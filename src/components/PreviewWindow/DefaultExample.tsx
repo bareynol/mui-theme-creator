@@ -8,43 +8,49 @@ import {
   CardActions,
   Button,
   Link,
+  Box,
+  Fab,
 } from "@material-ui/core"
 import MuiLogo from "src/images/mui_logo.svg"
+import AddIcon from "@material-ui/icons/Add"
 
 const useStyles = makeStyles(theme => ({
   logo: {
     width: 195,
     height: 175,
+    margin: theme.spacing(2),
+    marginBottom: 0,
   },
   muiTitle: {
     textTransform: "uppercase",
     letterSpacing: ".5rem",
     fontWeight: 300,
   },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  cardActions: {
+    justifyContent: "flex-end",
+  },
 }))
 
 const DefaultExample = () => {
   const classes = useStyles()
   return (
-    <>
-      <Typography>
-        Modify the theme on the right side of the screen to start making changes
-      </Typography>
-      <Grid container>
-        <Grid item>
-          <Card style={{ maxWidth: 350 }}>
-            <CardContent
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={MuiLogo}
-                alt="Material UI Logo"
-                className={classes.logo}
-              />
+    <Box p={3}>
+      <Card>
+        <Grid container wrap="nowrap">
+          <Grid item>
+            <img
+              src={MuiLogo}
+              alt="Material UI Logo"
+              className={classes.logo}
+            />
+          </Grid>
+          <Grid item>
+            <CardContent>
               <Typography
                 variant="h4"
                 color="primary"
@@ -57,7 +63,7 @@ const DefaultExample = () => {
                 {`React components for faster and easier web development. Build your own design system, or start with Material Design.`}
               </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.cardActions}>
               <Button
                 variant="outlined"
                 color="primary"
@@ -77,10 +83,16 @@ const DefaultExample = () => {
                 Support Them
               </Button>
             </CardActions>
-          </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </>
+      </Card>
+
+      <Typography variant="h4">Theming Instructions</Typography>
+
+      <Fab aria-label="FAB Preview" className={classes.fab} color="primary">
+        <AddIcon />
+      </Fab>
+    </Box>
   )
 }
 

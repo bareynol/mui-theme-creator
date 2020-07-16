@@ -22,13 +22,20 @@ import DashboardExample from "./DashboardExample"
 import BlogExample from "./BlogExample"
 import PricingExample from "./PricingExample"
 import CheckoutExample from "./CheckoutExample"
+import Alert from "@material-ui/lab/Alert"
 
 const useStyles = makeStyles(theme => ({
   letterBox: {
     backgroundColor: "#000",
     width: "100%",
-    paddingTop: 64,
+    paddingTop: 16,
     paddingBottom: 64,
+  },
+  infoAlert: {
+    width: `calc(100% - 32px)`,
+    maxWidth: 1000,
+    margin: "auto",
+    marginBottom: theme.spacing(2),
   },
   previewArea: {
     backgroundColor: theme.palette.background.default,
@@ -37,6 +44,16 @@ const useStyles = makeStyles(theme => ({
     height: 700,
     overflowY: "auto",
     margin: "auto",
+    position: "relative", // for FAB positioning
+  },
+  anchor: {
+    "&::before": {
+      content: '""',
+      display: "block",
+      height: 64,
+      marginTop: -64,
+      visibility: "hidden",
+    },
   },
 }))
 
@@ -45,10 +62,19 @@ const PreviewWrapper = ({ children }) => {
 
   return (
     <>
-      <Typography variant="h4" gutterBottom>
+      <Typography
+        id="Preview"
+        variant="h4"
+        gutterBottom
+        className={classes.anchor}
+      >
         Preview
       </Typography>
       <div className={classes.letterBox}>
+        <Alert severity="info" className={classes.infoAlert}>
+          Modify the theme on the right side of the screen to start making
+          changes
+        </Alert>
         <Paper elevation={10} className={classes.previewArea}>
           {children}
         </Paper>
@@ -79,7 +105,7 @@ function TabPanel(props: TabPanelProps) {
   )
 }
 
-const PreviewExample = () => {
+const PreviewWindow = () => {
   const classes = useStyles()
   const [tabIndex, setTabIndex] = React.useState(0)
 
@@ -98,11 +124,11 @@ const PreviewExample = () => {
           aria-label="preview-window-tabs"
         >
           <Tab label="Default" />
-          <Tab label="Sign Up Example" />
-          <Tab label="Dashboard Example" />
-          <Tab label="Blog Example" />
-          <Tab label="Pricing Example" />
-          <Tab label="Checkout Example" />
+          <Tab label="Sign Up" />
+          <Tab label="Dashboard" />
+          <Tab label="Blog" />
+          <Tab label="Pricing" />
+          <Tab label="Checkout" />
         </Tabs>
       </AppBar>
       {/* <Container style={{ paddingTop: 16, paddingBottom: 16 }}> */}
@@ -129,4 +155,4 @@ const PreviewExample = () => {
   )
 }
 
-export default PreviewExample
+export default PreviewWindow

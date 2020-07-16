@@ -89,11 +89,7 @@ const ThemeConfigDrawer = () => {
           <Grid item className={classes.editorWrapper}>
             <CodeEditor code={themeInput} onBeforeChange={updateInput} />
           </Grid>
-          <Grid item>
-            <Button variant="contained" color="primary">
-              Test
-            </Button>
-          </Grid>
+          <Grid item></Grid>
         </Grid>
       </Drawer>
     </ThemeProvider>

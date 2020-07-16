@@ -16,14 +16,14 @@ import {
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
 import ComponentExamples from "src/components/ComponentExamples"
 import NavDrawer from "src/components/NavDrawer"
-import PreviewExample from "src/components/PreviewWindow/PreviewExample"
+import PreviewWindow from "src/components/PreviewWindow"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Material UI Theme Creator" />
 
     <Container maxWidth={false}>
-      <PreviewExample />
+      <PreviewWindow />
 
       <Divider style={{ marginTop: 64, marginBottom: 64 }} />
 

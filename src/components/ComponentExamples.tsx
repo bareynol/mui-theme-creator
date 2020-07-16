@@ -1,5 +1,11 @@
 import React from "react"
-import { Container, Typography, makeStyles } from "@material-ui/core"
+import {
+  Container,
+  Typography,
+  makeStyles,
+  Button,
+  Grid,
+} from "@material-ui/core"
 
 import TypographyExample from "./Examples/Typography"
 
@@ -23,26 +29,35 @@ const useStyles = makeStyles(theme => ({
       visibility: "hidden",
     },
   },
+  docsButton: {
+    marginLeft: theme.spacing(2),
+  },
 }))
 
 const ComponentExamples = () => {
   const classes = useStyles()
   return (
     <>
-      {/* Offset for the app bar */}
       <Typography variant="h4" gutterBottom>
         Material-UI Components
       </Typography>
       {examples.map(({ id, title, component, docs }) => (
-        <div key={id}>
-          <Typography
-            className={classes.anchor}
-            variant="h5"
-            id={id}
-            gutterBottom
-          >
-            {title}
-          </Typography>
+        <div key={id} id={id} className={classes.anchor}>
+          <Grid container justify="space-between" alignItems="center">
+            <Typography variant="h5" gutterBottom>
+              {title}
+            </Typography>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              href={docs}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Docs
+            </Button>
+          </Grid>
           <div className={classes.exampleItem}>{component}</div>
         </div>
       ))}

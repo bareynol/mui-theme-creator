@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     overflow: "auto",
     flexGrow: 1,
   },
+  list: {
+    backgroundColor: theme.palette.background.paper,
+  },
   listItemText: {
     paddingLeft: theme.spacing(2),
   },
@@ -51,7 +54,10 @@ const NavDrawer = () => {
     >
       <Toolbar />
       <div className={classes.drawerContainer}>
-        <List dense>
+        <List dense className={classes.list}>
+          <ListItem button component={NavLink} href="#Preview">
+            <ListItemText primary="Preview" />
+          </ListItem>
           <ListSubheader>Components</ListSubheader>
           {examples.map(({ id, title }) => (
             <ListItem key={id} button component={NavLink} href={`#${id}`}>
