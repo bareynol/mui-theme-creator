@@ -10,7 +10,24 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
-import "./layout.css"
+import NavDrawer from "src/components/NavDrawer"
+import ThemeWrapper from "src/components/ThemeWrapper"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+  },
+  content: {
+    display: "flex",
+    flexGrow: 1,
+  },
+  header: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  toolbarOffset: theme.mixins.toolbar,
+}))
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,24 +40,27 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const classes = useStyles()
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
+    <ThemeWrapper>
+      <CssBaseline />
+      <div className={classes.toolbarOffset} />
+      <div className={classes.root}>
+        <Header
+          siteTitle={data.site.siteMetadata.title}
+          className={classes.header}
+        />
+
+        <NavDrawer />
+        <main className={classes.content}>{children}</main>
+      </div>
+      {/* <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+        </footer> */}
+    </ThemeWrapper>
   )
 }
 
