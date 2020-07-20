@@ -18,7 +18,7 @@ export const saveThemeInput = () => (dispatch, getState) => {
     // const validation = ThemeTest.check({theme: themeObject})
     // console.log("object validation", validation)
     const muiThemeObject = createMuiTheme(themeObject)
-    console.log("muiThemeObject", muiThemeObject)
+    // console.log("muiThemeObject", muiThemeObject)
     return dispatch({ type: "UPDATE_THEME", theme: themeObject })
   } catch (err) {
     console.log("error", err)

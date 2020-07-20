@@ -37,7 +37,6 @@ const S_KEY = 83
 const ThemeConfigDrawer = () => {
   const classes = useStyles()
   const themeInput = useSelector((state: RootState) => state.themeInput)
-  console.log("themeInput", themeInput)
 
   const dispatch = useDispatch()
 
