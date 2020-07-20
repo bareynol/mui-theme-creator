@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > *": {
         marginBottom: theme.spacing(2),
       },
-      "& .MuiBadge-root": {
+      "& > div > span": {
         marginRight: theme.spacing(4),
       },
     },

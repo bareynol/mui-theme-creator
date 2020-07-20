@@ -42,7 +42,12 @@ export default function ChipExample() {
           onClick={handleClick}
         />
         <Chip
-          avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+          avatar={
+            <Avatar
+              alt="Natacha"
+              src="https://material-ui.com/static/images/avatar/1.jpg"
+            />
+          }
           label="Deletable"
           onDelete={handleDelete}
         />
@@ -100,7 +105,12 @@ export default function ChipExample() {
         />
         <Chip
           variant="outlined"
-          avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+          avatar={
+            <Avatar
+              alt="Natacha"
+              src="https://material-ui.com/static/images/avatar/1.jpg"
+            />
+          }
           label="Deletable"
           onDelete={handleDelete}
         />
