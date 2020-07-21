@@ -23,7 +23,7 @@ interface ThemeWrapperProps {
  */
 const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
   const currentThemeInStore = useSelector(
-    (state: RootState) => state.currentTheme
+    (state: RootState) => state.themeObject
   )
   const [currentTheme, setCurrentTheme] = useState<Theme>(
     createMuiTheme(currentThemeInStore)

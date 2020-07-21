@@ -14,7 +14,6 @@ import NavDrawer from "src/components/NavDrawer"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
-import ThemeWrapper from "src/components/ThemeWrapper"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,7 +44,6 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <ThemeWrapper> */}
       <CssBaseline />
       <div className={classes.toolbarOffset} />
       <div className={classes.root}>
@@ -62,7 +60,6 @@ const Layout = ({ children }) => {
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer> */}
-      {/* </ThemeWrapper> */}
     </ThemeProvider>
   )
 }

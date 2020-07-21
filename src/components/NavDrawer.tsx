@@ -40,7 +40,7 @@ const NavDrawer = () => {
   const classes = useStyles()
 
   const NavLink = React.forwardRef((linkProps, ref) => (
-    <Link ref={ref} {...linkProps} />
+    <Link ref={ref} {...linkProps} color="textPrimary" />
   ))
 
   return (

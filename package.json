@@ -10,6 +10,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@types/recharts": "^1.8.14",
     "codemirror": "^5.55.0",
+    "dot-prop-immutable": "^2.1.0",
     "gatsby": "^2.23.12",
     "gatsby-image": "^2.4.9",
     "gatsby-plugin-manifest": "^2.4.14",
@@ -24,6 +25,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-codemirror2": "^7.2.1",
+    "react-color": "^2.18.1",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-redux": "^7.2.0",
@@ -33,6 +35,7 @@
   },
   "devDependencies": {
     "@types/codemirror": "^0.0.97",
+    "@types/dot-prop-immutable": "^1.5.1",
     "@types/react-redux": "^7.1.9",
     "prettier": "^2.0.5"
   },
