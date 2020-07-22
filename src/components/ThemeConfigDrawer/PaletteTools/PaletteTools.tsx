@@ -15,20 +15,50 @@ const paletteColorTypes = [
 
 export default function PaletteTools({ getThemeValue }) {
   return (
-    <NestedListItem primary="Palette">
+    <NestedListItem primary="Palette" openOnMount>
       <List disablePadding>
-        <ThemeTypeInput />
+        <ThemeTypeInput getThemeValue={getThemeValue} />
         <NestedListItem primary="Background">
           <List disablePadding>
             <ColorInputListItem
               label="Default"
               getThemeValue={getThemeValue}
               path="palette.background.default"
+              showAuto
             />
             <ColorInputListItem
               label="Paper"
               getThemeValue={getThemeValue}
               path="palette.background.paper"
+              showAuto
+            />
+          </List>
+        </NestedListItem>
+        <NestedListItem primary="Text">
+          <List disablePadding>
+            <ColorInputListItem
+              label="Primary"
+              getThemeValue={getThemeValue}
+              path={`palette.text.primary`}
+              showAuto
+            />
+            <ColorInputListItem
+              label="Secondary"
+              getThemeValue={getThemeValue}
+              path={`palette.text.secondary`}
+              showAuto
+            />
+            <ColorInputListItem
+              label="Disabled"
+              getThemeValue={getThemeValue}
+              path={`palette.text.disabled`}
+              showAuto
+            />
+            <ColorInputListItem
+              label="Hint"
+              getThemeValue={getThemeValue}
+              path={`palette.text.hint`}
+              showAuto
             />
           </List>
         </NestedListItem>

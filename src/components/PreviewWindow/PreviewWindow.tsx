@@ -26,16 +26,21 @@ import Alert from "@material-ui/lab/Alert"
 
 const useStyles = makeStyles(theme => ({
   letterBox: {
-    backgroundColor: "#000",
+    backgroundColor: "#212121",
     width: "100%",
     paddingTop: 16,
     paddingBottom: 64,
+    height: "calc(100vh - 64px)",
   },
   infoAlert: {
     width: `calc(100% - 32px)`,
     maxWidth: 1000,
     margin: "auto",
     marginBottom: theme.spacing(2),
+  },
+  previewTitle: {
+    color: "#fff",
+    marginLeft: 16,
   },
   previewArea: {
     backgroundColor: theme.palette.background.default,
@@ -62,20 +67,20 @@ const PreviewWrapper = ({ children }) => {
 
   return (
     <>
-      <Typography
-        id="Preview"
-        variant="h4"
-        gutterBottom
-        className={classes.anchor}
-      >
-        Preview
-      </Typography>
       <div className={classes.letterBox}>
+        <Typography
+          id="Preview"
+          variant="h4"
+          gutterBottom
+          className={`${classes.anchor} ${classes.previewTitle}`}
+        >
+          Preview
+        </Typography>
         <Alert severity="info" className={classes.infoAlert}>
           Modify the theme on the right side of the screen to start making
           changes
         </Alert>
-        <Paper elevation={10} className={classes.previewArea}>
+        <Paper elevation={8} className={classes.previewArea}>
           {children}
         </Paper>
       </div>
@@ -132,24 +137,26 @@ const PreviewWindow = () => {
         </Tabs>
       </AppBar>
       {/* <Container style={{ paddingTop: 16, paddingBottom: 16 }}> */}
-      <TabPanel value={tabIndex} index={0}>
-        <DefaultExample />
-      </TabPanel>
-      <TabPanel value={tabIndex} index={1}>
-        <SignUpExample />
-      </TabPanel>
-      <TabPanel value={tabIndex} index={2}>
-        <DashboardExample />
-      </TabPanel>
-      <TabPanel value={tabIndex} index={3}>
-        <BlogExample />
-      </TabPanel>
-      <TabPanel value={tabIndex} index={4}>
-        <PricingExample />
-      </TabPanel>
-      <TabPanel value={tabIndex} index={5}>
-        <CheckoutExample />
-      </TabPanel>
+      <div style={{ minHeight: 800 }}>
+        <TabPanel value={tabIndex} index={0}>
+          <DefaultExample />
+        </TabPanel>
+        <TabPanel value={tabIndex} index={1}>
+          <SignUpExample />
+        </TabPanel>
+        <TabPanel value={tabIndex} index={2}>
+          <DashboardExample />
+        </TabPanel>
+        <TabPanel value={tabIndex} index={3}>
+          <BlogExample />
+        </TabPanel>
+        <TabPanel value={tabIndex} index={4}>
+          <PricingExample />
+        </TabPanel>
+        <TabPanel value={tabIndex} index={5}>
+          <CheckoutExample />
+        </TabPanel>
+      </div>
       {/* </Container> */}
     </PreviewWrapper>
   )
