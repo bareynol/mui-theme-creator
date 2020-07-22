@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react"
-import { TextField, InputAdornment, Popover } from "@material-ui/core"
+import { TextField, InputAdornment, Popover, Link } from "@material-ui/core"
 import { ChromePicker } from "react-color"
 
-export default function ColorInput({ color, onColorChange }) {
+export default function ColorInput({ label, color, onColorChange }) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
   // const [inputValue, setInputValue] = React.useState<string | null>("color")
 
@@ -24,12 +24,18 @@ export default function ColorInput({ color, onColorChange }) {
   return (
     <div>
       <TextField
+        label={label}
         onClick={handleOpenPopover}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <div
-                style={{ width: "1em", height: "1em", backgroundColor: color }}
+                style={{
+                  width: "1em",
+                  height: "1em",
+                  backgroundColor: color,
+                  border: "1px solid grey",
+                }}
               />
             </InputAdornment>
           ),
@@ -37,7 +43,7 @@ export default function ColorInput({ color, onColorChange }) {
         InputLabelProps={{ shrink: true }}
         size="small"
         value={color}
-        style={{ width: 150 }}
+        // style={{ width: 150 }}
       />
       <Popover
         open={popoverOpen}

@@ -29,15 +29,20 @@ const drawerWidth: React.CSSProperties["width"] = 400
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,
     zIndex: theme.zIndex.drawer + 2,
   },
   editorWrapper: {
-    overflow: "auto",
     flexGrow: 1,
+    minHeight: "30vh",
+    maxHeight: "50vh",
+    height: "100%",
+  },
+  controlsWrapper: {
+    minHeight: "30vh",
+    height: "100%",
   },
 }))
 
@@ -86,38 +91,44 @@ const ThemeConfigDrawer = () => {
         paper: classes.drawerPaper,
       }}
     >
-      {/* <Grid
+      <Grid
         container
         direction="column"
         wrap="nowrap"
-        style={{ height: "100%" }}
+        style={{ height: "100vh" }}
       >
-        <Grid item> */}
-      <List disablePadding>
-        <div className={classes.editorWrapper}>
+        <Grid item className={classes.editorWrapper}>
           <CodeEditor />
-        </div>
-        <ListItem>
-          <ListItemText
-            primary="Theme Code Editor"
-            secondary="Edit the code or use the controls below"
-          />
-          <ListItemSecondaryAction>
-            <Tooltip title="Download theme.js">
-              <IconButton>
-                <DownloadIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Copy theme code">
-              <IconButton>
-                <FileCopyIcon />
-              </IconButton>
-            </Tooltip>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <Divider />
-        <ThemeControls />
-      </List>
+        </Grid>
+        <Grid item>
+          <List disablePadding>
+            {/* <div className={classes.editorWrapper}></div> */}
+            <ListItem>
+              <ListItemText
+                primary="Theme Code Editor"
+                secondary="Edit the code or use the controls below"
+              />
+              <ListItemSecondaryAction>
+                <Tooltip title="Download theme.js">
+                  <IconButton>
+                    <DownloadIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Copy theme code">
+                  <IconButton>
+                    <FileCopyIcon />
+                  </IconButton>
+                </Tooltip>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+          </List>
+        </Grid>
+        <Grid item className={classes.controlsWrapper}>
+          <ThemeControls />
+        </Grid>
+      </Grid>
+
       {/* </Grid>
         <Grid item></Grid>
       </Grid> */}

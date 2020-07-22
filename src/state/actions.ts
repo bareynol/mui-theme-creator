@@ -2,7 +2,7 @@ import JSON5 from "json5"
 import prettier from "prettier/standalone"
 import parserBabel from "prettier/parser-babel"
 import { createMuiTheme, ThemeOptions } from "@material-ui/core"
-import { setByPath, removeByPath } from "src/utils"
+import { setByPath, removeByPath, resolvePath } from "src/utils"
 
 // update the input string with events from the code editor
 export const updateThemeInput = (input: string) => ({
@@ -39,7 +39,31 @@ export const saveThemeInput = () => (dispatch, getState) => {
 }
 
 export const removeSavedThemeVariable = path => (dispatch, getState) => {
-  const updatedThemeObject = removeByPath(getState().themeObject, path)
+  let updatedThemeObject: ThemeOptions
+  const parentPath = path.substring(0, path.lastIndexOf(".")) // path with ".<name>" removed
+  if (path.endsWith("main")) {
+    // reset to default theme value
+
+    const tempThemeObject: ThemeOptions = removeByPath(
+      getState().themeObject,
+      parentPath
+    )
+    const defaultValueForPath = resolvePath(
+      createMuiTheme(tempThemeObject),
+      path
+    )
+    updatedThemeObject = setByPath(
+      getState().themeObject,
+      path,
+      defaultValueForPath
+    )
+  } else {
+    updatedThemeObject = removeByPath(getState().themeObject, path)
+    if (Object.keys(resolvePath(updatedThemeObject, parentPath)).length === 0) {
+      updatedThemeObject = removeByPath(updatedThemeObject, parentPath)
+    }
+  }
+
   return dispatch({
     type: "UPDATE_THEME",
     updatedThemeObject,

@@ -1,4 +1,10 @@
-import React, { useCallback } from "react"
+import React, {
+  useCallback,
+  Component,
+  Props,
+  ClassAttributes,
+  useState,
+} from "react"
 import {
   ListSubheader,
   List,
@@ -13,6 +19,12 @@ import {
   Theme,
   createMuiTheme,
   ThemeOptions,
+  BottomNavigation,
+  BottomNavigationAction,
+  makeStyles,
+  createStyles,
+  Divider,
+  IconTypeMap,
 } from "@material-ui/core"
 import NestedListItem from "../NestedListItem"
 import ThemeTypeInput from "./PaletteTools/ThemeTypeInput"
@@ -23,8 +35,72 @@ import { resolvePath } from "src/utils"
 import AutoSetInput from "./AutoSetInput"
 import ColorInputListItem from "./PaletteTools/ColorInputListItem"
 import PaletteTools from "./PaletteTools/PaletteTools"
+import PaletteIcon from "@material-ui/icons/Palette"
+import TypographyIcon from "@material-ui/icons/TextFields"
+import TransitionIcon from "@material-ui/icons/ClearAll"
+import SnippetsIcon from "@material-ui/icons/PlaylistAdd"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    bottomNavBar: {
+      backgroundColor: theme.palette.background.default,
+      borderTop: "1px solid",
+      borderTopColor: theme.palette.divider,
+    },
+    toolPanel: {
+      backgroundColor: "#212121",
+      flexGrow: 1,
+      overflowY: "auto",
+      overflowX: "hidden",
+    },
+    selected: {
+      // color: "#fff",
+      "&$root": {
+        backgroundColor: "#212121",
+      },
+      "& $wrapper": {
+        color: "#fff",
+      },
+    },
+    wrapper: {
+      color: theme.palette.text.disabled,
+    },
+    root: {},
+  })
+)
+
+interface ThemeControlWindow {
+  label: string
+  icon: React.ReactNode
+  ControlComponent: any // need to figure this out. React.FC ?
+}
+
+const controlWindows: Array<ThemeControlWindow> = [
+  {
+    label: "Palette",
+    icon: <PaletteIcon />,
+    ControlComponent: PaletteTools,
+  },
+  {
+    label: "Typography",
+    icon: <TypographyIcon />,
+    ControlComponent: () => <div />,
+  },
+  {
+    label: "Transitions",
+    icon: <TransitionIcon />,
+    ControlComponent: () => <div />,
+  },
+  {
+    label: "Snippets",
+    icon: <SnippetsIcon />,
+    ControlComponent: () => <div />,
+  },
+]
 
 export default function ThemeControls() {
+  const classes = useStyles()
+  const [bottomNavIndex, setBottomNavIndex] = useState(0)
   // the object that's being piped into createMuiTheme by the ThemeWrapper
   const savedThemeObject: ThemeOptions = useSelector(
     (state: RootState) => state.themeObject
@@ -51,113 +127,43 @@ export default function ThemeControls() {
     [savedThemeObject, fullMuiTheme]
   )
 
+  const bottomNavActionClasses = {
+    selected: classes.selected,
+    wrapper: classes.wrapper,
+    root: classes.root,
+  }
+
+  const ControlWindow = controlWindows[bottomNavIndex].ControlComponent
+
   return (
-    <>
-      <PaletteTools getThemeValue={getThemeValue} />
-      {/* <NestedListItem primary="Palette">
-        <List disablePadding>
-          <ThemeTypeInput />
-          <NestedListItem primary="Background">
-            <List disablePadding>
-              <ColorInputListItem
-                label="Default"
-                themeValue={getThemeValue("palette.background.default")}
-              />
-              <ColorInputListItem
-                label="Paper"
-                themeValue={getThemeValue("palette.background.paper")}
-              />
-            </List>
-          </NestedListItem>
-          <NestedListItem primary="Primary">
-            <List disablePadding>
-              <ColorInputListItem
-                label="Main"
-                themeValue={getThemeValue("palette.primary.main")}
-              />
-              <ColorInputListItem
-                label="Light"
-                themeValue={getThemeValue("palette.primary.light")}
-                showAuto
-              />
-              <ColorInputListItem
-                label="Dark"
-                themeValue={getThemeValue("palette.primary.dark")}
-                showAuto
-              />
-              <ColorInputListItem
-                label="Contrast Text"
-                themeValue={getThemeValue("palette.primary.contrastText")}
-                showAuto
-              />
-            </List>
-          </NestedListItem>
-          <NestedListItem primary="Secondary">
-            <List disablePadding>
-              <ColorInputListItem
-                label="Main"
-                themeValue={getThemeValue("palette.secondary.main")}
-              />
-              <ColorInputListItem
-                label="Light"
-                themeValue={getThemeValue("palette.secondary.light")}
-                showAuto
-              />
-              <ColorInputListItem
-                label="Dark"
-                themeValue={getThemeValue("palette.secondary.dark")}
-                showAuto
-              />
-              <ColorInputListItem
-                label="Contrast Text"
-                themeValue={getThemeValue("palette.secondary.contrastText")}
-                showAuto
-              />
-            </List>
-          </NestedListItem>
-        </List>
-      </NestedListItem> */}
-    </>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        overflow: "auto",
+      }}
+    >
+      <div className={classes.toolPanel}>
+        <ControlWindow getThemeValue={getThemeValue} />
+      </div>
+
+      <BottomNavigation
+        value={bottomNavIndex}
+        showLabels
+        className={classes.bottomNavBar}
+        onChange={(event, newValue) => setBottomNavIndex(newValue)}
+      >
+        {controlWindows.map((win, index) => (
+          <BottomNavigationAction
+            key={`${index}-${win.label}`}
+            label={win.label}
+            value={index}
+            icon={win.icon}
+            classes={bottomNavActionClasses}
+          />
+        ))}
+      </BottomNavigation>
+    </div>
   )
 }
-
-// const ColorInputListItem = ({ label, themeValue, showAuto = false }) => {
-//   const auto = showAuto && !themeValue.modifiedByUser
-//   return (
-//     <ListItem>
-//       {showAuto && (
-//         <AutoSetInput
-//           autoValue={auto}
-//           onAutoSet={() => {}}
-//           onAutoRemoved={() => {}}
-//         />
-//       )}
-//       {/* {showAuto && (
-//         <ListItemIcon>
-//           <div
-//             style={{
-//               marginLeft: -11,
-//               marginRight: 16,
-//               display: "inline-flex",
-//               flexDirection: "column",
-//               alignItems: "center",
-//             }}
-//           >
-//             <Checkbox color="default" checked={auto} />
-//             <Typography
-//               variant="caption"
-//               color="textSecondary"
-//               style={{ position: "absolute", bottom: 0 }}
-//             >
-//               Auto
-//             </Typography>
-//           </div>
-//         </ListItemIcon>
-//       )} */}
-//       <ListItemText inset={!showAuto} primary={label} />
-//       <ListItemSecondaryAction>
-//         <ColorInput color={themeValue.value} />
-//       </ListItemSecondaryAction>
-//     </ListItem>
-//   )
-// }

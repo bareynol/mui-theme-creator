@@ -44,21 +44,28 @@ export default function ThemeTypeInput({ getThemeValue }) {
   }, [dispatch, themeIsDark])
 
   return (
-    <ListItem>
-      <ListItemText primary="Type" />
-      <ListItemSecondaryAction className={classes.inputRoot}>
-        <Typography>Light</Typography>
-        <Switch
-          checked={themeIsDark}
-          onClick={toggleThemeType}
-          classes={{
-            switchBase: classes.switchBase,
-            checked: classes.checked,
-            track: classes.track,
-          }}
-        />
-        <Typography>Dark</Typography>
-      </ListItemSecondaryAction>
-    </ListItem>
+    <div className={classes.inputRoot}>
+      <Typography
+        variant="body2"
+        color={themeIsDark ? "textSecondary" : "textPrimary"}
+      >
+        Light
+      </Typography>
+      <Switch
+        checked={themeIsDark}
+        onClick={toggleThemeType}
+        classes={{
+          switchBase: classes.switchBase,
+          checked: classes.checked,
+          track: classes.track,
+        }}
+      />
+      <Typography
+        variant="body2"
+        color={!themeIsDark ? "textSecondary" : "textPrimary"}
+      >
+        Dark
+      </Typography>
+    </div>
   )
 }

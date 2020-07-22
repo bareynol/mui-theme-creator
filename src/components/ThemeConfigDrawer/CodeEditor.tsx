@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from "react"
 import "codemirror/lib/codemirror.css" // required for the base code editor styles
-import codemirror, { EditorConfiguration } from "codemirror"
+// import { EditorConfiguration } from "codemirror"
 import "codemirror/mode/javascript/javascript" // required for js mode
 import "codemirror/addon/edit/closebrackets" // required for autoCloseBrackets options
 
@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import { updateThemeInput } from "src/state/actions"
 
-const editorOptions: EditorConfiguration = {
+const editorOptions = {
   lineNumbers: true,
   autoCloseBrackets: true,
   mode: "javascript",
