@@ -1,9 +1,8 @@
 import { RootState } from "src/state/types"
-import { PaletteType } from "@material-ui/core"
+import { PaletteType, createMuiTheme } from "@material-ui/core"
 import JSON5 from "json5"
-import { removeByPath, setByPath } from "src/utils"
 
-const defaultTheme = {
+const defaultThemeOptions = {
   palette: {
     type: "light" as PaletteType,
     primary: {
@@ -28,8 +27,9 @@ const defaultTheme = {
 }
 
 const initialState: RootState = {
-  themeInput: JSON5.stringify(defaultTheme, null, 2), // the current state of the code editor input
-  themeObject: defaultTheme, // the object loaded into createMuiTheme
+  themeInput: JSON5.stringify(defaultThemeOptions, null, 2), // the current state of the code editor input
+  themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
+  themeObject: createMuiTheme(defaultThemeOptions),
 }
 
 export default (state = initialState, action) => {
@@ -42,12 +42,14 @@ export default (state = initialState, action) => {
     case "SAVE_THEME_INPUT":
       return {
         ...state,
-        themeObject: action.updatedThemeObject,
+        themeOptions: action.updatedThemeOptions,
+        themeObject: createMuiTheme(action.updatedThemeOptions),
       }
     case "UPDATE_THEME":
       return {
         ...state,
-        themeObject: action.updatedThemeObject,
+        themeOptions: action.updatedThemeOptions,
+        themeObject: createMuiTheme(action.updatedThemeOptions),
         themeInput: action.updatedThemeInput,
       }
     default:

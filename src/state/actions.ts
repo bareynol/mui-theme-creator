@@ -1,8 +1,9 @@
 import JSON5 from "json5"
 import prettier from "prettier/standalone"
 import parserBabel from "prettier/parser-babel"
-import { createMuiTheme, ThemeOptions } from "@material-ui/core"
+import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
+import { defaultTheme } from "src/siteTheme"
 
 // update the input string with events from the code editor
 export const updateThemeInput = (input: string) => ({
@@ -10,7 +11,7 @@ export const updateThemeInput = (input: string) => ({
   input,
 })
 
-// Validate the code editor input, convert it to an object and replace themeObject
+// Validate the code editor input, convert it to an object and replace themeOptions
 export const saveThemeInput = () => (dispatch, getState) => {
   const { themeInput } = getState()
   try {
@@ -20,64 +21,76 @@ export const saveThemeInput = () => (dispatch, getState) => {
     dispatch(updateThemeInput(prettifiedString))
 
     // parse the string into an object
-    const themeObject: ThemeOptions = parseThemeString(prettifiedString)
+    const themeOptions: ThemeOptions = parseThemeString(prettifiedString)
 
     // validate the object
-    // const validation = ThemeTest.check({theme: themeObject})
+    // const validation = ThemeTest.check({theme: themeOptions})
 
-    // const muiThemeObject = createMuiTheme(themeObject)
+    // const themeObject: Theme = createMuiTheme(themeOptions)
     // console.log("muiThemeObject", muiThemeObject)
 
-    // save the new object as the current themeObject
+    // save the new object as the current themeOptions
     return dispatch({
       type: "SAVE_THEME_INPUT",
-      updatedThemeObject: themeObject,
+      updatedThemeOptions: themeOptions,
     })
   } catch (err) {
     console.log("error", err)
   }
 }
 
+/**
+ * Remove a key/value in the theme options object by a given path.
+ * Paths ending in "main" eg. "palette.primary.main" must be declared.
+ * if the key path ends in "main"
+ *  replace it with the default Theme value at that path
+ * if the key is removed, and the containing object no longer
+ * has any meaningful key/values, remove it as well
+ * e.g. removing palette.background.default creates {palette: {background: {}}}
+ * and should be removed to tidy the theme code
+ * @param path - the path to remove from the themeOptions
+ */
 export const removeSavedThemeVariable = path => (dispatch, getState) => {
-  let updatedThemeObject: ThemeOptions
-  const parentPath = path.substring(0, path.lastIndexOf(".")) // path with ".<name>" removed
-  if (path.endsWith("main")) {
-    // reset to default theme value
+  let updatedThemeOptions: ThemeOptions
 
-    const tempThemeObject: ThemeOptions = removeByPath(
-      getState().themeObject,
-      parentPath
-    )
-    const defaultValueForPath = resolvePath(
-      createMuiTheme(tempThemeObject),
-      path
-    )
-    updatedThemeObject = setByPath(
-      getState().themeObject,
+  // path with ".<name>" removed
+  const parentPath = path.substring(0, path.lastIndexOf("."))
+
+  // paths ending in "main" must be declared
+  // replace with the value from the default Theme object
+  if (path.endsWith("main")) {
+    const defaultValueForPath = resolvePath(defaultTheme, path)
+    updatedThemeOptions = setByPath(
+      getState().themeOptions,
       path,
       defaultValueForPath
     )
   } else {
-    updatedThemeObject = removeByPath(getState().themeObject, path)
-    if (Object.keys(resolvePath(updatedThemeObject, parentPath)).length === 0) {
-      updatedThemeObject = removeByPath(updatedThemeObject, parentPath)
+    // remove the key from the themeOptions (immutably)
+    updatedThemeOptions = removeByPath(getState().themeOptions, path)
+
+    // if the parent "directory" is empty, remove it as well
+    if (
+      Object.keys(resolvePath(updatedThemeOptions, parentPath)).length === 0
+    ) {
+      updatedThemeOptions = removeByPath(updatedThemeOptions, parentPath)
     }
   }
 
   return dispatch({
     type: "UPDATE_THEME",
-    updatedThemeObject,
-    updatedThemeInput: JSON5.stringify(updatedThemeObject, null, 2),
+    updatedThemeOptions,
+    updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
   })
 }
 
 export const setSavedThemeVariable = (path, value) => (dispatch, getState) => {
   console.log("setSavedThemeVariable", path, value)
-  const updatedThemeObject = setByPath(getState().themeObject, path, value)
+  const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
   return dispatch({
     type: "UPDATE_THEME",
-    updatedThemeObject,
-    updatedThemeInput: JSON5.stringify(updatedThemeObject, null, 2),
+    updatedThemeOptions,
+    updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
   })
 }
 

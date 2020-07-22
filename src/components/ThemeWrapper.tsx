@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react"
-import {
-  createMuiTheme,
-  ThemeProvider,
-  Theme,
-  makeStyles,
-} from "@material-ui/core/styles"
+import { ThemeProvider, Theme, makeStyles } from "@material-ui/core/styles"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import Paper from "@material-ui/core/Paper"
-
-const defaultTheme = createMuiTheme()
-const darkTheme = createMuiTheme({ palette: { type: "dark" } })
 
 interface ThemeWrapperProps {
   children: React.ReactNode | React.ReactNodeArray
@@ -22,19 +14,10 @@ interface ThemeWrapperProps {
  * set by the theme editor sidebar
  */
 const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
-  const currentThemeInStore = useSelector(
-    (state: RootState) => state.themeObject
-  )
-  const [currentTheme, setCurrentTheme] = useState<Theme>(
-    createMuiTheme(currentThemeInStore)
-  )
-
-  useEffect(() => {
-    setCurrentTheme(createMuiTheme(currentThemeInStore))
-  }, [currentThemeInStore])
+  const themeObject = useSelector((state: RootState) => state.themeObject)
 
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={themeObject}>
       <ThemeContainer>{children}</ThemeContainer>
     </ThemeProvider>
   )

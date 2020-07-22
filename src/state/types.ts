@@ -1,6 +1,7 @@
-import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
+import { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 
 export interface RootState {
-  themeObject: ThemeOptions
+  themeObject: Theme
+  themeOptions: ThemeOptions
   themeInput: string
 }

@@ -17,7 +17,6 @@ import {
   Checkbox,
   FormControlLabel,
   Theme,
-  createMuiTheme,
   ThemeOptions,
   BottomNavigation,
   BottomNavigationAction,
@@ -101,18 +100,18 @@ const controlWindows: Array<ThemeControlWindow> = [
 export default function ThemeControls() {
   const classes = useStyles()
   const [bottomNavIndex, setBottomNavIndex] = useState(0)
-  // the object that's being piped into createMuiTheme by the ThemeWrapper
-  const savedThemeObject: ThemeOptions = useSelector(
+
+  const themeOptions: ThemeOptions = useSelector(
+    (state: RootState) => state.themeOptions
+  )
+  const themeObject: Theme = useSelector(
     (state: RootState) => state.themeObject
   )
-
-  // a Theme object created using the configs
-  const fullMuiTheme: Theme = createMuiTheme(savedThemeObject)
 
   // get the value of a key path in the currently shown theme
   const getThemeValue = useCallback(
     (path: string) => {
-      const valFromSaved: any = resolvePath(savedThemeObject, path)
+      const valFromSaved: any = resolvePath(themeOptions, path)
       if (valFromSaved !== undefined) {
         return {
           modifiedByUser: true,
@@ -121,10 +120,10 @@ export default function ThemeControls() {
       }
       return {
         modifiedByUser: false,
-        value: resolvePath(fullMuiTheme, path),
+        value: resolvePath(themeObject, path),
       }
     },
-    [savedThemeObject, fullMuiTheme]
+    [themeOptions, themeObject]
   )
 
   const bottomNavActionClasses = {

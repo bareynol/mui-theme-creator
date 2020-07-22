@@ -3,7 +3,6 @@ import {
   Drawer,
   Typography,
   makeStyles,
-  createMuiTheme,
   Grid,
   Button,
   ThemeProvider,
@@ -46,7 +45,6 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const defaultTheme = createMuiTheme()
 const MAC_SAVE_KEY = 19
 const S_KEY = 83
 
