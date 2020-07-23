@@ -100,7 +100,6 @@ const ThemeConfigDrawer = () => {
         </Grid>
         <Grid item>
           <List disablePadding>
-            {/* <div className={classes.editorWrapper}></div> */}
             <ListItem>
               <ListItemText
                 primary="Theme Code Editor"

@@ -12,6 +12,7 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core"
+import { useThemeValue, useThemeValueInfo } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,10 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export default function PaletteInput({ label, getThemeValue, path }) {
+export default function PaletteInput({ label, path }) {
   const classes = useStyles()
-  const themeValue = getThemeValue(path)
-  // const auto = showAuto && !themeValue.modifiedByUser
+  const themeValueInfo = useThemeValueInfo(path)
   const dispatch = useDispatch()
 
   const handleColorChange = useCallback(
@@ -45,21 +45,21 @@ export default function PaletteInput({ label, getThemeValue, path }) {
       <Grid item>
         <ColorInput
           label={label}
-          color={themeValue.value}
+          color={themeValueInfo.value}
           onColorChange={handleColorChange}
         />
       </Grid>
       <Grid item>
         <Button
           size="small"
-          disabled={!themeValue.modifiedByUser}
+          disabled={!themeValueInfo.modifiedByUser}
           classes={{
             root: classes.resetButton,
             disabled: classes.disabledButton,
           }}
           onClick={handleReset}
         >
-          {themeValue.modifiedByUser ? "Reset" : "auto"}
+          {themeValueInfo.modifiedByUser ? "Reset" : "auto"}
         </Button>
       </Grid>
     </Grid>

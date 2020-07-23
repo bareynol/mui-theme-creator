@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ColorInput from "src/components/ColorInput"
 import PaletteInput from "./PaletteInput"
+import { useThemeValue } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,16 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface PaletteSubTypeProps {
   title: string
-  getThemeValue: Function
+  path: string
   paletteValues: [string, string][] // [name, path]
 }
 
 export default function PaletteSubType({
   title,
-  getThemeValue,
+  path,
   paletteValues,
 }: PaletteSubTypeProps) {
   const classes = useStyles()
+  const themeValues = useThemeValue(path)
+
   return (
     <>
       <Accordion>
@@ -61,22 +64,21 @@ export default function PaletteSubType({
             {title}
           </Typography>
           <div className={classes.thumbnailContainer}>
-            {paletteValues.map(([name, path]) => (
+            {paletteValues.map(([name, subPath]) => (
               <div
                 key={name}
                 className={classes.colorThumbnail}
-                style={{ backgroundColor: getThemeValue(path).value }}
+                style={{ backgroundColor: themeValues?.[subPath] }}
               />
             ))}
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
-          {paletteValues.map(([name, path]) => (
+          {paletteValues.map(([name, subPath]) => (
             <PaletteInput
               key={`${title}-${name}`}
               label={name}
-              getThemeValue={getThemeValue}
-              path={path}
+              path={`${path}.${subPath}`}
             />
           ))}
         </AccordionDetails>

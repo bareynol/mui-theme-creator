@@ -1,8 +1,8 @@
 import { RootState } from "src/state/types"
-import { PaletteType, createMuiTheme } from "@material-ui/core"
+import { PaletteType, createMuiTheme, ThemeOptions } from "@material-ui/core"
 import JSON5 from "json5"
 
-const defaultThemeOptions = {
+const defaultThemeOptions: ThemeOptions = {
   palette: {
     type: "light" as PaletteType,
     primary: {

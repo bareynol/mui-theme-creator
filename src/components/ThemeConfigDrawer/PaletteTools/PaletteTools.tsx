@@ -15,7 +15,7 @@ const paletteColorTypes = [
   "success",
 ]
 
-export default function PaletteTools({ getThemeValue }) {
+export default function PaletteTools() {
   return (
     <>
       <Grid
@@ -32,44 +32,44 @@ export default function PaletteTools({ getThemeValue }) {
           <Typography variant="overline">Palette</Typography>
         </Grid>
         <Grid item>
-          <ThemeTypeInput getThemeValue={getThemeValue} />
+          <ThemeTypeInput />
         </Grid>
       </Grid>
       <PaletteSubType
-        getThemeValue={getThemeValue}
         title="Background"
+        path="palette.background"
         paletteValues={[
-          ["Default", "palette.background.default"],
-          ["Paper", "palette.background.paper"],
+          ["Default", "default"],
+          ["Paper", "paper"],
         ]}
       />
       <PaletteSubType
-        getThemeValue={getThemeValue}
         title="Text"
+        path="palette.text"
         paletteValues={[
-          ["Primary", "palette.text.primary"],
-          ["Secondary", "palette.text.secondary"],
-          ["Disabled", "palette.text.disabled"],
-          ["Hint", "palette.text.hint"],
+          ["Primary", "primary"],
+          ["Secondary", "secondary"],
+          ["Disabled", "disabled"],
+          ["Hint", "hint"],
         ]}
       />
       {paletteColorTypes.map(colorType => (
         <PaletteSubType
           key={colorType}
-          getThemeValue={getThemeValue}
           title={colorType}
+          path={`palette.${colorType}`}
           paletteValues={[
-            ["Main", `palette.${colorType}.main`],
-            ["Light", `palette.${colorType}.light`],
-            ["Dark", `palette.${colorType}.dark`],
-            ["Contrast Text", `palette.${colorType}.contrastText`],
+            ["Main", `main`],
+            ["Light", `light`],
+            ["Dark", `dark`],
+            ["Contrast Text", `contrastText`],
           ]}
         />
       ))}
       <PaletteSubType
-        getThemeValue={getThemeValue}
         title="Divider"
-        paletteValues={[["Divider", "palette.divider"]]}
+        path="palette.divider"
+        paletteValues={[["Divider", "divider"]]}
       />
     </>
   )
