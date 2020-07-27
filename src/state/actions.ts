@@ -4,6 +4,7 @@ import parserBabel from "prettier/parser-babel"
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
 import { defaultTheme } from "src/siteTheme"
+import WebFont from "webfontloader"
 
 // update the input string with events from the code editor
 export const updateThemeInput = (input: string) => ({
@@ -92,6 +93,44 @@ export const setSavedThemeVariable = (path, value) => (dispatch, getState) => {
     updatedThemeOptions,
     updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
   })
+}
+
+/**
+ * loads a set of passed fonts and resolves a promise
+ * when the fonts load, or fail to load
+ * @param fonts
+ */
+async function loadFonts(fonts: string[]) {
+  return new Promise<boolean>((resolve, reject) => {
+    WebFont.load({
+      google: {
+        families: fonts,
+      },
+      active: () => {
+        console.log("webfonts loaded")
+        resolve(true)
+      },
+      inactive: () => {
+        console.log("webfonts could not load")
+        resolve(false)
+      },
+    })
+  })
+}
+
+/**
+ * Load fonts using webfontloader, then add those fonts to the redux store
+ */
+export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
+  const fontsLoaded: boolean = await loadFonts(fonts)
+  if (fontsLoaded) {
+    return dispatch({
+      type: "FONTS_LOADED",
+      fonts,
+    })
+  } else {
+    return false
+  }
 }
 
 const prettifyCode = (rawInput: string) => {

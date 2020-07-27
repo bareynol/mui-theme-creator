@@ -21,7 +21,7 @@ import CodeEditor from "./CodeEditor"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import { updateThemeInput, saveThemeInput } from "src/state/actions"
-import ThemeControls from "./ThemeControls"
+import ThemeTools from "./ThemeTools/ThemeTools"
 
 const drawerWidth: React.CSSProperties["width"] = 400
 
@@ -122,7 +122,7 @@ const ThemeConfigDrawer = () => {
           </List>
         </Grid>
         <Grid item className={classes.controlsWrapper}>
-          <ThemeControls />
+          <ThemeTools />
         </Grid>
       </Grid>
 

@@ -4,4 +4,5 @@ export interface RootState {
   themeObject: Theme
   themeOptions: ThemeOptions
   themeInput: string
+  loadedFonts: Set<string>
 }

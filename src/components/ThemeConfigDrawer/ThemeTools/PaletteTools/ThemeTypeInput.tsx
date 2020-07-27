@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import { setSavedThemeVariable } from "src/state/actions"
+import { useThemeValue } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,21 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     switchBase: {
       color: "#fff",
-      "&$checked": {
-        color: "#212121",
-      },
-      "&$checked + $track": {
-        backgroundColor: "#303030",
-      },
+      // "&$checked": {
+      //   color: "#212121",
+      // },
+      // "&$checked + $track": {
+      //   backgroundColor: "#303030",
+      // },
     },
     checked: {},
     track: {},
   })
 )
 
-export default function ThemeTypeInput({ getThemeValue }) {
+export default function ThemeTypeInput() {
   const classes = useStyles()
-  const themeIsDark = getThemeValue("palette.type").value === "dark"
+  const themeIsDark = useThemeValue("palette.type") === "dark"
   const dispatch = useDispatch()
 
   const toggleThemeType = useCallback(() => {
@@ -59,6 +60,7 @@ export default function ThemeTypeInput({ getThemeValue }) {
           checked: classes.checked,
           track: classes.track,
         }}
+        color="default"
       />
       <Typography
         variant="body2"

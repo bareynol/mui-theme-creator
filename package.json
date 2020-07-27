@@ -32,12 +32,14 @@
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@types/codemirror": "^0.0.97",
     "@types/dot-prop-immutable": "^1.5.1",
     "@types/react-redux": "^7.1.9",
+    "@types/webfontloader": "^1.6.32",
     "prettier": "^2.0.5"
   },
   "keywords": [

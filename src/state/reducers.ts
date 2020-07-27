@@ -30,6 +30,9 @@ const initialState: RootState = {
   themeInput: JSON5.stringify(defaultThemeOptions, null, 2), // the current state of the code editor input
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
   themeObject: createMuiTheme(defaultThemeOptions),
+  loadedFonts: new Set(
+    ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
+  ),
 }
 
 export default (state = initialState, action) => {
@@ -51,6 +54,14 @@ export default (state = initialState, action) => {
         themeOptions: action.updatedThemeOptions,
         themeObject: createMuiTheme(action.updatedThemeOptions),
         themeInput: action.updatedThemeInput,
+      }
+    case "FONTS_LOADED":
+      const loadedFonts = new Set(
+        [...state.loadedFonts, ...action.fonts].sort()
+      )
+      return {
+        ...state,
+        loadedFonts,
       }
     default:
       return state

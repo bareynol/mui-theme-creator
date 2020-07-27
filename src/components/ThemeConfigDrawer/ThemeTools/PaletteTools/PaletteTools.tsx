@@ -3,7 +3,7 @@ import NestedListItem from "src/components/NestedListItem"
 import List from "@material-ui/core/List"
 import ThemeTypeInput from "./ThemeTypeInput"
 import ColorInputListItem from "./ColorInputListItem"
-import { Grid, Typography } from "@material-ui/core"
+import { Grid, Typography, Paper } from "@material-ui/core"
 import PaletteSubType from "./PaletteSubType"
 
 const paletteColorTypes = [
@@ -18,23 +18,25 @@ const paletteColorTypes = [
 export default function PaletteTools() {
   return (
     <>
-      <Grid
-        container
-        justify="space-between"
-        alignItems="baseline"
-        style={{
-          paddingLeft: 16,
-          paddingRight: 16,
-          borderBottom: "1px solid grey",
-        }}
-      >
-        <Grid item>
-          <Typography variant="overline">Palette</Typography>
+      <Paper>
+        <Grid
+          container
+          justify="space-between"
+          alignItems="baseline"
+          style={{
+            paddingLeft: 16,
+            paddingRight: 16,
+          }}
+        >
+          <Grid item>
+            <Typography variant="body2">Type</Typography>
+          </Grid>
+          <Grid item>
+            <ThemeTypeInput />
+          </Grid>
         </Grid>
-        <Grid item>
-          <ThemeTypeInput />
-        </Grid>
-      </Grid>
+      </Paper>
+
       <PaletteSubType
         title="Background"
         path="palette.background"
