@@ -7,9 +7,11 @@ import {
   createStyles,
   AccordionDetails,
   Theme,
+  Divider,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import TypographySampleArea from "./TypographySampleArea"
+import TypographyInput from "./TypographyInput/TypographyInput"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +24,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const typographyBaseOptions = ["htmlFontSize", "fontFamily", "fontSize", ""]
+const defaultGlobalProperties = [
+  "htmlFontSize",
+  "fontFamily",
+  "fontSize",
+  "fontWeightLight",
+  "fontWeightRegular",
+  "fontWeightMedium",
+  "fontWeightBold",
+]
 
 function TypographyGlobals() {
   const classes = useStyles()
@@ -36,14 +46,16 @@ function TypographyGlobals() {
         />
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {/* {paletteValues.map(([name, path]) => (
-          <PaletteInput
-            key={`${title}-${name}`}
-            label={name}
-            getThemeValue={getThemeValue}
-            path={path}
-          />
-        ))} */}
+        {defaultGlobalProperties.map(property => (
+          <div key={`base-text-${property}`}>
+            <TypographyInput
+              label={property}
+              variantPath="typography"
+              property={property}
+            />
+            <Divider style={{ marginBottom: 0 }} />
+          </div>
+        ))}
       </AccordionDetails>
     </Accordion>
   )

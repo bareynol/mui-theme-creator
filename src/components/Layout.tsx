@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: "#000000",
   },
   toolbarOffset: theme.mixins.toolbar,
 }))

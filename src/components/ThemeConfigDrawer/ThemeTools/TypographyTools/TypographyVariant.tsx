@@ -11,7 +11,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import TypographySampleArea from "./TypographySampleArea"
 import { useThemeValue } from "src/state/selectors"
-import TypographyInput from "./TypographyInput"
+import TypographyInput from "./TypographyInput/TypographyInput"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,15 +59,14 @@ function TypographyVariant({ variant, text, smallPreview = false }) {
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
         {defaultVariantProperties.map(property => (
-          <>
+          <div key={`${variant}-${property}`}>
             <TypographyInput
-              key={`${variant}-${property}`}
               label={property}
               variantPath={variantPath}
               property={property}
             />
             <Divider style={{ marginBottom: 0 }} />
-          </>
+          </div>
         ))}
       </AccordionDetails>
     </Accordion>

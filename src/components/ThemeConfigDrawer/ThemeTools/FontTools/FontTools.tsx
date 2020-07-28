@@ -17,8 +17,10 @@ import {
   createStyles,
   Link,
   TextField,
+  InputAdornment,
 } from "@material-ui/core"
-import AddFont from "./AddFont"
+import AddFontInput from "./AddFontInput"
+import PopularFontList from "./PopularFontList"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,18 +62,12 @@ function FontTools() {
           ))}
         </CardContent>
       </Card>
-      <Accordion defaultExpanded>
+      <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography
-            variant="body2"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <AddIcon style={{ marginRight: 8 }} />
-            Add Fonts
-          </Typography>
+          <AddFontInput />
         </AccordionSummary>
         <AccordionDetails style={{ flexDirection: "column" }}>
-          <AddFont />
+          <PopularFontList />
         </AccordionDetails>
       </Accordion>
     </>

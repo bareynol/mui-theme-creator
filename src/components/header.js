@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core"
 
 const Header = ({ siteTitle, className }) => (
   <header>
-    <AppBar position="fixed" className={className}>
+    <AppBar position="fixed" color="default" className={className}>
       <Toolbar>
         <Typography variant="h6">{siteTitle}</Typography>
       </Toolbar>
