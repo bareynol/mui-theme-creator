@@ -16,6 +16,14 @@ import TypographyInput from "./TypographyInput/TypographyInput"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     accordionSummary: {
+      position: "sticky",
+      top: 0,
+      backgroundColor: theme.palette.background.paper,
+      zIndex: theme.zIndex.drawer + 3,
+      borderBottom: "1px solid",
+      borderBottomColor: theme.palette.divider,
+    },
+    accordionSummaryContent: {
       maxWidth: "100%",
       overflow: "auto",
     },
@@ -48,7 +56,8 @@ function TypographyVariant({ variant, text, smallPreview = false }) {
     <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        classes={{ content: classes.accordionSummary }}
+        className={classes.accordionSummary}
+        classes={{ content: classes.accordionSummaryContent }}
       >
         <TypographySampleArea
           variant={variant}

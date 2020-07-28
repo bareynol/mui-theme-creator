@@ -4,9 +4,10 @@ import Typography from "@material-ui/core/Typography"
 import Select from "@material-ui/core/Select"
 import MenuItem from "@material-ui/core/MenuItem"
 import Slider from "@material-ui/core/Slider"
+import { makeStyles, Theme, createStyles } from "@material-ui/core"
 
 const supportedFontSizeTypes = ["rem", "em", "px", "pt"]
-const fontSizeSliderProps = {
+const fontSizeSliderProps: Record<string, object> = {
   px: { min: 5, max: 200 },
   pt: { min: 5, max: 200 },
   em: { min: 0.5, max: 10, step: 0.1 },
@@ -21,21 +22,40 @@ const getFontSizeUnit = value => {
       return "rem"
     } else if (value.endsWith("em")) {
       return "em"
+    } else {
+      return undefined
     }
   }
   return "px"
 }
 
 const getFontSizeValue = (value, fontSizeUnit) => {
+  if (fontSizeUnit == undefined) {
+    return 0
+  }
   return typeof value === "string"
     ? parseFloat(value.substring(0, value.lastIndexOf(fontSizeUnit)))
     : value
 }
 
-const titles = { fontSize: "Font Size", htmlFontSize: "HTML Font Size" }
+const titles: Record<string, string> = {
+  fontSize: "Font Size",
+  htmlFontSize: "HTML Font Size",
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    disabledText: {
+      fontStyle: "italic",
+    },
+  })
+)
 
 function FontSizeInput({ value, onChange, property }) {
-  const [fontSizeUnit, setFontSizeUnit] = useState(getFontSizeUnit(value))
+  const classes = useStyles()
+  const [fontSizeUnit, setFontSizeUnit] = useState<string | undefined>(
+    getFontSizeUnit(value)
+  )
   const [displayValue, setDisplayValue] = useState(
     getFontSizeValue(value, fontSizeUnit)
   )
@@ -46,6 +66,9 @@ function FontSizeInput({ value, onChange, property }) {
     setDisplayValue(getFontSizeValue(value, unit))
   }, [value])
 
+  const disabled = fontSizeUnit == null
+  const sliderProps = disabled ? {} : fontSizeSliderProps[fontSizeUnit!]
+
   return (
     <>
       <Grid container justify="space-between" alignItems="baseline">
@@ -55,11 +78,14 @@ function FontSizeInput({ value, onChange, property }) {
           </Typography>
         </Grid>
         <Grid item>
-          <Typography display="inline" style={{ marginRight: 8 }}>
-            {displayValue}
-          </Typography>
+          {!disabled && (
+            <Typography display="inline" style={{ marginRight: 8 }}>
+              {displayValue}
+            </Typography>
+          )}
           <Select
-            value={fontSizeUnit}
+            disabled={disabled}
+            value={fontSizeUnit || ""}
             onChange={event => {
               setFontSizeUnit(event.target.value)
               onChange(
@@ -81,7 +107,8 @@ function FontSizeInput({ value, onChange, property }) {
       </Grid>
       <Slider
         value={displayValue}
-        {...fontSizeSliderProps[fontSizeUnit]}
+        disabled={disabled}
+        {...sliderProps}
         onChange={(event, newDisplayValue) => setDisplayValue(newDisplayValue)}
         onChangeCommitted={(event, newValue) =>
           onChange(
@@ -90,6 +117,15 @@ function FontSizeInput({ value, onChange, property }) {
           )
         }
       />
+      {disabled && (
+        <Typography
+          color="textSecondary"
+          variant="caption"
+          className={classes.disabledText}
+        >
+          Only em units supported. Use the code editor to configure other types.
+        </Typography>
+      )}
     </>
   )
 }

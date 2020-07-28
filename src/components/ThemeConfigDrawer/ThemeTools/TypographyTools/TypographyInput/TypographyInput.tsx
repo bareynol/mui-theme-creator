@@ -26,6 +26,7 @@ import FontWeightInput from "./FontWeightInput"
 import FontSizeInput from "./FontSizeInput"
 import FontFamilyInput from "./FontFamilyInput"
 import LineHeightInput from "./LineHeightInput"
+import LetterSpacingInput from "./LetterSpacingInput"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -101,6 +102,8 @@ function TypographyPropertyInput({ property, ...props }) {
     case "fontWeightRegular":
     case "fontWeightBold":
       return <FontWeightInput {...props} property={property} />
+    case "letterSpacing":
+      return <LetterSpacingInput {...props} />
     case "lineHeight":
       return <LineHeightInput {...props} />
     default:
