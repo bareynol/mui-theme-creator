@@ -89,7 +89,7 @@ const DefaultExample = () => {
 
       <Typography variant="h4">Theming Instructions</Typography>
 
-      <Fab aria-label="FAB Preview" className={classes.fab} color="primary">
+      <Fab aria-label="FAB Preview" className={classes.fab} color="secondary">
         <AddIcon />
       </Fab>
     </Box>

@@ -27,10 +27,8 @@ import Alert from "@material-ui/lab/Alert"
 const useStyles = makeStyles(theme => ({
   letterBox: {
     backgroundColor: "#212121",
-    width: "100%",
     paddingTop: 16,
-    paddingBottom: 64,
-    height: "calc(100vh - 64px)",
+    height: "calc(100vh - 64px - 48px)",
   },
   infoAlert: {
     width: `calc(100% - 32px)`,
@@ -38,27 +36,14 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     marginBottom: theme.spacing(2),
   },
-  previewTitle: {
-    color: "#fff",
-    marginLeft: 16,
-  },
   previewArea: {
     backgroundColor: theme.palette.background.default,
     width: `calc(100% - 32px)`,
     maxWidth: 1000,
-    height: 700,
+    height: "95%",
     overflowY: "auto",
     margin: "auto",
     position: "relative", // for FAB positioning
-  },
-  anchor: {
-    "&::before": {
-      content: '""',
-      display: "block",
-      height: 64,
-      marginTop: -64,
-      visibility: "hidden",
-    },
   },
 }))
 
@@ -68,18 +53,10 @@ const PreviewWrapper = ({ children }) => {
   return (
     <>
       <div className={classes.letterBox}>
-        <Typography
-          id="Preview"
-          variant="h4"
-          gutterBottom
-          className={`${classes.anchor} ${classes.previewTitle}`}
-        >
-          Preview
-        </Typography>
-        <Alert severity="info" className={classes.infoAlert}>
+        {/* <Alert severity="info" className={classes.infoAlert}>
           Modify the theme on the right side of the screen to start making
           changes
-        </Alert>
+        </Alert> */}
         <Paper elevation={8} className={classes.previewArea}>
           {children}
         </Paper>

@@ -1,0 +1,11 @@
+/* root element needs to expand to full height */
+#___gatsby {
+  height: 100%;
+}
+
+/* Set body height to view port height, let child elements handle scroll */
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}

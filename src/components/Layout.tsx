@@ -17,6 +17,7 @@ import theme from "src/siteTheme"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import WebFont from "webfontloader"
+import "./layout.css"
 
 const useStyles = makeStyles(theme => ({
   root: {
