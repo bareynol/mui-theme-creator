@@ -1,7 +1,12 @@
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core"
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  makeStyles,
+  Link,
+} from "@material-ui/core"
 import muiVersion from "src/muiVersion"
 
 const useStyles = makeStyles(theme => ({
@@ -26,12 +31,15 @@ const Header = ({ siteTitle, className }) => {
             <Typography variant="h6" className={classes.title}>
               {siteTitle}
             </Typography>
-            <Typography
-              variant="caption"
-              color="primary"
-              className={classes.version}
-            >
-              {`Supporting @material-ui/core ${muiVersion}`}
+            <Typography variant="caption" className={classes.version}>
+              {"└─ "}
+              <Link
+                href="https://www.npmjs.com/package/@material-ui/core"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {`@material-ui/core@${muiVersion}`}
+              </Link>
             </Typography>
           </div>
         </Toolbar>
