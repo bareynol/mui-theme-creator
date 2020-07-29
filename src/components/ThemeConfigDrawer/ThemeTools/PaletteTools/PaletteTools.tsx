@@ -2,7 +2,6 @@ import React from "react"
 import NestedListItem from "src/components/NestedListItem"
 import List from "@material-ui/core/List"
 import ThemeTypeInput from "./ThemeTypeInput"
-import ColorInputListItem from "./ColorInputListItem"
 import { Grid, Typography, Paper } from "@material-ui/core"
 import PaletteSubType from "./PaletteSubType"
 

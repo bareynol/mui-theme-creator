@@ -1,4 +1,5 @@
 import dotProp from "dot-prop-immutable"
+import { RootState } from "./state/types"
 /**
  * Get an nested value from an object by a string path
  * e.g. resolvePath({a: {b: {c : 5}}}, 'a.b.c') would return 5
@@ -17,3 +18,23 @@ export const removeByPath = (object, path) => dotProp.delete(object, path)
 
 export const setByPath = (object, path, value) =>
   dotProp.set(object, path, value)
+
+/**
+ * Generate an id for a saved theme, ensuring that it does not collide with
+ * one already in the store
+ */
+export const generateThemeId = (savedThemes: RootState["savedThemes"]) => {
+  // generate a long string of characters
+  const genString = () =>
+    ["", "", ""].reduce(
+      (str, _) => (str += Math.random().toString(36).substring(2, 15)),
+      ""
+    )
+
+  let id
+  do {
+    id = genString()
+  } while (savedThemes.hasOwnProperty(id))
+
+  return id
+}

@@ -10,7 +10,7 @@ import {
   Switch,
 } from "@material-ui/core"
 import { useDispatch } from "react-redux"
-import { setSavedThemeVariable } from "src/state/actions"
+import { setThemeOption } from "src/state/actions"
 import { useThemeValue } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,9 +39,7 @@ export default function ThemeTypeInput() {
   const dispatch = useDispatch()
 
   const toggleThemeType = useCallback(() => {
-    dispatch(
-      setSavedThemeVariable("palette.type", themeIsDark ? "light" : "dark")
-    )
+    dispatch(setThemeOption("palette.type", themeIsDark ? "light" : "dark"))
   }, [dispatch, themeIsDark])
 
   return (

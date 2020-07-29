@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: "flex",
     flexGrow: 1,
+    minWidth: 0,
   },
   header: {
     zIndex: theme.zIndex.drawer + 1,

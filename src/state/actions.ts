@@ -51,7 +51,7 @@ export const saveThemeInput = () => (dispatch, getState) => {
  * and should be removed to tidy the theme code
  * @param path - the path to remove from the themeOptions
  */
-export const removeSavedThemeVariable = path => (dispatch, getState) => {
+export const removeThemeOption = path => (dispatch, getState) => {
   let updatedThemeOptions: ThemeOptions
 
   // path with ".<name>" removed
@@ -85,8 +85,8 @@ export const removeSavedThemeVariable = path => (dispatch, getState) => {
   })
 }
 
-export const setSavedThemeVariable = (path, value) => (dispatch, getState) => {
-  console.log("setSavedThemeVariable", path, value)
+export const setThemeOption = (path, value) => (dispatch, getState) => {
+  console.log("setThemeOption", path, value)
   const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
   return dispatch({
     type: "UPDATE_THEME",
@@ -94,6 +94,40 @@ export const setSavedThemeVariable = (path, value) => (dispatch, getState) => {
     updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
   })
 }
+
+/**
+ * Add a new theme and switch to it
+ */
+export const addNewSavedTheme = (
+  name: string,
+  themeOptions?: ThemeOptions | null
+) => ({
+  type: "ADD_NEW_THEME",
+  name,
+  themeOptions,
+})
+
+/**
+ * Switch to a new theme by ID
+ */
+export const loadSavedTheme = (themeId: string) => ({
+  type: "LOAD_THEME",
+  themeId,
+})
+
+export const removeSavedTheme = (themeId: string) => (dispatch, getState) => {
+  // don't remove the theme unless it is not the current theme
+  if (getState().themeId === themeId) {
+    return false
+  }
+  return dispatch({ type: "REMOVE_THEME", themeId })
+}
+
+export const renameSavedTheme = (themeId: string, name: string) => ({
+  type: "RENAME_THEME",
+  themeId,
+  name,
+})
 
 /**
  * loads a set of passed fonts and resolves a promise

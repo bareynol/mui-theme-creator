@@ -27,7 +27,8 @@ const IndexPage = () => {
 
       <div
         style={{
-          width: "100%",
+          flexGrow: 1,
+          minWidth: 0,
         }}
       >
         <AppBar position="sticky" color="default">
@@ -72,7 +73,7 @@ const IndexPage = () => {
               overflowY: "auto",
             }}
           >
-            <Container maxWidth="md">
+            <Container>
               <SavedThemes />
             </Container>
           </div>
