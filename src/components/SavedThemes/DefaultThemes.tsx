@@ -57,7 +57,7 @@ function DefaultThemes() {
       wrap="nowrap"
       style={{ flex: 1, flexGrow: 1, overflowX: "auto" }}
     >
-      {[...defaultThemeList, ...defaultThemeList].map(t => (
+      {defaultThemeList.map(t => (
         <Grid
           item
           key={t.title}
