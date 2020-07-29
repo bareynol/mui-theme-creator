@@ -48,6 +48,14 @@ const initialState: RootState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "persist/REHYDRATE":
+      if (action.payload != null) {
+        return {
+          ...state,
+          themeObject: createMuiTheme(action.payload.themeOptions),
+        }
+      }
+      return state
     case "UPDATE_THEME_INPUT":
       return {
         ...state,

@@ -46,10 +46,13 @@ const Layout = ({ children }) => {
     }
   `)
   const classes = useStyles()
-  const initialFonts = [...useSelector((state: RootState) => state.loadedFonts)]
+  const initialFonts: Set<string> = useSelector(
+    (state: RootState) => state.loadedFonts
+  )
+  console.log("initialFonts", initialFonts)
   useEffect(() => {
-    if (initialFonts.length) {
-      loadFonts(initialFonts)
+    if (initialFonts.size) {
+      loadFonts([...initialFonts])
     }
   }, [])
 
