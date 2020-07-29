@@ -1,10 +1,7 @@
 import React, { useCallback } from "react"
 import ColorInput from "src/components/ColorInput"
 import { useDispatch } from "react-redux"
-import {
-  setSavedThemeVariable,
-  removeSavedThemeVariable,
-} from "src/state/actions"
+import { setThemeOption, removeThemeOption } from "src/state/actions"
 import {
   Grid,
   Typography,
@@ -31,14 +28,13 @@ export default function PaletteInput({ label, path }) {
   const dispatch = useDispatch()
 
   const handleColorChange = useCallback(
-    color => dispatch(setSavedThemeVariable(path, color)),
+    color => dispatch(setThemeOption(path, color)),
     [dispatch]
   )
 
-  const handleReset = useCallback(
-    () => dispatch(removeSavedThemeVariable(path)),
-    [dispatch]
-  )
+  const handleReset = useCallback(() => dispatch(removeThemeOption(path)), [
+    dispatch,
+  ])
 
   return (
     <Grid container justify="space-between" alignItems="flex-end">

@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const getLetterSpacingValue = (letterSpacing: string) => {
-  if (letterSpacing.endsWith("rem") || !letterSpacing.endsWith("em")) {
+  if (
+    letterSpacing == null ||
+    letterSpacing.endsWith("rem") ||
+    !letterSpacing.endsWith("em")
+  ) {
     return undefined
   }
   return parseFloat(letterSpacing.slice(0, -2))

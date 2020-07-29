@@ -1,10 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react"
 import ColorInput from "src/components/ColorInput"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  setSavedThemeVariable,
-  removeSavedThemeVariable,
-} from "src/state/actions"
+import { setThemeOption, removeThemeOption } from "src/state/actions"
 import {
   Grid,
   Typography,
@@ -49,14 +46,13 @@ export default function TypographyInput({ label, variantPath, property }) {
   const dispatch = useDispatch()
 
   const handleValueChange = useCallback(
-    (event, value) => dispatch(setSavedThemeVariable(path, value)),
+    (event, value) => dispatch(setThemeOption(path, value)),
     [dispatch]
   )
 
-  const handleReset = useCallback(
-    () => dispatch(removeSavedThemeVariable(path)),
-    [dispatch]
-  )
+  const handleReset = useCallback(() => dispatch(removeThemeOption(path)), [
+    dispatch,
+  ])
 
   return (
     <Grid
