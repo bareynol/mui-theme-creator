@@ -13,6 +13,21 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 100,
       width: 1600 / 9,
       position: "relative",
+      "&.large": {
+        height: 200,
+        width: (1600 / 9) * 2,
+        fontSize: 28,
+        "& $fabIcon": {
+          height: 36,
+          width: 36,
+        },
+        "& $fab": {
+          height: 32,
+          width: 32,
+          bottom: 8,
+          right: 8,
+        },
+      },
     },
     appBar: {
       height: "15%",
@@ -21,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "75%",
     },
     contentTitle: {
-      fontSize: "0.6em",
+      fontSize: "60%",
       paddingLeft: 4,
     },
     card: {
@@ -29,10 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 4,
     },
     cardHeader: {
-      fontSize: "0.55em",
+      fontSize: "55%",
     },
     cardSubheader: {
-      fontSize: "0.5em",
+      fontSize: "45%",
     },
     fab: {
       height: 16,
@@ -52,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-function ThemeThumbnail({ themeOptions }) {
+function ThemeThumbnail({ themeOptions, large = false }) {
   const classes = useStyles()
   const [themeObject, setThemeObject] = useState({})
 
@@ -62,7 +77,7 @@ function ThemeThumbnail({ themeOptions }) {
 
   return (
     <div
-      className={classes.root}
+      className={`${classes.root} ${large ? "large" : null}`}
       style={{
         backgroundColor: background?.default,
         color: text?.primary,
