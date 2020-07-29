@@ -16,8 +16,8 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import WebFont from "webfontloader"
 import "./layout.css"
+import { loadFonts } from "src/state/actions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,11 +49,7 @@ const Layout = ({ children }) => {
   const initialFonts = [...useSelector((state: RootState) => state.loadedFonts)]
   useEffect(() => {
     if (initialFonts.length) {
-      WebFont.load({
-        google: {
-          families: initialFonts,
-        },
-      })
+      loadFonts(initialFonts)
     }
   }, [])
 

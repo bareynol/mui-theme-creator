@@ -4,7 +4,6 @@ import parserBabel from "prettier/parser-babel"
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
 import { defaultTheme } from "src/siteTheme"
-import WebFont from "webfontloader"
 
 // update the input string with events from the code editor
 export const updateThemeInput = (input: string) => ({
@@ -134,8 +133,10 @@ export const renameSavedTheme = (themeId: string, name: string) => ({
  * when the fonts load, or fail to load
  * @param fonts
  */
-async function loadFonts(fonts: string[]) {
+export async function loadFonts(fonts: string[]) {
   return new Promise<boolean>((resolve, reject) => {
+    // require inline to support server side rendering
+    const WebFont = require("webfontloader")
     WebFont.load({
       google: {
         families: fonts,
