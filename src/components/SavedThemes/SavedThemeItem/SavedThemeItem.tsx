@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     loadedCard: {
-      backgroundColor: theme.palette.info.light,
-      color: theme.palette.primary.contrastText,
+      backgroundColor: "#9e9e9e",
+      color: "#000",
     },
     hoverArea: {
       position: "absolute",
