@@ -27,11 +27,41 @@ const defaultThemeOptions: ThemeOptions = {
   },
 }
 
+const defaultThemeInput = `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
+const themeOptions: ThemeOptions = {
+  palette: {
+    type: "light",
+    primary: {
+      main: "#3f51b5",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+    error: {
+      main: "#f44336",
+    },
+    warning: {
+      main: "#ff9800",
+    },
+    info: {
+      main: "#2196f3",
+    },
+    success: {
+      main: "#4caf50",
+    },
+  },
+}`
+
 const defaultThemeId = generateThemeId({})
+
+const wrapCode = code =>
+  `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
+export const themeOptions: ThemeOptions = ${code}`
 
 const initialState: RootState = {
   themeId: defaultThemeId,
-  themeInput: JSON5.stringify(defaultThemeOptions, null, 2), // the current state of the code editor input
+  themeInput: wrapCode(JSON5.stringify(defaultThemeOptions, null, 2)), // the current state of the code editor input
+  // themeInput: defaultThemeInput,
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
   themeObject: createMuiTheme(defaultThemeOptions),
   savedThemes: {
@@ -62,8 +92,12 @@ export default (state = initialState, action) => {
         themeInput: action.input,
       }
     case "SAVE_THEME_INPUT":
+      console.log("SAVE_THEME_INPUT", action)
       return {
         ...state,
+        themeInput: wrapCode(
+          JSON5.stringify(action.updatedThemeOptions, null, 2)
+        ),
         ...onThemeOptionsUpdate(
           state,
           action.updatedThemeOptions,
@@ -78,7 +112,7 @@ export default (state = initialState, action) => {
           action.updatedThemeOptions,
           state.themeId
         ),
-        themeInput: action.updatedThemeInput,
+        themeInput: wrapCode(action.updatedThemeInput),
       }
     case "ADD_NEW_THEME":
       const newThemeId = generateThemeId(state)
@@ -86,7 +120,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         themeId: newThemeId,
-        themeInput: JSON5.stringify(newThemeOptions, null, 2),
+        themeInput: wrapCode(JSON5.stringify(newThemeOptions, null, 2)),
         ...onThemeOptionsUpdate(
           state,
           newThemeOptions,
@@ -98,10 +132,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         themeId: action.themeId,
-        themeInput: JSON5.stringify(
-          state.savedThemes[action.themeId].themeOptions,
-          null,
-          2
+        themeInput: wrapCode(
+          JSON5.stringify(
+            state.savedThemes[action.themeId].themeOptions,
+            null,
+            2
+          )
         ),
         themeOptions: state.savedThemes[action.themeId].themeOptions,
         themeObject: createMuiTheme(

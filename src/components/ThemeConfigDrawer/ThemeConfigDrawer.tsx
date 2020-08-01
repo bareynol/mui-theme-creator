@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import { updateThemeInput, saveThemeInput } from "src/state/actions"
 import ThemeTools from "./ThemeTools/ThemeTools"
+import MonacoThemeCodeEditor from "../MonacoThemeCodeEditor/MonacoThemeCodeEditor"
 
 const drawerWidth: React.CSSProperties["width"] = 400
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    overflowY: "visible",
     zIndex: theme.zIndex.drawer + 2,
   },
   editorWrapper: {
@@ -96,7 +98,8 @@ const ThemeConfigDrawer = () => {
         style={{ height: "100vh" }}
       >
         <Grid item className={classes.editorWrapper}>
-          <CodeEditor />
+          {/* <CodeEditor /> */}
+          <MonacoThemeCodeEditor />
         </Grid>
         <Grid item>
           <List disablePadding>

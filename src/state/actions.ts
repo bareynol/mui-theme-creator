@@ -40,6 +40,43 @@ export const saveThemeInput = () => (dispatch, getState) => {
 }
 
 /**
+ * Save the code coming from the monaco-editor
+ * strip the code of extra items, then parse
+ * it into an object
+ * @param code string - raw code output
+ */
+export const saveEditorCode = (code: string) => {
+  // remove "use strict" and "exports" line
+  const codeLines = code.split("\n").slice(2)
+
+  // editor disables editing this line, so it should always
+  // be the initial declaration of the themeObject.
+  // replace with open bracket to ready for JSON parsing
+  codeLines[0] = "{" // editor disables editing this line
+  let numUnclosedBrackets = 1
+  let currentLine = 1
+
+  while (numUnclosedBrackets > 0 && currentLine < codeLines.length) {
+    for (let i = 0; i < codeLines[currentLine].length; i++) {
+      const char = codeLines[currentLine][i]
+      if (char === "{") {
+        numUnclosedBrackets++
+      } else if (char === "}") {
+        numUnclosedBrackets--
+      }
+    }
+    currentLine++
+  }
+
+  codeLines[currentLine - 1] = "}" //editor disables editing this line
+
+  const objectCodeLines = codeLines.splice(0, currentLine).join("\n")
+  const objectCode = parseThemeString(objectCodeLines)
+  console.log("objectCode", objectCodeLines, objectCode)
+  return { type: "SAVE_THEME_INPUT", updatedThemeOptions: objectCode }
+}
+
+/**
  * Remove a key/value in the theme options object by a given path.
  * Paths ending in "main" eg. "palette.primary.main" must be declared.
  * if the key path ends in "main"

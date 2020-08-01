@@ -17,6 +17,6 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 export default () => {
   let store = reduxCreateStore(persistedReducer, applyMiddleware(thunk))
   let persistor = persistStore(store)
-  // persistor.purge()
+  persistor.purge()
   return { store, persistor }
 }
