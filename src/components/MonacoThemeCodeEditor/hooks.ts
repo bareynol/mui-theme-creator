@@ -7,7 +7,7 @@ import monokai from "src/monaco-themes/monokai"
 
 const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   language: "typescript",
-  theme: "vs-dark",
+  theme: "monokai",
   selectOnLineNumbers: true,
   scrollBeyondLastLine: false,
   minimap: { enabled: false },
@@ -28,7 +28,23 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
   suppressExcessPropertyErrors: true,
 }
 
-export const useEditor = (editorRef, initialCode: string) => {
+// number of lines from the top and bottom of the
+// code in the editor that should be considered read only
+//    first two lines consist of importing the ThemeOptions interface
+//    and opening the themeOptions objects
+//    last line is a bracket closing the themeOptions object
+const readOnlyLines = {
+  top: 3,
+  bottom: 1,
+}
+
+type MutableEditorRefType = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
+type EditorRefType = React.RefObject<monaco.editor.IStandaloneCodeEditor>
+
+export const useEditor = (
+  editorRef: MutableEditorRefType,
+  initialCode: string
+) => {
   useEffect(() => {
     // const monaco = require("monaco-editor")
 
@@ -46,7 +62,7 @@ export const useEditor = (editorRef, initialCode: string) => {
 
     // create the editor
     editorRef.current = monaco.editor.create(
-      document.getElementById("container"),
+      document.getElementById("container")!,
       {
         ...editorOptions,
         value: initialCode,
@@ -62,7 +78,7 @@ export const useEditor = (editorRef, initialCode: string) => {
     )
 
     return () => {
-      editorRef.current.dispose()
+      editorRef.current?.dispose()
     }
   }, [])
 }
@@ -121,68 +137,19 @@ const useMuiThemeTypeData = () => {
   }
 }
 
-export const useSaveKey = (editorRef, onSave: Function) => {
+export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
   useEffect(() => {
-    const actionBinding = editorRef.current.addAction({
+    const actionBinding = editorRef.current?.addAction({
       id: "save-editor-contents",
       label: "Save Editor Theme Contents",
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
       contextMenuGroupId: "navigation",
       contextMenuOrder: 1,
-      run: onSave,
+      run: () => onSave(),
     })
 
-    return () => actionBinding.dispose()
+    return () => actionBinding?.dispose()
   }, [onSave])
-}
-
-export const useReadOnlyLines = editorRef => {
-  useEffect(() => {
-    const setTopReadOnlyLines = event => {
-      // if selection is in top two lines, move the cursor
-      if (event.selection.startLineNumber <= 2) {
-        editorRef.current.setSelection({
-          startLineNumber: 3,
-          startColumn: 0,
-          endLineNumber: 3,
-          endColumn: 0,
-        })
-      }
-    }
-
-    const setBottomReadOnlyLines = event => {
-      // if the selection is on the last line, move the cursor
-      const lastLineNum = editorRef.current.getModel().getLineCount()
-      if (event.selection.endLineNumber === lastLineNum) {
-        const startLineNumber = Math.min(
-          event.selection.startLineNumber,
-          lastLineNum - 1
-        )
-        editorRef.current.setSelection({
-          startLineNumber: startLineNumber,
-          startColumn:
-            startLineNumber === lastLineNum - 1
-              ? editorRef.current.getModel().getLineLength(lastLineNum - 1) + 1
-              : event.selection.startColumn,
-          endLineNumber: lastLineNum - 1,
-          endColumn:
-            editorRef.current.getModel().getLineLength(lastLineNum - 1) + 1,
-        })
-      }
-    }
-
-    // set the event binding
-    const cursorSelectionBinding = editorRef.current.onDidChangeCursorSelection(
-      event => {
-        console.log("cursor selection changed", event.selection)
-        setTopReadOnlyLines(event)
-        setBottomReadOnlyLines(event)
-      }
-    )
-
-    // dispose the binding on unmount
-    return () => cursorSelectionBinding.dispose()
-  }, [])
 }
 
 /**
@@ -190,71 +157,176 @@ export const useReadOnlyLines = editorRef => {
  * also attempts to restrict closing the themeOptions object
  * @param editorRef
  */
-export const useRestrictedKeys = editorRef => {
+export const useReadOnlyLines = (editorRef: EditorRefType) => {
   useEffect(() => {
-    const preventBackspaceReadOnlyLines = event => {
-      if (event.keyCode === monaco.KeyCode.Backspace) {
-        const position = editorRef.current.getPosition()
+    /**
+     * prevent pasting, cutting, or key event that cause edits
+     * on read only lines
+     */
+    function preventModifyReadOnlyLines(event: monaco.IKeyboardEvent) {
+      const selection = editorRef.current?.getSelection()
+      const lastEditableLine =
+        (editorRef.current?.getModel()?.getLineCount() || 0) -
+        readOnlyLines.bottom
+      console.log(selection, lastEditableLine, event)
+
+      if (!selection || lastEditableLine < 0) return null
+
+      if (
+        selection.startLineNumber <= readOnlyLines.top ||
+        selection.endLineNumber > lastEditableLine
+      ) {
+        const allowedKeys = [
+          monaco.KeyCode.LeftArrow,
+          monaco.KeyCode.RightArrow,
+          monaco.KeyCode.UpArrow,
+          monaco.KeyCode.DownArrow,
+          monaco.KeyCode.PageUp,
+          monaco.KeyCode.PageDown,
+        ]
+        const eventIsPaste =
+          event.ctrlKey && event.keyCode === monaco.KeyCode.KEY_V
+        const eventIsCut =
+          event.ctrlKey && event.keyCode === monaco.KeyCode.KEY_X
+
         if (
-          position.lineNumber <= 2 ||
-          (position.lineNumber === 3 && position.column <= 3)
+          eventIsPaste ||
+          eventIsCut ||
+          (!event.ctrlKey && !allowedKeys.includes(event.keyCode))
         ) {
+          console.log("preventing edit")
+          event.preventDefault()
           event.stopPropagation()
         }
       }
     }
 
-    const preventDeleteReadOnlyLines = event => {
+    /**
+     * Prevent backspace on column 1 of the first editable line
+     */
+    function preventBackspaceToReadOnlyLines(event: monaco.IKeyboardEvent) {
+      if (event.keyCode === monaco.KeyCode.Backspace) {
+        const selection = editorRef.current?.getSelection()
+
+        if (!selection) return null
+
+        if (selection.startLineNumber === readOnlyLines.top + 1) {
+          if (selection.startColumn === 1 && selection.isEmpty()) {
+            console.log("preventing backspace")
+            event.stopPropagation()
+          }
+        }
+      }
+    }
+
+    /**
+     * Prevent delete key on last column of last editable line
+     */
+    function preventDeleteToReadOnlyLines(event: monaco.IKeyboardEvent) {
       if (event.keyCode === monaco.KeyCode.Delete) {
-        console.log("delete key")
-        const position = editorRef.current.getPosition()
-        const lastLineNum = editorRef.current.getModel().getLineCount()
-        console.log(position.lineNumber, lastLineNum)
-        if (position.lineNumber === lastLineNum - 1) {
-          const lineLength = editorRef.current
-            .getModel()
-            .getLineLength(position.lineNumber)
-          console.log(position.column, lineLength)
-          if (position.column > lineLength) {
+        const selection = editorRef.current?.getSelection()
+        const lastEditableLine =
+          (editorRef.current?.getModel()?.getLineCount() || 0) -
+          readOnlyLines.bottom
+
+        if (!selection || lastEditableLine < 0) return null
+
+        if (selection.endLineNumber === lastEditableLine) {
+          const lineLength =
+            editorRef.current?.getModel()?.getLineLength(lastEditableLine) || 0
+
+          if (selection.endColumn > lineLength && selection.isEmpty()) {
             console.log("preventing delete")
             event.stopPropagation()
           }
         }
       }
     }
-    const keyDownBinding = editorRef.current.onKeyDown(event => {
-      // disallow backspace on read-only lines
-      preventBackspaceReadOnlyLines(event)
-      preventDeleteReadOnlyLines(event)
 
-      // if (
-      //   event.shiftKey &&
-      //   event.keyCode === monaco.KeyCode.US_CLOSE_SQUARE_BRACKET
-      // ) {
-      //   console.log(
-      //     "close bracket pressed",
-      //     countUnclosedBrackets(editor.current.getValue())
-      //   )
-      //   if (countUnclosedBrackets(editor.current.getValue()) <= 0) {
-      //     console.log("preventing close bracket")
-      //     event.preventDefault()
-      //     event.stopPropagation()
-      //   }
-      // }
-    })
+    // set read only styles
+    const lastLine = editorRef.current?.getModel()?.getLineCount() || 0
+    editorRef.current?.deltaDecorations(
+      [],
+      [
+        {
+          range: new monaco.Range(1, 1, readOnlyLines.top, 50),
+          options: {
+            isWholeLine: true,
+            inlineClassName: "readOnlyLine",
+            hoverMessage: [
+              {
+                value: "This line is read-only",
+              },
+            ],
+          },
+        },
+        {
+          range: new monaco.Range(lastLine, 1, lastLine, 50),
+          options: {
+            isWholeLine: true,
+            inlineClassName: "readOnlyLine",
+            hoverMessage: [
+              {
+                value: "This line is read-only",
+              },
+            ],
+          },
+        },
+      ]
+    )
 
-    return () => keyDownBinding.dispose()
+    const keyDownBinding = editorRef.current?.onKeyDown(
+      (event: monaco.IKeyboardEvent) => {
+        preventModifyReadOnlyLines(event)
+        preventBackspaceToReadOnlyLines(event)
+        preventDeleteToReadOnlyLines(event)
+
+        // if (
+        //   event.shiftKey &&
+        //   event.keyCode === monaco.KeyCode.US_CLOSE_SQUARE_BRACKET
+        // ) {
+        //   console.log(
+        //     "close bracket pressed",
+        //     countUnclosedBrackets(editor.current.getValue())
+        //   )
+        //   if (countUnclosedBrackets(editor.current.getValue()) <= 0) {
+        //     console.log("preventing close bracket")
+        //     event.preventDefault()
+        //     event.stopPropagation()
+        //   }
+        // }
+      }
+    )
+
+    return () => keyDownBinding?.dispose()
   }, [])
 }
 
-export const useUpdateOnThemeInput = (editorRef, themeInput) => {
+export const useUpdateOnThemeInput = (
+  editorRef: EditorRefType,
+  themeInput: string
+) => {
   useEffect(() => {
     // push the new theme input on to the edit operations stack
     // so that undo functionality is preserved
-    const model = editorRef.current.getModel()
-    model.pushEditOperations(
+    const model = editorRef.current?.getModel()
+    model?.pushEditOperations(
       [],
-      [{ range: model.getFullModelRange(), text: themeInput }]
+      [{ range: model.getFullModelRange(), text: themeInput }],
+      () => null
     )
   }, [themeInput])
 }
+
+// const countUnclosedBrackets = code => {
+//   let numUnclosedBrackets = 0
+//   for (let i = 0; i < code.length; i++) {
+//     if (code[i] === "{") {
+//       numUnclosedBrackets++
+//     } else if (code[i] === "}") {
+//       numUnclosedBrackets--
+//     }
+//   }
+//   console.log("counted", numUnclosedBrackets, "unclosed brackets")
+//   return numUnclosedBrackets
+// }

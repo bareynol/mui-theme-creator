@@ -56,6 +56,7 @@ const defaultThemeId = generateThemeId({})
 
 const wrapCode = code =>
   `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
+
 export const themeOptions: ThemeOptions = ${code}`
 
 const initialState: RootState = {

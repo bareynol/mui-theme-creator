@@ -7,13 +7,14 @@ import {
   useEditor,
   useSaveKey,
   useReadOnlyLines,
-  useRestrictedKeys,
   useUpdateOnThemeInput,
 } from "./hooks"
+import "./editor.css"
+import * as monaco from "monaco-editor"
 
 const MonacoThemeCodeEditor = () => {
   const themeInput = useSelector((state: RootState) => state.themeInput)
-  const editor = useRef(null)
+  const editor = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
   const dispatch = useDispatch()
   const handleSaveCode = React.useCallback(
     code => {
@@ -26,13 +27,14 @@ const MonacoThemeCodeEditor = () => {
     const monaco = require("monaco-editor")
 
     try {
-      await editor.current.getAction("editor.action.formatDocument").run()
+      await editor.current?.getAction("editor.action.formatDocument").run()
     } catch (err) {
       console.log("error formatting document", err)
     }
     console.log("formatted document")
     // get the JS output of the typescript inside the code editor
-    const model = editor.current.getModel()
+    const model = editor.current?.getModel()
+    if (!model) return null
     const worker = await monaco.languages.typescript.getTypeScriptWorker()
     const proxy = await worker(model.uri)
 
@@ -62,10 +64,9 @@ const MonacoThemeCodeEditor = () => {
   useEditor(editor, themeInput)
   useSaveKey(editor, onSaveCode)
   useReadOnlyLines(editor)
-  useRestrictedKeys(editor)
   useUpdateOnThemeInput(editor, themeInput)
 
-  const resizeEditor = () => editor?.current?.layout()
+  const resizeEditor = () => editor.current?.layout()
 
   useEffect(() => {
     window.addEventListener("resize", resizeEditor)
@@ -73,12 +74,6 @@ const MonacoThemeCodeEditor = () => {
     return () => {
       console.log("MonacoThemeCodeEditor unmounted")
       window.removeEventListener("resize", resizeEditor)
-
-      // remove the code editor from the container div
-      // let containerEl = document.getElementById("container")
-      // while (containerEl?.firstChild) {
-      //   containerEl?.removeChild(containerEl?.firstChild)
-      // }
     }
   }, [])
 
@@ -87,19 +82,6 @@ const MonacoThemeCodeEditor = () => {
       <div id="container" style={{ height: "100%", width: "100%" }} />
     </>
   )
-}
-
-const countUnclosedBrackets = code => {
-  let numUnclosedBrackets = 0
-  for (let i = 0; i < code.length; i++) {
-    if (code[i] === "{") {
-      numUnclosedBrackets++
-    } else if (code[i] === "}") {
-      numUnclosedBrackets--
-    }
-  }
-  console.log("counted", numUnclosedBrackets, "unclosed brackets")
-  return numUnclosedBrackets
 }
 
 export default MonacoThemeCodeEditor
