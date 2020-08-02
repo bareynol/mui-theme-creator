@@ -8,6 +8,7 @@ import {
   useSaveKey,
   useReadOnlyLines,
   useUpdateOnThemeInput,
+  useReadOnlyStyles,
 } from "./hooks"
 import "./editor.css"
 import * as monaco from "monaco-editor"
@@ -64,16 +65,31 @@ const MonacoThemeCodeEditor = () => {
   useEditor(editor, themeInput)
   useSaveKey(editor, onSaveCode)
   useReadOnlyLines(editor)
+  useReadOnlyStyles(editor)
   useUpdateOnThemeInput(editor, themeInput)
 
   const resizeEditor = () => editor.current?.layout()
+  const undoRedoActions = (event: KeyboardEvent) => {
+    if (event.ctrlKey) {
+      if (event.code === "KeyZ") {
+        console.log("global undo listener")
+        editor.current?.trigger("MonacoThemeCodeEditor", "undo", null)
+      }
+      if (event.code === "KeyY") {
+        console.log("global redo listener")
+        editor.current?.trigger("MonacoThemeCodeEditor", "redo", null)
+      }
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("resize", resizeEditor)
+    window.addEventListener("keydown", undoRedoActions)
 
     return () => {
       console.log("MonacoThemeCodeEditor unmounted")
       window.removeEventListener("resize", resizeEditor)
+      window.removeEventListener("keydown", undoRedoActions)
     }
   }, [])
 

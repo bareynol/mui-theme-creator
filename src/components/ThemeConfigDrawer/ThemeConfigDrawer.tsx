@@ -76,11 +76,11 @@ const ThemeConfigDrawer = () => {
     [dispatch]
   )
 
-  useEffect(() => {
-    document.addEventListener("keydown", saveInput, false)
+  // useEffect(() => {
+  //   document.addEventListener("keydown", saveInput, false)
 
-    return () => document.removeEventListener("keydown", saveInput, false)
-  }, [])
+  //   return () => document.removeEventListener("keydown", saveInput, false)
+  // }, [])
 
   return (
     <Drawer

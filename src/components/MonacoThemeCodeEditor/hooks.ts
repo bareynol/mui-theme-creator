@@ -152,6 +152,52 @@ export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
   }, [onSave])
 }
 
+// ensure read only lines always have proper styling
+export const useReadOnlyStyles = (editorRef: EditorRefType) => {
+  let decorationIds: string[] = [] // the IDs of decorations created
+  useEffect(() => {
+    const modelContentChangeBinding = editorRef.current?.onDidChangeModelContent(
+      event => {
+        const lastLine = editorRef.current?.getModel()?.getLineCount() || 0
+
+        // wipe the existing read only decorations, and add new ones
+        decorationIds =
+          editorRef.current?.deltaDecorations(decorationIds, [
+            {
+              range: new monaco.Range(1, 1, readOnlyLines.top, 50),
+              options: {
+                isWholeLine: true,
+                inlineClassName: "readOnlyLine",
+                hoverMessage: [
+                  {
+                    value: "This line is read-only",
+                  },
+                ],
+              },
+            },
+            {
+              range: new monaco.Range(lastLine, 1, lastLine, 50),
+              options: {
+                isWholeLine: true,
+                inlineClassName: "readOnlyLine",
+                hoverMessage: [
+                  {
+                    value: "This line is read-only",
+                  },
+                ],
+              },
+            },
+          ]) || []
+      }
+    )
+
+    return () => {
+      editorRef.current?.deltaDecorations(decorationIds, []) // wipe any existing decorations
+      modelContentChangeBinding?.dispose()
+    }
+  }, [])
+}
+
 /**
  * Restricts backspace and delete on read only lines,
  * also attempts to restrict closing the themeOptions object
@@ -168,7 +214,6 @@ export const useReadOnlyLines = (editorRef: EditorRefType) => {
       const lastEditableLine =
         (editorRef.current?.getModel()?.getLineCount() || 0) -
         readOnlyLines.bottom
-      console.log(selection, lastEditableLine, event)
 
       if (!selection || lastEditableLine < 0) return null
 
@@ -194,7 +239,6 @@ export const useReadOnlyLines = (editorRef: EditorRefType) => {
           eventIsCut ||
           (!event.ctrlKey && !allowedKeys.includes(event.keyCode))
         ) {
-          console.log("preventing edit")
           event.preventDefault()
           event.stopPropagation()
         }
@@ -242,38 +286,6 @@ export const useReadOnlyLines = (editorRef: EditorRefType) => {
         }
       }
     }
-
-    // set read only styles
-    const lastLine = editorRef.current?.getModel()?.getLineCount() || 0
-    editorRef.current?.deltaDecorations(
-      [],
-      [
-        {
-          range: new monaco.Range(1, 1, readOnlyLines.top, 50),
-          options: {
-            isWholeLine: true,
-            inlineClassName: "readOnlyLine",
-            hoverMessage: [
-              {
-                value: "This line is read-only",
-              },
-            ],
-          },
-        },
-        {
-          range: new monaco.Range(lastLine, 1, lastLine, 50),
-          options: {
-            isWholeLine: true,
-            inlineClassName: "readOnlyLine",
-            hoverMessage: [
-              {
-                value: "This line is read-only",
-              },
-            ],
-          },
-        },
-      ]
-    )
 
     const keyDownBinding = editorRef.current?.onKeyDown(
       (event: monaco.IKeyboardEvent) => {
