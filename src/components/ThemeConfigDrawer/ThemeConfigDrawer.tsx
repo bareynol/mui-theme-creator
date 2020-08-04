@@ -1,26 +1,9 @@
-import React, { useCallback, useEffect } from "react"
-import {
-  Drawer,
-  Typography,
-  makeStyles,
-  Grid,
-  Button,
-  ThemeProvider,
-  ListItem,
-  ListItemText,
-  Divider,
-  ListItemIcon,
-  Tooltip,
-  ListItemSecondaryAction,
-  IconButton,
-  List,
-} from "@material-ui/core"
-import FileCopyIcon from "@material-ui/icons/FileCopy"
-import DownloadIcon from "@material-ui/icons/GetApp"
-import CodeEditor from "./CodeEditor"
+import React from "react"
+import Drawer from "@material-ui/core/Drawer"
+import Grid from "@material-ui/core/Grid"
+import { makeStyles } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
-import { updateThemeInput, saveThemeInput } from "src/state/actions"
 import ThemeTools from "./ThemeTools/ThemeTools"
 import MonacoThemeCodeEditor from "../MonacoThemeCodeEditor/MonacoThemeCodeEditor"
 
@@ -47,41 +30,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const MAC_SAVE_KEY = 19
-const S_KEY = 83
-
 const ThemeConfigDrawer = () => {
   const classes = useStyles()
-  // const themeInput = useSelector((state: RootState) => state.themeInput)
-
-  const dispatch = useDispatch()
   const themeId = useSelector((state: RootState) => state.themeId)
-
-  // const updateInput = useCallback(
-  //   (editor, data, value) => {
-  //     dispatch(updateThemeInput(value))
-  //   },
-  //   [dispatch]
-  // )
-
-  const saveInput = useCallback(
-    event => {
-      if (
-        event.keyCode == MAC_SAVE_KEY ||
-        (event.ctrlKey && event.keyCode == S_KEY)
-      ) {
-        event.preventDefault()
-        dispatch(saveThemeInput())
-      }
-    },
-    [dispatch]
-  )
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", saveInput, false)
-
-  //   return () => document.removeEventListener("keydown", saveInput, false)
-  // }, [])
 
   return (
     <Drawer
@@ -99,7 +50,7 @@ const ThemeConfigDrawer = () => {
         style={{ height: "100vh" }}
       >
         <Grid item className={classes.editorWrapper}>
-          {/* <CodeEditor /> */}
+          {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
           <MonacoThemeCodeEditor key={themeId} />
         </Grid>
 
@@ -107,10 +58,6 @@ const ThemeConfigDrawer = () => {
           <ThemeTools />
         </Grid>
       </Grid>
-
-      {/* </Grid>
-        <Grid item></Grid>
-      </Grid> */}
     </Drawer>
   )
 }

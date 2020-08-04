@@ -85,5 +85,6 @@ const useUndoRedoHandlers = (editorRef: EditorRefType) => {
     }
   }, [])
 
+  // return the handlers to be used on undo/redo
   return { handleRedo, handleUndo }
 }

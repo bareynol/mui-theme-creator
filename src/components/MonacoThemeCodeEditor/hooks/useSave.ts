@@ -6,7 +6,7 @@ import { EditorRefType, MutableEditorRefType } from "../types"
 import monokai from "src/monaco-themes/monokai"
 import { useDispatch } from "react-redux"
 import { updateEditorState } from "src/state/editor/actions"
-import { saveEditorCode } from "src/state/actions"
+import { saveEditorToTheme } from "src/state/editor/actions"
 
 export default function useSave(editorRef: EditorRefType) {
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export default function useSave(editorRef: EditorRefType) {
     } else if (syntacticDiagnostics.length > 0) {
       // handle errors
     } else {
-      dispatch(saveEditorCode(emittedOutput.outputFiles[0].text))
+      dispatch(saveEditorToTheme(emittedOutput.outputFiles[0].text))
       // update the saved version
       dispatch(
         updateEditorState({
@@ -42,6 +42,7 @@ export default function useSave(editorRef: EditorRefType) {
 
 export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
   useEffect(() => {
+    // save key action in the monaco editor
     const actionBinding = editorRef.current?.addAction({
       id: "save-editor-contents",
       label: "Save Editor Theme Contents",
@@ -51,7 +52,20 @@ export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
       run: () => onSave(),
     })
 
-    return () => actionBinding?.dispose()
+    // global save key listener
+    const handleGlobalSave = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.code == "KeyS") {
+        event.preventDefault()
+        console.log("global save")
+        onSave()
+      }
+    }
+    window.addEventListener("keydown", handleGlobalSave)
+
+    return () => {
+      actionBinding?.dispose()
+      window.removeEventListener("keydown", handleGlobalSave)
+    }
   }, [onSave])
 }
 

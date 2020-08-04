@@ -1,80 +1,6 @@
-import JSON5 from "json5"
-import prettier from "prettier/standalone"
-import parserBabel from "prettier/parser-babel"
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
-import { defaultTheme } from "src/siteTheme"
-
-// update the input string with events from the code editor
-export const updateThemeInput = (input: string) => ({
-  type: "UPDATE_THEME_INPUT",
-  input,
-})
-
-// Validate the code editor input, convert it to an object and replace themeOptions
-export const saveThemeInput = () => (dispatch, getState) => {
-  const { themeInput } = getState()
-  try {
-    // first automatically prettify the code for their benefit
-    // save the updated code if prettifying it doesn't error out
-    const prettifiedString = prettifyCode(themeInput)
-    dispatch(updateThemeInput(prettifiedString))
-
-    // parse the string into an object
-    const themeOptions: ThemeOptions = parseThemeString(prettifiedString)
-
-    // validate the object
-    // const validation = ThemeTest.check({theme: themeOptions})
-
-    // const themeObject: Theme = createMuiTheme(themeOptions)
-    // console.log("muiThemeObject", muiThemeObject)
-
-    // save the new object as the current themeOptions
-    return dispatch({
-      type: "SAVE_THEME_INPUT",
-      updatedThemeOptions: themeOptions,
-    })
-  } catch (err) {
-    console.log("error", err)
-  }
-}
-
-/**
- * Save the code coming from the monaco-editor
- * strip the code of extra items, then parse
- * it into an object
- * @param code string - raw code output
- */
-export const saveEditorCode = (code: string) => {
-  // remove "use strict" and "exports" line
-  const codeLines = code.split("\n").slice(2)
-
-  // editor disables editing this line, so it should always
-  // be the initial declaration of the themeObject.
-  // replace with open bracket to ready for JSON parsing
-  codeLines[0] = "{" // editor disables editing this line
-  let numUnclosedBrackets = 1
-  let currentLine = 1
-
-  while (numUnclosedBrackets > 0 && currentLine < codeLines.length) {
-    for (let i = 0; i < codeLines[currentLine].length; i++) {
-      const char = codeLines[currentLine][i]
-      if (char === "{") {
-        numUnclosedBrackets++
-      } else if (char === "}") {
-        numUnclosedBrackets--
-      }
-    }
-    currentLine++
-  }
-
-  codeLines[currentLine - 1] = "}" //editor disables editing this line
-
-  const objectCodeLines = codeLines.splice(0, currentLine).join("\n")
-  const objectCode = parseThemeString(objectCodeLines)
-  console.log("objectCode", objectCodeLines, objectCode)
-  return { type: "SAVE_THEME_INPUT", updatedThemeOptions: objectCode }
-}
+import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 
 /**
  * Remove a key/value in the theme options object by a given path.
@@ -116,8 +42,7 @@ export const removeThemeOption = path => (dispatch, getState) => {
 
   return dispatch({
     type: "UPDATE_THEME",
-    updatedThemeOptions,
-    updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
+    themeOptions: updatedThemeOptions,
   })
 }
 
@@ -126,8 +51,7 @@ export const setThemeOption = (path, value) => (dispatch, getState) => {
   const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
   return dispatch({
     type: "UPDATE_THEME",
-    updatedThemeOptions,
-    updatedThemeInput: JSON5.stringify(updatedThemeOptions, null, 2),
+    themeOptions: updatedThemeOptions,
   })
 }
 
@@ -140,7 +64,7 @@ export const addNewSavedTheme = (
 ) => ({
   type: "ADD_NEW_THEME",
   name,
-  themeOptions,
+  themeOptions: themeOptions || defaultThemeOptions,
 })
 
 /**
@@ -202,26 +126,5 @@ export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
     })
   } else {
     return false
-  }
-}
-
-const prettifyCode = (rawInput: string) => {
-  try {
-    return prettier.format(rawInput, {
-      parser: "json5",
-      plugins: [parserBabel],
-    })
-  } catch (err) {
-    console.log("Error while prettifying code", err)
-    throw err
-  }
-}
-
-const parseThemeString = (input: string) => {
-  try {
-    return JSON5.parse(input)
-  } catch (err) {
-    console.log("Error while parsing theme string", err)
-    throw err
   }
 }
