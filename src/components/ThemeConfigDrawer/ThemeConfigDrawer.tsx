@@ -55,6 +55,7 @@ const ThemeConfigDrawer = () => {
   // const themeInput = useSelector((state: RootState) => state.themeInput)
 
   const dispatch = useDispatch()
+  const themeId = useSelector((state: RootState) => state.themeId)
 
   // const updateInput = useCallback(
   //   (editor, data, value) => {
@@ -99,31 +100,9 @@ const ThemeConfigDrawer = () => {
       >
         <Grid item className={classes.editorWrapper}>
           {/* <CodeEditor /> */}
-          <MonacoThemeCodeEditor />
+          <MonacoThemeCodeEditor key={themeId} />
         </Grid>
-        <Grid item>
-          <List disablePadding>
-            <ListItem>
-              <ListItemText
-                primary="Theme Code Editor"
-                secondary="Edit the code or use the controls below"
-              />
-              <ListItemSecondaryAction>
-                <Tooltip title="Download theme.js">
-                  <IconButton>
-                    <DownloadIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Copy theme code">
-                  <IconButton>
-                    <FileCopyIcon />
-                  </IconButton>
-                </Tooltip>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-          </List>
-        </Grid>
+
         <Grid item className={classes.controlsWrapper}>
           <ThemeTools />
         </Grid>

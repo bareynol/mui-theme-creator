@@ -1,102 +1,45 @@
 import React, { useEffect, useRef } from "react"
 
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "src/state/types"
-import { saveEditorCode } from "src/state/actions"
-import {
-  useEditor,
-  useSaveKey,
-  useReadOnlyLines,
-  useUpdateOnThemeInput,
-  useReadOnlyStyles,
-} from "./hooks"
+import useEditor from "./hooks/useEditor"
+import useEditorStateSync from "./hooks/useEditorStateSync"
+import useReadOnlyLines from "./hooks/useReadOnlyLines"
+import useSave from "./hooks/useSave"
+import useUndoRedo from "./hooks/useUndoRedo"
+
 import "./editor.css"
 import * as monaco from "monaco-editor"
+import EditorControls from "./EditorControls"
 
 const MonacoThemeCodeEditor = () => {
-  const themeInput = useSelector((state: RootState) => state.themeInput)
-  const editor = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
-  const dispatch = useDispatch()
-  const handleSaveCode = React.useCallback(
-    code => {
-      dispatch(saveEditorCode(code))
-    },
-    [dispatch]
-  )
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
 
-  const onSaveCode = async () => {
-    const monaco = require("monaco-editor")
+  // set up editor and configure options
+  useEditor(editorRef)
+  useEditorStateSync(editorRef)
+  useReadOnlyLines(editorRef)
 
-    try {
-      await editor.current?.getAction("editor.action.formatDocument").run()
-    } catch (err) {
-      console.log("error formatting document", err)
-    }
-    console.log("formatted document")
-    // get the JS output of the typescript inside the code editor
-    const model = editor.current?.getModel()
-    if (!model) return null
-    const worker = await monaco.languages.typescript.getTypeScriptWorker()
-    const proxy = await worker(model.uri)
-
-    // get the current semantic errors, and the emitted output
-    const [
-      semanticDiagnostics,
-      syntacticDiagnostics,
-      emittedOutput,
-    ] = await Promise.all([
-      proxy.getSemanticDiagnostics(model.uri.toString()),
-      proxy.getSyntacticDiagnostics(model.uri.toString()),
-      proxy.getEmitOutput(model.uri.toString()),
-    ])
-
-    // if there are semantic errors, prevent saving, else save to redux store
-    if (semanticDiagnostics.length > 0) {
-      // handle errors
-    } else if (syntacticDiagnostics.length > 0) {
-      // handle errors
-    } else {
-      handleSaveCode(emittedOutput.outputFiles[0].text)
-    }
-
-    console.log({ semanticDiagnostics, syntacticDiagnostics, emittedOutput })
-  }
-
-  useEditor(editor, themeInput)
-  useSaveKey(editor, onSaveCode)
-  useReadOnlyLines(editor)
-  useReadOnlyStyles(editor)
-  useUpdateOnThemeInput(editor, themeInput)
-
-  const resizeEditor = () => editor.current?.layout()
-  const undoRedoActions = (event: KeyboardEvent) => {
-    if (event.ctrlKey) {
-      if (event.code === "KeyZ") {
-        console.log("global undo listener")
-        editor.current?.trigger("MonacoThemeCodeEditor", "undo", null)
-      }
-      if (event.code === "KeyY") {
-        console.log("global redo listener")
-        editor.current?.trigger("MonacoThemeCodeEditor", "redo", null)
-      }
-    }
-  }
+  // set Save and Undo/Redo listeners, and get handlers
+  const handleSave = useSave(editorRef)
+  const { handleRedo, handleUndo } = useUndoRedo(editorRef)
 
   useEffect(() => {
-    window.addEventListener("resize", resizeEditor)
-    window.addEventListener("keydown", undoRedoActions)
-
     return () => {
       console.log("MonacoThemeCodeEditor unmounted")
-      window.removeEventListener("resize", resizeEditor)
-      window.removeEventListener("keydown", undoRedoActions)
     }
   }, [])
 
   return (
-    <>
-      <div id="container" style={{ height: "100%", width: "100%" }} />
-    </>
+    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <EditorControls
+        onUndo={handleUndo}
+        onRedo={handleRedo}
+        onSave={handleSave}
+      />
+      <div
+        id="container"
+        style={{ flexGrow: 1, height: "100%", width: "100%" }}
+      />
+    </div>
   )
 }
 

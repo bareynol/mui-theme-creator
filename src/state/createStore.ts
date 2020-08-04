@@ -9,7 +9,7 @@ const persistConfig = {
   key: "root",
   storage,
   transforms: [LoadedFontsTransform],
-  blacklist: ["themeObject"],
+  blacklist: ["themeObject", "themeInput", "unsavedChanges"],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

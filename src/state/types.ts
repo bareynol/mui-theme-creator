@@ -1,4 +1,5 @@
 import { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
+import { EditorState } from "./editor/types"
 
 export interface RootState {
   themeId: string
@@ -7,6 +8,7 @@ export interface RootState {
   themeInput: string
   savedThemes: Record<string, SavedTheme>
   loadedFonts: Set<string>
+  editor: EditorState
 }
 
 export interface SavedTheme {

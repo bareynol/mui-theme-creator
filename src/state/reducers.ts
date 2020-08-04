@@ -2,6 +2,9 @@ import { RootState } from "src/state/types"
 import { PaletteType, createMuiTheme, ThemeOptions } from "@material-ui/core"
 import JSON5 from "json5"
 import { generateThemeId } from "src/utils"
+import editorReducer, {
+  initialState as editorInitialState,
+} from "./editor/reducers"
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {
@@ -26,38 +29,12 @@ const defaultThemeOptions: ThemeOptions = {
     },
   },
 }
-
-const defaultThemeInput = `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
-const themeOptions: ThemeOptions = {
-  palette: {
-    type: "light",
-    primary: {
-      main: "#3f51b5",
-    },
-    secondary: {
-      main: "#f50057",
-    },
-    error: {
-      main: "#f44336",
-    },
-    warning: {
-      main: "#ff9800",
-    },
-    info: {
-      main: "#2196f3",
-    },
-    success: {
-      main: "#4caf50",
-    },
-  },
-}`
-
 const defaultThemeId = generateThemeId({})
 
 const wrapCode = code =>
-  `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
+  `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
-export const themeOptions: ThemeOptions = ${code}`
+export const themeOptions: ThemeOptions = ${code};`
 
 const initialState: RootState = {
   themeId: defaultThemeId,
@@ -75,6 +52,10 @@ const initialState: RootState = {
   loadedFonts: new Set(
     ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
   ),
+  editor: {
+    ...editorInitialState,
+    themeInput: wrapCode(JSON5.stringify(defaultThemeOptions, null, 2)),
+  },
 }
 
 export default (state = initialState, action) => {
@@ -84,6 +65,9 @@ export default (state = initialState, action) => {
         return {
           ...state,
           themeObject: createMuiTheme(action.payload.themeOptions),
+          themeInput: wrapCode(
+            JSON5.stringify(action.payload.themeOptions, null, 2)
+          ),
         }
       }
       return state
@@ -96,9 +80,9 @@ export default (state = initialState, action) => {
       console.log("SAVE_THEME_INPUT", action)
       return {
         ...state,
-        themeInput: wrapCode(
-          JSON5.stringify(action.updatedThemeOptions, null, 2)
-        ),
+        // themeInput: wrapCode(
+        //   JSON5.stringify(action.updatedThemeOptions, null, 2)
+        // ),
         ...onThemeOptionsUpdate(
           state,
           action.updatedThemeOptions,
@@ -114,6 +98,10 @@ export default (state = initialState, action) => {
           state.themeId
         ),
         themeInput: wrapCode(action.updatedThemeInput),
+        editor: {
+          ...state.editor,
+          themeInput: wrapCode(action.updatedThemeInput),
+        },
       }
     case "ADD_NEW_THEME":
       const newThemeId = generateThemeId(state)
@@ -128,6 +116,10 @@ export default (state = initialState, action) => {
           newThemeId,
           action.name
         ),
+        editor: {
+          ...state.editor,
+          themeInput: wrapCode(JSON5.stringify(newThemeOptions, null, 2)),
+        },
       }
     case "LOAD_THEME":
       return {
@@ -144,6 +136,16 @@ export default (state = initialState, action) => {
         themeObject: createMuiTheme(
           state.savedThemes[action.themeId].themeOptions
         ),
+        editor: {
+          ...state.editor,
+          themeInput: wrapCode(
+            JSON5.stringify(
+              state.savedThemes[action.themeId].themeOptions,
+              null,
+              2
+            )
+          ),
+        },
       }
     case "RENAME_THEME":
       return {
@@ -170,7 +172,7 @@ export default (state = initialState, action) => {
         loadedFonts,
       }
     default:
-      return state
+      return { ...state, editor: editorReducer(state.editor, action) }
   }
 }
 

@@ -6,6 +6,9 @@ export const themeConfig: ThemeOptions = {
     primary: {
       main: "#90caf9",
     },
+    secondary: {
+      main: "#f48fb1",
+    },
   },
 }
 
