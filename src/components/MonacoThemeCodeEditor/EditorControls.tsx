@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import DownloadIcon from "@material-ui/icons/GetApp"
 import SaveIcon from "@material-ui/icons/Save"
@@ -12,10 +12,12 @@ import {
   createStyles,
   Theme,
   Divider,
+  Snackbar,
 } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import { useCanSave } from "src/state/selectors"
+import Alert from "@material-ui/lab/Alert"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,11 +43,7 @@ function EditorControls({ onRedo, onUndo, onSave }) {
             <DownloadIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Copy theme code">
-          <IconButton color="secondary">
-            <FileCopyIcon />
-          </IconButton>
-        </Tooltip>
+        <CopyButton />
         <Divider orientation="vertical" flexItem />
         <Tooltip title="Undo (Ctrl + Z)">
           <span>
@@ -76,22 +74,35 @@ function EditorControls({ onRedo, onUndo, onSave }) {
       >
         {canSave ? "* Unsaved Changes" : "All changes saved"}
       </Typography>
-
-      {/* <div>
-        <Typography display="inline">Theme Editor</Typography>
-        <Tooltip title="Download theme.js">
-          <IconButton>
-            <DownloadIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Copy theme code">
-          <IconButton>
-            <FileCopyIcon />
-          </IconButton>
-        </Tooltip>
-      </div> */}
     </div>
   )
 }
 
 export default EditorControls
+
+const CopyButton = ({}) => {
+  const themeInput = useSelector((state: RootState) => state.editor.themeInput)
+  const [open, setOpen] = useState(false)
+  const copyToClipboard = () =>
+    navigator.clipboard.writeText(themeInput).then(() => setOpen(true))
+
+  return (
+    <>
+      <Tooltip title="Copy theme code">
+        <IconButton color="secondary" onClick={copyToClipboard}>
+          <FileCopyIcon />
+        </IconButton>
+      </Tooltip>
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        onClose={() => setOpen(false)}
+      >
+        <Alert variant="filled" severity="success">
+          Copied theme code to clipboard!
+        </Alert>
+      </Snackbar>
+    </>
+  )
+}

@@ -112,7 +112,7 @@ const defaultThemeList = [
           main: "#f48fb1",
         },
         background: {
-          default: "#121212",
+          default: "#212121",
           paper: "#424242",
         },
       },
