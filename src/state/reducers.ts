@@ -27,7 +27,10 @@ const initialState: RootState = {
 }
 
 export default (state = initialState, action) => {
-  state.editor = editorReducer(state.editor, action, state.savedThemes)
+  state = {
+    ...state,
+    editor: editorReducer(state.editor, action, state.savedThemes),
+  }
   switch (action.type) {
     case "persist/REHYDRATE":
       if (action.payload != null) {

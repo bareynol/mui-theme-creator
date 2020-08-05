@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
+import { useCanSave } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,10 +32,7 @@ function EditorControls({ onRedo, onUndo, onSave }) {
   const classes = useStyles()
   const canUndo = useSelector((state: RootState) => state.editor.canUndo)
   const canRedo = useSelector((state: RootState) => state.editor.canRedo)
-  const canSave = useSelector(
-    (state: RootState) =>
-      state.editor.savedVersion !== state.editor.currentVersion
-  )
+  const canSave = useCanSave()
   return (
     <div className={classes.root}>
       <div style={{ display: "flex" }}>

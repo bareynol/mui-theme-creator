@@ -47,7 +47,6 @@ export const removeThemeOption = path => (dispatch, getState) => {
 }
 
 export const setThemeOption = (path, value) => (dispatch, getState) => {
-  console.log("setThemeOption", path, value)
   const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
   return dispatch({
     type: "UPDATE_THEME",

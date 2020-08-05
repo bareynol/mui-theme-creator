@@ -38,7 +38,7 @@ export const saveEditorToTheme = (code: string) => {
   const objectCodeLines = codeLines.splice(0, currentLine).join("\n")
   const objectCode = parseThemeString(objectCodeLines)
   console.log("objectCode", objectCodeLines, objectCode)
-  return { type: "SAVE_THEME_INPUT", updatedThemeOptions: objectCode }
+  return { type: "SAVE_THEME_INPUT", themeOptions: objectCode }
 }
 
 const parseThemeString = (input: string) => {

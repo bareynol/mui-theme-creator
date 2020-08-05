@@ -9,8 +9,20 @@ import useUndoRedo from "./hooks/useUndoRedo"
 import "./editor.css"
 import * as monaco from "monaco-editor"
 import EditorControls from "./EditorControls"
+import EditorErrors from "./EditorErrors"
+import { makeStyles, Theme, createStyles } from "@material-ui/core"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      height: "calc(100% - 48px)",
+      width: "100%",
+    },
+  })
+)
 
 const MonacoThemeCodeEditor = () => {
+  const classes = useStyles()
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
 
   // set up editor and configure options
@@ -29,16 +41,21 @@ const MonacoThemeCodeEditor = () => {
   }, [])
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+      }}
+    >
       <EditorControls
         onUndo={handleUndo}
         onRedo={handleRedo}
         onSave={handleSave}
       />
-      <div
-        id="container"
-        style={{ flexGrow: 1, height: "100%", width: "100%" }}
-      />
+      <div id="container" className={classes.container} />
+      <EditorErrors editorRef={editorRef} />
     </div>
   )
 }

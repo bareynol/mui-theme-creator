@@ -5,11 +5,13 @@ import { useMemo } from "react"
 import { useSelector } from "react-redux"
 import { ThemeOptions, Theme } from "@material-ui/core"
 
-// return an object of the following shape:
-//  {
-//    modifiedByUser: whether the user has manually set that path,
-//    value: value in themeOptions or themeObject
-//  }
+/**
+ * Return the value of in the theme at the specified path,
+ * and whether that value is set by the user or is default
+ * @param path
+ * @param themeOptions
+ * @param themeObject
+ */
 const getThemeValueInfo = (
   path: string,
   themeOptions: ThemeOptions,
@@ -30,16 +32,28 @@ const makeThemeValueInfoSelector = () =>
     getThemeValueInfo
   )
 
-// hook to return an object of the following shape:
-//  {
-//    modifiedByUser: whether the user has manually set that path,
-//    value: value in themeOptions or themeObject
-//  }
+/**
+ * Return the value of in the theme at the specified path,
+ * and whether that value is set by the user or is default
+ * @param path
+ */
 export const useThemeValueInfo = (path: string) => {
   const selectThemeValue = useMemo(makeThemeValueInfoSelector, [])
 
   return useSelector((state: RootState) => selectThemeValue(state, path))
 }
 
-// return just the value from themeValueInfo
+/**
+ * Return the value of a generated theme at the specified path
+ * @param path
+ */
 export const useThemeValue = (path: string) => useThemeValueInfo(path).value
+
+/**
+ * Return whether the code editor has unsaved changes
+ */
+export const useCanSave = () =>
+  useSelector(
+    (state: RootState) =>
+      state.editor.savedVersion !== state.editor.currentVersion
+  )
