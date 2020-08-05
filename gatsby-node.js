@@ -5,3 +5,20 @@
  */
 
 // You can delete this file if you're not using it
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin")
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new MonacoWebpackPlugin({
+        languages: ["javascript", "css", "html", "typescript"],
+      }),
+    ],
+  })
+}

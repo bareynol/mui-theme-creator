@@ -1,0 +1,5 @@
+/* Styles for custom code editor decorations */
+
+.readOnlyLine {
+  opacity: 0.7;
+}

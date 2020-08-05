@@ -1,27 +1,11 @@
-import React, { useCallback, useEffect } from "react"
-import {
-  Drawer,
-  Typography,
-  makeStyles,
-  Grid,
-  Button,
-  ThemeProvider,
-  ListItem,
-  ListItemText,
-  Divider,
-  ListItemIcon,
-  Tooltip,
-  ListItemSecondaryAction,
-  IconButton,
-  List,
-} from "@material-ui/core"
-import FileCopyIcon from "@material-ui/icons/FileCopy"
-import DownloadIcon from "@material-ui/icons/GetApp"
-import CodeEditor from "./CodeEditor"
+import React from "react"
+import Drawer from "@material-ui/core/Drawer"
+import Grid from "@material-ui/core/Grid"
+import { makeStyles } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
-import { updateThemeInput, saveThemeInput } from "src/state/actions"
 import ThemeTools from "./ThemeTools/ThemeTools"
+import MonacoThemeCodeEditor from "../MonacoThemeCodeEditor/MonacoThemeCodeEditor"
 
 const drawerWidth: React.CSSProperties["width"] = 400
 
@@ -31,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    overflowY: "visible",
     zIndex: theme.zIndex.drawer + 2,
   },
   editorWrapper: {
@@ -45,40 +30,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const MAC_SAVE_KEY = 19
-const S_KEY = 83
-
 const ThemeConfigDrawer = () => {
   const classes = useStyles()
-  // const themeInput = useSelector((state: RootState) => state.themeInput)
-
-  const dispatch = useDispatch()
-
-  // const updateInput = useCallback(
-  //   (editor, data, value) => {
-  //     dispatch(updateThemeInput(value))
-  //   },
-  //   [dispatch]
-  // )
-
-  const saveInput = useCallback(
-    event => {
-      if (
-        event.keyCode == MAC_SAVE_KEY ||
-        (event.ctrlKey && event.keyCode == S_KEY)
-      ) {
-        event.preventDefault()
-        dispatch(saveThemeInput())
-      }
-    },
-    [dispatch]
-  )
-
-  useEffect(() => {
-    document.addEventListener("keydown", saveInput, false)
-
-    return () => document.removeEventListener("keydown", saveInput, false)
-  }, [])
+  const themeId = useSelector((state: RootState) => state.themeId)
 
   return (
     <Drawer
@@ -96,39 +50,14 @@ const ThemeConfigDrawer = () => {
         style={{ height: "100vh" }}
       >
         <Grid item className={classes.editorWrapper}>
-          <CodeEditor />
+          {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
+          <MonacoThemeCodeEditor key={themeId} />
         </Grid>
-        <Grid item>
-          <List disablePadding>
-            <ListItem>
-              <ListItemText
-                primary="Theme Code Editor"
-                secondary="Edit the code or use the controls below"
-              />
-              <ListItemSecondaryAction>
-                <Tooltip title="Download theme.js">
-                  <IconButton>
-                    <DownloadIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Copy theme code">
-                  <IconButton>
-                    <FileCopyIcon />
-                  </IconButton>
-                </Tooltip>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-          </List>
-        </Grid>
+
         <Grid item className={classes.controlsWrapper}>
           <ThemeTools />
         </Grid>
       </Grid>
-
-      {/* </Grid>
-        <Grid item></Grid>
-      </Grid> */}
     </Drawer>
   )
 }

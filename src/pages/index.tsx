@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
+// import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
 import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import ThemeWrapper from "src/components/ThemeWrapper"
@@ -15,7 +15,7 @@ import {
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer/ThemeConfigDrawer"
 import ComponentExamples from "src/components/ComponentExamples"
 import PreviewWindow from "src/components/PreviewWindow"
-import MaterialColorPicker from "src/components/MaterialColorPicker"
+// import MaterialColorPicker from "src/components/MaterialColorPicker"
 import SavedThemes from "src/components/SavedThemes/SavedThemes"
 
 const IndexPage = () => {

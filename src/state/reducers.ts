@@ -1,37 +1,16 @@
 import { RootState } from "src/state/types"
-import { PaletteType, createMuiTheme, ThemeOptions } from "@material-ui/core"
-import JSON5 from "json5"
+import { createMuiTheme, ThemeOptions } from "@material-ui/core"
 import { generateThemeId } from "src/utils"
-
-const defaultThemeOptions: ThemeOptions = {
-  palette: {
-    type: "light" as PaletteType,
-    primary: {
-      main: "#3f51b5",
-    },
-    secondary: {
-      main: "#f50057",
-    },
-    error: {
-      main: "#f44336",
-    },
-    warning: {
-      main: "#ff9800",
-    },
-    info: {
-      main: "#2196f3",
-    },
-    success: {
-      main: "#4caf50",
-    },
-  },
-}
+import editorReducer, {
+  initialState as editorInitialState,
+} from "./editor/reducers"
+import { defaultThemeOptions } from "src/siteTheme"
 
 const defaultThemeId = generateThemeId({})
 
 const initialState: RootState = {
   themeId: defaultThemeId,
-  themeInput: JSON5.stringify(defaultThemeOptions, null, 2), // the current state of the code editor input
+  // themeInput: defaultThemeInput,
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
   themeObject: createMuiTheme(defaultThemeOptions),
   savedThemes: {
@@ -44,44 +23,37 @@ const initialState: RootState = {
   loadedFonts: new Set(
     ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
   ),
+  editor: editorInitialState,
 }
 
 export default (state = initialState, action) => {
+  state = {
+    ...state,
+    editor: editorReducer(state.editor, action, state.savedThemes),
+  }
   switch (action.type) {
-    case "UPDATE_THEME_INPUT":
-      return {
-        ...state,
-        themeInput: action.input,
+    case "persist/REHYDRATE":
+      if (action.payload != null) {
+        return {
+          ...state,
+          themeObject: createMuiTheme(action.payload.themeOptions),
+        }
       }
+      return state
+
     case "SAVE_THEME_INPUT":
-      return {
-        ...state,
-        ...onThemeOptionsUpdate(
-          state,
-          action.updatedThemeOptions,
-          state.themeId
-        ),
-      }
     case "UPDATE_THEME":
       return {
         ...state,
-        ...onThemeOptionsUpdate(
-          state,
-          action.updatedThemeOptions,
-          state.themeId
-        ),
-        themeInput: action.updatedThemeInput,
+        ...onThemeOptionsUpdate(state, action.themeOptions, state.themeId),
       }
     case "ADD_NEW_THEME":
       const newThemeId = generateThemeId(state)
-      const newThemeOptions = action.themeOptions || defaultThemeOptions
       return {
         ...state,
-        themeId: newThemeId,
-        themeInput: JSON5.stringify(newThemeOptions, null, 2),
         ...onThemeOptionsUpdate(
           state,
-          newThemeOptions,
+          action.themeOptions,
           newThemeId,
           action.name
         ),
@@ -90,11 +62,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         themeId: action.themeId,
-        themeInput: JSON5.stringify(
-          state.savedThemes[action.themeId].themeOptions,
-          null,
-          2
-        ),
         themeOptions: state.savedThemes[action.themeId].themeOptions,
         themeObject: createMuiTheme(
           state.savedThemes[action.themeId].themeOptions
@@ -135,6 +102,7 @@ const onThemeOptionsUpdate = (
   themeId: string,
   name?: string
 ) => ({
+  themeId: themeId,
   themeOptions: themeOptions,
   themeObject: createMuiTheme(themeOptions),
   savedThemes: {
