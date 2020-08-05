@@ -10,6 +10,8 @@ import {
   Toolbar,
   Link,
 } from "@material-ui/core"
+import { useDispatch } from "react-redux"
+import { setActiveTab } from "src/state/actions"
 
 const drawerWidth: React.CSSProperties["width"] = 200
 
@@ -39,6 +41,12 @@ const useStyles = makeStyles(theme => ({
 const NavDrawer = () => {
   const classes = useStyles()
 
+  const dispatch = useDispatch()
+  const openComponentsTab = React.useCallback(
+    () => dispatch(setActiveTab("components")),
+    [dispatch]
+  )
+
   const NavLink = React.forwardRef((linkProps, ref) => (
     <Link ref={ref} {...linkProps} color="textPrimary" />
   ))
@@ -55,12 +63,15 @@ const NavDrawer = () => {
       <Toolbar />
       <div className={classes.drawerContainer}>
         <List dense className={classes.list}>
-          <ListItem button component={NavLink} href="#Preview">
-            <ListItemText primary="Preview" />
-          </ListItem>
           <ListSubheader>Components</ListSubheader>
           {examples.map(({ id, title }) => (
-            <ListItem key={id} button component={NavLink} href={`#${id}`}>
+            <ListItem
+              key={id}
+              button
+              component={NavLink}
+              href={`#${id}`}
+              onClick={openComponentsTab}
+            >
               <ListItemText
                 primary={title}
                 className={classes.listItemText}

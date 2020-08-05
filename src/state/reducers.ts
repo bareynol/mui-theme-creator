@@ -9,6 +9,7 @@ import { defaultThemeOptions } from "src/siteTheme"
 const defaultThemeId = generateThemeId({})
 
 const initialState: RootState = {
+  editor: editorInitialState,
   themeId: defaultThemeId,
   // themeInput: defaultThemeInput,
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
@@ -23,7 +24,7 @@ const initialState: RootState = {
   loadedFonts: new Set(
     ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
   ),
-  editor: editorInitialState,
+  activeTab: "preview",
 }
 
 export default (state = initialState, action) => {
@@ -90,6 +91,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadedFonts,
+      }
+    case "SET_TAB":
+      return {
+        ...state,
+        activeTab: action.tab,
       }
     default:
       return state

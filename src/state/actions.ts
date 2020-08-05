@@ -127,3 +127,8 @@ export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
     return false
   }
 }
+
+/**
+ * Set the active tab for the editor page
+ */
+export const setActiveTab = (tab: string) => ({ type: "SET_TAB", tab })

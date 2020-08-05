@@ -8,6 +8,7 @@ export interface RootState {
   themeOptions: ThemeOptions
   savedThemes: Record<string, SavedTheme>
   loadedFonts: Set<string>
+  activeTab: string
 }
 
 export interface SavedTheme {

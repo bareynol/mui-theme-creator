@@ -17,9 +17,16 @@ import ComponentExamples from "src/components/ComponentExamples"
 import PreviewWindow from "src/components/PreviewWindow"
 // import MaterialColorPicker from "src/components/MaterialColorPicker"
 import SavedThemes from "src/components/SavedThemes/SavedThemes"
+import { useDispatch, useSelector } from "react-redux"
+import { setActiveTab } from "src/state/actions"
+import { RootState } from "src/state/types"
 
 const IndexPage = () => {
-  const [tab, setTab] = useState("preview")
+  const tab = useSelector((state: RootState) => state.activeTab)
+  const dispatch = useDispatch()
+  const setTab = React.useCallback(value => dispatch(setActiveTab(value)), [
+    dispatch,
+  ])
 
   return (
     <Layout>
