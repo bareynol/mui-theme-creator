@@ -4,17 +4,20 @@ import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
 import Link from "@material-ui/core/Link"
+import Tooltip from "@material-ui/core/Tooltip"
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <Tooltip title={`<Typography variant="body2" color="textSecondary">`} arrow>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="https://material-ui.com/">
+          Your Website
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </Tooltip>
   )
 }
 
@@ -33,17 +36,24 @@ export default function BlogFooter(props) {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          {title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
+        <Tooltip title={`<Typography variant="h6">`} arrow>
+          <Typography variant="h6" align="center" gutterBottom>
+            {title}
+          </Typography>
+        </Tooltip>
+        <Tooltip
+          title={`<Typography color="textSecondary" variant="subtitle1">`}
+          arrow
         >
-          {description}
-        </Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            {description}
+          </Typography>
+        </Tooltip>
         <Copyright />
       </Container>
     </footer>

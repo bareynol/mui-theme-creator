@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography"
 import AddressForm from "./AddressForm"
 import PaymentForm from "./PaymentForm"
 import Review from "./Review"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -77,45 +78,72 @@ export default function Checkout() {
   return (
     <div className={classes.layout}>
       <Paper className={classes.paper}>
-        <Typography component="h1" variant="h4" align="center">
-          Checkout
-        </Typography>
+        <Tooltip
+          title={`<Typography color="textPrimary" variant="h4">`}
+          placement="top"
+          arrow
+        >
+          <Typography component="h1" variant="h4" align="center">
+            Checkout
+          </Typography>
+        </Tooltip>
         <Stepper activeStep={activeStep} className={classes.stepper}>
           {steps.map(label => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <Tooltip title={`<StepLabel>`} placement="top" arrow>
+                <StepLabel>{label}</StepLabel>
+              </Tooltip>
             </Step>
           ))}
         </Stepper>
         <React.Fragment>
           {activeStep === steps.length ? (
             <React.Fragment>
-              <Typography variant="h5" gutterBottom>
-                Thank you for your order.
-              </Typography>
-              <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
-              </Typography>
+              <Tooltip
+                title={`<Typography color="textPrimary" variant="h5">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="h5" gutterBottom>
+                  Thank you for your order.
+                </Typography>
+              </Tooltip>
+              <Tooltip
+                title={`<Typography color="textPrimary" variant="subtitle1">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="subtitle1">
+                  Your order number is #2001539. We have emailed your order
+                  confirmation, and will send you an update when your order has
+                  shipped.
+                </Typography>
+              </Tooltip>
             </React.Fragment>
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
               <div className={classes.buttons}>
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} className={classes.button}>
-                    Back
-                  </Button>
+                  <Tooltip title={`<Button variant="text">`} arrow>
+                    <Button onClick={handleBack} className={classes.button}>
+                      Back
+                    </Button>
+                  </Tooltip>
                 )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
+                <Tooltip
+                  title={`<Button color="primary" variant="contained">`}
+                  arrow
                 >
-                  {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                  </Button>
+                </Tooltip>
               </div>
             </React.Fragment>
           )}

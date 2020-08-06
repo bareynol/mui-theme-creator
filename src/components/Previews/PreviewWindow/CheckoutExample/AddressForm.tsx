@@ -4,13 +4,20 @@ import Typography from "@material-ui/core/Typography"
 import TextField from "@material-ui/core/TextField"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
+import Tooltip from "@material-ui/core/Tooltip"
 
 export default function AddressForm() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
-      </Typography>
+      <Tooltip
+        title={`<Typography color="textPrimary" variant="h6">`}
+        placement="left"
+        arrow
+      >
+        <Typography variant="h6" gutterBottom>
+          Shipping address
+        </Typography>
+      </Tooltip>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -92,7 +99,9 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <FormControlLabel
             control={
-              <Checkbox color="secondary" name="saveAddress" value="yes" />
+              <Tooltip title={`<Checkbox color="secondary">`} arrow>
+                <Checkbox color="secondary" name="saveAddress" value="yes" />
+              </Tooltip>
             }
             label="Use this address for payment details"
           />

@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,12 +37,14 @@ export default function SignUpExample() {
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
+        <Tooltip title={`<Avatar> color="secondary"`} arrow>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Tooltip>
+        <Tooltip title={`<Typography color="textPrimary" variant="h5">`} arrow>
+          <Typography variant="h5">Sign up</Typography>
+        </Tooltip>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -92,25 +95,33 @@ export default function SignUpExample() {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={
+                  <Tooltip title={`<Checkbox color="primary">`} arrow>
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  </Tooltip>
+                }
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
+          <Tooltip title={`<Button color="primary" variant="contained">`} arrow>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+          </Tooltip>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+              <Tooltip title={`<Link color="primary" variant="body2">`} arrow>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Tooltip>
             </Grid>
           </Grid>
         </form>

@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import Link from "@material-ui/core/Link"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   sidebarAboutBox: {
@@ -22,36 +23,61 @@ export default function BlogSidebar(props) {
   return (
     <Grid item xs={12} md={4}>
       <Paper elevation={0} className={classes.sidebarAboutBox}>
-        <Typography variant="h6" gutterBottom>
-          {title}
-        </Typography>
-        <Typography>{description}</Typography>
+        <Tooltip title={`<Typography variant="h6">`} placement="left" arrow>
+          <Typography variant="h6" gutterBottom>
+            {title}
+          </Typography>
+        </Tooltip>
+        <Tooltip title={`<Typography variant="body1">`} placement="left" arrow>
+          <Typography>{description}</Typography>
+        </Tooltip>
       </Paper>
-      <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Archives
-      </Typography>
-      {archives.map(archive => (
-        <Link
-          display="block"
-          variant="body1"
-          href={archive.url}
-          key={archive.title}
+      <Tooltip title={`<Typography variant="h6">`} placement="left" arrow>
+        <Typography
+          variant="h6"
+          gutterBottom
+          className={classes.sidebarSection}
         >
-          {archive.title}
-        </Link>
+          Archives
+        </Typography>
+      </Tooltip>
+      {archives.map(archive => (
+        <Tooltip
+          key={archive.title}
+          title={`<Link color="primary" variant="body1">`}
+          placement="left"
+          arrow
+        >
+          <Link display="block" variant="body1" href={archive.url}>
+            {archive.title}
+          </Link>
+        </Tooltip>
       ))}
-      <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Social
-      </Typography>
+      <Tooltip title={`<Typography variant="h6">`} placement="left" arrow>
+        <Typography
+          variant="h6"
+          gutterBottom
+          className={classes.sidebarSection}
+        >
+          Social
+        </Typography>
+      </Tooltip>
       {social.map(network => (
-        <Link display="block" variant="body1" href="#" key={network.name}>
-          <Grid container direction="row" spacing={1} alignItems="center">
-            <Grid item>
-              <network.icon />
+        <Tooltip
+          key={network.name}
+          title={`<Link color="primary" variant="body1">`}
+          placement="left"
+          arrow
+        >
+          <Link display="block" variant="body1" href="#">
+            <Grid container direction="row" spacing={1} alignItems="center">
+              <Grid item>
+                <network.icon />
+              </Grid>
+              <Grid item>{network.name}</Grid>
             </Grid>
-            <Grid item>{network.name}</Grid>
-          </Grid>
-        </Link>
+          </Link>
+        </Tooltip>
       ))}
     </Grid>
   )

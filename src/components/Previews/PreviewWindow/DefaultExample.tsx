@@ -10,6 +10,7 @@ import {
   Link,
   Box,
   Fab,
+  Tooltip,
 } from "@material-ui/core"
 import MuiLogo from "src/images/mui_logo.svg"
 import AddIcon from "@material-ui/icons/Add"
@@ -51,37 +52,59 @@ const DefaultExample = () => {
           </Grid>
           <Grid item>
             <CardContent>
-              <Typography
-                variant="h4"
-                color="primary"
-                className={classes.muiTitle}
-                gutterBottom
+              <Tooltip
+                title={`<Typography color="primary" variant="h4">`}
+                placement="left"
+                arrow
               >
-                Material-UI
-              </Typography>
-              <Typography variant="body2" paragraph>
-                {`React components for faster and easier web development. Build your own design system, or start with Material Design.`}
-              </Typography>
+                <Typography
+                  variant="h4"
+                  color="primary"
+                  className={classes.muiTitle}
+                  gutterBottom
+                >
+                  Material-UI
+                </Typography>
+              </Tooltip>
+              <Tooltip
+                title={`<Typography color="textPrimary" variant="body2">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="body2" paragraph>
+                  {`React components for faster and easier web development. Build your own design system, or start with Material Design.`}
+                </Typography>
+              </Tooltip>
             </CardContent>
             <CardActions className={classes.cardActions}>
-              <Button
-                variant="outlined"
-                color="primary"
-                href="https://material-ui.com/getting-started/installation/"
-                target="_blank"
-                rel="noreferrer"
+              <Tooltip
+                title={`<Button color="primary" variant="outlined">`}
+                arrow
               >
-                {`Docs`}
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                href="https://material-ui.com/discover-more/backers/"
-                target="_blank"
-                rel="noreferrer"
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  href="https://material-ui.com/getting-started/installation/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {`Docs`}
+                </Button>
+              </Tooltip>
+              <Tooltip
+                title={`<Button color="secondary" variant="contained">`}
+                arrow
               >
-                Support Them
-              </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  href="https://material-ui.com/discover-more/backers/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Support Them
+                </Button>
+              </Tooltip>
             </CardActions>
           </Grid>
         </Grid>
@@ -89,9 +112,11 @@ const DefaultExample = () => {
 
       <Typography variant="h4">Theming Instructions</Typography>
 
-      <Fab aria-label="FAB Preview" className={classes.fab} color="secondary">
-        <AddIcon />
-      </Fab>
+      <Tooltip title={`<Fab color="secondary">`} arrow>
+        <Fab aria-label="FAB Preview" className={classes.fab} color="secondary">
+          <AddIcon />
+        </Fab>
+      </Tooltip>
     </Box>
   )
 }

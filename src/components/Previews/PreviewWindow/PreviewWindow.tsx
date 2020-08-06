@@ -1,5 +1,12 @@
 import React from "react"
-import { makeStyles, Paper, AppBar, Tabs, Tab } from "@material-ui/core"
+import {
+  makeStyles,
+  Paper,
+  AppBar,
+  Tabs,
+  Tab,
+  Tooltip,
+} from "@material-ui/core"
 import AppBarExample from "src/components/Previews/MuiComponentPreviews/AppBar"
 import DefaultExample from "./DefaultExample"
 import SignUpExample from "./SignUpExample"
@@ -83,21 +90,23 @@ const PreviewWindow = () => {
   return (
     <PreviewWrapper>
       <AppBarExample />
-      <AppBar position="static">
-        <Tabs
-          variant="fullWidth"
-          value={tabIndex}
-          onChange={handleChange}
-          aria-label="preview-window-tabs"
-        >
-          <Tab label="Default" />
-          <Tab label="Sign Up" />
-          <Tab label="Dashboard" />
-          <Tab label="Blog" />
-          <Tab label="Pricing" />
-          <Tab label="Checkout" />
-        </Tabs>
-      </AppBar>
+      <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
+        <AppBar position="static">
+          <Tabs
+            variant="fullWidth"
+            value={tabIndex}
+            onChange={handleChange}
+            aria-label="preview-window-tabs"
+          >
+            <Tab label="Default" />
+            <Tab label="Sign Up" />
+            <Tab label="Dashboard" />
+            <Tab label="Blog" />
+            <Tab label="Pricing" />
+            <Tab label="Checkout" />
+          </Tabs>
+        </AppBar>
+      </Tooltip>
       {/* <Container style={{ paddingTop: 16, paddingBottom: 16 }}> */}
       <div style={{ minHeight: 800 }}>
         <TabPanel value={tabIndex} index={0}>

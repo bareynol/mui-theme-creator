@@ -4,13 +4,20 @@ import Grid from "@material-ui/core/Grid"
 import TextField from "@material-ui/core/TextField"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
+import Tooltip from "@material-ui/core/Tooltip"
 
 export default function PaymentForm() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Payment method
-      </Typography>
+      <Tooltip
+        title={`<Typography color="textPrimary" variant="h6">`}
+        placement="left"
+        arrow
+      >
+        <Typography variant="h6" gutterBottom>
+          Payment method
+        </Typography>
+      </Tooltip>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -51,7 +58,11 @@ export default function PaymentForm() {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
+            control={
+              <Tooltip title={`<Checkbox color="secondary">`} arrow>
+                <Checkbox color="secondary" name="saveCard" value="yes" />
+              </Tooltip>
+            }
             label="Remember credit card details for next time"
           />
         </Grid>

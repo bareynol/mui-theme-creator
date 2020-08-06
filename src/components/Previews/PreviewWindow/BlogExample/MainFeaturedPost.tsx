@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import Grid from "@material-ui/core/Grid"
 import Link from "@material-ui/core/Link"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {
@@ -56,20 +57,38 @@ export default function MainFeaturedPost(props) {
       <Grid container>
         <Grid item md={6}>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography
-              component="h1"
-              variant="h3"
-              color="inherit"
-              gutterBottom
+            <Tooltip
+              title={`<Typography color="textPrimary" variant="h3">`}
+              placement="left"
+              arrow
             >
-              {post.title}
-            </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              {post.description}
-            </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
-            </Link>
+              <Typography
+                component="h1"
+                variant="h3"
+                color="inherit"
+                gutterBottom
+              >
+                {post.title}
+              </Typography>
+            </Tooltip>
+            <Tooltip
+              title={`<Typography color="textPrimary" variant="h5">`}
+              placement="left"
+              arrow
+            >
+              <Typography variant="h5" color="inherit" paragraph>
+                {post.description}
+              </Typography>
+            </Tooltip>
+            <Tooltip
+              title={`<Link color="primary" variant="subtitle1">`}
+              placement="left"
+              arrow
+            >
+              <Link variant="subtitle1" href="#">
+                {post.linkText}
+              </Link>
+            </Tooltip>
           </div>
         </Grid>
       </Grid>

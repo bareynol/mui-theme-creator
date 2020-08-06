@@ -1,5 +1,6 @@
 import React from "react"
 import { useTheme } from "@material-ui/core/styles"
+import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
 import {
   LineChart,
@@ -32,9 +33,15 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Today
-      </Typography>
+      <Tooltip
+        title={`<Typography color="primary" variant="h6">`}
+        placement="left"
+        arrow
+      >
+        <Typography variant="h6" color="primary" gutterBottom>
+          Today
+        </Typography>
+      </Tooltip>
       <ResponsiveContainer>
         <LineChart
           data={data}

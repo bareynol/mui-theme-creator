@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Typography from "@material-ui/core/Typography"
+import Tooltip from "@material-ui/core/Tooltip"
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -70,35 +71,45 @@ export default function Orders() {
   const classes = useStyles()
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Recent Orders
-      </Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+      <Tooltip
+        title={`<Typography color="primary" variant="h6">`}
+        placement="left"
+        arrow
+      >
+        <Typography variant="h6" color="primary" gutterBottom>
+          Recent Orders
+        </Typography>
+      </Tooltip>
+      <Tooltip title={`<Table size="small">`} placement="top" arrow>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Ship To</TableCell>
+              <TableCell>Payment Method</TableCell>
+              <TableCell align="right">Sale Amount</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.id}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.shipTo}</TableCell>
+                <TableCell>{row.paymentMethod}</TableCell>
+                <TableCell align="right">{row.amount}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Tooltip>
       <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
+        <Tooltip title={`<Link color="primary">`} placement="left" arrow>
+          <Link color="primary" href="#" onClick={preventDefault}>
+            See more orders
+          </Link>
+        </Tooltip>
       </div>
     </React.Fragment>
   )

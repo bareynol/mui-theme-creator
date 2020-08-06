@@ -13,6 +13,7 @@ import Link from "@material-ui/core/Link"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import { darken, lighten } from "@material-ui/core/styles/colorManipulator"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   ul: {
@@ -133,78 +134,117 @@ export default function PricingExample() {
 
   return (
     <React.Fragment>
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        className={classes.appBar}
-      >
-        <Toolbar className={classes.toolbar}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.toolbarTitle}
-          >
-            Company name
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
+      <Tooltip title={`<AppBar color="default">`} placement="bottom" arrow>
+        <AppBar
+          position="static"
+          color="default"
+          elevation={0}
+          className={classes.appBar}
+        >
+          <Toolbar className={classes.toolbar}>
+            <Tooltip
+              title={`<Typography color="textPrimary" variant="h6">`}
+              placement="left"
+              arrow
             >
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
+              <Typography
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.toolbarTitle}
+              >
+                Company name
+              </Typography>
+            </Tooltip>
+            <nav>
+              <Tooltip
+                title={`<Link color="textPrimary" variant="button">`}
+                arrow
+              >
+                <Link
+                  variant="button"
+                  color="textPrimary"
+                  href="#"
+                  className={classes.link}
+                >
+                  Features
+                </Link>
+              </Tooltip>
+              <Tooltip
+                title={`<Link color="textPrimary" variant="button">`}
+                arrow
+              >
+                <Link
+                  variant="button"
+                  color="textPrimary"
+                  href="#"
+                  className={classes.link}
+                >
+                  Enterprise
+                </Link>
+              </Tooltip>
+              <Tooltip
+                title={`<Link color="textPrimary" variant="button">`}
+                arrow
+              >
+                <Link
+                  variant="button"
+                  color="textPrimary"
+                  href="#"
+                  className={classes.link}
+                >
+                  Support
+                </Link>
+              </Tooltip>
+            </nav>
+            <Tooltip
+              title={`<Button color="primary" variant="outlined">`}
+              arrow
             >
-              Enterprise
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-            >
-              Support
-            </Link>
-          </nav>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-          >
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+              <Button
+                href="#"
+                color="primary"
+                variant="outlined"
+                className={classes.link}
+              >
+                Login
+              </Button>
+            </Tooltip>
+          </Toolbar>
+        </AppBar>
+      </Tooltip>
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="textPrimary"
-          gutterBottom
+        <Tooltip
+          title={`<Typography color="textPrimary" variant="h2">`}
+          placement="top"
+          arrow
         >
-          Pricing
-        </Typography>
-        <Typography
-          variant="h5"
-          align="center"
-          color="textSecondary"
-          component="p"
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            Pricing
+          </Typography>
+        </Tooltip>
+        <Tooltip
+          title={`<Typography color="textSecondary" variant="h5">`}
+          arrow
         >
-          Quickly build an effective pricing table for your potential customers
-          with this layout. It&apos;s built with default Material-UI components
-          with little customization.
-        </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            Quickly build an effective pricing table for your potential
+            customers with this layout. It&apos;s built with default Material-UI
+            components with little customization.
+          </Typography>
+        </Tooltip>
       </Container>
       {/* End hero unit */}
       <Container maxWidth="md" component="main">
@@ -219,44 +259,75 @@ export default function PricingExample() {
               md={4}
             >
               <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{ align: "center" }}
-                  action={tier.title === "Pro" ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
+                <Tooltip title={`<CardHeader>`} arrow placement="top">
+                  <div>
+                    <CardHeader
+                      title={tier.title}
+                      subheader={tier.subheader}
+                      titleTypographyProps={{ align: "center" }}
+                      subheaderTypographyProps={{ align: "center" }}
+                      action={tier.title === "Pro" ? <StarIcon /> : null}
+                      className={classes.cardHeader}
+                    />
+                  </div>
+                </Tooltip>
                 <CardContent>
                   <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography>
+                    <Tooltip
+                      title={`<Typography color="textPrimary" variant="h3">`}
+                      placement="left"
+                      arrow
+                    >
+                      <Typography
+                        component="h2"
+                        variant="h3"
+                        color="textPrimary"
+                      >
+                        ${tier.price}
+                      </Typography>
+                    </Tooltip>
+                    <Tooltip
+                      title={`<Typography color="textSecondary" variant="h6">`}
+                      placement="right"
+                      arrow
+                    >
+                      <Typography variant="h6" color="textSecondary">
+                        /mo
+                      </Typography>
+                    </Tooltip>
                   </div>
                   <ul>
                     {tier.description.map(line => (
-                      <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
+                      <Tooltip
                         key={line}
+                        title={`<Typography color="textPrimary" variant="subtitle1" component="li">`}
+                        placement="left"
+                        arrow
                       >
-                        {line}
-                      </Typography>
+                        <Typography
+                          component="li"
+                          variant="subtitle1"
+                          align="center"
+                        >
+                          {line}
+                        </Typography>
+                      </Tooltip>
                     ))}
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary"
+                  <Tooltip
+                    title={`<Button color="primary" variant="${tier.buttonVariant}">`}
+                    arrow
                   >
-                    {tier.buttonText}
-                  </Button>
+                    <Button
+                      fullWidth
+                      variant={tier.buttonVariant}
+                      color="primary"
+                    >
+                      {tier.buttonText}
+                    </Button>
+                  </Tooltip>
                 </CardActions>
               </Card>
             </Grid>
@@ -268,15 +339,27 @@ export default function PricingExample() {
         <Grid container spacing={4} justify="space-evenly">
           {footers.map(footer => (
             <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
+              <Tooltip
+                title={`<Typography color="textPrimary" variant="h6">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="h6" color="textPrimary" gutterBottom>
+                  {footer.title}
+                </Typography>
+              </Tooltip>
               <ul className={classes.ul}>
                 {footer.description.map(item => (
                   <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
+                    <Tooltip
+                      title={`<Link color="textSecondary" variant="subtitle1">`}
+                      placement="left"
+                      arrow
+                    >
+                      <Link href="#" variant="subtitle1" color="textSecondary">
+                        {item}
+                      </Link>
+                    </Tooltip>
                   </li>
                 ))}
               </ul>

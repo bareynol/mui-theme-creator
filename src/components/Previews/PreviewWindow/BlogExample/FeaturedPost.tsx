@@ -8,6 +8,7 @@ import CardActionArea from "@material-ui/core/CardActionArea"
 import CardContent from "@material-ui/core/CardContent"
 import CardMedia from "@material-ui/core/CardMedia"
 import Hidden from "@material-ui/core/Hidden"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const useStyles = makeStyles({
   card: {
@@ -31,18 +32,42 @@ export default function FeaturedPost(props) {
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
-              <Typography component="h2" variant="h5">
-                {post.title}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {post.date}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {post.description}
-              </Typography>
-              <Typography variant="subtitle1" color="primary">
-                Continue reading...
-              </Typography>
+              <Tooltip
+                title={`<Typography variant="h5">`}
+                placement="left"
+                arrow
+              >
+                <Typography component="h2" variant="h5">
+                  {post.title}
+                </Typography>
+              </Tooltip>
+              <Tooltip
+                title={`<Typography color="textSecondary" variant="subtitle1">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="subtitle1" color="textSecondary">
+                  {post.date}
+                </Typography>
+              </Tooltip>
+              <Tooltip
+                title={`<Typography variant="subtitle1">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="subtitle1" paragraph>
+                  {post.description}
+                </Typography>
+              </Tooltip>
+              <Tooltip
+                title={`<Typography color="primary" variant="subtitle1">`}
+                placement="left"
+                arrow
+              >
+                <Typography variant="subtitle1" color="primary">
+                  Continue reading...
+                </Typography>
+              </Tooltip>
             </CardContent>
           </div>
           <Hidden xsDown>
