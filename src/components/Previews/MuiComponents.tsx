@@ -1,15 +1,7 @@
 import React from "react"
-import {
-  Container,
-  Typography,
-  makeStyles,
-  Button,
-  Grid,
-} from "@material-ui/core"
+import { Typography, makeStyles, Button, Grid } from "@material-ui/core"
 
-import TypographyExample from "./Examples/Typography"
-
-import examples from "./Examples"
+import examples from "./MuiComponentPreviews"
 
 const useStyles = makeStyles(theme => ({
   exampleItem: {

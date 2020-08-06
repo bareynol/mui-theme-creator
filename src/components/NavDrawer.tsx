@@ -1,5 +1,5 @@
-import React, { useMemo } from "react"
-import examples from "src/components/Examples"
+import React from "react"
+import examples from "src/components/Previews/MuiComponentPreviews"
 import {
   Drawer,
   List,

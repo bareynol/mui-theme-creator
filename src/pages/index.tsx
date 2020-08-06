@@ -13,8 +13,8 @@ import {
   Tab,
 } from "@material-ui/core"
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer/ThemeConfigDrawer"
-import ComponentExamples from "src/components/ComponentExamples"
-import PreviewWindow from "src/components/PreviewWindow"
+import MuiComponents from "src/components/Previews/MuiComponents"
+import PreviewWindow from "src/components/Previews/PreviewWindow"
 // import MaterialColorPicker from "src/components/MaterialColorPicker"
 import SavedThemes from "src/components/SavedThemes/SavedThemes"
 import { useDispatch, useSelector } from "react-redux"
@@ -68,7 +68,7 @@ const IndexPage = () => {
           >
             <ThemeWrapper>
               <Container maxWidth="md">
-                <ComponentExamples />
+                <MuiComponents />
               </Container>
             </ThemeWrapper>
           </div>

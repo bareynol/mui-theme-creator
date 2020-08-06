@@ -1,21 +1,6 @@
 import React from "react"
-import {
-  Container,
-  Typography,
-  makeStyles,
-  Paper,
-  Grid,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  Link,
-  AppBar,
-  Tabs,
-  Tab,
-  Box,
-} from "@material-ui/core"
-import AppBarExample from "src/components/Examples/AppBar"
+import { makeStyles, Paper, AppBar, Tabs, Tab } from "@material-ui/core"
+import AppBarExample from "src/components/Previews/MuiComponentPreviews/AppBar"
 import DefaultExample from "./DefaultExample"
 import SignUpExample from "./SignUpExample"
 import DashboardExample from "./DashboardExample"
