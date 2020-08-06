@@ -25,6 +25,8 @@ export const initialState: EditorState = {
   canUndo: false,
   canSave: false,
   errors: [],
+  formatOnSave: true,
+  outputTypescript: true,
 }
 
 export default (

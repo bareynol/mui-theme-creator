@@ -18,6 +18,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import { useCanSave } from "src/state/selectors"
 import Alert from "@material-ui/lab/Alert"
+import EditorButton from "./EditorSettings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,6 +44,7 @@ function EditorControls({ onRedo, onUndo, onSave }) {
             <DownloadIcon />
           </IconButton>
         </Tooltip> */}
+        <EditorButton />
         <CopyButton />
         <Divider orientation="vertical" flexItem />
         <Tooltip title="Undo (Ctrl + Z)">
@@ -82,9 +84,21 @@ export default EditorControls
 
 const CopyButton = ({}) => {
   const themeInput = useSelector((state: RootState) => state.editor.themeInput)
+  const outputTypescript = useSelector(
+    (state: RootState) => state.editor.outputTypescript
+  )
   const [open, setOpen] = useState(false)
-  const copyToClipboard = () =>
-    navigator.clipboard.writeText(themeInput).then(() => setOpen(true))
+  const copyToClipboard = () => {
+    let codeToCopy = themeInput
+    if (!outputTypescript) {
+      // naively strip out typescript (first three lines)
+      codeToCopy = [
+        `export const themeOptions = {`,
+        ...themeInput.split("\n").slice(3),
+      ].join("\n")
+    }
+    navigator.clipboard.writeText(codeToCopy).then(() => setOpen(true))
+  }
 
   return (
     <>

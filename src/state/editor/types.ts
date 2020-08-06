@@ -9,6 +9,9 @@ export type EditorState = {
   canRedo: boolean
   canSave: boolean
   errors: monaco.languages.typescript.Diagnostic[]
+  // user modified settings
+  formatOnSave: boolean
+  outputTypescript: boolean
 }
 
 export type EditorStateOptions = Partial<EditorState>
