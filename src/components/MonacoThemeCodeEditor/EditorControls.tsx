@@ -38,11 +38,11 @@ function EditorControls({ onRedo, onUndo, onSave }) {
   return (
     <div className={classes.root}>
       <div style={{ display: "flex" }}>
-        <Tooltip title="Download theme.js">
+        {/* <Tooltip title="Download theme.js">
           <IconButton color="primary">
             <DownloadIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <CopyButton />
         <Divider orientation="vertical" flexItem />
         <Tooltip title="Undo (Ctrl + Z)">
@@ -89,7 +89,7 @@ const CopyButton = ({}) => {
   return (
     <>
       <Tooltip title="Copy theme code">
-        <IconButton color="secondary" onClick={copyToClipboard}>
+        <IconButton color="primary" onClick={copyToClipboard}>
           <FileCopyIcon />
         </IconButton>
       </Tooltip>
