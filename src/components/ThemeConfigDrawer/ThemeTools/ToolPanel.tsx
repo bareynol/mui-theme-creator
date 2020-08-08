@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
     toolPanelTitle: {
       paddingLeft: 16,
       paddingRight: 16,
-      borderBottom: "1px solid grey",
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      borderTop: "1px solid grey",
     },
     toolPanelContent: {
       flex: 1,
