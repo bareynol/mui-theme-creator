@@ -12,15 +12,6 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
   },
   inset: {},
-  anchor: {
-    "&::before": {
-      content: '""',
-      display: "block",
-      height: 64,
-      marginTop: -64,
-      visibility: "hidden",
-    },
-  },
   docsButton: {
     marginLeft: theme.spacing(2),
   },
@@ -34,7 +25,7 @@ const ComponentExamples = () => {
         Material-UI Components
       </Typography>
       {examples.map(({ id, title, component, docs }) => (
-        <div key={id} id={id} className={classes.anchor}>
+        <div key={id} id={id}>
           <Grid container justify="space-between" alignItems="center">
             <Typography variant="h5" gutterBottom>
               {title}

@@ -6,12 +6,17 @@ import Popover from "@material-ui/core/Popover"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import { useUpdateEditorState } from "src/state/editor/actions"
-import FormControl from "@material-ui/core/FormControl"
-import FormLabel from "@material-ui/core/FormLabel"
-import FormGroup from "@material-ui/core/FormGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
-import { makeStyles, Theme, createStyles } from "@material-ui/core"
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  ListSubheader,
+} from "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     popoverPaper: {
       // backgroundColor: theme.palette.background.default,
+    },
+    settingsList: {
+      minWidth: 320,
     },
   })
 )
@@ -76,34 +84,41 @@ const EditorSettings = () => {
     (state: RootState) => state.editor.outputTypescript
   )
   const updateEditor = useUpdateEditorState()
+  const toggleFormatOnSave = () => updateEditor({ formatOnSave: !formatOnSave })
+  const toggleOutputTypescript = () =>
+    updateEditor({ outputTypescript: !outputTypescript })
 
   return (
-    <FormControl component="fieldset" className={classes.formControl}>
-      <FormLabel component="legend">Editor Settings</FormLabel>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={formatOnSave}
-              onChange={() => updateEditor({ formatOnSave: !formatOnSave })}
-              name="formatOnSave"
-            />
-          }
-          label="Format Document on Save (Prettier)"
+    <List dense className={classes.settingsList}>
+      <ListSubheader>Editor Settings</ListSubheader>
+      <ListItem button onClick={toggleFormatOnSave}>
+        <ListItemText
+          id="format-document-label"
+          primary="Format Document on Save (Prettier)"
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={outputTypescript}
-              onChange={() =>
-                updateEditor({ outputTypescript: !outputTypescript })
-              }
-              name="formatOnSave"
-            />
-          }
-          label="Copy Button Outputs Typescript"
+        <ListItemSecondaryAction>
+          <Checkbox
+            checked={formatOnSave}
+            onChange={toggleFormatOnSave}
+            name="formatOnSave"
+            inputProps={{ "aria-labelledby": "format-document-label" }}
+          />
+        </ListItemSecondaryAction>
+      </ListItem>
+      <ListItem button onClick={toggleOutputTypescript}>
+        <ListItemText
+          id="output-typescript-label"
+          primary="Copy Button Outputs Typescript"
         />
-      </FormGroup>
-    </FormControl>
+        <ListItemSecondaryAction>
+          <Checkbox
+            checked={outputTypescript}
+            onChange={toggleOutputTypescript}
+            name="outputTypescript"
+            inputProps={{ "aria-labelledby": "output-typescript-label" }}
+          />
+        </ListItemSecondaryAction>
+      </ListItem>
+    </List>
   )
 }
