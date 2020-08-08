@@ -11,8 +11,11 @@ export interface RootState {
   activeTab: string
 }
 
-export interface SavedTheme {
+export type SavedTheme = {
   id: string
   name: string
   themeOptions: ThemeOptions
+  fonts: string[]
 }
+
+export type NewSavedTheme = Omit<SavedTheme, "id">

@@ -6,27 +6,20 @@ import Accordion from "@material-ui/core/Accordion"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
 import AccordionDetails from "@material-ui/core/AccordionDetails"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import AddIcon from "@material-ui/icons/Add"
+
 import {
   Card,
-  CardHeader,
   CardContent,
   Chip,
   makeStyles,
   Theme,
   createStyles,
-  Link,
-  TextField,
-  InputAdornment,
 } from "@material-ui/core"
 import AddFontInput from "./AddFontInput"
 import PopularFontList from "./PopularFontList"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    loadedFontTitle: {
-      paddingBottom: theme.spacing(1),
-    },
     loadedFontContent: {
       display: "flex",
       flexWrap: "wrap",
@@ -42,26 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
 function FontTools() {
   const classes = useStyles()
   const loadedFonts = useSelector((state: RootState) => state.loadedFonts)
+  const currentFonts = useSelector(
+    (state: RootState) => state.savedThemes[state.themeId].fonts
+  )
 
   return (
     <>
-      <Card>
-        <CardHeader
-          title="Loaded Fonts"
-          titleTypographyProps={{ variant: "body2" }}
-          className={classes.loadedFontTitle}
-        />
-        <CardContent className={classes.loadedFontContent}>
-          {[...loadedFonts].map(font => (
-            <Chip
-              label={font}
-              key={font}
-              size="small"
-              style={{ fontFamily: font }}
-            />
-          ))}
-        </CardContent>
-      </Card>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <AddFontInput />
@@ -70,6 +49,36 @@ function FontTools() {
           <PopularFontList />
         </AccordionDetails>
       </Accordion>
+      <Card>
+        <CardContent>
+          <Typography variant="body2">
+            Current Theme Font Dependencies
+          </Typography>
+          <div className={classes.loadedFontContent}>
+            {[...currentFonts].map(font => (
+              <Chip
+                label={font}
+                key={font}
+                size="small"
+                style={{ fontFamily: font }}
+              />
+            ))}
+          </div>
+        </CardContent>
+        <CardContent>
+          <Typography variant="body2">Loaded Fonts</Typography>
+          <div className={classes.loadedFontContent}>
+            {[...loadedFonts].map(font => (
+              <Chip
+                label={font}
+                key={font}
+                size="small"
+                style={{ fontFamily: font }}
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </>
   )
 }
