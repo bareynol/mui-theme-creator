@@ -6,6 +6,8 @@ import {
   Tabs,
   Tab,
   Tooltip,
+  BottomNavigation,
+  BottomNavigationAction,
 } from "@material-ui/core"
 import AppBarExample from "src/components/Previews/MuiComponentPreviews/AppBar"
 import DefaultExample from "./DefaultExample"
@@ -15,47 +17,15 @@ import BlogExample from "./BlogExample"
 import PricingExample from "./PricingExample"
 import CheckoutExample from "./CheckoutExample"
 import Alert from "@material-ui/lab/Alert"
+import { useSelector } from "react-redux"
+import { RootState } from "src/state/types"
+import ThemeWrapper from "src/components/ThemeWrapper"
+import SmartphoneIcon from "@material-ui/icons/Smartphone"
+import TabletIcon from "@material-ui/icons/TabletAndroid"
+import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows"
+import PreviewWrapper from "./PreviewWrapper"
 
-const useStyles = makeStyles(theme => ({
-  letterBox: {
-    backgroundColor: "#212121",
-    paddingTop: 16,
-    height: "calc(100vh - 64px - 48px)",
-  },
-  infoAlert: {
-    width: `calc(100% - 32px)`,
-    maxWidth: 1000,
-    margin: "auto",
-    marginBottom: theme.spacing(2),
-  },
-  previewArea: {
-    backgroundColor: theme.palette.background.default,
-    width: `calc(100% - 32px)`,
-    maxWidth: 1000,
-    height: "95%",
-    overflowY: "auto",
-    margin: "auto",
-    position: "relative", // for FAB positioning
-  },
-}))
-
-const PreviewWrapper = ({ children }) => {
-  const classes = useStyles()
-
-  return (
-    <>
-      <div className={classes.letterBox}>
-        {/* <Alert severity="info" className={classes.infoAlert}>
-          Modify the theme on the right side of the screen to start making
-          changes
-        </Alert> */}
-        <Paper elevation={8} className={classes.previewArea}>
-          {children}
-        </Paper>
-      </div>
-    </>
-  )
-}
+const useStyles = makeStyles(theme => ({}))
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -80,7 +50,6 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const PreviewWindow = () => {
-  const classes = useStyles()
   const [tabIndex, setTabIndex] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newTabIndex: number) => {

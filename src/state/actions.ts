@@ -1,7 +1,7 @@
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
-import { NewSavedTheme } from "./types"
+import { NewSavedTheme, PreviewSize } from "./types"
 
 /**
  * Remove a key/value in the theme options object by a given path.
@@ -138,3 +138,11 @@ export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
  * Set the active tab for the editor page
  */
 export const setActiveTab = (tab: string) => ({ type: "SET_TAB", tab })
+
+/**
+ * Set the active tab for the editor page
+ */
+export const setPreviewSize = (previewSize: PreviewSize) => ({
+  type: "SET_PREVIEW_SIZE",
+  previewSize,
+})

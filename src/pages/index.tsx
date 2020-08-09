@@ -52,10 +52,9 @@ const IndexPage = () => {
           </Tabs>
         </AppBar>
         {tab === "preview" && (
-          <ThemeWrapper>
-            <PreviewWindow />
-            {/* <Container maxWidth={false}><ComponentExamples /></Container> */}
-          </ThemeWrapper>
+          // <ThemeWrapper>
+          <PreviewWindow />
+          // </ThemeWrapper>
         )}
 
         {tab === "components" && (

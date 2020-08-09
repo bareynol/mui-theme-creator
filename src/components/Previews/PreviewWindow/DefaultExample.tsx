@@ -139,7 +139,7 @@ const DefaultExample = () => {
       </Grid> */}
 
       <Grid container spacing={2} justify="center">
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FeatureCard
             icon={<BuildIcon color="primary" />}
             title="Editor Usage"
@@ -204,7 +204,7 @@ const DefaultExample = () => {
           </FeatureCard>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FeatureCard title="Features" icon={<StarIcon color="primary" />}>
             <List>
               <ListItem>

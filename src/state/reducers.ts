@@ -1,13 +1,15 @@
-import { RootState } from "src/state/types"
+import { RootState, PreviewSize } from "src/state/types"
 import { createMuiTheme, ThemeOptions } from "@material-ui/core"
 import { generateThemeId, isSetEq } from "src/utils"
 import editorReducer, {
   initialState as editorInitialState,
 } from "./editor/reducers"
 import { loadFonts } from "./actions"
+import deepmerge from "deepmerge"
 
 import { defaultThemeOptions } from "src/siteTheme"
 import { TypographyOptions } from "@material-ui/core/styles/createTypography"
+import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints"
 
 const defaultThemeId = generateThemeId({})
 
@@ -28,6 +30,7 @@ const initialState: RootState = {
     ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
   ),
   activeTab: "preview",
+  previewSize: false,
 }
 
 export default (state = initialState, action) => {
@@ -41,7 +44,10 @@ export default (state = initialState, action) => {
       if (action.payload != null) {
         return {
           ...state,
-          themeObject: createMuiTheme(action.payload.themeOptions),
+          themeObject: createPreviewMuiTheme(
+            action.payload.themeOptions,
+            state.previewSize
+          ),
           loadedFonts: loadFontsIfRequired(
             action.payload.savedThemes[action.payload.themeId].fonts,
             state.loadedFonts
@@ -55,15 +61,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         themeOptions: action.themeOptions,
-        themeObject: createMuiTheme(action.themeOptions),
+        themeObject: createPreviewMuiTheme(
+          action.themeOptions,
+          state.previewSize
+        ),
         savedThemes: {
           ...state.savedThemes,
-          [action.themeId]: {
-            ...state.savedThemes[action.themeId],
+          [state.themeId]: {
+            ...state.savedThemes[state.themeId],
             themeOptions: action.themeOptions,
             fonts: getFontsFromThemeOptions(
               action.themeOptions,
-              state.savedThemes[action.themeId]?.fonts,
+              state.savedThemes[state.themeId]?.fonts,
               state.loadedFonts
             ),
           },
@@ -75,7 +84,10 @@ export default (state = initialState, action) => {
         ...state,
         themeId: newThemeId,
         themeOptions: action.savedTheme.themeOptions,
-        themeObject: createMuiTheme(action.savedTheme.themeOptions),
+        themeObject: createPreviewMuiTheme(
+          action.savedTheme.themeOptions,
+          state.previewSize
+        ),
         savedThemes: {
           ...state.savedThemes,
           [newThemeId]: {
@@ -93,8 +105,9 @@ export default (state = initialState, action) => {
         ...state,
         themeId: action.themeId,
         themeOptions: state.savedThemes[action.themeId].themeOptions,
-        themeObject: createMuiTheme(
-          state.savedThemes[action.themeId].themeOptions
+        themeObject: createPreviewMuiTheme(
+          state.savedThemes[action.themeId].themeOptions,
+          state.previewSize
         ),
         loadedFonts: loadFontsIfRequired(
           state.savedThemes[action.themeId].fonts,
@@ -129,6 +142,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         activeTab: action.tab,
+      }
+    case "SET_PREVIEW_SIZE":
+      return {
+        ...state,
+        previewSize: action.previewSize,
+        themeObject: createPreviewMuiTheme(
+          state.themeOptions,
+          action.previewSize
+        ),
       }
     default:
       return state
@@ -203,4 +225,26 @@ function loadFontsIfRequired(fonts: string[], loadedFonts: Set<string>) {
 
   loadFonts(fontsToLoad)
   return new Set([...loadedFonts, ...fontsToLoad].sort())
+}
+
+const createPreviewMuiTheme = (
+  themeOptions: ThemeOptions,
+  previewSize: PreviewSize
+) => {
+  const spoofedBreakpoints: Record<string, BreakpointValues> = {
+    xs: { xs: 0, sm: 10000, md: 10001, lg: 10002, xl: 10003 },
+    sm: { xs: 0, sm: 1, md: 10001, lg: 10002, xl: 10003 },
+    md: { xs: 0, sm: 1, md: 2, lg: 10002, xl: 10003 },
+    lg: { xs: 0, sm: 1, md: 2, lg: 3, xl: 10003 },
+    xl: { xs: 0, sm: 1, md: 2, lg: 3, xl: 4 },
+  }
+
+  if (!previewSize) return createMuiTheme(themeOptions)
+
+  return createMuiTheme(
+    deepmerge(
+      { breakpoints: { values: spoofedBreakpoints[previewSize] } },
+      themeOptions
+    )
+  )
 }

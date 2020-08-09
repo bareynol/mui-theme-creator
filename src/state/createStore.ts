@@ -7,7 +7,7 @@ import reducers from "./reducers"
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["themeObject", "editor", "loadedFonts"],
+  blacklist: ["themeObject", "editor", "loadedFonts", "previewSize"],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
