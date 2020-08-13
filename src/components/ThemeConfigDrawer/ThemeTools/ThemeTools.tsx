@@ -6,15 +6,14 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
 import PaletteTools from "./PaletteTools/PaletteTools"
 
 import TypographyTools from "./TypographyTools/TypographyTools"
-import TransitionTools from "./TransitionTools/TransitionTools"
 
 import PaletteIcon from "@material-ui/icons/Palette"
 import FontIcon from "@material-ui/icons/FontDownload"
 import TypographyIcon from "@material-ui/icons/TextFields"
-import TransitionIcon from "@material-ui/icons/ClearAll"
 import SnippetsIcon from "@material-ui/icons/PlaylistAdd"
 import ToolPanel from "./ToolPanel"
 import FontTools from "./FontTools/FontTools"
+// import SnippetTools from "./SnippetTools"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,16 +59,11 @@ const toolPanels: Array<{
     icon: <TypographyIcon />,
     tools: TypographyTools,
   },
-  {
-    label: "Transitions",
-    icon: <TransitionIcon />,
-    tools: TransitionTools,
-  },
-  {
-    label: "Snippets",
-    icon: <SnippetsIcon />,
-    tools: () => <div />,
-  },
+  // {
+  //   label: "Snippets",
+  //   icon: <SnippetsIcon />,
+  //   tools: SnippetTools,
+  // },
 ]
 
 export default function ThemeTools() {
