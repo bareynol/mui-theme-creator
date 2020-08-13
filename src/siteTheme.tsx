@@ -15,6 +15,49 @@ export const themeConfig: ThemeOptions = {
       main: "#f48fb1",
     },
   },
+  props: {
+    MuiAccordion: {
+      square: true,
+    },
+  },
+  overrides: {
+    MuiAccordion: {
+      root: {
+        border: "1px solid rgba(255, 255, 255, .125)",
+        boxShadow: "none",
+        "&:not(:last-child)": {
+          borderBottom: 0,
+        },
+        "&:before": {
+          display: "none",
+        },
+        "&$expanded": {
+          margin: "auto",
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      root: {
+        borderBottom: "1px solid rgba(255, 255, 255, .125)",
+        minHeight: 56,
+        "&$expanded": {
+          minHeight: 56,
+        },
+      },
+      content: {
+        alignItems: "center",
+        justifyContent: "space-between",
+        "&$expanded": {
+          margin: "12px 0",
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      root: {
+        backgroundColor: "#212121",
+      },
+    },
+  },
 }
 
 export default createMuiTheme(themeConfig)
