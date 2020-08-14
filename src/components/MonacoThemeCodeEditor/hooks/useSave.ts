@@ -2,18 +2,23 @@ import { useEffect, useCallback } from "react"
 import * as monaco from "monaco-editor"
 import { EditorRefType } from "../types"
 // custom theme config
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { updateEditorState } from "src/state/editor/actions"
 import { saveEditorToTheme } from "src/state/editor/actions"
 
-async function formatAndValidateInput(editorRef: EditorRefType) {
+async function formatAndValidateInput(
+  editorRef: EditorRefType,
+  formatOnSave: boolean
+) {
   const monaco = require("monaco-editor")
 
   // use prettier to auto format the code
-  try {
-    await editorRef.current?.getAction("editor.action.formatDocument").run()
-  } catch (err) {
-    console.log("error formatting document", err)
+  if (formatOnSave) {
+    try {
+      await editorRef.current?.getAction("editor.action.formatDocument").run()
+    } catch (err) {
+      console.log("error formatting document", err)
+    }
   }
 
   // get the JS output of the typescript inside the code editor
@@ -31,6 +36,9 @@ async function formatAndValidateInput(editorRef: EditorRefType) {
 }
 
 export default function useSave(editorRef: EditorRefType) {
+  const formatOnSave = useSelector(
+    (state: RootState) => state.editor.formatOnSave
+  )
   const dispatch = useDispatch()
   const handleSave = useCallback(async () => {
     // clear existing errors first
@@ -39,7 +47,8 @@ export default function useSave(editorRef: EditorRefType) {
       semanticDiagnostics,
       syntacticDiagnostics,
       emittedOutput,
-    ] = await formatAndValidateInput(editorRef)
+    ] = await formatAndValidateInput(editorRef, formatOnSave)
+
     console.log({ semanticDiagnostics, syntacticDiagnostics, emittedOutput })
     // if there are semantic errors, prevent saving, else save to redux store
     const errors = [...syntacticDiagnostics, ...semanticDiagnostics]
@@ -61,7 +70,7 @@ export default function useSave(editorRef: EditorRefType) {
         })
       )
     }
-  }, [dispatch])
+  }, [dispatch, formatOnSave])
 
   useSaveKey(editorRef, handleSave)
 

@@ -25,6 +25,8 @@ export const initialState: EditorState = {
   canUndo: false,
   canSave: false,
   errors: [],
+  formatOnSave: true,
+  outputTypescript: true,
 }
 
 export default (
@@ -46,10 +48,14 @@ export default (
         ...action.editorState,
       }
     case "UPDATE_THEME":
-    case "ADD_NEW_THEME":
       return {
         ...state,
         themeInput: stringify(action.themeOptions),
+      }
+    case "ADD_NEW_THEME":
+      return {
+        ...state,
+        themeInput: stringify(action.savedTheme.themeOptions),
       }
     case "LOAD_THEME":
       return {

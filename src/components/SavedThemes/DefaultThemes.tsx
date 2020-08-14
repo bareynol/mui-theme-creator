@@ -10,7 +10,9 @@ import {
 } from "@material-ui/core"
 import ThemeThumbnail from "./ThemeThumbnail"
 import { useDispatch } from "react-redux"
-import { addNewSavedTheme } from "src/state/actions"
+import { addNewDefaultTheme } from "src/state/actions"
+import defaultThemes from "./defaultThemes"
+import { NewSavedTheme } from "src/state/types"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,8 +46,8 @@ function DefaultThemes() {
   const dispatch = useDispatch()
 
   const handleClick = useCallback(
-    (title: string, themeOptions: ThemeOptions) => {
-      dispatch(addNewSavedTheme(title, themeOptions))
+    (newTheme: NewSavedTheme) => {
+      dispatch(addNewDefaultTheme(newTheme))
     },
     [dispatch]
   )
@@ -57,12 +59,8 @@ function DefaultThemes() {
       wrap="nowrap"
       style={{ flex: 1, flexGrow: 1, overflowX: "auto" }}
     >
-      {defaultThemeList.map(t => (
-        <Grid
-          item
-          key={t.title}
-          onClick={() => handleClick(t.title, t.themeOptions)}
-        >
+      {defaultThemes.map(t => (
+        <Grid item key={t.name} onClick={() => handleClick(t)}>
           <ButtonBase className={classes.buttonRoot}>
             <div className={classes.thumbnailContainer}>
               <ThemeThumbnail themeOptions={t.themeOptions} />
@@ -71,7 +69,7 @@ function DefaultThemes() {
               </div>
             </div>
 
-            <Typography variant="subtitle1">{t.title}</Typography>
+            <Typography variant="subtitle1">{t.name}</Typography>
           </ButtonBase>
         </Grid>
       ))}
@@ -80,75 +78,3 @@ function DefaultThemes() {
 }
 
 export default DefaultThemes
-
-const defaultThemeList = [
-  {
-    title: "Material-UI Docs - Light",
-    themeOptions: {
-      palette: {
-        type: "light",
-        primary: {
-          main: "#1976d2",
-        },
-        secondary: {
-          main: "rgb(220, 0, 78)",
-        },
-        background: {
-          default: "#fff",
-          paper: "#fff",
-        },
-      },
-    },
-  },
-  {
-    title: "Material-UI Docs - Dark",
-    themeOptions: {
-      palette: {
-        type: "dark",
-        primary: {
-          main: "#90caf9",
-        },
-        secondary: {
-          main: "#f48fb1",
-        },
-        background: {
-          default: "#121212",
-          paper: "#424242",
-        },
-      },
-    },
-  },
-  {
-    title: "Hacker Theme",
-    themeOptions: {
-      palette: {
-        type: "dark",
-        primary: {
-          main: "#0f0",
-        },
-        background: {
-          default: "#111111",
-          paper: "#212121",
-        },
-      },
-    },
-  },
-  {
-    title: "Dark Blue",
-    themeOptions: {
-      palette: {
-        type: "dark",
-        primary: {
-          main: "#5893df",
-        },
-        secondary: {
-          main: "#2ec5d3",
-        },
-        background: {
-          default: "#192231",
-          paper: "#24344d",
-        },
-      },
-    },
-  },
-]

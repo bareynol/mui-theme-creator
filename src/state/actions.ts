@@ -1,6 +1,7 @@
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, resolvePath } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
+import { NewSavedTheme, PreviewSize } from "./types"
 
 /**
  * Remove a key/value in the theme options object by a given path.
@@ -46,8 +47,38 @@ export const removeThemeOption = path => (dispatch, getState) => {
   })
 }
 
+export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
+  dispatch,
+  getState
+) => {
+  let updatedThemeOptions = getState().themeOptions
+  configs.forEach(
+    ({ path, value }) =>
+      (updatedThemeOptions = removeByPath(updatedThemeOptions, path))
+  )
+  return dispatch({
+    type: "UPDATE_THEME",
+    themeOptions: updatedThemeOptions,
+  })
+}
+
 export const setThemeOption = (path, value) => (dispatch, getState) => {
   const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
+  return dispatch({
+    type: "UPDATE_THEME",
+    themeOptions: updatedThemeOptions,
+  })
+}
+
+export const setThemeOptions = (configs: { path: string; value: any }[]) => (
+  dispatch,
+  getState
+) => {
+  let updatedThemeOptions = getState().themeOptions
+  configs.forEach(
+    ({ path, value }) =>
+      (updatedThemeOptions = setByPath(updatedThemeOptions, path, value))
+  )
   return dispatch({
     type: "UPDATE_THEME",
     themeOptions: updatedThemeOptions,
@@ -57,13 +88,18 @@ export const setThemeOption = (path, value) => (dispatch, getState) => {
 /**
  * Add a new theme and switch to it
  */
-export const addNewSavedTheme = (
-  name: string,
-  themeOptions?: ThemeOptions | null
-) => ({
+export const addNewSavedTheme = (name: string) => ({
   type: "ADD_NEW_THEME",
-  name,
-  themeOptions: themeOptions || defaultThemeOptions,
+  savedTheme: {
+    name,
+    themeOptions: defaultThemeOptions,
+    fonts: ["Roboto"],
+  },
+})
+
+export const addNewDefaultTheme = (newSavedTheme: NewSavedTheme) => ({
+  type: "ADD_NEW_THEME",
+  savedTheme: newSavedTheme,
 })
 
 /**
@@ -127,3 +163,16 @@ export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
     return false
   }
 }
+
+/**
+ * Set the active tab for the editor page
+ */
+export const setActiveTab = (tab: string) => ({ type: "SET_TAB", tab })
+
+/**
+ * Set the active tab for the editor page
+ */
+export const setPreviewSize = (previewSize: PreviewSize) => ({
+  type: "SET_PREVIEW_SIZE",
+  previewSize,
+})

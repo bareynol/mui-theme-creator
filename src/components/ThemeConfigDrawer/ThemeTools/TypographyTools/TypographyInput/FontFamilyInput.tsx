@@ -86,7 +86,11 @@ function FontSelector({ onSelectFont }) {
           onClose={() => setAnchorEl(null)}
         >
           {[...loadedFonts].map(f => (
-            <MenuItem key={f} onClick={() => handleClick(f)}>
+            <MenuItem
+              key={f}
+              onClick={() => handleClick(f)}
+              style={{ fontFamily: f }}
+            >
               {f}
             </MenuItem>
           ))}

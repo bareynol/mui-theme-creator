@@ -9,3 +9,10 @@ body {
   width: 100vw;
   overflow: hidden;
 }
+
+code {
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+  color: #1f1f1f;
+}

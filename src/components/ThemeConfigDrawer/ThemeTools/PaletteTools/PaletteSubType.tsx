@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       textTransform: "capitalize",
     },
-    accordionSummary: {
-      justifyContent: "space-between",
-    },
     accordionDetails: {
       flexDirection: "column",
       "&> *": {
@@ -29,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     thumbnailContainer: {
       display: "flex",
+      alignSelf: "stretch",
     },
     colorThumbnail: {
       height: "100%",
@@ -56,10 +54,7 @@ export default function PaletteSubType({
   return (
     <>
       <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          classes={{ content: classes.accordionSummary }}
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.title} variant="body2">
             {title}
           </Typography>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import DownloadIcon from "@material-ui/icons/GetApp"
 import SaveIcon from "@material-ui/icons/Save"
@@ -12,10 +12,13 @@ import {
   createStyles,
   Theme,
   Divider,
+  Snackbar,
 } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import { useCanSave } from "src/state/selectors"
+import Alert from "@material-ui/lab/Alert"
+import EditorButton from "./EditorSettings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,16 +39,13 @@ function EditorControls({ onRedo, onUndo, onSave }) {
   return (
     <div className={classes.root}>
       <div style={{ display: "flex" }}>
-        <Tooltip title="Download theme.js">
+        {/* <Tooltip title="Download theme.js">
           <IconButton color="primary">
             <DownloadIcon />
           </IconButton>
-        </Tooltip>
-        <Tooltip title="Copy theme code">
-          <IconButton color="secondary">
-            <FileCopyIcon />
-          </IconButton>
-        </Tooltip>
+        </Tooltip> */}
+        <EditorButton />
+        <CopyButton />
         <Divider orientation="vertical" flexItem />
         <Tooltip title="Undo (Ctrl + Z)">
           <span>
@@ -76,22 +76,47 @@ function EditorControls({ onRedo, onUndo, onSave }) {
       >
         {canSave ? "* Unsaved Changes" : "All changes saved"}
       </Typography>
-
-      {/* <div>
-        <Typography display="inline">Theme Editor</Typography>
-        <Tooltip title="Download theme.js">
-          <IconButton>
-            <DownloadIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Copy theme code">
-          <IconButton>
-            <FileCopyIcon />
-          </IconButton>
-        </Tooltip>
-      </div> */}
     </div>
   )
 }
 
 export default EditorControls
+
+const CopyButton = ({}) => {
+  const themeInput = useSelector((state: RootState) => state.editor.themeInput)
+  const outputTypescript = useSelector(
+    (state: RootState) => state.editor.outputTypescript
+  )
+  const [open, setOpen] = useState(false)
+  const copyToClipboard = () => {
+    let codeToCopy = themeInput
+    if (!outputTypescript) {
+      // naively strip out typescript (first three lines)
+      codeToCopy = [
+        `export const themeOptions = {`,
+        ...themeInput.split("\n").slice(3),
+      ].join("\n")
+    }
+    navigator.clipboard.writeText(codeToCopy).then(() => setOpen(true))
+  }
+
+  return (
+    <>
+      <Tooltip title="Copy theme code">
+        <IconButton color="primary" onClick={copyToClipboard}>
+          <FileCopyIcon />
+        </IconButton>
+      </Tooltip>
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        onClose={() => setOpen(false)}
+      >
+        <Alert variant="filled" severity="success">
+          Copied theme code to clipboard!
+        </Alert>
+      </Snackbar>
+    </>
+  )
+}

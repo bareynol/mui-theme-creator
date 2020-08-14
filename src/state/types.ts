@@ -8,10 +8,17 @@ export interface RootState {
   themeOptions: ThemeOptions
   savedThemes: Record<string, SavedTheme>
   loadedFonts: Set<string>
+  activeTab: string
+  previewSize: PreviewSize
 }
 
-export interface SavedTheme {
+export type SavedTheme = {
   id: string
   name: string
   themeOptions: ThemeOptions
+  fonts: string[]
 }
+
+export type NewSavedTheme = Omit<SavedTheme, "id">
+
+export type PreviewSize = "xs" | "sm" | "md" | "lg" | "xl" | false

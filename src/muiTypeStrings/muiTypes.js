@@ -1,7 +1,10 @@
 // @ts-nocheck
 /* eslint-disable */
+import muiComponentPropTypes from "./muiComponentPropTypes"
+import muiComponentOverrideTypes from "./muiComponentOverrideTypes"
 export const content = `
 import * as CSS from "cssTypes"
+${muiComponentPropTypes}
 
 export type SpacingArgument = number | string
 
@@ -339,14 +342,16 @@ export type ZIndexOptions = Partial<ZIndex>
 
 export type Direction = "ltr" | "rtl"
 
+${muiComponentOverrideTypes}
+
 export interface ThemeOptions {
   shape?: ShapeOptions
   breakpoints?: BreakpointsOptions
   direction?: Direction
   mixins?: MixinsOptions
-  overrides?: any // don't want to deal with these imports
+  overrides?: Overrides // don't want to deal with these imports
   palette?: PaletteOptions
-  props?: any // or these
+  props?: MuiComponentProps
   shadows?: Shadows
   spacing?: SpacingOptions
   transitions?: TransitionsOptions

@@ -38,3 +38,15 @@ export const generateThemeId = (savedThemes: RootState["savedThemes"]) => {
 
   return id
 }
+
+/**
+ * Shallow comparison of sets for equality
+ * @param a Set to compare
+ * @param b Set to compare
+ */
+export function isSetEq(a: Set<any>, b: Set<any>) {
+  if (a.size !== b.size) return false
+  for (var x of a) if (!b.has(x)) return false
+
+  return true
+}

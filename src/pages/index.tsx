@@ -13,13 +13,20 @@ import {
   Tab,
 } from "@material-ui/core"
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer/ThemeConfigDrawer"
-import ComponentExamples from "src/components/ComponentExamples"
-import PreviewWindow from "src/components/PreviewWindow"
+import MuiComponents from "src/components/Previews/MuiComponents"
+import PreviewWindow from "src/components/Previews/PreviewWindow"
 // import MaterialColorPicker from "src/components/MaterialColorPicker"
 import SavedThemes from "src/components/SavedThemes/SavedThemes"
+import { useDispatch, useSelector } from "react-redux"
+import { setActiveTab } from "src/state/actions"
+import { RootState } from "src/state/types"
 
 const IndexPage = () => {
-  const [tab, setTab] = useState("preview")
+  const tab = useSelector((state: RootState) => state.activeTab)
+  const dispatch = useDispatch()
+  const setTab = React.useCallback(value => dispatch(setActiveTab(value)), [
+    dispatch,
+  ])
 
   return (
     <Layout>
@@ -45,25 +52,25 @@ const IndexPage = () => {
           </Tabs>
         </AppBar>
         {tab === "preview" && (
-          <ThemeWrapper>
-            <PreviewWindow />
-            {/* <Container maxWidth={false}><ComponentExamples /></Container> */}
-          </ThemeWrapper>
+          // <ThemeWrapper>
+          <PreviewWindow />
+          // </ThemeWrapper>
         )}
 
         {tab === "components" && (
-          <ThemeWrapper>
-            <div
-              style={{
-                height: "calc(100vh - 64px - 48px)",
-                overflowY: "auto",
-              }}
-            >
+          <div
+            style={{
+              height: "calc(100vh - 64px - 48px)",
+              overflowY: "auto",
+              backgroundColor: "#fff", // ensures rgba background colors work properly
+            }}
+          >
+            <ThemeWrapper>
               <Container maxWidth="md">
-                <ComponentExamples />
+                <MuiComponents />
               </Container>
-            </div>
-          </ThemeWrapper>
+            </ThemeWrapper>
+          </div>
         )}
 
         {tab === "saved" && (

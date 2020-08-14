@@ -51,6 +51,7 @@ function AddFontInput() {
             </>
           )
         }
+        onClick={event => event.stopPropagation()}
         onChange={() => setError(false)}
         InputLabelProps={{ shrink: true }}
         InputProps={{
