@@ -1,5 +1,5 @@
 import { createSelector } from "reselect"
-import { resolvePath } from "src/utils"
+import { getByPath } from "src/utils"
 import { RootState } from "./types"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
@@ -17,10 +17,10 @@ const getThemeValueInfo = (
   themeOptions: ThemeOptions,
   themeObject: Theme
 ) => {
-  const valFromSaved: any = resolvePath(themeOptions, path)
+  const valFromSaved: any = getByPath(themeOptions, path)
   return {
     modifiedByUser: valFromSaved !== undefined,
-    value: resolvePath(themeObject, path),
+    value: getByPath(themeObject, path),
   }
 }
 

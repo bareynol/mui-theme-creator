@@ -23,7 +23,7 @@ import {
 import { SnippetModification } from "./types"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import { resolvePath } from "src/utils"
+import { getByPath } from "src/utils"
 import SnippetItem, { ExpandableSnippetItem } from "./SnippetItem"
 import snippets from "./snippets"
 

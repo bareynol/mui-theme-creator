@@ -1,5 +1,5 @@
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
-import { setByPath, removeByPath, resolvePath } from "src/utils"
+import { setByPath, removeByPath, getByPath } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"
 
@@ -23,7 +23,7 @@ export const removeThemeOption = path => (dispatch, getState) => {
   // paths ending in "main" must be declared
   // replace with the value from the default Theme object
   if (path.endsWith("main")) {
-    const defaultValueForPath = resolvePath(defaultTheme, path)
+    const defaultValueForPath = getByPath(defaultTheme, path)
     updatedThemeOptions = setByPath(
       getState().themeOptions,
       path,
@@ -32,13 +32,6 @@ export const removeThemeOption = path => (dispatch, getState) => {
   } else {
     // remove the key from the themeOptions (immutably)
     updatedThemeOptions = removeByPath(getState().themeOptions, path)
-
-    // if the parent "directory" is empty, remove it as well
-    if (
-      Object.keys(resolvePath(updatedThemeOptions, parentPath)).length === 0
-    ) {
-      updatedThemeOptions = removeByPath(updatedThemeOptions, parentPath)
-    }
   }
 
   return dispatch({

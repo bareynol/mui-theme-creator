@@ -3,7 +3,7 @@ import clsx from "clsx"
 import { SnippetModification } from "./types"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
-import { resolvePath } from "src/utils"
+import { getByPath } from "src/utils"
 import {
   Link,
   ListItem,
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const useIsSnippetIncluded = (configs: SnippetModification["configs"]) => {
   const themeOptions = useSelector((state: RootState) => state.themeOptions)
   for (const c in configs) {
-    if (resolvePath(themeOptions, configs[c].path) == null) {
+    if (getByPath(themeOptions, configs[c].path) == null) {
       return false
     }
   }
