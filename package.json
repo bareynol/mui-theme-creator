@@ -41,12 +41,18 @@
   "devDependencies": {
     "@types/codemirror": "^0.0.97",
     "@types/dot-prop-immutable": "^1.5.1",
+    "@types/jest": "^26.0.9",
     "@types/prettier": "^2.0.2",
     "@types/react-color": "^3.0.4",
     "@types/react-redux": "^7.1.9",
     "@types/webfontloader": "^1.6.32",
+    "babel-jest": "^26.3.0",
+    "babel-preset-gatsby": "^0.5.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.4.0",
     "monaco-editor-webpack-plugin": "^1.9.0",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "react-test-renderer": "^16.13.1"
   },
   "keywords": [
     "gatsby"
@@ -59,7 +65,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

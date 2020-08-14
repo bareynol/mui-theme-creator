@@ -8,13 +8,31 @@ import { RootState } from "./state/types"
  * @param {string} path   - a key path to access nested values
  * @param {*} defaultValue - optional default value if path not found
  */
-export const resolvePath = (
+export const getByPath = (
   object: object | null,
   path: string,
   defaultValue?: any
-) => path.split(".").reduce((o: any, p) => (o ? o[p] : defaultValue), object)
+) =>
+  path.split(".").reduce((o: any, p) => (o ? o[p] : defaultValue), object) ||
+  defaultValue
 
-export const removeByPath = (object, path) => dotProp.delete(object, path)
+export const removeByPath = (object, path) => {
+  const prunedObject = dotProp.delete(object, path)
+  const pathArray = path.split(".")
+  if (pathArray.length > 1) {
+    const parentPath = pathArray.slice(0, pathArray.length - 1).join(".")
+    const parentObject = getByPath(prunedObject, parentPath)
+    if (
+      parentObject &&
+      typeof parentObject === "object" &&
+      Object.keys(parentObject).length === 0
+    ) {
+      return removeByPath(prunedObject, parentPath)
+    }
+  }
+
+  return prunedObject
+}
 
 export const setByPath = (object, path, value) =>
   dotProp.set(object, path, value)
