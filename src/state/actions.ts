@@ -47,8 +47,38 @@ export const removeThemeOption = path => (dispatch, getState) => {
   })
 }
 
+export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
+  dispatch,
+  getState
+) => {
+  let updatedThemeOptions = getState().themeOptions
+  configs.forEach(
+    ({ path, value }) =>
+      (updatedThemeOptions = removeByPath(updatedThemeOptions, path))
+  )
+  return dispatch({
+    type: "UPDATE_THEME",
+    themeOptions: updatedThemeOptions,
+  })
+}
+
 export const setThemeOption = (path, value) => (dispatch, getState) => {
   const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
+  return dispatch({
+    type: "UPDATE_THEME",
+    themeOptions: updatedThemeOptions,
+  })
+}
+
+export const setThemeOptions = (configs: { path: string; value: any }[]) => (
+  dispatch,
+  getState
+) => {
+  let updatedThemeOptions = getState().themeOptions
+  configs.forEach(
+    ({ path, value }) =>
+      (updatedThemeOptions = setByPath(updatedThemeOptions, path, value))
+  )
   return dispatch({
     type: "UPDATE_THEME",
     themeOptions: updatedThemeOptions,

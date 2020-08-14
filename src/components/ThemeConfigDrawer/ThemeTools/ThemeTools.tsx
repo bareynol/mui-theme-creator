@@ -13,7 +13,7 @@ import TypographyIcon from "@material-ui/icons/TextFields"
 import SnippetsIcon from "@material-ui/icons/PlaylistAdd"
 import ToolPanel from "./ToolPanel"
 import FontTools from "./FontTools/FontTools"
-// import SnippetTools from "./SnippetTools"
+import SnippetTools from "./SnippetTools"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,11 +59,11 @@ const toolPanels: Array<{
     icon: <TypographyIcon />,
     tools: TypographyTools,
   },
-  // {
-  //   label: "Snippets",
-  //   icon: <SnippetsIcon />,
-  //   tools: SnippetTools,
-  // },
+  {
+    label: "Snippets",
+    icon: <SnippetsIcon />,
+    tools: SnippetTools,
+  },
 ]
 
 export default function ThemeTools() {

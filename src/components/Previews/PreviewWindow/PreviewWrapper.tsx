@@ -100,11 +100,16 @@ export default PreviewWrapper
 
 const PreviewBackground = ({ children }) => {
   const classes = useStylesInTheme()
+  const directionIsRTL = useSelector(
+    (state: RootState) => state.themeOptions.direction === "rtl"
+  )
   const previewSize = useSelector((state: RootState) => state.previewSize)
   return (
     <Paper
       elevation={8}
+      square
       className={`${classes.previewArea} ${previewSize || ""}`}
+      dir={directionIsRTL ? "rtl" : ""}
     >
       {children}
     </Paper>

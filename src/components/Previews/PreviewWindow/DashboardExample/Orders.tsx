@@ -80,8 +80,8 @@ export default function Orders() {
           Recent Orders
         </Typography>
       </Tooltip>
-      <Tooltip title={`<Table size="small">`} placement="top" arrow>
-        <Table size="small">
+      <Tooltip title={`<Table>`} placement="top" arrow>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>

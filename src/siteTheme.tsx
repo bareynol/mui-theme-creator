@@ -5,6 +5,20 @@ import {
   PaletteType,
 } from "@material-ui/core"
 
+export const defaultThemeOptions: ThemeOptions = {
+  palette: {
+    type: "light" as PaletteType,
+    primary: {
+      main: "#3f51b5",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+  },
+}
+
+export const defaultTheme: Theme = createMuiTheme()
+
 export const themeConfig: ThemeOptions = {
   palette: {
     type: "dark",
@@ -18,6 +32,9 @@ export const themeConfig: ThemeOptions = {
   props: {
     MuiAccordion: {
       square: true,
+      TransitionProps: {
+        unmountOnExit: true,
+      },
     },
   },
   overrides: {
@@ -25,6 +42,7 @@ export const themeConfig: ThemeOptions = {
       root: {
         border: "1px solid rgba(255, 255, 255, .125)",
         boxShadow: "none",
+        transition: defaultTheme.transitions.create("margin-left"),
         "&:not(:last-child)": {
           borderBottom: 0,
         },
@@ -33,6 +51,9 @@ export const themeConfig: ThemeOptions = {
         },
         "&$expanded": {
           margin: "auto",
+        },
+        "&$disabled": {
+          marginLeft: 32,
         },
       },
     },
@@ -61,17 +82,3 @@ export const themeConfig: ThemeOptions = {
 }
 
 export default createMuiTheme(themeConfig)
-
-export const defaultThemeOptions: ThemeOptions = {
-  palette: {
-    type: "light" as PaletteType,
-    primary: {
-      main: "#3f51b5",
-    },
-    secondary: {
-      main: "#f50057",
-    },
-  },
-}
-
-export const defaultTheme: Theme = createMuiTheme()
