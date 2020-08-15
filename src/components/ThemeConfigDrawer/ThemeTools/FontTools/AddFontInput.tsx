@@ -3,7 +3,7 @@ import Link from "@material-ui/core/Link"
 import TextField from "@material-ui/core/TextField"
 import { useDispatch } from "react-redux"
 import { addFonts } from "src/state/actions"
-import { InputAdornment, CircularProgress, Chip } from "@material-ui/core"
+import { InputAdornment, CircularProgress, Typography } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 
 function AddFontInput() {
@@ -31,9 +31,10 @@ function AddFontInput() {
 
   return (
     <form onSubmit={handleAddFontName} autoComplete="off">
+      <Typography variant="body2">Add Fonts</Typography>
       <TextField
         name="fontname"
-        label="Add Fonts"
+        // label="Add Fonts"
         error={error}
         helperText={
           error ? (
@@ -53,7 +54,7 @@ function AddFontInput() {
         }
         onClick={event => event.stopPropagation()}
         onChange={() => setError(false)}
-        InputLabelProps={{ shrink: true }}
+        // InputLabelProps={{ shrink: true }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

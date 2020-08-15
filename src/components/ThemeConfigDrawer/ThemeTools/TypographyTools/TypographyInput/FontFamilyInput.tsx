@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import ReplaceIcon from "@material-ui/icons/FindReplace"
 
 function FontFamilyInput({ value, onChange }) {
   const loadedFonts = useSelector((state: RootState) => state.loadedFonts)
@@ -66,7 +65,11 @@ function FontSelector({ onSelectFont }) {
   }
 
   return (
-    <Tooltip title="Add Downloaded Font" placement="top" open={tooltipOpen}>
+    <Tooltip
+      title="Replace with Downloaded Font"
+      placement="top"
+      open={tooltipOpen}
+    >
       <div
         onMouseEnter={() => setTooltipOpen(true)}
         onMouseLeave={() => setTooltipOpen(false)}

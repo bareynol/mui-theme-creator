@@ -7,14 +7,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary"
 import AccordionDetails from "@material-ui/core/AccordionDetails"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-import {
-  Card,
-  CardContent,
-  Chip,
-  makeStyles,
-  Theme,
-  createStyles,
-} from "@material-ui/core"
+import { Chip, makeStyles, Theme, createStyles } from "@material-ui/core"
 import AddFontInput from "./AddFontInput"
 import PopularFontList from "./PopularFontList"
 
@@ -42,20 +35,25 @@ function FontTools() {
   return (
     <>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <AddFontInput />
+        </AccordionSummary>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="body2">Popular Fonts</Typography>
         </AccordionSummary>
         <AccordionDetails style={{ flexDirection: "column" }}>
           <PopularFontList />
         </AccordionDetails>
       </Accordion>
-      <Card>
-        <CardContent>
-          <Typography variant="body2">
-            Current Theme Font Dependencies
-          </Typography>
+      <Accordion defaultExpanded={currentFonts.length < 5}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          {`Fonts used in current theme (${currentFonts.length})`}
+        </AccordionSummary>
+        <AccordionDetails>
           <div className={classes.loadedFontContent}>
-            {[...currentFonts].map(font => (
+            {currentFonts.map(font => (
               <Chip
                 label={font}
                 key={font}
@@ -64,9 +62,13 @@ function FontTools() {
               />
             ))}
           </div>
-        </CardContent>
-        <CardContent>
-          <Typography variant="body2">Loaded Fonts</Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion defaultExpanded>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          {`Loaded and Available Fonts (${loadedFonts.size})`}
+        </AccordionSummary>
+        <AccordionDetails>
           <div className={classes.loadedFontContent}>
             {[...loadedFonts].map(font => (
               <Chip
@@ -77,8 +79,8 @@ function FontTools() {
               />
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </AccordionDetails>
+      </Accordion>
     </>
   )
 }

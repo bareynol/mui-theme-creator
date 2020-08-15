@@ -49,9 +49,6 @@ function PopularFontList() {
 
   return fontShortList.length ? (
     <div>
-      <Typography variant="body2" style={{ marginTop: 8 }}>
-        Popular Fonts
-      </Typography>
       <div
         style={{
           display: "flex",
