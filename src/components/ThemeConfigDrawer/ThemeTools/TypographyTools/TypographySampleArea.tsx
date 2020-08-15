@@ -60,7 +60,7 @@ function TypographySampleArea({
             </Typography>
           </Grid>
           <Grid item>
-            <Paper variant="outlined" className={classes.paper}>
+            <Paper variant="outlined" square className={classes.paper}>
               <Typography
                 variant={variant}
                 {...typographyProps}

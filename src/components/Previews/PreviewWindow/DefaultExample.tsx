@@ -257,6 +257,21 @@ const DefaultExample = () => {
                   </Typography>
                 </ListItemText>
               </ListItem>
+              <ListItem>
+                <Typography variant="h6">Snippets</Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Typography variant="body2" paragraph>
+                    Add global styles or default options with various built in
+                    snippets
+                  </Typography>
+                  <Typography variant="body2">
+                    Got any useful theme snippets that you think others could
+                    use? Open an issue on Gitlab!
+                  </Typography>
+                </ListItemText>
+              </ListItem>
             </List>
           </FeatureCard>
         </Grid>

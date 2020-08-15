@@ -62,12 +62,13 @@ const PreviewWindow = () => {
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static">
           <Tabs
-            variant="fullWidth"
             value={tabIndex}
             onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="on"
             aria-label="preview-window-tabs"
           >
-            <Tab label="Default" />
+            <Tab label="Instructions" />
             <Tab label="Sign Up" />
             <Tab label="Dashboard" />
             <Tab label="Blog" />
