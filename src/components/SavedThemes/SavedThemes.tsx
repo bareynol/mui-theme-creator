@@ -85,11 +85,15 @@ function CurrentTheme() {
   const themeName = useSelector(
     (state: RootState) => state.savedThemes[state.themeId].name
   )
+  const lastUpdated = useSelector(
+    (state: RootState) => state.savedThemes[state.themeId].lastUpdated
+  )
   return (
     <SavedThemeItem
       name={themeName}
       themeOptions={themeOptions}
       themeId={themeId}
+      lastUpdated={lastUpdated}
       large
     />
   )

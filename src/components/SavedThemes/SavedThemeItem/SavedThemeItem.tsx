@@ -1,4 +1,5 @@
 import React, { useCallback } from "react"
+import moment from "moment"
 import {
   Typography,
   makeStyles,
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-function SavedThemeItem({ name, themeId, ...thumbnailProps }) {
+function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
   const classes = useStyles()
 
   const dispatch = useDispatch()
@@ -72,15 +73,19 @@ function SavedThemeItem({ name, themeId, ...thumbnailProps }) {
   )
 
   const loadedThemeId = useSelector((state: RootState) => state.themeId)
+
   return (
     <div className={classes.root} onClick={handleLoadTheme}>
       <Card
         className={`${themeId === loadedThemeId ? classes.loadedCard : ""}`}
       >
-        <CardContent style={{ paddingTop: 0 }}>
+        <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
           <div className={classes.content}>
             <Typography variant="subtitle1">{name}</Typography>
             <ThemeThumbnail {...thumbnailProps} />
+            <Typography variant="caption">{`Last Updated: ${moment(
+              lastUpdated
+            ).fromNow()}`}</Typography>
           </div>
         </CardContent>
       </Card>

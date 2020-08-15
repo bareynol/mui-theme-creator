@@ -7,7 +7,7 @@ import SavedThemeItem from "./SavedThemeItem/SavedThemeItem"
 function SavedThemeList() {
   const savedThemes = useSelector((state: RootState) => state.savedThemes)
   const sortedThemes = Object.values(savedThemes).sort((a, b) =>
-    a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    a.lastUpdated > b.lastUpdated ? -1 : a.lastUpdated < b.lastUpdated ? 1 : 0
   )
 
   return (
@@ -18,6 +18,7 @@ function SavedThemeList() {
             name={t.name}
             themeOptions={t.themeOptions}
             themeId={t.id}
+            lastUpdated={t.lastUpdated}
           />
         </Grid>
       ))}

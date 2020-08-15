@@ -17,6 +17,7 @@ export type SavedTheme = {
   name: string
   themeOptions: ThemeOptions
   fonts: string[]
+  lastUpdated: string
 }
 
 export type NewSavedTheme = Omit<SavedTheme, "id">

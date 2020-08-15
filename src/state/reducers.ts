@@ -24,6 +24,7 @@ const initialState: RootState = {
       name: "My Theme",
       themeOptions: defaultThemeOptions,
       fonts: ["Roboto"],
+      lastUpdated: new Date().toISOString(),
     },
   },
   loadedFonts: new Set(
@@ -75,6 +76,7 @@ export default (state = initialState, action) => {
               state.savedThemes[state.themeId]?.fonts,
               state.loadedFonts
             ),
+            lastUpdated: new Date().toISOString(),
           },
         },
       }
@@ -93,9 +95,10 @@ export default (state = initialState, action) => {
           [newThemeId]: {
             id: newThemeId,
             ...action.savedTheme,
+            lastUpdated: new Date().toISOString(),
           },
         },
-        fontLoaded: loadFontsIfRequired(
+        loadedFonts: loadFontsIfRequired(
           action.savedTheme.fonts,
           state.loadedFonts
         ),
@@ -122,6 +125,7 @@ export default (state = initialState, action) => {
           [action.themeId]: {
             ...state.savedThemes[action.themeId],
             name: action.name,
+            lastUpdated: new Date().toISOString(),
           },
         },
       }
@@ -224,6 +228,7 @@ function loadFontsIfRequired(fonts: string[], loadedFonts: Set<string>) {
   if (!fontsToLoad.length) return loadedFonts
 
   loadFonts(fontsToLoad)
+
   return new Set([...loadedFonts, ...fontsToLoad].sort())
 }
 
