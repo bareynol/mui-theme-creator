@@ -69,6 +69,10 @@ export function isSetEq(a: Set<any>, b: Set<any>) {
   return true
 }
 
+/**
+ * Logs to console if in development mode
+ * @param args parameters passed to `console.log`
+ */
 export function verbose(...args: any[]) {
   if (process.env.NODE_ENV === "development") {
     console.log(...args)

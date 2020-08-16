@@ -12,7 +12,7 @@ import {
   Tabs,
   Tab,
 } from "@material-ui/core"
-import ThemeConfigDrawer from "src/components/ThemeConfigDrawer/ThemeConfigDrawer"
+import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
 import MuiComponents from "src/components/Previews/MuiComponents"
 import PreviewWindow from "src/components/Previews/PreviewWindow"
 // import MaterialColorPicker from "src/components/MaterialColorPicker"
