@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     toolPanelContent: {
       flex: 1,
       overflowY: "auto",
+      overflowX: "hidden",
     },
   })
 )

@@ -1,8 +1,6 @@
 import React from "react"
-import NestedListItem from "src/components/NestedListItem"
-import List from "@material-ui/core/List"
 import ThemeTypeInput from "./ThemeTypeInput"
-import { Grid, Typography, Paper } from "@material-ui/core"
+import { Typography, AccordionSummary, Accordion } from "@material-ui/core"
 import PaletteSubType from "./PaletteSubType"
 
 const paletteColorTypes = [
@@ -17,25 +15,12 @@ const paletteColorTypes = [
 export default function PaletteTools() {
   return (
     <>
-      <Paper>
-        <Grid
-          container
-          justify="space-between"
-          alignItems="baseline"
-          style={{
-            paddingLeft: 16,
-            paddingRight: 16,
-          }}
-        >
-          <Grid item>
-            <Typography variant="body2">Type</Typography>
-          </Grid>
-          <Grid item>
-            <ThemeTypeInput />
-          </Grid>
-        </Grid>
-      </Paper>
-
+      <Accordion>
+        <AccordionSummary>
+          <Typography variant="body2">Type</Typography>
+          <ThemeTypeInput />
+        </AccordionSummary>
+      </Accordion>
       <PaletteSubType
         title="Background"
         path="palette.background"
