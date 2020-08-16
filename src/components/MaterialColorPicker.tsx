@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MaterialColorPicker({ color, onChangeComplete }) {
   const [hue, setHue] = React.useState("red")
-  const [shade, setShade] = React.useState(null)
+  const [shade, setShade] = React.useState<string | null>(null)
   const classes = useStyles()
 
   useEffect(() => {
@@ -126,7 +126,6 @@ export default function MaterialColorPicker({ color, onChangeComplete }) {
     }
 
     const mappedColor = muiColorByHex[hexColor]
-    console.log("mui input color change", hexColor, mappedColor, opacity)
 
     if (mappedColor) {
       setHue(mappedColor[0])
@@ -134,7 +133,6 @@ export default function MaterialColorPicker({ color, onChangeComplete }) {
     }
   }, [color])
 
-  console.log(hue, shade)
   return (
     <div>
       <div>

@@ -49,8 +49,6 @@ function TypographyVariant({ variant, text, smallPreview = false }) {
   const [expanded, setExpanded] = useState(false)
 
   const variantPath = `typography.${variant}`
-  // const themeValue = useThemeValue(variantPath)
-  // console.log(variant, modifiedByUser, value)
 
   return (
     <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>

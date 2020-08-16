@@ -6,6 +6,7 @@ import {
   updateVersionStates,
 } from "src/state/editor/actions"
 import { RootState } from "src/state/types"
+import { verbose } from "src/utils"
 
 export default function useUndoRedo(editorRef: EditorRefType) {
   const updateEditorState = useUpdateEditorState()
@@ -16,8 +17,7 @@ export default function useUndoRedo(editorRef: EditorRefType) {
       ?.getModel()
       ?.getAlternativeVersionId()
 
-    // sett initial versions
-    console.log("initialize versions", initialVersionId)
+    // set initial versions
     updateEditorState({
       initialVersion: initialVersionId,
       currentVersion: initialVersionId,
@@ -54,23 +54,25 @@ const useTrackUndoRedoState = (editorRef: EditorRefType) => {
 
 const useUndoRedoHandlers = (editorRef: EditorRefType) => {
   const handleRedo = () => {
-    console.log("global redo listener")
+    verbose(
+      "MonacoThemeCodeEditor/hooks/useUndoRedo -> handleRedo: global redo listener fired"
+    )
     editorRef.current?.trigger("MonacoThemeCodeEditor", "redo", null)
   }
 
   const handleUndo = () => {
-    console.log("global undo listener")
+    verbose(
+      "MonacoThemeCodeEditor/hooks/useUndoRedo -> handleUndo: global undo listener fired"
+    )
     editorRef.current?.trigger("MonacoThemeCodeEditor", "undo", null)
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.ctrlKey) {
       if (event.code === "KeyZ") {
-        console.log("global undo listener")
         handleUndo()
       }
       if (event.code === "KeyY") {
-        console.log("global redo listener")
         handleRedo()
       }
     }

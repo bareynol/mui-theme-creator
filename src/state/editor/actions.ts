@@ -12,6 +12,7 @@ import { Dispatch } from "redux"
  */
 export const saveEditorToTheme = (code: string) => {
   // remove "use strict" and "exports" line
+  console.log(code)
   const codeLines = code.split("\n").slice(2)
 
   // editor disables editing this line, so it should always
@@ -81,12 +82,6 @@ export const updateVersionStates = (nextVersionId: number) => (
 ) => {
   const { initialVersion, lastVersion, currentVersion } = getState().editor
 
-  console.log("updateVersionStates", {
-    nextVersionId,
-    initialVersion,
-    lastVersion,
-    currentVersion,
-  })
   let nextState: EditorStateOptions = {}
   if (nextVersionId < currentVersion) {
     // "undo" has been applied, enable redo

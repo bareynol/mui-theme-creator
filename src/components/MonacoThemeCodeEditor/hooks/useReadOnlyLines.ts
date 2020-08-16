@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import * as monaco from "monaco-editor"
 import { EditorRefType } from "../types"
+import { verbose } from "src/utils"
 
 // number of lines from the top and bottom of the
 // code in the editor that should be considered read only
@@ -73,7 +74,7 @@ export default function useReadOnlyLines(editorRef: EditorRefType) {
 
         if (selection.startLineNumber === readOnlyLines.top + 1) {
           if (selection.startColumn === 1 && selection.isEmpty()) {
-            console.log("preventing backspace")
+            verbose("preventing backspace on read-only line")
             event.stopPropagation()
           }
         }
@@ -97,7 +98,7 @@ export default function useReadOnlyLines(editorRef: EditorRefType) {
             editorRef.current?.getModel()?.getLineLength(lastEditableLine) || 0
 
           if (selection.endColumn > lineLength && selection.isEmpty()) {
-            console.log("preventing delete")
+            verbose("preventing delete on read-only lines")
             event.stopPropagation()
           }
         }
@@ -109,21 +110,6 @@ export default function useReadOnlyLines(editorRef: EditorRefType) {
         preventModifyReadOnlyLines(event)
         preventBackspaceToReadOnlyLines(event)
         preventDeleteToReadOnlyLines(event)
-
-        // if (
-        //   event.shiftKey &&
-        //   event.keyCode === monaco.KeyCode.US_CLOSE_SQUARE_BRACKET
-        // ) {
-        //   console.log(
-        //     "close bracket pressed",
-        //     countUnclosedBrackets(editor.current.getValue())
-        //   )
-        //   if (countUnclosedBrackets(editor.current.getValue()) <= 0) {
-        //     console.log("preventing close bracket")
-        //     event.preventDefault()
-        //     event.stopPropagation()
-        //   }
-        // }
       }
     )
 
@@ -131,12 +117,20 @@ export default function useReadOnlyLines(editorRef: EditorRefType) {
   }, [])
 }
 
-// ensure read only lines always have proper styling
+/**
+ * Add styles and hover messages to read only lines, and create
+ * an event listener to ensure proper read only styles are applied
+ * after the editor input updates
+ * @param editorRef
+ */
 export const useReadOnlyStyles = (editorRef: EditorRefType) => {
   let decorationIds: string[] = [] // the IDs of decorations created
 
+  /**
+   * Add the className "readOnlyLine" (styles defined in ../editor.css)
+   * to the first three lines and the last line in the editor
+   */
   const applyStyles = () => {
-    console.log("useReadOnlyStyles detected change")
     const lastLine = editorRef.current?.getModel()?.getLineCount() || 0
 
     // wipe the existing read only decorations, and add new ones
@@ -163,7 +157,10 @@ export const useReadOnlyStyles = (editorRef: EditorRefType) => {
   }
 
   useEffect(() => {
+    // add the initial styles
     applyStyles()
+
+    // when model content changes, ensure that styles are reapplied
     const modelContentChangeBinding = editorRef.current?.onDidChangeModelContent(
       applyStyles
     )
@@ -174,16 +171,3 @@ export const useReadOnlyStyles = (editorRef: EditorRefType) => {
     }
   }, [])
 }
-
-// const countUnclosedBrackets = code => {
-//   let numUnclosedBrackets = 0
-//   for (let i = 0; i < code.length; i++) {
-//     if (code[i] === "{") {
-//       numUnclosedBrackets++
-//     } else if (code[i] === "}") {
-//       numUnclosedBrackets--
-//     }
-//   }
-//   console.log("counted", numUnclosedBrackets, "unclosed brackets")
-//   return numUnclosedBrackets
-// }

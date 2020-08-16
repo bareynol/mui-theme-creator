@@ -11,6 +11,7 @@ import * as monaco from "monaco-editor"
 import EditorControls from "./EditorControls"
 import EditorErrors from "./EditorErrors"
 import { makeStyles, Theme, createStyles } from "@material-ui/core"
+import { verbose } from "src/utils"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +37,7 @@ const MonacoThemeCodeEditor = () => {
 
   useEffect(() => {
     return () => {
-      console.log("MonacoThemeCodeEditor unmounted")
+      verbose("MonacoThemeCodeEditor unmounted")
     }
   }, [])
 

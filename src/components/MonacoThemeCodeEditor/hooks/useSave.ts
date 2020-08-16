@@ -5,21 +5,17 @@ import { EditorRefType } from "../types"
 import { useDispatch, useSelector } from "react-redux"
 import { updateEditorState } from "src/state/editor/actions"
 import { saveEditorToTheme } from "src/state/editor/actions"
+import { RootState } from "src/state/types"
+import { verbose } from "src/utils"
 
-async function formatAndValidateInput(
-  editorRef: EditorRefType,
-  formatOnSave: boolean
-) {
+/**
+ * Transpile the editor and return any semantic or syntactic
+ * errors as well as the emitted code
+ * @param editorRef - ref of the monaco-editor
+ * @returns [semanticDiagnostics: Diagnostic[], syntacticDiagnostics: Diagnostic[], emittedOutput: any]
+ */
+async function validateInput(editorRef: EditorRefType) {
   const monaco = require("monaco-editor")
-
-  // use prettier to auto format the code
-  if (formatOnSave) {
-    try {
-      await editorRef.current?.getAction("editor.action.formatDocument").run()
-    } catch (err) {
-      console.log("error formatting document", err)
-    }
-  }
 
   // get the JS output of the typescript inside the code editor
   const model = editorRef.current?.getModel()
@@ -35,6 +31,31 @@ async function formatAndValidateInput(
   ])
 }
 
+/**
+ * Run the formatDocument action on the monaco editor
+ * @param editorRef - ref of the monaco-editor
+ * @returns true if document was formatted, false otherwise
+ */
+async function formatInput(editorRef: EditorRefType) {
+  try {
+    await editorRef.current?.getAction("editor.action.formatDocument").run()
+    return true
+  } catch (err) {
+    verbose(
+      "MonacoThemeCodeEditor/hooks/useSave -> formatInput: Error formatting document",
+      err
+    )
+  }
+  return false
+}
+
+/**
+ * Create a handler for saving the code editor contents to the theme options,
+ * create an event listener for the Ctrl + S key combo, and return the
+ * handler for saving code editor contents
+ * @param editorRef
+ * @returns Function that handles saving code editor contents
+ */
 export default function useSave(editorRef: EditorRefType) {
   const formatOnSave = useSelector(
     (state: RootState) => state.editor.formatOnSave
@@ -43,13 +64,16 @@ export default function useSave(editorRef: EditorRefType) {
   const handleSave = useCallback(async () => {
     // clear existing errors first
     dispatch(updateEditorState({ errors: [] }))
+
+    // format document if required
+    if (formatOnSave) await formatInput(editorRef)
+
     const [
       semanticDiagnostics,
       syntacticDiagnostics,
       emittedOutput,
-    ] = await formatAndValidateInput(editorRef, formatOnSave)
+    ] = await validateInput(editorRef)
 
-    console.log({ semanticDiagnostics, syntacticDiagnostics, emittedOutput })
     // if there are semantic errors, prevent saving, else save to redux store
     const errors = [...syntacticDiagnostics, ...semanticDiagnostics]
     if (errors.length > 0) {
@@ -77,6 +101,12 @@ export default function useSave(editorRef: EditorRefType) {
   return handleSave
 }
 
+/**
+ * Add an event listener for the Ctrl + S key combo that saves the editor contents
+ * to the saved theme options
+ * @param editorRef
+ * @param onSave
+ */
 export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
   useEffect(() => {
     // save key action in the monaco editor
@@ -93,7 +123,6 @@ export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
     const handleGlobalSave = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.code == "KeyS") {
         event.preventDefault()
-        console.log("global save")
         onSave()
       }
     }

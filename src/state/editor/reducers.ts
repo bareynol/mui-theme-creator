@@ -5,7 +5,6 @@ import { ThemeOptions } from "@material-ui/core"
 import { RootState } from "../types"
 
 const stringify = (themeOptions: ThemeOptions) => {
-  console.log("Stringify", themeOptions)
   return `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
 export const themeOptions: ThemeOptions = ${JSON5.stringify(

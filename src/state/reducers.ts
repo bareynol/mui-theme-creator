@@ -208,16 +208,12 @@ const getFontsFromThemeOptions = (
     // .flat() // flatten the array if any font families had multiple specified
     .map(x => x.trim()) // trim off any white space
 
-  console.log("fonts specified", fontList)
   const fontSet = new Set<string>()
   fontList.forEach(x => loadedFonts.has(x) && fontSet.add(x))
-  console.log("fontSet of fonts specified", fontSet)
-  console.log("existing theme font set:", previousFonts)
 
   // if new fontSet hasn't changed from the current theme fonts
   // return the original Set for redux performance
   if (previousFonts && isSetEq(new Set(previousFonts), fontSet)) {
-    console.log("fontSet unchanged, skipping update")
     return previousFonts
   }
 

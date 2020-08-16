@@ -68,3 +68,9 @@ export function isSetEq(a: Set<any>, b: Set<any>) {
 
   return true
 }
+
+export function verbose(...args: any[]) {
+  if (process.env.NODE_ENV === "development") {
+    console.log(...args)
+  }
+}

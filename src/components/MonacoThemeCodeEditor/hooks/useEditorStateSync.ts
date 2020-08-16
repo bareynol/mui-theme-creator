@@ -19,10 +19,7 @@ const useSyncToStore = (editorRef: EditorRefType) => {
 
   useEffect(() => {
     const modelContentChangeBinding = editorRef.current?.onDidChangeModelContent(
-      event => {
-        console.log("update redux themeInput")
-        updateEditorState({ themeInput: editorRef.current?.getValue() })
-      }
+      event => updateEditorState({ themeInput: editorRef.current?.getValue() })
     )
 
     return () => {
@@ -41,15 +38,11 @@ const useSyncFromStore = (editorRef: EditorRefType) => {
   useEffect(() => {
     const model = editorRef.current?.getModel()
 
-    console.log("useSyncThemeInputToEditor", model?.getValue() === themeInput)
-
     // only modify the editor if themeInput differs from editor,
     // so as to not pollute the undo/redo stack
     if (model?.getValue() !== themeInput) {
       // push the new theme input on to the edit operations stack
       // so that undo stack is preserved
-      console.log("previous model version", model?.getAlternativeVersionId())
-      // push changes to editor
       model?.pushEditOperations(
         [],
         [{ range: model.getFullModelRange(), text: themeInput }],
@@ -57,8 +50,6 @@ const useSyncFromStore = (editorRef: EditorRefType) => {
       )
       // create a new undo/redo "save" point
       model?.pushStackElement()
-
-      console.log("updating saved version", model?.getAlternativeVersionId())
 
       // update the last saved version after update is applied
       updateEditorState({ savedVersion: model?.getAlternativeVersionId() })

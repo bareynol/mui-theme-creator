@@ -1,5 +1,5 @@
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
-import { setByPath, removeByPath, getByPath } from "src/utils"
+import { setByPath, removeByPath, getByPath, verbose } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"
 
@@ -131,11 +131,11 @@ export async function loadFonts(fonts: string[]) {
         families: fonts,
       },
       active: () => {
-        console.log("webfonts loaded")
+        verbose("state/actions -> loadFonts: webfonts loaded", fonts)
         resolve(true)
       },
       inactive: () => {
-        console.log("webfonts could not load")
+        verbose("state/actions -> loadFonts: webfonts could not load", fonts)
         resolve(false)
       },
     })
