@@ -27,21 +27,30 @@ const initialState: RootState = {
       lastUpdated: new Date().toISOString(),
     },
   },
-  loadedFonts: new Set(
-    ["Roboto", "Open Sans", "Droid Sans", "Droid Serif"].sort()
-  ),
+  loadedFonts: new Set(),
   activeTab: "preview",
   previewSize: false,
 }
 
+const initialFonts = ["Droid Sans", "Droid Serif", "Open Sans", "Roboto"]
+
 export default (state = initialState, action) => {
+  // run editor reducers
   state = {
     ...state,
     editor: editorReducer(state.editor, action, state.savedThemes),
   }
+
+  // on initial page load, load the initial fonts
+  if (!state.loadedFonts.size) {
+    state = {
+      ...state,
+      loadedFonts: loadFontsIfRequired(initialFonts, state.loadedFonts),
+    }
+  }
+
   switch (action.type) {
     case "persist/REHYDRATE":
-      console.log(action)
       if (action.payload != null) {
         return {
           ...state,
@@ -56,7 +65,6 @@ export default (state = initialState, action) => {
         }
       }
       return state
-
     case "SAVE_THEME_INPUT":
     case "UPDATE_THEME":
       return {

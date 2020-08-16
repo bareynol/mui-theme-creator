@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useEffect } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -14,10 +14,7 @@ import NavDrawer from "src/components/NavDrawer"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
 import "./layout.css"
-import { loadFonts } from "src/state/actions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,15 +43,6 @@ const Layout = ({ children }) => {
     }
   `)
   const classes = useStyles()
-  const initialFonts: Set<string> = useSelector(
-    (state: RootState) => state.loadedFonts
-  )
-  console.log("initialFonts", initialFonts)
-  useEffect(() => {
-    if (initialFonts.size) {
-      loadFonts([...initialFonts])
-    }
-  }, [])
 
   return (
     <ThemeProvider theme={theme}>
