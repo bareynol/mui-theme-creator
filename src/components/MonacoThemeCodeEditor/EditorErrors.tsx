@@ -77,7 +77,10 @@ const EditorErrors = ({ editorRef }) => {
     }
   }, [errors])
 
-  const getErrorPosition = error => {
+  const getErrorString = error => {
+    if (!error.start) {
+      return error.messageText
+    }
     const pos = model?.getPositionAt(error.start)
     return `Line ${pos.lineNumber}:${pos.column}. ${
       error.messageText.messageText ?? error.messageText
@@ -118,7 +121,7 @@ const EditorErrors = ({ editorRef }) => {
           <Collapse in={expanded}>
             {errors.map(e => (
               <div key={`${e.code}-${e.start}`} className={classes.errorLine}>
-                {getErrorPosition(e)}
+                {getErrorString(e)}
               </div>
             ))}
             <Divider className={classes.alertDivider} />

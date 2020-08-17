@@ -1,8 +1,8 @@
 import { EditorStateOptions } from "./types"
 import { useDispatch } from "react-redux"
 import { useCallback } from "react"
-import JSON5 from "json5"
 import { Dispatch } from "redux"
+import { parseEditorOutput } from "./parser"
 
 /**
  * Save the code coming from the monaco-editor
@@ -11,44 +11,25 @@ import { Dispatch } from "redux"
  * @param code string - raw code output
  */
 export const saveEditorToTheme = (code: string) => {
-  // remove "use strict" and "exports" line
-  console.log(code)
-  const codeLines = code.split("\n").slice(2)
+  let themeOptions
 
-  // editor disables editing this line, so it should always
-  // be the initial declaration of the themeObject.
-  // replace with open bracket to ready for JSON parsing
-  codeLines[0] = "{" // editor disables editing this line
-  let numUnclosedBrackets = 1
-  let currentLine = 1
-
-  while (numUnclosedBrackets > 0 && currentLine < codeLines.length) {
-    for (let i = 0; i < codeLines[currentLine].length; i++) {
-      const char = codeLines[currentLine][i]
-      if (char === "{") {
-        numUnclosedBrackets++
-      } else if (char === "}") {
-        numUnclosedBrackets--
-      }
-    }
-    currentLine++
-  }
-
-  codeLines[currentLine - 1] = "}" //editor disables editing this line
-
-  const objectCodeLines = codeLines.splice(0, currentLine).join("\n")
-  const objectCode = parseThemeString(objectCodeLines)
-  console.log("objectCode", objectCodeLines, objectCode)
-  return { type: "SAVE_THEME_INPUT", themeOptions: objectCode }
-}
-
-const parseThemeString = (input: string) => {
   try {
-    return JSON5.parse(input)
+    themeOptions = parseEditorOutput(code)
   } catch (err) {
-    console.log("Error while parsing theme string", err)
-    throw err
+    // dispatch errors to redux store
+    return {
+      type: "UPDATE_EDITOR_STATE",
+      editorState: {
+        errors: [
+          {
+            category: 1,
+            messageText: `Error while JSON5 parsing code: ${err.message}`,
+          },
+        ],
+      },
+    }
   }
+  return { type: "SAVE_THEME_INPUT", themeOptions }
 }
 
 /**
