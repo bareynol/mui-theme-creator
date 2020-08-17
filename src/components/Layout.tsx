@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header"
-import NavDrawer from "src/components/NavDrawer"
+import ComponentNavDrawer from "src/components/ComponentNavDrawer"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
           className={classes.header}
         />
 
-        <NavDrawer />
+        <ComponentNavDrawer />
         <main className={classes.content}>{children}</main>
       </div>
       {/* <footer>

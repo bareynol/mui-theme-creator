@@ -1,24 +1,8 @@
-import React, { useCallback, useState, useEffect } from "react"
-import ColorInput from "src/components/ColorInput"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useCallback } from "react"
+import { useDispatch } from "react-redux"
 import { setThemeOption, removeThemeOption } from "src/state/actions"
-import {
-  Grid,
-  Typography,
-  Button,
-  makeStyles,
-  createStyles,
-  Slider,
-  Select,
-  MenuItem,
-  TextField,
-  IconButton,
-  Menu,
-  InputAdornment,
-} from "@material-ui/core"
+import { Grid, Button, makeStyles, createStyles } from "@material-ui/core"
 import { useThemeValueInfo } from "src/state/selectors"
-import { RootState } from "src/state/types"
-import AddIcon from "@material-ui/icons/Add"
 import FontWeightInput from "./FontWeightInput"
 import FontSizeInput from "./FontSizeInput"
 import FontFamilyInput from "./FontFamilyInput"

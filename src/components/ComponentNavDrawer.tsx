@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const NavDrawer = () => {
+const ComponentNavDrawer = () => {
   const classes = useStyles()
 
   const dispatch = useDispatch()
@@ -87,4 +87,4 @@ const NavDrawer = () => {
   )
 }
 
-export default NavDrawer
+export default ComponentNavDrawer

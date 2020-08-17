@@ -9,7 +9,6 @@ import {
   Theme,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import ColorInput from "src/components/ColorInput"
 import PaletteInput from "./PaletteInput"
 import { useThemeValue } from "src/state/selectors"
 
