@@ -1,5 +1,5 @@
 import React from "react"
-import examples from "src/components/Previews/MuiComponentPreviews"
+import componentSamples from "src/components/MuiComponentSamples/Samples"
 import {
   Drawer,
   List,
@@ -64,7 +64,7 @@ const NavDrawer = () => {
       <div className={classes.drawerContainer}>
         <List dense className={classes.list}>
           <ListSubheader>Components</ListSubheader>
-          {examples.map(({ id, title }) => (
+          {componentSamples.map(({ id, title }) => (
             <ListItem
               key={id}
               button

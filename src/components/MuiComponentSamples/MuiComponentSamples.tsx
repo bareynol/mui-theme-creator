@@ -1,10 +1,10 @@
 import React from "react"
 import { Typography, makeStyles, Button, Grid } from "@material-ui/core"
 
-import examples from "./MuiComponentPreviews"
+import componentSamples from "./Samples"
 
 const useStyles = makeStyles(theme => ({
-  exampleItem: {
+  sampleItem: {
     marginBottom: theme.spacing(10),
     width: "100%",
     maxWidth: 1000,
@@ -17,14 +17,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const ComponentExamples = () => {
+const MuiComponentSamples = () => {
   const classes = useStyles()
   return (
     <>
       <Typography variant="h4" gutterBottom>
         Material-UI Components
       </Typography>
-      {examples.map(({ id, title, component, docs }) => (
+      {componentSamples.map(({ id, title, component, docs }) => (
         <div key={id} id={id}>
           <Grid container justify="space-between" alignItems="center">
             <Typography variant="h5" gutterBottom>
@@ -41,11 +41,11 @@ const ComponentExamples = () => {
               Docs
             </Button>
           </Grid>
-          <div className={classes.exampleItem}>{component}</div>
+          <div className={classes.sampleItem}>{component}</div>
         </div>
       ))}
     </>
   )
 }
 
-export default ComponentExamples
+export default MuiComponentSamples

@@ -24,9 +24,10 @@ const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  themeContainer: {
     backgroundColor: theme.palette.background.default,
     width: "100%",
+    height: "100%",
   },
 }))
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 const ThemeContainer = ({ children }: ThemeWrapperProps) => {
   const classes = useStyles()
   return (
-    <Paper className={classes.root} elevation={0} square>
+    <Paper className={classes.themeContainer} elevation={0} square>
       {children}
     </Paper>
   )

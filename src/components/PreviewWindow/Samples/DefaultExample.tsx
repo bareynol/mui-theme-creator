@@ -5,11 +5,8 @@ import {
   Grid,
   Card,
   CardContent,
-  CardActions,
-  Button,
   Link,
   Box,
-  Fab,
   Tooltip,
   Divider,
   BottomNavigationAction,
@@ -17,17 +14,12 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
-  FormControlLabel,
 } from "@material-ui/core"
-import MuiLogo from "src/images/mui_logo.svg"
-import AddIcon from "@material-ui/icons/Add"
 import BuildIcon from "@material-ui/icons/Build"
 import StarIcon from "@material-ui/icons/Star"
 import PaletteIcon from "@material-ui/icons/Palette"
 import FontIcon from "@material-ui/icons/FontDownload"
 import TypographyIcon from "@material-ui/icons/TextFields"
-import RemoveIcon from "@material-ui/icons/Remove"
 import wrapTooltip from "../wrapTooltip"
 
 const useStyles = makeStyles(theme => ({
@@ -62,82 +54,6 @@ const DefaultExample = () => {
   const classes = useStyles()
   return (
     <Box p={3}>
-      {/* <Grid container wrap="nowrap" alignItems="center">
-        <Grid item>
-          <img src={MuiLogo} alt="Material UI Logo" className={classes.logo} />
-        </Grid>
-        <Grid
-          item
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Tooltip
-            title={`<Typography color="primary" variant="h3">`}
-            placement="left"
-            arrow
-          >
-            <Typography
-              variant="h3"
-              color="primary"
-              className={classes.muiTitle}
-            >
-              Material-UI
-            </Typography>
-          </Tooltip>
-          <Tooltip
-            title={`<Typography color="primary" variant="h5">`}
-            placement="left"
-            arrow
-          >
-            <Typography color="primary" variant="h5">
-              {`React components for faster and easier web development.`}
-            </Typography>
-          </Tooltip>
-          <Tooltip
-            title={`<Typography color="primary" variant="h5">`}
-            placement="left"
-            arrow
-          >
-            <Typography color="primary" variant="h5" paragraph>
-              {`Build your own design system, or start with Material Design.`}
-            </Typography>
-          </Tooltip>
-          <div className={classes.cardActions}>
-            <Tooltip
-              title={`<Button color="primary" variant="outlined">`}
-              arrow
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                href="https://material-ui.com/getting-started/installation/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {`Docs`}
-              </Button>
-            </Tooltip>
-            <Tooltip
-              title={`<Button color="secondary" variant="contained">`}
-              arrow
-            >
-              <Button
-                variant="contained"
-                color="secondary"
-                href="https://material-ui.com/discover-more/backers/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Support Material-UI
-              </Button>
-            </Tooltip>
-          </div>
-        </Grid>
-      </Grid> */}
-
       <Grid container spacing={2} justify="center">
         <Grid item xs={12} md={6}>
           <FeatureCard
