@@ -8,6 +8,8 @@ import DialogActions from "@material-ui/core/DialogActions"
 import { useDispatch } from "react-redux"
 import { addNewSavedTheme } from "src/state/actions"
 
+export const addThemeButtonId = "add-theme-button"
+
 function AddThemeButton() {
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false)
@@ -33,7 +35,12 @@ function AddThemeButton() {
 
   return (
     <>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+      <Button
+        id={addThemeButtonId}
+        variant="outlined"
+        color="secondary"
+        onClick={handleClickOpen}
+      >
         Add New Theme
       </Button>
 

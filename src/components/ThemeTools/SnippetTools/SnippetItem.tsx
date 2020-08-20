@@ -92,7 +92,7 @@ const SnippetItem = ({ snippet }) => {
           {title}
         </Typography>
         {info && (
-          <Tooltip title={toolTipContent} interactive>
+          <Tooltip title={toolTipContent} interactive arrow>
             <InfoOutlinedIcon />
           </Tooltip>
         )}

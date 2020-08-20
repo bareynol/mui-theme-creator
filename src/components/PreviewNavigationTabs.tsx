@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const previewTabId = "preview-tab"
+export const componentsTabId = "components-tab"
+export const savedThemesTabId = "saved-themes-tab"
+
 const PreviewNavigationTabs = () => {
   const classes = useStyles()
   const activeTab = useSelector((state: RootState) => state.activeTab)
@@ -50,9 +54,9 @@ const PreviewNavigationTabs = () => {
           centered
           onChange={(event, value) => setTab(value)}
         >
-          <Tab label="Preview" value="preview" />
-          <Tab label="Components" value="components" />
-          <Tab label="Saved Themes" value="saved" />
+          <Tab label="Preview" value="preview" id={previewTabId} />
+          <Tab label="Components" value="components" id={componentsTabId} />
+          <Tab label="Saved Themes" value="saved" id={savedThemesTabId} />
         </Tabs>
       </AppBar>
       <div className={classes.mainWindow}>

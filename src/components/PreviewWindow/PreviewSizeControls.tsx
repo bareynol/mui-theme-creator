@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const previewSizeControlsId = "preview-size-controls"
+
 const PreviewSizeControls = () => {
   const classes = useStyles()
   const previewSize = useSelector((state: RootState) => state.previewSize)
@@ -37,6 +39,7 @@ const PreviewSizeControls = () => {
   )
   return (
     <BottomNavigation
+      id={previewSizeControlsId}
       value={previewSize}
       onChange={handleOnChange}
       className={classes.sizeControlRoot}

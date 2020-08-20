@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const codeEditorId = "code-editor"
+
 const MonacoThemeCodeEditor = () => {
   const classes = useStyles()
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
@@ -49,6 +51,7 @@ const MonacoThemeCodeEditor = () => {
         flexDirection: "column",
         position: "relative",
       }}
+      id="code-editor"
     >
       <EditorControls
         onUndo={handleUndo}
