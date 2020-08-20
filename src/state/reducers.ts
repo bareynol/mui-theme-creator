@@ -30,6 +30,8 @@ const initialState: RootState = {
   loadedFonts: new Set(),
   activeTab: "preview",
   previewSize: false,
+  tutorialStep: 0,
+  tutorialOpen: false,
 }
 
 const initialFonts = ["Droid Sans", "Droid Serif", "Open Sans", "Roboto"]
@@ -163,6 +165,26 @@ export default (state = initialState, action) => {
           state.themeOptions,
           action.previewSize
         ),
+      }
+    case "INCREMENT_TUTORIAL_STEP":
+      return {
+        ...state,
+        tutorialStep: state.tutorialStep + 1,
+      }
+    case "DECREMENT_TUTORIAL_STEP":
+      return {
+        ...state,
+        tutorialStep: state.tutorialStep - 1,
+      }
+    case "RESET_TUTORIAL_STEP":
+      return {
+        ...state,
+        tutorialStep: 0,
+      }
+    case "TOGGLE_TUTORIAL":
+      return {
+        ...state,
+        tutorialOpen: !state.tutorialOpen,
       }
     default:
       return state

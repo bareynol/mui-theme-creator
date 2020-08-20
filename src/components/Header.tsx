@@ -8,6 +8,7 @@ import {
   Link,
 } from "@material-ui/core"
 import muiVersion from "src/muiVersion"
+import { TutorialButton } from "./Tutorial/Tutorial"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -19,32 +20,38 @@ const useStyles = makeStyles(theme => ({
     lineHeight: theme.typography.caption.fontSize,
     fontWeight: 700,
   },
+  toolbar: {
+    width: "calc(100% - 400px)", // screen width minus the config drawer
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }))
 
 const Header = ({ siteTitle, className }) => {
   const classes = useStyles()
   return (
-    <header>
-      <AppBar position="fixed" color="default" className={className}>
-        <Toolbar>
-          <div>
-            <Typography variant="h6" className={classes.title}>
-              {siteTitle}
-            </Typography>
-            <Typography variant="caption" className={classes.version}>
-              {"└─ "}
-              <Link
-                href="https://www.npmjs.com/package/@material-ui/core"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {`@material-ui/core@${muiVersion}`}
-              </Link>
-            </Typography>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </header>
+    <AppBar position="fixed" color="default" className={className}>
+      <Toolbar className={classes.toolbar}>
+        <div>
+          <Typography variant="h6" className={classes.title}>
+            {siteTitle}
+          </Typography>
+          <Typography variant="caption" className={classes.version}>
+            {"└─ "}
+            <Link
+              href="https://www.npmjs.com/package/@material-ui/core"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {`@material-ui/core@${muiVersion}`}
+            </Link>
+          </Typography>
+        </div>
+        <div>
+          <TutorialButton />
+        </div>
+      </Toolbar>
+    </AppBar>
   )
 }
 
