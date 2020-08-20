@@ -39,30 +39,40 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const paletteToolsId = "palette-tools-nav"
+export const fontToolsId = "font-tools-nav"
+export const typographyToolsId = "typography-tools-nav"
+export const snippetToolsId = "snippet-tools-nav"
+
 const toolPanels: Array<{
   label: string
   icon: React.ReactNode
   tools: any
+  id: string
 }> = [
   {
     label: "Palette",
     icon: <PaletteIcon />,
     tools: PaletteTools,
+    id: paletteToolsId,
   },
   {
     label: "Fonts",
     icon: <FontIcon />,
     tools: FontTools,
+    id: fontToolsId,
   },
   {
     label: "Typography",
     icon: <TypographyIcon />,
     tools: TypographyTools,
+    id: typographyToolsId,
   },
   {
     label: "Snippets",
     icon: <SnippetsIcon />,
     tools: SnippetTools,
+    id: snippetToolsId,
   },
 ]
 
@@ -97,12 +107,13 @@ export default function ThemeTools() {
         className={classes.bottomNavBar}
         onChange={(event, newValue) => setBottomNavIndex(newValue)}
       >
-        {toolPanels.map((win, index) => (
+        {toolPanels.map((panel, index) => (
           <BottomNavigationAction
-            key={`${index}-${win.label}`}
-            label={win.label}
+            key={`${index}-${panel.label}`}
+            id={panel.id}
+            label={panel.label}
             value={index}
-            icon={win.icon}
+            icon={panel.icon}
             classes={bottomNavActionClasses}
           />
         ))}

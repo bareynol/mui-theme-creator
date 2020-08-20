@@ -10,6 +10,8 @@ export interface RootState {
   loadedFonts: Set<string>
   activeTab: string
   previewSize: PreviewSize
+  tutorialStep: number
+  tutorialOpen: boolean
 }
 
 export type SavedTheme = {

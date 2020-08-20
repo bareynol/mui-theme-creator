@@ -79,6 +79,8 @@ function SavedThemes() {
 
 export default SavedThemes
 
+export const currentThemeThumbnailId = "current-theme-thumbnail"
+
 function CurrentTheme() {
   const themeOptions = useSelector((state: RootState) => state.themeOptions)
   const themeId = useSelector((state: RootState) => state.themeId)
@@ -89,12 +91,14 @@ function CurrentTheme() {
     (state: RootState) => state.savedThemes[state.themeId].lastUpdated
   )
   return (
-    <SavedThemeItem
-      name={themeName}
-      themeOptions={themeOptions}
-      themeId={themeId}
-      lastUpdated={lastUpdated}
-      large
-    />
+    <div id={currentThemeThumbnailId}>
+      <SavedThemeItem
+        name={themeName}
+        themeOptions={themeOptions}
+        themeId={themeId}
+        lastUpdated={lastUpdated}
+        large
+      />
+    </div>
   )
 }

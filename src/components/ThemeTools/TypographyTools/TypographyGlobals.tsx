@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const defaultGlobalProperties = [
-  "htmlFontSize",
   "fontFamily",
   "fontSize",
   "fontWeightLight",
   "fontWeightRegular",
   "fontWeightMedium",
   "fontWeightBold",
+  "htmlFontSize",
 ]
 
 function TypographyGlobals() {

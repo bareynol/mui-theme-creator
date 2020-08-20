@@ -169,3 +169,8 @@ export const setPreviewSize = (previewSize: PreviewSize) => ({
   type: "SET_PREVIEW_SIZE",
   previewSize,
 })
+
+export const incrementTutorialStep = () => ({ type: "INCREMENT_TUTORIAL_STEP" })
+export const decrementTutorialStep = () => ({ type: "DECREMENT_TUTORIAL_STEP" })
+export const resetTutorialStep = () => ({ type: "RESET_TUTORIAL_STEP" })
+export const toggleTutorial = () => ({ type: "TOGGLE_TUTORIAL" })

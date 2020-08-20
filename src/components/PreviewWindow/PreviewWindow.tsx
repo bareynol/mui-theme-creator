@@ -49,6 +49,8 @@ function TabPanel(props: TabPanelProps) {
   )
 }
 
+export const previewNavTabsId = "preview-nav-tabs"
+
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
 
@@ -60,7 +62,7 @@ const PreviewWindow = () => {
     <PreviewWrapper>
       <AppBarExample />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
-        <AppBar position="static">
+        <AppBar position="static" id={previewNavTabsId}>
           <Tabs
             value={tabIndex}
             onChange={handleChange}

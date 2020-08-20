@@ -4,6 +4,8 @@ import { RootState } from "src/state/types"
 import { Grid } from "@material-ui/core"
 import SavedThemeItem from "./SavedThemeItem/SavedThemeItem"
 
+export const savedThemeListId = "saved-theme-list"
+
 function SavedThemeList() {
   const savedThemes = useSelector((state: RootState) => state.savedThemes)
   const sortedThemes = Object.values(savedThemes).sort((a, b) =>
@@ -11,7 +13,7 @@ function SavedThemeList() {
   )
 
   return (
-    <Grid container spacing={4}>
+    <Grid id={savedThemeListId} container spacing={4}>
       {sortedThemes.map(t => (
         <Grid item key={`${t.name}-${t.id}`}>
           <SavedThemeItem

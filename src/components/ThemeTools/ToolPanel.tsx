@@ -25,10 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const toolPanelId = "theme-tool-panel"
+
 function ToolPanel({ panelTitle, children }) {
   const classes = useStyles()
   return (
-    <div className={classes.toolPanel}>
+    <div id={toolPanelId} className={classes.toolPanel}>
       <div className={classes.toolPanelTitle}>
         <Typography variant="overline">{panelTitle}</Typography>
       </div>

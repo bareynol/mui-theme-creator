@@ -38,6 +38,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+export const componentNavDrawerId = "component-nav-drawer"
+
 const ComponentNavDrawer = () => {
   const classes = useStyles()
 
@@ -53,6 +55,7 @@ const ComponentNavDrawer = () => {
 
   return (
     <Drawer
+      id={componentNavDrawerId}
       className={classes.drawer}
       variant="permanent"
       classes={{

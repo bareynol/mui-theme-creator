@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+export const defaultThemesId = "default-themes"
+
 function DefaultThemes() {
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -54,6 +56,7 @@ function DefaultThemes() {
 
   return (
     <Grid
+      id={defaultThemesId}
       container
       spacing={2}
       wrap="nowrap"
