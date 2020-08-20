@@ -21,7 +21,7 @@ const ComponentsTabTutorialStep = () => {
 const ComponentNavDrawerTutorialStep = () => {
   return (
     <TutorialTooltip anchorId={componentNavDrawerId} placement="right">
-      Click a component name to view it
+      Click a component name to navigate to it
     </TutorialTooltip>
   )
 }

@@ -22,7 +22,7 @@ const SiteSamplesTutorialStep = () => {
   useSwitchToTab("preview")
   return (
     <TutorialTooltip anchorId={previewNavTabsId} placement="bottom">
-      View your theme on a variety of site templates
+      Use these tabs to view your theme on a variety of site templates
     </TutorialTooltip>
   )
 }

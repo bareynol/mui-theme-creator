@@ -29,6 +29,15 @@ const CurrentThemeTutorialStep = () => {
   )
 }
 
+const SavedThemeListTutorialStep = () => {
+  useSwitchToTab("saved")
+  return (
+    <TutorialTooltip anchorId={savedThemeListId} placement="top">
+      Switch between your saved themes, rename, or delete them here
+    </TutorialTooltip>
+  )
+}
+
 const AddNewThemesTutorialStep = () => {
   useSwitchToTab("saved")
   return (
@@ -43,18 +52,9 @@ const AddNewThemesTutorialStep = () => {
   )
 }
 
-const SavedThemeListTutorialStep = () => {
-  useSwitchToTab("saved")
-  return (
-    <TutorialTooltip anchorId={savedThemeListId} placement="top">
-      Switch between your saved themes, rename, or delete them here
-    </TutorialTooltip>
-  )
-}
-
 export default [
   SavedThemesTabTutorialStep,
   CurrentThemeTutorialStep,
-  AddNewThemesTutorialStep,
   SavedThemeListTutorialStep,
+  AddNewThemesTutorialStep,
 ]

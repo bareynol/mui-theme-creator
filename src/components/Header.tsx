@@ -39,7 +39,7 @@ const Header = ({ siteTitle, className }) => {
           <Typography variant="caption" className={classes.version}>
             {"└─ "}
             <Link
-              href="https://www.npmjs.com/package/@material-ui/core"
+              href="https://material-ui.com/"
               target="_blank"
               rel="noreferrer"
             >

@@ -5,9 +5,9 @@ import componentSamplesSteps from "./componentSamplesSteps"
 import savedThemesSteps from "./savedThemesSteps"
 
 export default [
+  ...toolPanelSteps,
+  ...codeEditorSteps,
   ...previewWindowSteps,
   ...componentSamplesSteps,
   ...savedThemesSteps,
-  ...toolPanelSteps,
-  ...codeEditorSteps,
 ]
