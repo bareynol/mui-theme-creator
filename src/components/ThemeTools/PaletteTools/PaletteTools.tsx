@@ -54,7 +54,7 @@ export default function PaletteTools() {
       ))}
       <PaletteSubType
         title="Divider"
-        path="palette.divider"
+        path="palette"
         paletteValues={[["Divider", "divider"]]}
       />
     </>

@@ -47,7 +47,7 @@ const PaletteTutorialStep = () => {
           >
             Material-UI Colors
           </Link>{" "}
-          from the top bar of popup, or use the{" "}
+          from the top bar of the popup, or use the{" "}
           <Link
             href="https://casesandberg.github.io/react-color/"
             target="_blank"

@@ -1,6 +1,6 @@
 import { NewSavedTheme } from "src/state/types"
 
-const defaultThemeList: NewSavedTheme[] = [
+const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
   {
     name: "Material-UI Docs - Light",
     themeOptions: {
@@ -107,6 +107,65 @@ const defaultThemeList: NewSavedTheme[] = [
       },
     },
     fonts: ["Roboto"],
+  },
+  {
+    name: "Red Rover",
+    themeOptions: {
+      palette: {
+        type: "dark",
+        primary: {
+          main: "#ff8f00",
+        },
+        secondary: {
+          main: "#f50057",
+        },
+        background: {
+          default: "#310000",
+          paper: "#731010",
+        },
+      },
+      typography: {
+        fontFamily: "Do Hyeon",
+      },
+      shape: {
+        borderRadius: 16,
+      },
+    },
+    fonts: ["Roboto", "Do Hyeon"],
+  },
+  {
+    name: "Comic Book",
+    themeOptions: {
+      palette: {
+        type: "dark",
+        primary: {
+          main: "#bd0707",
+        },
+        secondary: {
+          main: "#ffc510",
+        },
+        background: {
+          default: "#4c69f6",
+          paper: "#4c94f6",
+        },
+      },
+      typography: {
+        body1: {
+          fontFamily: "Roboto",
+        },
+        fontFamily: "Bangers",
+        caption: {
+          fontFamily: "Do Hyeon",
+        },
+        overline: {
+          fontFamily: "Do Hyeon",
+        },
+        body2: {
+          fontFamily: "Roboto",
+        },
+      },
+    },
+    fonts: ["Bangers", "Do Hyeon", "Roboto"],
   },
 ]
 

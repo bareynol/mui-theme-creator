@@ -20,20 +20,12 @@ const SavedThemesTabTutorialStep = () => {
   )
 }
 
-const CurrentThemeTutorialStep = () => {
-  useSwitchToTab("saved")
-  return (
-    <TutorialTooltip anchorId={currentThemeThumbnailId} placement="right">
-      This is the theme you're currently editing
-    </TutorialTooltip>
-  )
-}
-
 const SavedThemeListTutorialStep = () => {
   useSwitchToTab("saved")
   return (
     <TutorialTooltip anchorId={savedThemeListId} placement="top">
-      Switch between your saved themes, rename, or delete them here
+      <Typography>Switch between your saved themes here.</Typography>
+      <Typography>You can rename, or delete them here too</Typography>
     </TutorialTooltip>
   )
 }
@@ -54,7 +46,6 @@ const AddNewThemesTutorialStep = () => {
 
 export default [
   SavedThemesTabTutorialStep,
-  CurrentThemeTutorialStep,
   SavedThemeListTutorialStep,
   AddNewThemesTutorialStep,
 ]
