@@ -15,8 +15,6 @@ import { verbose } from "src/utils"
  * @returns [semanticDiagnostics: Diagnostic[], syntacticDiagnostics: Diagnostic[], emittedOutput: any]
  */
 async function validateInput(editorRef: EditorRefType) {
-  const monaco = require("monaco-editor")
-
   // get the JS output of the typescript inside the code editor
   const model = editorRef.current?.getModel()
   if (!model) return [null, null, null]

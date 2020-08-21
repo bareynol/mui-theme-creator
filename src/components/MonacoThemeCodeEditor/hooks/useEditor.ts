@@ -33,8 +33,6 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 export default function useEditor(editorRef: MutableEditorRefType) {
   const themeInput = useSelector((state: RootState) => state.editor.themeInput)
   useEffect(() => {
-    // const monaco = require("monaco-editor")
-
     // set the editor theme
     monaco.editor.defineTheme(
       "monokai",

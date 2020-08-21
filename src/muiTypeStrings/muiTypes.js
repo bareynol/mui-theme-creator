@@ -360,4 +360,21 @@ export interface ThemeOptions {
   unstable_strictMode?: boolean
 }
 
+export interface Theme {
+  shape: Shape;
+  breakpoints: Breakpoints;
+  direction: Direction;
+  mixins: Mixins;
+  overrides?: Overrides;
+  palette: Palette;
+  props?: ComponentsProps;
+  shadows: Shadows;
+  spacing: Spacing;
+  transitions: Transitions;
+  typography: Typography;
+  zIndex: ZIndex;
+  unstable_strictMode?: boolean;
+}
+
+export function createMuiTheme(options?: ThemeOptions, ...args: object[]): Theme;
 `
