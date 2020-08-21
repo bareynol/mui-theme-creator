@@ -8,6 +8,7 @@ import FontSizeInput from "./FontSizeInput"
 import FontFamilyInput from "./FontFamilyInput"
 import LineHeightInput from "./LineHeightInput"
 import LetterSpacingInput from "./LetterSpacingInput"
+import { ThemeValueChangeEvent } from "../../events"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,7 +31,10 @@ export default function TypographyInput({ label, variantPath, property }) {
   const dispatch = useDispatch()
 
   const handleValueChange = useCallback(
-    (event, value) => dispatch(setThemeOption(path, value)),
+    (event, value) => {
+      dispatch(setThemeOption(path, value))
+      document.dispatchEvent(ThemeValueChangeEvent)
+    },
     [dispatch]
   )
 

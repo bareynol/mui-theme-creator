@@ -12,6 +12,7 @@ import {
 import { useDispatch } from "react-redux"
 import { setThemeOption } from "src/state/actions"
 import { useThemeValue } from "src/state/selectors"
+import { ThemeValueChangeEvent } from "../events"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,7 @@ export default function ThemeTypeInput() {
 
   const toggleThemeType = useCallback(() => {
     dispatch(setThemeOption("palette.type", themeIsDark ? "light" : "dark"))
+    document.dispatchEvent(ThemeValueChangeEvent)
   }, [dispatch, themeIsDark])
 
   return (

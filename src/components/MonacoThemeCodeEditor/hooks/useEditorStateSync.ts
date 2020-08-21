@@ -4,10 +4,12 @@ import { RootState } from "src/state/types"
 
 import { EditorRefType } from "../types"
 import { useUpdateEditorState } from "src/state/editor/actions"
+import { ThemeValueChangeEvent } from "src/components/ThemeTools/events"
 
 export default function useEditorStateSync(editorRef: EditorRefType) {
   useSyncToStore(editorRef)
   useSyncFromStore(editorRef)
+  useListenForThemeChangeEvent(editorRef)
 }
 
 /**
@@ -49,10 +51,25 @@ const useSyncFromStore = (editorRef: EditorRefType) => {
         () => null
       )
       // create a new undo/redo "save" point
-      model?.pushStackElement()
+      // model?.pushStackElement()
 
       // update the last saved version after update is applied
       updateEditorState({ savedVersion: model?.getAlternativeVersionId() })
     }
   }, [themeInput])
+}
+
+const useListenForThemeChangeEvent = (editorRef: EditorRefType) => {
+  const onChangeEvent = () => {
+    console.log("test")
+    const model = editorRef.current?.getModel()
+    model?.pushStackElement()
+  }
+  useEffect(() => {
+    document.addEventListener(ThemeValueChangeEvent.type, onChangeEvent)
+
+    return () => {
+      document.removeEventListener(ThemeValueChangeEvent.type, onChangeEvent)
+    }
+  })
 }

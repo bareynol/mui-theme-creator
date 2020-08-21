@@ -25,6 +25,7 @@ import RemoveIcon from "@material-ui/icons/Remove"
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { setThemeOptions, removeThemeOptions } from "src/state/actions"
+import { ThemeValueChangeEvent } from "../events"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,10 +61,12 @@ const SnippetItem = ({ snippet }) => {
   const dispatch = useDispatch()
   const handleAddSnippet = useCallback(() => {
     dispatch(setThemeOptions(snippet.configs))
+    document.dispatchEvent(ThemeValueChangeEvent)
   }, [dispatch])
 
   const handleRemoveSnippet = useCallback(() => {
     dispatch(removeThemeOptions(snippet.configs))
+    document.dispatchEvent(ThemeValueChangeEvent)
   }, [dispatch])
 
   const isSnippetIncluded = useIsSnippetIncluded(snippet.configs)
