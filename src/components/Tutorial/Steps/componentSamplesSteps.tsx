@@ -1,6 +1,6 @@
 import React from "react"
 
-import { componentsTabId } from "src/components/PreviewNavigationTabs"
+import { componentsTabId } from "src/components/MainWindow"
 import { componentNavDrawerId } from "src/components/ComponentNavDrawer"
 
 import TutorialTooltip from "../TutorialTooltip"

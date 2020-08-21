@@ -61,7 +61,6 @@ const useSyncFromStore = (editorRef: EditorRefType) => {
 
 const useListenForThemeChangeEvent = (editorRef: EditorRefType) => {
   const onChangeEvent = () => {
-    console.log("test")
     const model = editorRef.current?.getModel()
     model?.pushStackElement()
   }

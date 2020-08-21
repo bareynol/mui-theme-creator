@@ -1,6 +1,6 @@
 import React from "react"
 
-import { savedThemesTabId } from "src/components/PreviewNavigationTabs"
+import { savedThemesTabId } from "src/components/MainWindow"
 import { currentThemeThumbnailId } from "src/components/SavedThemes/SavedThemes"
 import { addThemeButtonId } from "src/components/SavedThemes/AddThemeButton"
 import { defaultThemesId } from "src/components/SavedThemes/DefaultThemes"

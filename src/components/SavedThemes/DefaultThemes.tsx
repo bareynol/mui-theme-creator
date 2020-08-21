@@ -2,11 +2,12 @@ import React, { useCallback } from "react"
 import {
   Grid,
   Typography,
-  ThemeOptions,
   ButtonBase,
   makeStyles,
   Theme,
   createStyles,
+  Button,
+  Popover,
 } from "@material-ui/core"
 import ThemeThumbnail from "./ThemeThumbnail"
 import { useDispatch } from "react-redux"
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       display: "none",
     },
+    templatePopover: {
+      padding: theme.spacing(2),
+    },
   })
 )
 
@@ -46,37 +50,70 @@ export const defaultThemesId = "default-themes"
 function DefaultThemes() {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
-  const handleClick = useCallback(
+  const handleClickButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleClickTheme = useCallback(
     (newTheme: NewSavedTheme) => {
       dispatch(addNewDefaultTheme(newTheme))
     },
     [dispatch]
   )
 
-  return (
-    <Grid
-      id={defaultThemesId}
-      container
-      spacing={2}
-      wrap="nowrap"
-      style={{ flex: 1, flexGrow: 1, overflowX: "auto" }}
-    >
-      {defaultThemes.map(t => (
-        <Grid item key={t.name} onClick={() => handleClick(t)}>
-          <ButtonBase className={classes.buttonRoot}>
-            <div className={classes.thumbnailContainer}>
-              <ThemeThumbnail themeOptions={t.themeOptions} />
-              <div className={classes.hoverArea}>
-                <Typography>Click to add</Typography>
-              </div>
-            </div>
+  const open = Boolean(anchorEl)
+  const popoverId = open ? "default-themes-popover" : undefined
 
-            <Typography variant="subtitle1">{t.name}</Typography>
-          </ButtonBase>
+  return (
+    <>
+      <Button variant="outlined" onClick={handleClickButton}>
+        Example Templates
+      </Button>
+      <Popover
+        id={popoverId}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        classes={{ paper: classes.templatePopover }}
+      >
+        <Grid
+          id={defaultThemesId}
+          container
+          spacing={2}
+          wrap="nowrap"
+          style={{ flex: 1, flexGrow: 1, overflowX: "auto" }}
+        >
+          {defaultThemes.map(t => (
+            <Grid item key={t.name} onClick={() => handleClickTheme(t)}>
+              <ButtonBase className={classes.buttonRoot}>
+                <div className={classes.thumbnailContainer}>
+                  <ThemeThumbnail themeOptions={t.themeOptions} />
+                  <div className={classes.hoverArea}>
+                    <Typography>Click to add</Typography>
+                  </div>
+                </div>
+
+                <Typography variant="subtitle1">{t.name}</Typography>
+              </ButtonBase>
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
+      </Popover>
+    </>
   )
 }
 

@@ -12,6 +12,7 @@ const drawerWidth: React.CSSProperties["width"] = 400
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
+    height: "100vh",
   },
   drawerPaper: {
     width: drawerWidth,

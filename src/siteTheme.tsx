@@ -78,6 +78,19 @@ export const themeConfig: ThemeOptions = {
         backgroundColor: "#212121",
       },
     },
+    MuiDrawer: {
+      docked: {
+        "& $paper": {
+          position: "static",
+        },
+      },
+      paper: {},
+    },
+    MuiPopover: {
+      paper: {
+        backgroundColor: "#121212",
+      },
+    },
   },
 }
 

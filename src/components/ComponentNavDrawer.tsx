@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    [theme.breakpoints.up("md")]: {
+      height: "calc(100vh - 64px)",
+    },
   },
   drawerPaper: {
     width: drawerWidth,
@@ -63,7 +66,7 @@ const ComponentNavDrawer = () => {
       }}
       anchor="left"
     >
-      <Toolbar />
+      {/* <Toolbar /> */}
       <div className={classes.drawerContainer}>
         <List dense className={classes.list}>
           <ListSubheader>Components</ListSubheader>

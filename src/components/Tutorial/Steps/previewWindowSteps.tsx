@@ -1,6 +1,6 @@
 import React from "react"
 
-import { previewTabId } from "src/components/PreviewNavigationTabs"
+import { previewTabId } from "src/components/MainWindow"
 import { previewSizeControlsId } from "src/components/PreviewWindow/PreviewSizeControls"
 import { previewNavTabsId } from "src/components/PreviewWindow/PreviewWindow"
 

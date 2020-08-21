@@ -18,7 +18,7 @@ import { RootState } from "src/state/types"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    previewTabsRoot: {
+    mainWindowRoot: {
       flex: 1,
       height: "100%",
       width: "calc(100% - 400px)",
@@ -37,7 +37,7 @@ export const previewTabId = "preview-tab"
 export const componentsTabId = "components-tab"
 export const savedThemesTabId = "saved-themes-tab"
 
-const PreviewNavigationTabs = () => {
+const MainWindow = () => {
   const classes = useStyles()
   const activeTab = useSelector((state: RootState) => state.activeTab)
   const dispatch = useDispatch()
@@ -46,7 +46,7 @@ const PreviewNavigationTabs = () => {
   ])
 
   return (
-    <div className={classes.previewTabsRoot}>
+    <div className={classes.mainWindowRoot}>
       <AppBar position="sticky" color="default">
         <Tabs
           value={activeTab}
@@ -73,14 +73,10 @@ const PreviewNavigationTabs = () => {
           </div>
         )}
 
-        {activeTab === "saved" && (
-          <Container>
-            <SavedThemes />
-          </Container>
-        )}
+        {activeTab === "saved" && <SavedThemes />}
       </div>
     </div>
   )
 }
 
-export default PreviewNavigationTabs
+export default MainWindow
