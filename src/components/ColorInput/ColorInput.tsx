@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core"
 import { ChromePicker } from "react-color"
 import MaterialColorPicker from "./MaterialColorPicker"
+import { colorFromString } from "./utils"
+import { ThemeValueChangeEvent } from "src/components/ThemeTools/events"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,9 +43,20 @@ export default function ColorInput({ label, color, onColorChange }) {
 
   const handleClosePopover = () => {
     setAnchorEl(null)
+    console.log("dispatching event")
+    document.dispatchEvent(ThemeValueChangeEvent)
   }
 
   const handleColorChange = (value: string) => onColorChange(value)
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+    const pastedText = event.clipboardData.getData("text")
+    const color = colorFromString(pastedText)
+    console.log("handlePaste", color, pastedText)
+    if (color) {
+      handleColorChange(color)
+    }
+  }
 
   const popoverOpen = Boolean(anchorEl)
   return (
@@ -66,6 +79,7 @@ export default function ColorInput({ label, color, onColorChange }) {
         InputLabelProps={{ shrink: true }}
         size="small"
         value={color}
+        onPaste={handlePaste}
       />
       <Popover
         open={popoverOpen}
@@ -82,6 +96,8 @@ export default function ColorInput({ label, color, onColorChange }) {
         PaperProps={{
           className: classes.popoverPaper,
         }}
+        disableAutoFocus
+        disableEnforceFocus
       >
         <ColorPicker color={color} onChangeComplete={handleColorChange} />
       </Popover>
