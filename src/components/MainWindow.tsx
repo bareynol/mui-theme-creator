@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     mainWindowRoot: {
       flex: 1,
       height: "100%",
-      width: "calc(100% - 400px)",
+      // width: "calc(100% - 400px)",
     },
     mainWindow: {
       height: "calc(100vh - 64px - 48px)", // full height minus the size of the tab toolbar
@@ -66,9 +66,7 @@ const MainWindow = () => {
         {activeTab === "components" && (
           <div className={classes.componentsTabRoot}>
             <ThemeWrapper>
-              <Container maxWidth="md">
-                <MuiComponentSamples />
-              </Container>
+              <MuiComponentSamples />
             </ThemeWrapper>
           </div>
         )}

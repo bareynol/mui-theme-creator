@@ -72,7 +72,11 @@ function DefaultThemes() {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickButton}>
+      <Button
+        id={defaultThemesId}
+        variant="outlined"
+        onClick={handleClickButton}
+      >
         Example Templates
       </Button>
       <Popover
@@ -91,7 +95,6 @@ function DefaultThemes() {
         classes={{ paper: classes.templatePopover }}
       >
         <Grid
-          id={defaultThemesId}
           container
           spacing={2}
           wrap="nowrap"

@@ -21,23 +21,15 @@ const PreviewTabTutorialStep = () => {
 const SiteSamplesTutorialStep = () => {
   useSwitchToTab("preview")
   return (
-    <TutorialTooltip anchorId={previewNavTabsId} placement="bottom">
-      Use these tabs to view your theme on a variety of site templates
-    </TutorialTooltip>
+    <>
+      <TutorialTooltip anchorId={previewNavTabsId} placement="bottom">
+        Use these tabs to view your theme on a variety of site templates
+      </TutorialTooltip>
+      <TutorialTooltip anchorId={previewSizeControlsId} placement="right">
+        View your theme on multiple screen sizes
+      </TutorialTooltip>
+    </>
   )
 }
 
-const PreviewSizeControlsTutorialStep = () => {
-  useSwitchToTab("preview")
-  return (
-    <TutorialTooltip anchorId={previewSizeControlsId} placement="right">
-      View your theme on multiple screen sizes
-    </TutorialTooltip>
-  )
-}
-
-export default [
-  PreviewTabTutorialStep,
-  SiteSamplesTutorialStep,
-  PreviewSizeControlsTutorialStep,
-]
+export default [PreviewTabTutorialStep, SiteSamplesTutorialStep]

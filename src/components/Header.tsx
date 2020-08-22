@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 const Header = ({ className }) => {
   const classes = useStyles()
   return (
-    <AppBar position="fixed" color="default" className={className}>
+    <AppBar position="static" color="default" className={className}>
       <Toolbar className={classes.toolbar}>
         <div>
           <Typography variant="h6" className={classes.title}>
