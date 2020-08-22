@@ -12,8 +12,9 @@ import {
   useTheme,
   useMediaQuery,
 } from "@material-ui/core"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setActiveTab } from "src/state/actions"
+import { RootState } from "src/state/types"
 
 const drawerWidth: React.CSSProperties["width"] = 200
 
@@ -39,6 +40,7 @@ const ComponentNavDrawer = () => {
   const classes = useStyles()
   const theme = useTheme()
   const permanent = useMediaQuery(theme.breakpoints.up("md"))
+  const open = useSelector((state: RootState) => state.componentNavOpen)
 
   const dispatch = useDispatch()
   const openComponentsTab = React.useCallback(
@@ -58,7 +60,9 @@ const ComponentNavDrawer = () => {
       classes={{
         paper: classes.drawerPaper,
       }}
+      open={open}
       anchor="left"
+      onClose={() => dispatch({ type: "TOGGLE_COMPONENT_NAV" })}
     >
       <List dense className={classes.list}>
         <ListSubheader>Components</ListSubheader>

@@ -34,9 +34,11 @@ const useStyles = makeStyles(theme => ({
 const ThemeConfigDrawer = () => {
   const classes = useStyles()
   const themeId = useSelector((state: RootState) => state.themeId)
+  const open = useSelector((state: RootState) => state.themeConfigOpen)
+  const dispatch = useDispatch()
 
   const theme = useTheme()
-  const permanent = useMediaQuery(theme.breakpoints.up("md"))
+  const permanent = useMediaQuery(theme.breakpoints.up("sm"))
 
   return (
     <Drawer
@@ -46,6 +48,8 @@ const ThemeConfigDrawer = () => {
       classes={{
         paper: classes.drawerPaper,
       }}
+      open={open}
+      onClose={() => dispatch({ type: "TOGGLE_THEME_CONFIG" })}
     >
       <Grid
         container
