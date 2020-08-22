@@ -10,17 +10,21 @@ import { makeStyles } from "@material-ui/core"
 import SmallScreenWarning from "src/components/SmallScreenWarning"
 
 const useStyles = makeStyles(theme => ({
-  container: {
+  appRoot: {
+    display: "flex",
+  },
+  headerAndMain: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    minWidth: 0,
   },
-  mainWindow: {
+  navAndMain: {
     flex: 1,
     display: "flex",
   },
-  content: {
-    display: "flex",
+  main: {
+    minWidth: 0,
     flex: 1,
   },
   header: {
@@ -36,18 +40,19 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Material UI Theme Creator" />
-
-      <div className={classes.container}>
-        <Header className={classes.header} />
-        <div className={classes.mainWindow}>
-          <ComponentNavDrawer />
-          <main className={classes.content}>
-            <MainWindow />
-          </main>
+      <div className={classes.appRoot}>
+        <div className={classes.headerAndMain}>
+          <Header className={classes.header} />
+          <div className={classes.navAndMain}>
+            <ComponentNavDrawer />
+            <main className={classes.main}>
+              <MainWindow />
+            </main>
+          </div>
         </div>
-      </div>
 
-      <ThemeConfigDrawer />
+        <ThemeConfigDrawer />
+      </div>
       <SmallScreenWarning />
     </Layout>
   )

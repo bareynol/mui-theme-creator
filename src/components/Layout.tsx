@@ -16,19 +16,11 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
 import "./layout.css"
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-  },
-}))
-
 const Layout = ({ children }) => {
-  const classes = useStyles()
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={classes.root}>{children}</div>
+      {children}
     </ThemeProvider>
   )
 }
