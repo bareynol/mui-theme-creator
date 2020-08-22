@@ -1,7 +1,7 @@
 import React from "react"
 import Drawer from "@material-ui/core/Drawer"
 import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import ThemeTools from "./ThemeTools/ThemeTools"
@@ -35,9 +35,12 @@ const ThemeConfigDrawer = () => {
   const classes = useStyles()
   const themeId = useSelector((state: RootState) => state.themeId)
 
+  const theme = useTheme()
+  const permanent = useMediaQuery(theme.breakpoints.up("md"))
+
   return (
     <Drawer
-      variant="permanent"
+      variant={permanent ? "permanent" : "temporary"}
       anchor="right"
       className={classes.drawer}
       classes={{

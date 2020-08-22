@@ -7,6 +7,7 @@ import MainWindow from "src/components/MainWindow"
 import Header from "src/components/Header"
 import ComponentNavDrawer from "src/components/ComponentNavDrawer"
 import { makeStyles } from "@material-ui/core"
+import SmallScreenWarning from "src/components/SmallScreenWarning"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -47,6 +48,7 @@ const IndexPage = () => {
       </div>
 
       <ThemeConfigDrawer />
+      <SmallScreenWarning />
     </Layout>
   )
 }

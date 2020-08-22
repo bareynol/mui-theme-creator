@@ -9,6 +9,8 @@ import {
   ListItemText,
   Toolbar,
   Link,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import { setActiveTab } from "src/state/actions"
@@ -45,6 +47,8 @@ export const componentNavDrawerId = "component-nav-drawer"
 
 const ComponentNavDrawer = () => {
   const classes = useStyles()
+  const theme = useTheme()
+  const permanent = useMediaQuery(theme.breakpoints.up("md"))
 
   const dispatch = useDispatch()
   const openComponentsTab = React.useCallback(
@@ -60,7 +64,7 @@ const ComponentNavDrawer = () => {
     <Drawer
       id={componentNavDrawerId}
       className={classes.drawer}
-      variant="permanent"
+      variant={permanent ? "permanent" : "temporary"}
       classes={{
         paper: classes.drawerPaper,
       }}
