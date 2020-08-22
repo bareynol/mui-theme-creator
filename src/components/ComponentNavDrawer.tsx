@@ -20,22 +20,12 @@ const drawerWidth: React.CSSProperties["width"] = 200
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    [theme.breakpoints.up("md")]: {
-      height: "calc(100vh - 64px)",
-    },
   },
   drawerPaper: {
     width: drawerWidth,
   },
-  drawerContainer: {
-    overflow: "auto",
-  },
-  editorWrapper: {
-    overflow: "auto",
-    flexGrow: 1,
-  },
   list: {
+    // gives background to the sticky header
     backgroundColor: theme.palette.background.paper,
   },
   listItemText: {
@@ -70,29 +60,26 @@ const ComponentNavDrawer = () => {
       }}
       anchor="left"
     >
-      {/* <Toolbar /> */}
-      <div className={classes.drawerContainer}>
-        <List dense className={classes.list}>
-          <ListSubheader>Components</ListSubheader>
-          {componentSamples.map(({ id, title }) => (
-            <ListItem
-              key={id}
-              button
-              component={NavLink}
-              href={`#${id}`}
-              onClick={openComponentsTab}
-            >
-              <ListItemText
-                primary={title}
-                className={classes.listItemText}
-                primaryTypographyProps={{
-                  variant: "body2",
-                }}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </div>
+      <List dense className={classes.list}>
+        <ListSubheader>Components</ListSubheader>
+        {componentSamples.map(({ id, title }) => (
+          <ListItem
+            key={id}
+            button
+            component={NavLink}
+            href={`#${id}`}
+            onClick={openComponentsTab}
+          >
+            <ListItemText
+              primary={title}
+              className={classes.listItemText}
+              primaryTypographyProps={{
+                variant: "body2",
+              }}
+            />
+          </ListItem>
+        ))}
+      </List>
     </Drawer>
   )
 }

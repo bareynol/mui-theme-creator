@@ -24,21 +24,21 @@ const useStyles = makeStyles((theme: Theme) =>
     savedThemesRoot: {
       paddingTop: theme.spacing(2),
       paddingLeft: theme.spacing(2),
-      display: "flex",
-      justifyContent: "space-between",
-      overflowY: "auto",
     },
     savedThemes: {
       flex: 1,
-      overflowY: "auto",
     },
     divider: {
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
+      [theme.breakpoints.down("md")]: {
+        display: "none",
+      },
     },
     themeActions: {
       display: "flex",
       flexDirection: "column",
+      marginBottom: theme.spacing(2),
       "& > *": {
         marginTop: theme.spacing(),
       },
@@ -50,7 +50,7 @@ function SavedThemes() {
   const classes = useStyles()
   return (
     <div className={classes.savedThemesRoot}>
-      <Grid container justify="space-between">
+      <Grid container justify="center">
         <Grid item>
           <Typography variant="h4">Current Theme</Typography>
           <CurrentTheme />

@@ -18,13 +18,7 @@ import { RootState } from "src/state/types"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    mainWindowRoot: {
-      flex: 1,
-      height: "100%",
-      // width: "calc(100% - 400px)",
-    },
     mainWindow: {
-      height: "calc(100vh - 64px - 48px)", // full height minus the size of the tab toolbar
       overflowY: "auto",
     },
     componentsTabRoot: {
@@ -46,7 +40,7 @@ const MainWindow = () => {
   ])
 
   return (
-    <div className={classes.mainWindowRoot}>
+    <>
       <AppBar position="sticky" color="default">
         <Tabs
           value={activeTab}
@@ -73,7 +67,7 @@ const MainWindow = () => {
 
         {activeTab === "saved" && <SavedThemes />}
       </div>
-    </div>
+    </>
   )
 }
 

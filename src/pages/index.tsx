@@ -12,6 +12,7 @@ import SmallScreenWarning from "src/components/SmallScreenWarning"
 const useStyles = makeStyles(theme => ({
   appRoot: {
     display: "flex",
+    height: "100vh",
   },
   headerAndMain: {
     flex: 1,
@@ -22,10 +23,13 @@ const useStyles = makeStyles(theme => ({
   navAndMain: {
     flex: 1,
     display: "flex",
+    minHeight: 0,
   },
   main: {
     minWidth: 0,
     flex: 1,
+    display: "flex",
+    flexDirection: "column",
   },
   header: {
     backgroundColor: "#000000",

@@ -13,7 +13,7 @@ function SavedThemeList() {
   )
 
   return (
-    <Grid id={savedThemeListId} container wrap="wrap" justify="space-between">
+    <Grid id={savedThemeListId} container wrap="wrap" justify="center">
       {sortedThemes.map(t => (
         <Grid
           item

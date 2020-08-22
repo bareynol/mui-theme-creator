@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import { setPreviewSize } from "src/state/actions"
@@ -12,6 +12,8 @@ import {
   makeStyles,
   Theme,
   createStyles,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       bottom: 0,
       left: 0,
+      zIndex: 1,
       flexDirection: "column",
     },
   })
@@ -37,7 +40,21 @@ const PreviewSizeControls = () => {
     (_, value) => dispatch(setPreviewSize(value)),
     [dispatch]
   )
-  return (
+
+  const theme = useTheme()
+  const screenIsMdDown = useMediaQuery(theme.breakpoints.down("md"))
+
+  useEffect(
+    function previewSizeFromScreen() {
+      console.log("screen size md or below:", screenIsMdDown)
+      if (screenIsMdDown) {
+        handleOnChange(null, "xs")
+      }
+    },
+    [screenIsMdDown]
+  )
+
+  return screenIsMdDown ? null : (
     <BottomNavigation
       id={previewSizeControlsId}
       value={previewSize}
