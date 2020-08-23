@@ -2,7 +2,6 @@ import React from "react"
 import {
   Accordion,
   AccordionSummary,
-  Typography,
   makeStyles,
   createStyles,
   AccordionDetails,

@@ -1,19 +1,14 @@
 import React from "react"
 import {
-  Paper,
-  Card,
-  CardContent,
   Typography,
   makeStyles,
   Theme,
   createStyles,
   Grid,
-  Button,
   Divider,
 } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import ThemeThumbnail from "./ThemeThumbnail"
 import DefaultThemes from "./DefaultThemes"
 import SavedThemeItem from "./SavedThemeItem/SavedThemeItem"
 import SavedThemeList from "./SavedThemeList"

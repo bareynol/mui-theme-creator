@@ -5,7 +5,6 @@ import {
   Theme,
   createStyles,
   Tooltip,
-  Slide,
   Collapse,
 } from "@material-ui/core"
 
