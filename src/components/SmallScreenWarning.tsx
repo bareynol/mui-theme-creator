@@ -4,25 +4,36 @@ import {
   Dialog,
   Typography,
   DialogContent,
-  DialogContentText,
   Slide,
   makeStyles,
   Theme,
   createStyles,
-  DialogTitle,
   Button,
   darken,
 } from "@material-ui/core"
 import { TransitionProps } from "@material-ui/core/transitions/transition"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
-import hereBeDragonsImage from "src/images/herebedragonsanimated.webp"
+import hereBeDragonsImage from "src/images/herebedragons.webp"
 import { loadFonts } from "src/state/actions"
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "src/state/types"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dialogPaper: {
       backgroundColor: darken(theme.palette.error.dark, 0.5),
+    },
+    dialogContent: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    exitButtonArea: {
+      textAlign: "center",
+      marginBottom: 32,
+      "& > *": {
+        fontFamily: '"Press Start 2P"',
+      },
     },
   })
 )
@@ -36,10 +47,11 @@ const Transition = React.forwardRef(function Transition(
 
 const SmallScreenWarning = () => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(true)
+  const warningSeen = useSelector((state: RootState) => state.mobileWarningSeen)
+  const dispatch = useDispatch()
 
   const handleClose = () => {
-    setOpen(false)
+    dispatch({ type: "WARNING_SCREEN_SEEN" })
   }
 
   useEffect(() => {
@@ -50,29 +62,20 @@ const SmallScreenWarning = () => {
     <Hidden smUp>
       <Dialog
         fullScreen
-        open={open}
+        open={!warningSeen}
         onClose={handleClose}
         TransitionComponent={Transition}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>
-          Material-UI Theme Creator Small Screen Warning
-        </DialogTitle>
-        <DialogContent
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
+        <DialogContent className={classes.dialogContent}>
+          <Typography variant="h5">Material-UI Theme Creator</Typography>
+          <Typography variant="h6">You are using a small screen</Typography>
           <div>
             <Typography align="center" paragraph>
               This is a developer tool, designed for use on large screens
             </Typography>
             <Typography align="center">
-              You are viewing this on a small screen, and will likely have
-              issues viewing content or using the tools.
+              You will likely have issues viewing content or using the tools.
             </Typography>
           </div>
           <img
@@ -80,17 +83,9 @@ const SmallScreenWarning = () => {
             alt="Here Be Dragons... (for small screens)"
             width="75%"
           />
-          <div style={{ textAlign: "center" }}>
-            <Typography
-              align="center"
-              style={{ fontFamily: '"Press Start 2P"' }}
-            >
-              Warning to all who enter
-            </Typography>
-            <Button
-              variant="outlined"
-              style={{ fontFamily: '"Press Start 2P"' }}
-            >
+          <div className={classes.exitButtonArea}>
+            <Typography align="center">Warning to all who enter</Typography>
+            <Button variant="outlined" onClick={handleClose}>
               Here be dragons
             </Button>
           </div>

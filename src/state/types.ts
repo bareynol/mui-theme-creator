@@ -14,6 +14,7 @@ export interface RootState {
   tutorialOpen: boolean
   componentNavOpen: boolean
   themeConfigOpen: boolean
+  mobileWarningSeen: boolean
 }
 
 export type SavedTheme = {

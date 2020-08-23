@@ -34,6 +34,7 @@ const initialState: RootState = {
   tutorialOpen: false,
   componentNavOpen: false,
   themeConfigOpen: false,
+  mobileWarningSeen: false,
 }
 
 const initialFonts = ["Droid Sans", "Droid Serif", "Open Sans", "Roboto"]
@@ -197,6 +198,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         themeConfigOpen: !state.themeConfigOpen,
+      }
+    case "WARNING_SCREEN_SEEN":
+      return {
+        ...state,
+        mobileWarningSeen: true,
       }
     default:
       return state
