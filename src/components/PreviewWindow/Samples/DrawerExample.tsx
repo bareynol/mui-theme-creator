@@ -36,14 +36,7 @@ const DrawerExample = ({ open, onClose }) => {
   const classes = useStyles()
   const drawerRef = React.useRef<HTMLElement | null>(null)
 
-  const getParent = () => {
-    console.log(
-      "drawerRef",
-      drawerRef.current,
-      drawerRef.current?.parentElement
-    )
-    return drawerRef.current?.parentElement
-  }
+  const getParent = () => drawerRef.current?.parentElement
 
   return (
     <Drawer

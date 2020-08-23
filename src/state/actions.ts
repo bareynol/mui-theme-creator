@@ -61,7 +61,6 @@ export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
 }
 
 export const setThemeOption = (path, value) => (dispatch, getState) => {
-  console.log(canSave(getState()))
   if (checkIfUserAllowsOverwrite(getState())) {
     const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
     return dispatch({

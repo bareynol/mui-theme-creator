@@ -46,7 +46,6 @@ const PreviewSizeControls = () => {
 
   useEffect(
     function previewSizeFromScreen() {
-      console.log("screen size md or below:", screenIsMdDown)
       if (screenIsMdDown) {
         handleOnChange(null, "xs")
       }

@@ -43,7 +43,6 @@ export default function ColorInput({ label, color, onColorChange }) {
 
   const handleClosePopover = () => {
     setAnchorEl(null)
-    console.log("dispatching event")
     document.dispatchEvent(ThemeValueChangeEvent())
   }
 
@@ -52,7 +51,6 @@ export default function ColorInput({ label, color, onColorChange }) {
   const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
     const pastedText = event.clipboardData.getData("text")
     const color = colorFromString(pastedText)
-    console.log("handlePaste", color, pastedText)
     if (color) {
       handleColorChange(color)
     }
