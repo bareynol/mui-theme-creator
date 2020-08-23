@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     mainWindow: {
       overflowY: "auto",
+      height: "100%",
     },
     navAppBar: {
       justifyContent: "space-between",

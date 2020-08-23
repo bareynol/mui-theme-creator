@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "#212121",
       paddingTop: theme.spacing(2),
       height: "100%",
+      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
     },
   })
 )
@@ -45,10 +47,9 @@ const useBackgroundStyles = makeStyles((theme: Theme) =>
   createStyles({
     previewArea: {
       backgroundColor: theme.palette.background.default,
-      width: `calc(100% - 32px)`,
       maxWidth: 1000,
       height: "calc(100% - 16px)",
-      overflowY: "auto",
+      overflowY: "scroll",
       margin: "auto",
       position: "relative", // for FAB positioning
       "&.xs": {

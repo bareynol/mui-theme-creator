@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   main: {
     minWidth: 0,
+    minHeight: 0,
     flex: 1,
     display: "flex",
     flexDirection: "column",
