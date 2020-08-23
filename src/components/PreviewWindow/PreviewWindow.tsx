@@ -24,6 +24,7 @@ import SmartphoneIcon from "@material-ui/icons/Smartphone"
 import TabletIcon from "@material-ui/icons/TabletAndroid"
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows"
 import PreviewWrapper from "./PreviewWrapper"
+import DrawerExample from "./Samples/DrawerExample"
 
 const useStyles = makeStyles(theme => ({}))
 
@@ -53,14 +54,18 @@ export const previewNavTabsId = "preview-nav-tabs"
 
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   const handleChange = (event: React.ChangeEvent<{}>, newTabIndex: number) => {
     setTabIndex(newTabIndex)
   }
 
+  const handleOpenDrawer = () => setDrawerOpen(true)
+  const handleCloseDrawer = () => setDrawerOpen(false)
+
   return (
     <PreviewWrapper>
-      <AppBarExample />
+      <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
           <Tabs
@@ -80,8 +85,10 @@ const PreviewWindow = () => {
           </Tabs>
         </AppBar>
       </Tooltip>
+
       {/* <Container style={{ paddingTop: 16, paddingBottom: 16 }}> */}
       <div style={{ minHeight: 800 }}>
+        <DrawerExample open={drawerOpen} onClose={handleCloseDrawer} />
         <TabPanel value={tabIndex} index={0}>
           <DefaultExample />
         </TabPanel>
