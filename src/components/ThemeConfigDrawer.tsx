@@ -13,11 +13,13 @@ const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     height: "100vh",
+    maxWidth: "90vw",
   },
   drawerPaper: {
     width: drawerWidth,
     overflowY: "visible",
     zIndex: theme.zIndex.drawer + 2,
+    maxWidth: "90vw",
   },
   editorWrapper: {
     flexGrow: 1,

@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: 100,
+      maxWidth: "85vw",
       width: 1600 / 9,
       position: "relative",
       "&.large": {

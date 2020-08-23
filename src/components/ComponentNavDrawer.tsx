@@ -43,10 +43,10 @@ const ComponentNavDrawer = () => {
   const open = useSelector((state: RootState) => state.componentNavOpen)
 
   const dispatch = useDispatch()
-  const openComponentsTab = React.useCallback(
-    () => dispatch(setActiveTab("components")),
-    [dispatch]
-  )
+  const handleClick = React.useCallback(() => {
+    dispatch({ type: "TOGGLE_COMPONENT_NAV" })
+    dispatch(setActiveTab("components"))
+  }, [dispatch])
 
   const NavLink = React.forwardRef((linkProps, ref) => (
     <Link ref={ref} {...linkProps} color="textPrimary" />
@@ -72,7 +72,7 @@ const ComponentNavDrawer = () => {
             button
             component={NavLink}
             href={`#${id}`}
-            onClick={openComponentsTab}
+            onClick={handleClick}
           >
             <ListItemText
               primary={title}
