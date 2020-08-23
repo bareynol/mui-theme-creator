@@ -7,26 +7,27 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useDispatch } from "react-redux"
 import { toggleTutorial } from "src/state/actions"
 
-const TutorialTooltip = ({ anchorId, children, ...props }) => (
-  <Tooltip
-    {...props}
-    open
-    interactive
-    arrow
-    title={<TooltipContents>{children}</TooltipContents>}
-    PopperProps={{
-      anchorEl: document.getElementById(anchorId),
-      disablePortal: true,
-      modifiers: {
-        preventOverflow: {
-          boundariesElement: "viewport",
+const TutorialTooltip = ({ anchorId, children, ...props }) =>
+  document.getElementById(anchorId) && (
+    <Tooltip
+      {...props}
+      open
+      interactive
+      arrow
+      title={<TooltipContents>{children}</TooltipContents>}
+      PopperProps={{
+        anchorEl: document.getElementById(anchorId),
+        disablePortal: true,
+        modifiers: {
+          preventOverflow: {
+            boundariesElement: "viewport",
+          },
         },
-      },
-    }}
-  >
-    <div />
-  </Tooltip>
-)
+      }}
+    >
+      <div />
+    </Tooltip>
+  )
 
 const TooltipContents = ({ children }) => {
   const dispatch = useDispatch()
