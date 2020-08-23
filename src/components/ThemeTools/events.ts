@@ -1,1 +1,1 @@
-export const ThemeValueChangeEvent = new Event("change-save-point")
+export const ThemeValueChangeEvent = () => new Event("change-save-point")

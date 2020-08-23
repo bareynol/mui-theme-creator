@@ -1,6 +1,6 @@
 import React from "react"
 
-import { codeEditorId } from "src/components/MonacoThemeCodeEditor/MonacoThemeCodeEditor"
+import { codeEditorId } from "src/components/MonacoThemeCodeEditor"
 
 import TutorialTooltip from "../TutorialTooltip"
 import Typography from "@material-ui/core/Typography"

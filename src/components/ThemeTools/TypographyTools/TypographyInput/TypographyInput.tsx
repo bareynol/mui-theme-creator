@@ -33,7 +33,7 @@ export default function TypographyInput({ label, variantPath, property }) {
   const handleValueChange = useCallback(
     (event, value) => {
       dispatch(setThemeOption(path, value))
-      document.dispatchEvent(ThemeValueChangeEvent)
+      document.dispatchEvent(ThemeValueChangeEvent())
     },
     [dispatch]
   )

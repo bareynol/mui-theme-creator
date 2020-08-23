@@ -44,7 +44,7 @@ export default function ColorInput({ label, color, onColorChange }) {
   const handleClosePopover = () => {
     setAnchorEl(null)
     console.log("dispatching event")
-    document.dispatchEvent(ThemeValueChangeEvent)
+    document.dispatchEvent(ThemeValueChangeEvent())
   }
 
   const handleColorChange = (value: string) => onColorChange(value)
