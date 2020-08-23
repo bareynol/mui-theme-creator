@@ -7,7 +7,6 @@ export type EditorState = {
   savedVersion: number
   canUndo: boolean
   canRedo: boolean
-  canSave: boolean
   errors: monaco.languages.typescript.Diagnostic[]
   // user modified settings
   formatOnSave: boolean

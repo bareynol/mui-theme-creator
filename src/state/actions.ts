@@ -2,6 +2,7 @@ import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
 import { setByPath, removeByPath, getByPath, verbose } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"
+import { canSave } from "./selectors"
 
 /**
  * Remove a key/value in the theme options object by a given path.
@@ -15,68 +16,87 @@ import { NewSavedTheme, PreviewSize } from "./types"
  * @param path - the path to remove from the themeOptions
  */
 export const removeThemeOption = path => (dispatch, getState) => {
-  let updatedThemeOptions: ThemeOptions
+  if (checkIfUserAllowsOverwrite(getState())) {
+    let updatedThemeOptions: ThemeOptions
 
-  // path with ".<name>" removed
-  const parentPath = path.substring(0, path.lastIndexOf("."))
+    // path with ".<name>" removed
+    const parentPath = path.substring(0, path.lastIndexOf("."))
 
-  // paths ending in "main" must be declared
-  // replace with the value from the default Theme object
-  if (path.endsWith("main")) {
-    const defaultValueForPath = getByPath(defaultTheme, path)
-    updatedThemeOptions = setByPath(
-      getState().themeOptions,
-      path,
-      defaultValueForPath
-    )
-  } else {
-    // remove the key from the themeOptions (immutably)
-    updatedThemeOptions = removeByPath(getState().themeOptions, path)
+    // paths ending in "main" must be declared
+    // replace with the value from the default Theme object
+    if (path.endsWith("main")) {
+      const defaultValueForPath = getByPath(defaultTheme, path)
+      updatedThemeOptions = setByPath(
+        getState().themeOptions,
+        path,
+        defaultValueForPath
+      )
+    } else {
+      // remove the key from the themeOptions (immutably)
+      updatedThemeOptions = removeByPath(getState().themeOptions, path)
+    }
+
+    return dispatch({
+      type: "UPDATE_THEME",
+      themeOptions: updatedThemeOptions,
+    })
   }
-
-  return dispatch({
-    type: "UPDATE_THEME",
-    themeOptions: updatedThemeOptions,
-  })
 }
 
 export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
   dispatch,
   getState
 ) => {
-  let updatedThemeOptions = getState().themeOptions
-  configs.forEach(
-    ({ path, value }) =>
-      (updatedThemeOptions = removeByPath(updatedThemeOptions, path))
-  )
-  return dispatch({
-    type: "UPDATE_THEME",
-    themeOptions: updatedThemeOptions,
-  })
+  if (checkIfUserAllowsOverwrite(getState())) {
+    let updatedThemeOptions = getState().themeOptions
+    configs.forEach(
+      ({ path, value }) =>
+        (updatedThemeOptions = removeByPath(updatedThemeOptions, path))
+    )
+    return dispatch({
+      type: "UPDATE_THEME",
+      themeOptions: updatedThemeOptions,
+    })
+  }
 }
 
 export const setThemeOption = (path, value) => (dispatch, getState) => {
-  const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
-  return dispatch({
-    type: "UPDATE_THEME",
-    themeOptions: updatedThemeOptions,
-  })
+  console.log(canSave(getState()))
+  if (checkIfUserAllowsOverwrite(getState())) {
+    const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
+    return dispatch({
+      type: "UPDATE_THEME",
+      themeOptions: updatedThemeOptions,
+    })
+  }
 }
 
 export const setThemeOptions = (configs: { path: string; value: any }[]) => (
   dispatch,
   getState
 ) => {
-  let updatedThemeOptions = getState().themeOptions
-  configs.forEach(
-    ({ path, value }) =>
-      (updatedThemeOptions = setByPath(updatedThemeOptions, path, value))
-  )
-  return dispatch({
-    type: "UPDATE_THEME",
-    themeOptions: updatedThemeOptions,
-  })
+  if (checkIfUserAllowsOverwrite(getState())) {
+    let updatedThemeOptions = getState().themeOptions
+    configs.forEach(
+      ({ path, value }) =>
+        (updatedThemeOptions = setByPath(updatedThemeOptions, path, value))
+    )
+    return dispatch({
+      type: "UPDATE_THEME",
+      themeOptions: updatedThemeOptions,
+    })
+  }
 }
+
+/**
+ * Check if the code editor has unsaved work, and if so, prompt the user
+ * as to whether they'd like to overwrite with changes being made
+ */
+const checkIfUserAllowsOverwrite = state =>
+  !canSave(state) ||
+  confirm(
+    "There are unsaved changes in the code editor. Wipe changes and proceed?"
+  )
 
 /**
  * Add a new theme and switch to it
