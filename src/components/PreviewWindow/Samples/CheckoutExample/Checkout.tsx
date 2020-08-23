@@ -19,8 +19,10 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      maxWidth: 600,
       marginLeft: "auto",
       marginRight: "auto",
     },
