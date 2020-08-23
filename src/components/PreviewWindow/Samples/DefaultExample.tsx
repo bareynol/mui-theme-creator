@@ -21,6 +21,7 @@ import PaletteIcon from "@material-ui/icons/Palette"
 import FontIcon from "@material-ui/icons/FontDownload"
 import TypographyIcon from "@material-ui/icons/TextFields"
 import wrapTooltip from "../wrapTooltip"
+import { TutorialLink } from "src/components/Tutorial/TutorialButton"
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -54,6 +55,9 @@ const DefaultExample = () => {
   const classes = useStyles()
   return (
     <Box p={3}>
+      <Typography paragraph>
+        <TutorialLink>Check out the Tutorial!</TutorialLink>
+      </Typography>
       <Grid container spacing={2} justify="center">
         <Grid item xs={12} md={6}>
           <FeatureCard
@@ -192,7 +196,6 @@ const DefaultExample = () => {
           </FeatureCard>
         </Grid>
       </Grid>
-
       {/* <Tooltip title={`<Fab color="secondary">`} arrow>
         <Fab aria-label="FAB Preview" className={classes.fab} color="secondary">
           <AddIcon />

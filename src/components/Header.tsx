@@ -8,7 +8,7 @@ import {
   Link,
 } from "@material-ui/core"
 import muiVersion from "src/muiVersion"
-import { TutorialButton } from "./Tutorial/Tutorial"
+import TutorialButton from "./Tutorial/TutorialButton"
 
 const useStyles = makeStyles(theme => ({
   title: {
