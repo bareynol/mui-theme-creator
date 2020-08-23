@@ -32,6 +32,9 @@ const initialState: RootState = {
   previewSize: false,
   tutorialStep: 0,
   tutorialOpen: false,
+  componentNavOpen: false,
+  themeConfigOpen: false,
+  mobileWarningSeen: false,
 }
 
 const initialFonts = ["Droid Sans", "Droid Serif", "Open Sans", "Roboto"]
@@ -185,6 +188,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tutorialOpen: !state.tutorialOpen,
+      }
+    case "TOGGLE_COMPONENT_NAV":
+      return {
+        ...state,
+        componentNavOpen: !state.componentNavOpen,
+      }
+    case "TOGGLE_THEME_CONFIG":
+      return {
+        ...state,
+        themeConfigOpen: !state.themeConfigOpen,
+      }
+    case "WARNING_SCREEN_SEEN":
+      return {
+        ...state,
+        mobileWarningSeen: true,
       }
     default:
       return state

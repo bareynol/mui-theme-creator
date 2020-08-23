@@ -61,15 +61,14 @@ const useSyncFromStore = (editorRef: EditorRefType) => {
 
 const useListenForThemeChangeEvent = (editorRef: EditorRefType) => {
   const onChangeEvent = () => {
-    console.log("test")
     const model = editorRef.current?.getModel()
     model?.pushStackElement()
   }
   useEffect(() => {
-    document.addEventListener(ThemeValueChangeEvent.type, onChangeEvent)
+    document.addEventListener(ThemeValueChangeEvent().type, onChangeEvent)
 
     return () => {
-      document.removeEventListener(ThemeValueChangeEvent.type, onChangeEvent)
+      document.removeEventListener(ThemeValueChangeEvent().type, onChangeEvent)
     }
   })
 }

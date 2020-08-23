@@ -1,6 +1,6 @@
 import React from "react"
 
-import { savedThemesTabId } from "src/components/PreviewNavigationTabs"
+import { savedThemesTabId } from "src/components/MainWindow"
 import { currentThemeThumbnailId } from "src/components/SavedThemes/SavedThemes"
 import { addThemeButtonId } from "src/components/SavedThemes/AddThemeButton"
 import { defaultThemesId } from "src/components/SavedThemes/DefaultThemes"
@@ -20,32 +20,22 @@ const SavedThemesTabTutorialStep = () => {
   )
 }
 
-const SavedThemeListTutorialStep = () => {
-  useSwitchToTab("saved")
-  return (
-    <TutorialTooltip anchorId={savedThemeListId} placement="top">
-      <Typography>Switch between your saved themes here.</Typography>
-      <Typography>You can rename, or delete them here too</Typography>
-    </TutorialTooltip>
-  )
-}
-
 const AddNewThemesTutorialStep = () => {
-  useSwitchToTab("saved")
+  // useSwitchToTab("saved")
   return (
     <>
-      <TutorialTooltip anchorId={defaultThemesId} placement="top">
+      <TutorialTooltip anchorId={savedThemeListId} placement="top">
+        <Typography>Switch between your saved themes here.</Typography>
+        <Typography>You can rename, or delete them here too</Typography>
+      </TutorialTooltip>
+      <TutorialTooltip anchorId={defaultThemesId} placement="bottom">
         Add sample themes here to check them out
       </TutorialTooltip>
-      <TutorialTooltip anchorId={addThemeButtonId} placement="bottom">
+      <TutorialTooltip anchorId={addThemeButtonId} placement="top">
         Add a new blank theme here
       </TutorialTooltip>
     </>
   )
 }
 
-export default [
-  SavedThemesTabTutorialStep,
-  SavedThemeListTutorialStep,
-  AddNewThemesTutorialStep,
-]
+export default [SavedThemesTabTutorialStep, AddNewThemesTutorialStep]

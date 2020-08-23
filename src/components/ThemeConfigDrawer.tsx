@@ -1,7 +1,7 @@
 import React from "react"
 import Drawer from "@material-ui/core/Drawer"
 import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import ThemeTools from "./ThemeTools/ThemeTools"
@@ -12,11 +12,14 @@ const drawerWidth: React.CSSProperties["width"] = 400
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
+    height: "100vh",
+    maxWidth: "90vw",
   },
   drawerPaper: {
     width: drawerWidth,
     overflowY: "visible",
     zIndex: theme.zIndex.drawer + 2,
+    maxWidth: "90vw",
   },
   editorWrapper: {
     flexGrow: 1,
@@ -33,15 +36,22 @@ const useStyles = makeStyles(theme => ({
 const ThemeConfigDrawer = () => {
   const classes = useStyles()
   const themeId = useSelector((state: RootState) => state.themeId)
+  const open = useSelector((state: RootState) => state.themeConfigOpen)
+  const dispatch = useDispatch()
+
+  const theme = useTheme()
+  const permanent = useMediaQuery(theme.breakpoints.up("sm"))
 
   return (
     <Drawer
-      variant="permanent"
+      variant={permanent ? "permanent" : "temporary"}
       anchor="right"
       className={classes.drawer}
       classes={{
         paper: classes.drawerPaper,
       }}
+      open={open}
+      onClose={() => dispatch({ type: "TOGGLE_THEME_CONFIG" })}
     >
       <Grid
         container

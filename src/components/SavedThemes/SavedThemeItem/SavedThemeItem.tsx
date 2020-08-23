@@ -83,11 +83,13 @@ function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
           <div className={classes.content}>
             <Typography variant="subtitle1">{name}</Typography>
             <ThemeThumbnail {...thumbnailProps} />
-            <Typography variant="caption">{`Last Updated: ${moment(
-              lastUpdated
-            ).fromNow()}`}</Typography>
           </div>
         </CardContent>
+        <Typography
+          variant="caption"
+          component="p"
+          align="center"
+        >{`Last Updated: ${moment(lastUpdated).fromNow()}`}</Typography>
       </Card>
       <div className={classes.hoverArea}>
         <div

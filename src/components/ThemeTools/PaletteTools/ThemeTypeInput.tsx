@@ -41,7 +41,7 @@ export default function ThemeTypeInput() {
 
   const toggleThemeType = useCallback(() => {
     dispatch(setThemeOption("palette.type", themeIsDark ? "light" : "dark"))
-    document.dispatchEvent(ThemeValueChangeEvent)
+    document.dispatchEvent(ThemeValueChangeEvent())
   }, [dispatch, themeIsDark])
 
   return (

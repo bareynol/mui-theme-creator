@@ -10268,6 +10268,11 @@ mdast-util-to-hast@9.1.0:
     unist-util-position "^3.0.0"
     unist-util-visit "^2.0.0"
 
+mdi-material-ui@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/mdi-material-ui/-/mdi-material-ui-6.18.0.tgz#c059da550dc3838c51d301a8eccb5e0a3a58bc71"
+  integrity sha512-/v8Aop6DTrbbLdbk+wEsFlO0Gdo7XX2PDQwgj/u3NLLNZxcSN2N5XN2ICpXWLfq+7aopFUw0XaZQ5Ufs6ayrLQ==
+
 mdn-data@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"

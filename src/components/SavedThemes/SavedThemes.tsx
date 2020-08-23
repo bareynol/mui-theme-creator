@@ -21,16 +21,27 @@ import AddThemeButton from "./AddThemeButton"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    savedThemesRoot: {
       paddingTop: theme.spacing(2),
-    },
-    addNewButtons: {
-      "& > *": {
-        marginRight: theme.spacing(),
-      },
+      paddingLeft: theme.spacing(2),
     },
     savedThemes: {
-      marginTop: theme.spacing(4),
+      flex: 1,
+    },
+    divider: {
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.down("md")]: {
+        display: "none",
+      },
+    },
+    themeActions: {
+      display: "flex",
+      flexDirection: "column",
+      marginBottom: theme.spacing(2),
+      "& > *": {
+        marginTop: theme.spacing(),
+      },
     },
   })
 )
@@ -38,41 +49,25 @@ const useStyles = makeStyles((theme: Theme) =>
 function SavedThemes() {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
-      <Typography variant="h4">Current Theme</Typography>
-      <Grid
-        container
-        spacing={4}
-        justify="flex-start"
-        wrap="nowrap"
-        alignItems="flex-end"
-      >
+    <div className={classes.savedThemesRoot}>
+      <Grid container justify="center">
         <Grid item>
+          <Typography variant="h4">Current Theme</Typography>
           <CurrentTheme />
+          <div className={classes.themeActions}>
+            <AddThemeButton />
+            <DefaultThemes />
+          </div>
         </Grid>
-        <Divider orientation="vertical" flexItem />
-        <Grid item style={{ width: "100%" }} zeroMinWidth>
-          <Typography variant="h6" gutterBottom>
-            Theme Templates
-          </Typography>
-          <DefaultThemes />
-        </Grid>
-      </Grid>
+        <Divider orientation="vertical" flexItem className={classes.divider} />
 
-      <Divider style={{ marginTop: 64, marginBottom: 32 }} />
-
-      <Grid container justify="space-between" alignItems="center">
-        <Grid item>
+        <Grid item className={classes.savedThemes}>
           <Typography variant="h4" gutterBottom>
             Saved Themes
           </Typography>
-        </Grid>
-        <Grid item>
-          <AddThemeButton />
+          <SavedThemeList />
         </Grid>
       </Grid>
-
-      <SavedThemeList />
     </div>
   )
 }

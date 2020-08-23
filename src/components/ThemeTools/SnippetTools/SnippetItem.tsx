@@ -61,12 +61,12 @@ const SnippetItem = ({ snippet }) => {
   const dispatch = useDispatch()
   const handleAddSnippet = useCallback(() => {
     dispatch(setThemeOptions(snippet.configs))
-    document.dispatchEvent(ThemeValueChangeEvent)
+    document.dispatchEvent(ThemeValueChangeEvent())
   }, [dispatch])
 
   const handleRemoveSnippet = useCallback(() => {
     dispatch(removeThemeOptions(snippet.configs))
-    document.dispatchEvent(ThemeValueChangeEvent)
+    document.dispatchEvent(ThemeValueChangeEvent())
   }, [dispatch])
 
   const isSnippetIncluded = useIsSnippetIncluded(snippet.configs)

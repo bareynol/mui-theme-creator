@@ -21,20 +21,19 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
   },
   toolbar: {
-    width: "calc(100% - 400px)", // screen width minus the config drawer
     display: "flex",
     justifyContent: "space-between",
   },
 }))
 
-const Header = ({ siteTitle, className }) => {
+const Header = ({ className }) => {
   const classes = useStyles()
   return (
-    <AppBar position="fixed" color="default" className={className}>
+    <AppBar position="static" color="default" className={className}>
       <Toolbar className={classes.toolbar}>
         <div>
           <Typography variant="h6" className={classes.title}>
-            {siteTitle}
+            Material-UI Theme Creator
           </Typography>
           <Typography variant="caption" className={classes.version}>
             {"└─ "}

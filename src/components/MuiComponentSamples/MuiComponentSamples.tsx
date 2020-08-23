@@ -15,12 +15,17 @@ const useStyles = makeStyles(theme => ({
   docsButton: {
     marginLeft: theme.spacing(2),
   },
+  sampleContainer: {
+    maxWidth: theme.breakpoints.values.md,
+    padding: theme.spacing(),
+    margin: "auto",
+  },
 }))
 
 const MuiComponentSamples = () => {
   const classes = useStyles()
   return (
-    <>
+    <div className={classes.sampleContainer}>
       <Typography variant="h4" gutterBottom>
         Material-UI Components
       </Typography>
@@ -44,7 +49,7 @@ const MuiComponentSamples = () => {
           <div className={classes.sampleItem}>{component}</div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 

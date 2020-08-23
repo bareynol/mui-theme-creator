@@ -13,9 +13,13 @@ function SavedThemeList() {
   )
 
   return (
-    <Grid id={savedThemeListId} container spacing={4}>
+    <Grid id={savedThemeListId} container wrap="wrap" justify="center">
       {sortedThemes.map(t => (
-        <Grid item key={`${t.name}-${t.id}`}>
+        <Grid
+          item
+          key={`${t.name}-${t.id}`}
+          style={{ margin: "0 16px 16px 16px" }}
+        >
           <SavedThemeItem
             name={t.name}
             themeOptions={t.themeOptions}

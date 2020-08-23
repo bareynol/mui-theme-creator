@@ -69,6 +69,7 @@ const PreviewWindow = () => {
             variant="scrollable"
             scrollButtons="on"
             aria-label="preview-window-tabs"
+            style={{ maxWidth: "100vw" }}
           >
             <Tab label="Instructions" />
             <Tab label="Sign Up" />

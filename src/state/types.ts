@@ -12,6 +12,9 @@ export interface RootState {
   previewSize: PreviewSize
   tutorialStep: number
   tutorialOpen: boolean
+  componentNavOpen: boolean
+  themeConfigOpen: boolean
+  mobileWarningSeen: boolean
 }
 
 export type SavedTheme = {
