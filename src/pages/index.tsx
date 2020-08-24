@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react"
-// import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
-import Layout from "../components/Layout"
-import SEO from "../components/seo"
-import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
-import MainWindow from "src/components/MainWindow"
-import Header from "src/components/Header"
-import ComponentNavDrawer from "src/components/ComponentNavDrawer"
+import React from "react"
+
 import { makeStyles } from "@material-ui/core"
+
+import ComponentNavDrawer from "src/components/ComponentNavDrawer"
+import Header from "src/components/Header"
+import Layout from "src/components/Layout"
+import MainWindow from "src/components/MainWindow"
+import SEO from "src/components/seo"
 import SmallScreenWarning from "src/components/SmallScreenWarning"
+import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
 import Tutorial from "src/components/Tutorial"
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     height: "100vh",
   },
-  headerAndMain: {
+  headerNavAndMain: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
@@ -47,7 +48,7 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Material UI Theme Creator" />
       <div className={classes.appRoot}>
-        <div className={classes.headerAndMain}>
+        <div className={classes.headerNavAndMain}>
           <Header className={classes.header} />
           <div className={classes.navAndMain}>
             <ComponentNavDrawer />

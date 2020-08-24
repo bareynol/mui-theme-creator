@@ -5,4 +5,4 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
 
-printf "export default \"$PACKAGE_VERSION\"\n" > ./src/muiVersion.js
+printf "// Auto-generated on build by extractMuiVersion.sh\nexport default \"$PACKAGE_VERSION\"\n" > ./src/muiVersion.js

@@ -3,7 +3,7 @@ import * as monaco from "monaco-editor"
 import { files as muiTypeFiles } from "src/muiTypeStrings"
 import { EditorRefType, MutableEditorRefType } from "../types"
 // custom theme config
-import monokai from "src/monaco-themes/monokai"
+import monokai from "src/components/MonacoThemeCodeEditor/monaco-themes/monokai"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 
