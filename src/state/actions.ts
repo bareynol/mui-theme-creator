@@ -144,20 +144,24 @@ export const renameSavedTheme = (themeId: string, name: string) => ({
 export async function loadFonts(fonts: string[]) {
   return new Promise<boolean>((resolve, reject) => {
     // require inline to support server side rendering
-    const WebFont = require("webfontloader")
-    WebFont.load({
-      google: {
-        families: fonts,
-      },
-      active: () => {
-        verbose("state/actions -> loadFonts: webfonts loaded", fonts)
-        resolve(true)
-      },
-      inactive: () => {
-        verbose("state/actions -> loadFonts: webfonts could not load", fonts)
-        resolve(false)
-      },
-    })
+    try {
+      const WebFont = require("webfontloader")
+      WebFont.load({
+        google: {
+          families: fonts,
+        },
+        active: () => {
+          verbose("state/actions -> loadFonts: webfonts loaded", fonts)
+          resolve(true)
+        },
+        inactive: () => {
+          verbose("state/actions -> loadFonts: webfonts could not load", fonts)
+          resolve(false)
+        },
+      })
+    } catch (err) {
+      resolve(false)
+    }
   })
 }
 
