@@ -7,13 +7,13 @@ import PreviewSizeControls from "./PreviewSizeControls"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
+    previewWrapper: {
       height: "100%",
       position: "relative",
     },
     letterBox: {
       backgroundColor: "#212121",
-      paddingTop: theme.spacing(2),
+      padding: theme.spacing(2),
       height: "100%",
     },
   })
@@ -27,7 +27,7 @@ const PreviewWrapper = ({ children }) => {
 
   return (
     <>
-      <div className={classes.container}>
+      <div className={classes.previewWrapper}>
         <PreviewSizeControls />
         <ThemeWrapper>
           <div className={classes.letterBox}>
@@ -45,10 +45,9 @@ const useBackgroundStyles = makeStyles((theme: Theme) =>
   createStyles({
     previewArea: {
       backgroundColor: theme.palette.background.default,
-      width: `calc(100% - 32px)`,
       maxWidth: 1000,
-      height: "calc(100% - 16px)",
-      overflowY: "auto",
+      height: "100%",
+      overflowY: "scroll",
       margin: "auto",
       position: "relative", // for FAB positioning
       "&.xs": {

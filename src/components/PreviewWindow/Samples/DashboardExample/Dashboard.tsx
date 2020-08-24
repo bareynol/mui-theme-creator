@@ -11,6 +11,7 @@ import { mainListItems, secondaryListItems } from "./listItems"
 import Chart from "./Chart"
 import Deposits from "./Deposits"
 import Orders from "./Orders"
+import Hidden from "@material-ui/core/Hidden"
 
 const drawerWidth = 240
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
   },
   drawerPaper: {
-    position: "relative",
+    position: "static",
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -52,17 +53,19 @@ export default function Dashboard() {
 
   return (
     <div className={classes.root}>
-      <Drawer
-        variant="permanent"
-        open
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
+      <Hidden smDown>
+        <Drawer
+          variant="permanent"
+          open
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <List>{mainListItems}</List>
+          <Divider />
+          <List>{secondaryListItems}</List>
+        </Drawer>
+      </Hidden>
       <div className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>

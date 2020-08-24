@@ -45,6 +45,9 @@ const titles: Record<string, string> = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    valueLabel: {
+      marginRight: theme.spacing(),
+    },
     disabledText: {
       fontStyle: "italic",
     },
@@ -79,7 +82,7 @@ function FontSizeInput({ value, onChange, property }) {
         </Grid>
         <Grid item>
           {!disabled && (
-            <Typography display="inline" style={{ marginRight: 8 }}>
+            <Typography display="inline" className={classes.valueLabel}>
               {displayValue}
             </Typography>
           )}

@@ -31,6 +31,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: "30vh",
     height: "100%",
   },
+  drawerContainer: {
+    height: "100vh",
+  },
 }))
 
 const ThemeConfigDrawer = () => {
@@ -57,7 +60,7 @@ const ThemeConfigDrawer = () => {
         container
         direction="column"
         wrap="nowrap"
-        style={{ height: "100vh" }}
+        className={classes.drawerContainer}
       >
         <Grid item className={classes.editorWrapper}>
           {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}

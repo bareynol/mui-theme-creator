@@ -9,10 +9,10 @@ export const defaultThemeOptions: ThemeOptions = {
   palette: {
     type: "light" as PaletteType,
     primary: {
-      main: "#3f51b5",
+      main: "#3f51b5", // the default primary color
     },
     secondary: {
-      main: "#f50057",
+      main: "#f50057", // the default secondary color
     },
   },
 }

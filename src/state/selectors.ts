@@ -49,11 +49,11 @@ export const useThemeValueInfo = (path: string) => {
  */
 export const useThemeValue = (path: string) => useThemeValueInfo(path).value
 
+export const canSave = state =>
+  state.editor.savedVersion !== state.editor.currentVersion
+
 /**
  * Return whether the code editor has unsaved changes
  */
 export const useCanSave = () =>
-  useSelector(
-    (state: RootState) =>
-      state.editor.savedVersion !== state.editor.currentVersion
-  )
+  useSelector((state: RootState) => canSave(state))

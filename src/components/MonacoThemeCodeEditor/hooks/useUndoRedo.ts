@@ -58,6 +58,7 @@ const useUndoRedoHandlers = (editorRef: EditorRefType) => {
       "MonacoThemeCodeEditor/hooks/useUndoRedo -> handleRedo: global redo listener fired"
     )
     editorRef.current?.trigger("MonacoThemeCodeEditor", "redo", null)
+    editorRef.current?.focus()
   }
 
   const handleUndo = () => {
@@ -65,6 +66,7 @@ const useUndoRedoHandlers = (editorRef: EditorRefType) => {
       "MonacoThemeCodeEditor/hooks/useUndoRedo -> handleUndo: global undo listener fired"
     )
     editorRef.current?.trigger("MonacoThemeCodeEditor", "undo", null)
+    editorRef.current?.focus()
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {

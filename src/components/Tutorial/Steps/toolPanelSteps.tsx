@@ -117,8 +117,7 @@ const TypographyTutorialStep = () => {
           <code>palette.background</code> colors
         </Typography>
         <Typography>
-          Click on the variant to expand it to full size and modify various
-          typography options
+          Click on the variant to expand it to full size and modify options
         </Typography>
         <img
           src={typographyToolsImage}

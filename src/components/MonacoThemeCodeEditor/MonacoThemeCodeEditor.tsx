@@ -15,6 +15,12 @@ import { verbose } from "src/utils"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    monacoThemeEditorRoot: {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      position: "relative",
+    },
     container: {
       height: "calc(100% - 48px)",
       width: "100%",
@@ -44,15 +50,7 @@ const MonacoThemeCodeEditor = () => {
   }, [])
 
   return (
-    <div
-      style={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-      }}
-      id="code-editor"
-    >
+    <div id="code-editor" className={classes.monacoThemeEditorRoot}>
       <EditorControls
         onUndo={handleUndo}
         onRedo={handleRedo}

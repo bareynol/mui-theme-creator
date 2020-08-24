@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useEffect, useCallback } from "react"
 import Backdrop from "@material-ui/core/Backdrop"
 import Button from "@material-ui/core/Button"
 import Portal from "@material-ui/core/Portal"
@@ -44,11 +44,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const Tutorial = ({ onClose }) => {
+export const TutorialContent = () => {
   const classes = useStyles()
   const previewWindowTab = useSelector((state: RootState) => state.activeTab)
   const step = useSelector((state: RootState) => state.tutorialStep)
   const dispatch = useDispatch()
+  const handleClose = useCallback(() => dispatch(toggleTutorial()), [dispatch])
 
   useEffect(function onStart() {
     return function onEnd() {
@@ -58,7 +59,6 @@ const Tutorial = ({ onClose }) => {
     }
   }, [])
 
-  // Portal avoids any parent z-index issues from this component being included in the Header
   const CurrentStep = stepList[step]
   return (
     <Portal>
@@ -72,7 +72,7 @@ const Tutorial = ({ onClose }) => {
           </div>
 
           <Button
-            onClick={onClose}
+            onClick={handleClose}
             endIcon={<CloseIcon className={classes.closeIcon} />}
             className={classes.closeButton}
           >
@@ -85,17 +85,9 @@ const Tutorial = ({ onClose }) => {
   )
 }
 
-export default Tutorial
-
-export const TutorialButton = () => {
+const Tutorial = () => {
   const open = useSelector((state: RootState) => state.tutorialOpen)
-  const dispatch = useDispatch()
-  const handleToggle = useCallback(() => dispatch(toggleTutorial()), [dispatch])
-
-  return (
-    <>
-      <Button onClick={handleToggle}>Tutorial</Button>
-      {open && <Tutorial onClose={handleToggle} />}
-    </>
-  )
+  return open ? <TutorialContent /> : null
 }
+
+export default Tutorial

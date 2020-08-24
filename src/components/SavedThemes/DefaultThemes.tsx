@@ -1,19 +1,21 @@
 import React, { useCallback } from "react"
+
 import {
-  Grid,
-  Typography,
-  ButtonBase,
-  makeStyles,
-  Theme,
-  createStyles,
   Button,
+  ButtonBase,
+  createStyles,
+  Grid,
+  makeStyles,
   Popover,
+  Theme,
+  Typography,
 } from "@material-ui/core"
-import ThemeThumbnail from "./ThemeThumbnail"
+
 import { useDispatch } from "react-redux"
 import { addNewDefaultTheme } from "src/state/actions"
-import defaultThemes from "./defaultThemes"
 import { NewSavedTheme } from "src/state/types"
+import defaultThemes from "./defaultThemes"
+import ThemeThumbnail from "./ThemeThumbnail"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     templatePopover: {
       padding: theme.spacing(2),
+    },
+    templateContainer: {
+      flex: 1,
+      flexGrow: 1,
+      overflowX: "auto",
     },
   })
 )
@@ -98,7 +105,7 @@ function DefaultThemes() {
           container
           spacing={2}
           wrap="nowrap"
-          style={{ flex: 1, flexGrow: 1, overflowX: "auto" }}
+          className={classes.templateContainer}
         >
           {defaultThemes.map(t => (
             <Grid item key={t.name} onClick={() => handleClickTheme(t)}>

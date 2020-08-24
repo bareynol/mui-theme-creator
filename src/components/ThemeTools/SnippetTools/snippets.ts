@@ -2,7 +2,7 @@ import { SnippetModification } from "./types"
 import { grey } from "@material-ui/core/colors"
 import { defaultTheme } from "src/siteTheme"
 
-const baseSnippets: Array<SnippetModification> = [
+const snippets: Array<SnippetModification> = [
   {
     title: "Spacing",
     info: "Change the spacing created by theme.spacing()",
@@ -19,9 +19,28 @@ const baseSnippets: Array<SnippetModification> = [
     title: "Border Radius",
     configs: [{ path: "shape.borderRadius", value: 4 }],
   },
-]
-
-const styleSnippets: Array<SnippetModification> = [
+  {
+    title: "Set custom AppBar color (color set in code editor)",
+    configs: [
+      {
+        path: "overrides.MuiAppBar.colorInherit",
+        value: { backgroundColor: "#689f38", color: "#fff" },
+      },
+      { path: "props.MuiAppBar.color", value: "inherit" },
+    ],
+  },
+  {
+    title: "Set AppBar Color to Secondary",
+    configs: [{ path: "props.MuiAppBar.color", value: "secondary" }],
+  },
+  {
+    title: "Set AppBar Color to Default",
+    configs: [{ path: "props.MuiAppBar.color", value: "default" }],
+  },
+  {
+    title: "Set AppBar Color to Transparent",
+    configs: [{ path: "props.MuiAppBar.color", value: "transparent" }],
+  },
   {
     title: "iOS Switches",
     configs: [
@@ -82,9 +101,6 @@ const styleSnippets: Array<SnippetModification> = [
       },
     ],
   },
-]
-
-const propSnippets: Array<SnippetModification> = [
   {
     title: "Disable Ripple",
     configs: [{ path: "props.MuiButtonBase.disableRipple", value: true }],
@@ -122,4 +138,4 @@ const propSnippets: Array<SnippetModification> = [
   },
 ]
 
-export default [...baseSnippets, ...styleSnippets, ...propSnippets]
+export default snippets

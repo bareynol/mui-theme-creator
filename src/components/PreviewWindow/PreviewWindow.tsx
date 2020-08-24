@@ -1,14 +1,5 @@
 import React from "react"
-import {
-  makeStyles,
-  Paper,
-  AppBar,
-  Tabs,
-  Tab,
-  Tooltip,
-  BottomNavigation,
-  BottomNavigationAction,
-} from "@material-ui/core"
+import { AppBar, Tabs, Tab, Tooltip } from "@material-ui/core"
 import AppBarExample from "src/components/MuiComponentSamples/Samples/AppBar"
 import DefaultExample from "./Samples/DefaultExample"
 import SignUpExample from "./Samples/SignUpExample"
@@ -16,16 +7,8 @@ import DashboardExample from "./Samples/DashboardExample"
 import BlogExample from "./Samples/BlogExample"
 import PricingExample from "./Samples/PricingExample"
 import CheckoutExample from "./Samples/CheckoutExample"
-import Alert from "@material-ui/lab/Alert"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import ThemeWrapper from "src/components/ThemeWrapper"
-import SmartphoneIcon from "@material-ui/icons/Smartphone"
-import TabletIcon from "@material-ui/icons/TabletAndroid"
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows"
 import PreviewWrapper from "./PreviewWrapper"
-
-const useStyles = makeStyles(theme => ({}))
+import DrawerExample from "./Samples/DrawerExample"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -53,14 +36,18 @@ export const previewNavTabsId = "preview-nav-tabs"
 
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   const handleChange = (event: React.ChangeEvent<{}>, newTabIndex: number) => {
     setTabIndex(newTabIndex)
   }
 
+  const handleOpenDrawer = () => setDrawerOpen(true)
+  const handleCloseDrawer = () => setDrawerOpen(false)
+
   return (
     <PreviewWrapper>
-      <AppBarExample />
+      <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
           <Tabs
@@ -69,7 +56,6 @@ const PreviewWindow = () => {
             variant="scrollable"
             scrollButtons="on"
             aria-label="preview-window-tabs"
-            style={{ maxWidth: "100vw" }}
           >
             <Tab label="Instructions" />
             <Tab label="Sign Up" />
@@ -80,8 +66,9 @@ const PreviewWindow = () => {
           </Tabs>
         </AppBar>
       </Tooltip>
-      {/* <Container style={{ paddingTop: 16, paddingBottom: 16 }}> */}
-      <div style={{ minHeight: 800 }}>
+
+      <div>
+        <DrawerExample open={drawerOpen} onClose={handleCloseDrawer} />
         <TabPanel value={tabIndex} index={0}>
           <DefaultExample />
         </TabPanel>
@@ -101,7 +88,6 @@ const PreviewWindow = () => {
           <CheckoutExample />
         </TabPanel>
       </div>
-      {/* </Container> */}
     </PreviewWrapper>
   )
 }

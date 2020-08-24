@@ -22,7 +22,6 @@ export const initialState: EditorState = {
   savedVersion: 0,
   canRedo: false,
   canUndo: false,
-  canSave: false,
   errors: [],
   formatOnSave: true,
   outputTypescript: true,

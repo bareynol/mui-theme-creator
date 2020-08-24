@@ -37,11 +37,20 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(8, 0, 6),
   },
   cardHeader: {
-    backgroundColor:
-      theme.palette.type === "light"
-        ? darken(theme.palette.background.paper, 0.2)
-        : lighten(theme.palette.background.paper, 0.2),
+    color: theme.palette.secondary.contrastText,
+    "&$main": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    "&$light": {
+      backgroundColor: theme.palette.secondary.light,
+    },
+    "&$dark": {
+      backgroundColor: theme.palette.secondary.dark,
+    },
   },
+  main: {},
+  dark: {},
+  light: {},
   cardPricing: {
     display: "flex",
     justifyContent: "center",
@@ -72,6 +81,7 @@ const tiers = [
     ],
     buttonText: "Sign up for free",
     buttonVariant: "outlined",
+    color: "dark",
   },
   {
     title: "Pro",
@@ -85,6 +95,7 @@ const tiers = [
     ],
     buttonText: "Get started",
     buttonVariant: "contained",
+    color: "main",
   },
   {
     title: "Enterprise",
@@ -97,6 +108,7 @@ const tiers = [
     ],
     buttonText: "Contact us",
     buttonVariant: "outlined",
+    color: "light",
   },
 ]
 const footers = [
@@ -265,9 +277,12 @@ export default function PricingExample() {
                       title={tier.title}
                       subheader={tier.subheader}
                       titleTypographyProps={{ align: "center" }}
-                      subheaderTypographyProps={{ align: "center" }}
+                      subheaderTypographyProps={{
+                        align: "center",
+                        classes: { root: classes.cardHeader },
+                      }}
                       action={tier.title === "Pro" ? <StarIcon /> : null}
-                      className={classes.cardHeader}
+                      className={`${classes.cardHeader} ${classes[tier.color]}`}
                     />
                   </div>
                 </Tooltip>

@@ -72,7 +72,7 @@ function TypographyVariant({ variant, text, smallPreview = false }) {
               variantPath={variantPath}
               property={property}
             />
-            <Divider style={{ marginBottom: 0 }} />
+            <Divider />
           </div>
         ))}
       </AccordionDetails>

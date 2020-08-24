@@ -1,7 +1,6 @@
 import React from "react"
 
 import { savedThemesTabId } from "src/components/MainWindow"
-import { currentThemeThumbnailId } from "src/components/SavedThemes/SavedThemes"
 import { addThemeButtonId } from "src/components/SavedThemes/AddThemeButton"
 import { defaultThemesId } from "src/components/SavedThemes/DefaultThemes"
 import { savedThemeListId } from "src/components/SavedThemes/SavedThemeList"
@@ -24,7 +23,7 @@ const AddNewThemesTutorialStep = () => {
   // useSwitchToTab("saved")
   return (
     <>
-      <TutorialTooltip anchorId={savedThemeListId} placement="top">
+      <TutorialTooltip anchorId={savedThemeListId} placement="right">
         <Typography>Switch between your saved themes here.</Typography>
         <Typography>You can rename, or delete them here too</Typography>
       </TutorialTooltip>

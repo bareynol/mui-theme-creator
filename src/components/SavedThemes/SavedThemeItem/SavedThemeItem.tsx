@@ -1,23 +1,22 @@
 import React, { useCallback } from "react"
 import moment from "moment"
+import { useDispatch, useSelector } from "react-redux"
+
 import {
-  Typography,
+  Button,
+  Card,
+  createStyles,
   makeStyles,
   Theme,
-  createStyles,
-  Card,
-  CardContent,
-  Button,
+  Typography,
 } from "@material-ui/core"
-import ThemeThumbnail from "../ThemeThumbnail"
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "src/state/types"
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz"
 
-import DeleteIcon from "@material-ui/icons/Delete"
-import RenameThemeButton from "./RenameThemeButton"
 import { loadSavedTheme, removeSavedTheme } from "src/state/actions"
+import { RootState } from "src/state/types"
+import ThemeThumbnail from "../ThemeThumbnail"
 import DeleteThemeButton from "./DeleteThemeButton"
+import RenameThemeButton from "./RenameThemeButton"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,10 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "flex",
       },
     },
-    content: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
+    savedItemContent: {
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
     },
     loadedCard: {
       backgroundColor: "#9e9e9e",
@@ -43,10 +41,14 @@ const useStyles = makeStyles((theme: Theme) =>
       right: 0,
       left: 0,
       backdropFilter: "blur(2px) saturate(30%) brightness(40%)",
-      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       display: "none",
+    },
+    hoverAreaActions: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "baseline",
     },
   })
 )
@@ -79,26 +81,20 @@ function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
       <Card
         className={`${themeId === loadedThemeId ? classes.loadedCard : ""}`}
       >
-        <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
-          <div className={classes.content}>
-            <Typography variant="subtitle1">{name}</Typography>
-            <ThemeThumbnail {...thumbnailProps} />
-          </div>
-        </CardContent>
-        <Typography
-          variant="caption"
-          component="p"
-          align="center"
-        >{`Last Updated: ${moment(lastUpdated).fromNow()}`}</Typography>
+        <div className={classes.savedItemContent}>
+          <Typography variant="subtitle1" align="center">
+            {name}
+          </Typography>
+          <ThemeThumbnail {...thumbnailProps} />
+          <Typography
+            variant="caption"
+            component="p"
+            align="center"
+          >{`Last Updated: ${moment(lastUpdated).fromNow()}`}</Typography>
+        </div>
       </Card>
       <div className={classes.hoverArea}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "baseline",
-          }}
-        >
+        <div className={classes.hoverAreaActions}>
           <Button
             size="large"
             disabled={themeId === loadedThemeId}

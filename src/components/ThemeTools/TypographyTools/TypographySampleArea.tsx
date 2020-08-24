@@ -13,7 +13,12 @@ import { RootState } from "src/state/types"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    paper: {
+    sampleAreaRoot: {
+      overflow: "auto",
+      maxHeight: 200,
+      paddingLeft: 4,
+    },
+    sampleAreaPaper: {
       padding: theme.spacing(0.5),
     },
     text: {
@@ -42,11 +47,9 @@ function TypographySampleArea({
     <ThemeProvider theme={themeObject}>
       <Paper
         variant="outlined"
+        className={classes.sampleAreaRoot}
         style={{
           backgroundColor: themeObject.palette.background.default,
-          overflow: "auto",
-          maxHeight: 200,
-          paddingLeft: 4,
         }}
       >
         <Grid container wrap="nowrap" alignItems="baseline">
@@ -60,7 +63,11 @@ function TypographySampleArea({
             </Typography>
           </Grid>
           <Grid item>
-            <Paper variant="outlined" square className={classes.paper}>
+            <Paper
+              variant="outlined"
+              square
+              className={classes.sampleAreaPaper}
+            >
               <Typography
                 variant={variant}
                 {...typographyProps}

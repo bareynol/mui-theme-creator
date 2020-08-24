@@ -19,6 +19,8 @@ export type AppBarClassKey =
   | "colorDefault"
   | "colorPrimary"
   | "colorSecondary"
+  | "colorInherit"
+  | "colorTransparent"
 export type AvatarClassKey =
   | "root"
   | "colorDefault"

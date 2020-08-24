@@ -2,7 +2,6 @@ import React from "react"
 import {
   Accordion,
   AccordionSummary,
-  Typography,
   makeStyles,
   createStyles,
   AccordionDetails,
@@ -69,7 +68,7 @@ function TypographyGlobals() {
               variantPath="typography"
               property={property}
             />
-            <Divider style={{ marginBottom: 0 }} />
+            <Divider />
           </div>
         ))}
       </AccordionDetails>

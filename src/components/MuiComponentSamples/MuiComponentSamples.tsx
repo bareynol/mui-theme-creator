@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
   },
   sampleContainer: {
-    maxWidth: theme.breakpoints.values.md,
+    maxWidth: 1000,
     padding: theme.spacing(),
     margin: "auto",
   },

@@ -22,11 +22,14 @@ import EditorButton from "./EditorSettings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    editorControlRoot: {
       paddingRight: theme.spacing(),
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+    },
+    editorControlActions: {
+      display: "flex",
     },
   })
 )
@@ -37,13 +40,8 @@ function EditorControls({ onRedo, onUndo, onSave }) {
   const canRedo = useSelector((state: RootState) => state.editor.canRedo)
   const canSave = useCanSave()
   return (
-    <div className={classes.root}>
-      <div style={{ display: "flex" }}>
-        {/* <Tooltip title="Download theme.js">
-          <IconButton color="primary">
-            <DownloadIcon />
-          </IconButton>
-        </Tooltip> */}
+    <div className={classes.editorControlRoot}>
+      <div className={classes.editorControlActions}>
         <EditorButton />
         <CopyButton />
         <Divider orientation="vertical" flexItem />

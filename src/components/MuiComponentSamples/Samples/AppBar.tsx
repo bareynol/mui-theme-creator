@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AppBarExample() {
+export default function AppBarExample({ onDrawerButtonClick }) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -172,6 +172,7 @@ export default function AppBarExample() {
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
+              onClick={onDrawerButtonClick}
             >
               <MenuIcon />
             </IconButton>

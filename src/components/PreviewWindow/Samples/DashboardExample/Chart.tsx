@@ -13,7 +13,12 @@ import {
 
 // Generate Sales Data
 function createData(time, amount) {
-  return { time, amount }
+  return {
+    time,
+    amount,
+    amount2: amount + Math.round(Math.random() * 1000),
+    amount3: amount + Math.round(Math.random() * 2000),
+  }
 }
 
 const data = [
@@ -66,6 +71,18 @@ export default function Chart() {
             type="monotone"
             dataKey="amount"
             stroke={theme.palette.primary.main}
+            dot={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="amount2"
+            stroke={theme.palette.primary.light}
+            dot={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="amount3"
+            stroke={theme.palette.primary.dark}
             dot={false}
           />
         </LineChart>
