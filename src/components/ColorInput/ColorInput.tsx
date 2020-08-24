@@ -15,7 +15,6 @@ import { ThemeValueChangeEvent } from "src/components/ThemeTools/events"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     popoverPaper: {
-      backgroundColor: "#121212",
       display: "flex",
       flexDirection: "column",
       borderRadius: 0,

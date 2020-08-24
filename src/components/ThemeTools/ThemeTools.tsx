@@ -17,7 +17,13 @@ import SnippetTools from "./SnippetTools"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    bottomNavBar: {
+    themeToolsRoot: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+      overflow: "auto",
+    },
+    themeToolsBottomNavBar: {
       backgroundColor: theme.palette.background.default,
       borderTop: "1px solid",
       borderTopColor: theme.palette.divider,
@@ -89,14 +95,7 @@ export default function ThemeTools() {
   const currentTool = toolPanels[bottomNavIndex]
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        overflow: "auto",
-      }}
-    >
+    <div className={classes.themeToolsRoot}>
       <ToolPanel panelTitle={currentTool.label}>
         <currentTool.tools />
       </ToolPanel>
@@ -104,7 +103,7 @@ export default function ThemeTools() {
       <BottomNavigation
         value={bottomNavIndex}
         showLabels
-        className={classes.bottomNavBar}
+        className={classes.themeToolsBottomNavBar}
         onChange={(event, newValue) => setBottomNavIndex(newValue)}
       >
         {toolPanels.map((panel, index) => (

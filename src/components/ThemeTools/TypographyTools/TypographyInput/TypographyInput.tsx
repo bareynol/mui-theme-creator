@@ -43,12 +43,7 @@ export default function TypographyInput({ label, variantPath, property }) {
   ])
 
   return (
-    <Grid
-      container
-      justify="space-between"
-      alignItems="baseline"
-      style={{ marginBottom: 0 }}
-    >
+    <Grid container justify="space-between" alignItems="baseline">
       <Grid item className={classes.inputContainer}>
         <TypographyPropertyInput
           property={property}

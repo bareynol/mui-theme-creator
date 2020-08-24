@@ -13,6 +13,9 @@ import PopularFontList from "./PopularFontList"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    popularFontList: {
+      flexDirection: "column",
+    },
     loadedFontContent: {
       display: "flex",
       flexWrap: "wrap",
@@ -43,7 +46,7 @@ function FontTools() {
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="body2">Popular Fonts</Typography>
         </AccordionSummary>
-        <AccordionDetails style={{ flexDirection: "column" }}>
+        <AccordionDetails>
           <PopularFontList />
         </AccordionDetails>
       </Accordion>

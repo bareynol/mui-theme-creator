@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react"
 import Typography from "@material-ui/core/Typography"
 import { useDispatch, useSelector } from "react-redux"
 import { addFonts } from "src/state/actions"
-import { Chip } from "@material-ui/core"
+import { Chip, Grid } from "@material-ui/core"
 import { RootState } from "src/state/types"
 import AddIcon from "@material-ui/icons/Add"
 
@@ -48,26 +48,17 @@ function PopularFontList() {
   )
 
   return fontShortList.length ? (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          paddingLeft: 8,
-        }}
-      >
-        {fontShortList.map(font => (
+    <Grid container spacing={1}>
+      {fontShortList.map(font => (
+        <Grid item key={font}>
           <Chip
-            key={font}
             label={font}
             icon={<AddIcon />}
             onClick={() => handleDefaultFontClick(font)}
-            style={{ marginTop: 4 }}
           />
-        ))}
-      </div>
-    </div>
+        </Grid>
+      ))}
+    </Grid>
   ) : null
 }
 

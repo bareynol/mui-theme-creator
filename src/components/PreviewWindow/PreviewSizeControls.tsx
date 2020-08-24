@@ -44,6 +44,8 @@ const PreviewSizeControls = () => {
   const theme = useTheme()
   const screenIsMdDown = useMediaQuery(theme.breakpoints.down("md"))
 
+  // spoof a 'xs' screen size on the preview theme
+  // when the user's screen is md breakpoint and below
   useEffect(
     function previewSizeFromScreen() {
       if (screenIsMdDown) {

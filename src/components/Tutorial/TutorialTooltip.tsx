@@ -1,11 +1,35 @@
 import React from "react"
 import Tooltip from "@material-ui/core/Tooltip"
 import IconButton from "@material-ui/core/IconButton"
-import { withStyles, Theme } from "@material-ui/core"
+import { withStyles, Theme, makeStyles, createStyles } from "@material-ui/core"
 import TutorialStepButton from "./TutorialStepButton"
 import CloseIcon from "@material-ui/icons/Close"
 import { useDispatch } from "react-redux"
 import { toggleTutorial } from "src/state/actions"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    tutorialTooltipContentRoot: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    tutorialTooltipCloseButton: {
+      alignSelf: "flex-end",
+      "& svg": {
+        fontSize: "1.2em",
+      },
+    },
+    tutorialTooltipActions: {
+      marginTop: 8,
+      display: "flex",
+      justifyContent: "space-between",
+    },
+    tutorialTooltipContent: {
+      paddingLeft: 16,
+      paddingRight: 16,
+    },
+  })
+)
 
 const TutorialTooltip = ({ anchorId, children, ...props }) =>
   document.getElementById(anchorId) && (
@@ -30,31 +54,19 @@ const TutorialTooltip = ({ anchorId, children, ...props }) =>
   )
 
 const TooltipContents = ({ children }) => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className={classes.tutorialTooltipContentRoot}>
       <IconButton
         size="small"
         onClick={() => dispatch(toggleTutorial())}
-        style={{ position: "relative", right: 0, alignSelf: "flex-end" }}
+        className={classes.tutorialTooltipCloseButton}
       >
-        <CloseIcon style={{ fontSize: "1.2em" }} />
+        <CloseIcon />
       </IconButton>
-      <div
-        style={{
-          paddingLeft: 16,
-          paddingRight: 16,
-        }}
-      >
-        {children}
-      </div>
-      <div
-        style={{
-          marginTop: 8,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className={classes.tutorialTooltipContent}>{children}</div>
+      <div className={classes.tutorialTooltipActions}>
         <TutorialStepButton variant="prev" />
         <TutorialStepButton variant="next" />
       </div>

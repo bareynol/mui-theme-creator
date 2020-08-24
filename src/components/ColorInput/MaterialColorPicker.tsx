@@ -93,12 +93,10 @@ export default function MaterialColorPicker({ color, onChangeComplete }) {
     // if incoming color maps to a Material UI color, change the input to match
     if (!color) return
     let hexColor
-    let opacity = 1
 
     const decomposed = decomposeColor(color)
     switch (decomposed.type) {
       case "rgba":
-        opacity = decomposed.values[3]!
         hexColor = rgbToHex(
           recomposeColor({ type: "rgb", values: decomposed.values.slice(0, 3) })
         )
@@ -107,7 +105,6 @@ export default function MaterialColorPicker({ color, onChangeComplete }) {
         hexColor = rgbToHex(color)
         break
       case "hsla":
-        opacity = decomposed.values[3]!
         hexColor = rgbToHex(
           hslToRgb(
             recomposeColor({
