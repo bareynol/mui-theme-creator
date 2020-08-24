@@ -9,6 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import siteImage from "src/images/mui_theme_creator_logo.webp"
 
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
@@ -43,12 +44,20 @@ function SEO({ description, lang, meta, title }) {
           content: title,
         },
         {
+          property: `og:url`,
+          content: `https://bareynol.gitlab.io/mui-theme-creator/`,
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: `og:image`,
+          content: siteImage,
         },
         {
           name: `twitter:card`,
@@ -59,12 +68,20 @@ function SEO({ description, lang, meta, title }) {
           content: site.siteMetadata.author,
         },
         {
+          name: `twitter:url`,
+          content: `https://bareynol.gitlab.io/mui-theme-creator/`,
+        },
+        {
           name: `twitter:title`,
           content: title,
         },
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: siteImage,
         },
       ].concat(meta)}
     />

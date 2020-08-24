@@ -6,7 +6,6 @@ import ComponentNavDrawer from "src/components/ComponentNavDrawer"
 import Header from "src/components/Header"
 import Layout from "src/components/Layout"
 import MainWindow from "src/components/MainWindow"
-import SEO from "src/components/seo"
 import SmallScreenWarning from "src/components/SmallScreenWarning"
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
 import Tutorial from "src/components/Tutorial"
@@ -47,7 +46,6 @@ const IndexPage = () => {
   const classes = useStyles()
   return (
     <Layout>
-      <SEO title="Material UI Theme Creator" />
       <div className={classes.appRoot}>
         <ErrorBoundary>
           <div className={classes.headerNavAndMain}>
