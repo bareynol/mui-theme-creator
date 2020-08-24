@@ -10,6 +10,7 @@ import SEO from "src/components/seo"
 import SmallScreenWarning from "src/components/SmallScreenWarning"
 import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
 import Tutorial from "src/components/Tutorial"
+import ErrorBoundary from "src/components/ErrorBoundary"
 
 const useStyles = makeStyles(theme => ({
   appRoot: {
@@ -48,17 +49,21 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Material UI Theme Creator" />
       <div className={classes.appRoot}>
-        <div className={classes.headerNavAndMain}>
-          <Header className={classes.header} />
-          <div className={classes.navAndMain}>
-            <ComponentNavDrawer />
-            <main className={classes.main}>
-              <MainWindow />
-            </main>
-          </div>
-        </div>
+        <ErrorBoundary>
+          <div className={classes.headerNavAndMain}>
+            <Header className={classes.header} />
 
-        <ThemeConfigDrawer />
+            <div className={classes.navAndMain}>
+              <ComponentNavDrawer />
+
+              <main className={classes.main}>
+                <MainWindow />
+              </main>
+            </div>
+          </div>
+
+          <ThemeConfigDrawer />
+        </ErrorBoundary>
       </div>
       <SmallScreenWarning />
       <Tutorial />

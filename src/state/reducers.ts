@@ -204,6 +204,10 @@ export default (state = initialState, action) => {
         ...state,
         mobileWarningSeen: true,
       }
+    case "RESET_SITE_DATA":
+      return {
+        ...initialState,
+      }
     default:
       return state
   }
