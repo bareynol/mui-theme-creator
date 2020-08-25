@@ -1,16 +1,24 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
+
 <p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+  <a href="#">
+    <img alt="Material-Ui Theme Creator" src="/src/images/mui_theme_creator_logo.webp?raw=true" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby's default starter
+  Material-UI Theme Creator
 </h1>
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Material-UI Theme Creator provides an interface to help create a [Material-UI](https://material-ui.com/) `ThemeOptions` object, which styles components in the library.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+The app has a few developer-friendly features to accomplish this:
+
+* Site templates to preview the theme on
+* A code editor with code completion and suggestions based off `ThemeOptions` type data.
+* Dynamic loading of Google Fonts
+* Detailed snippets that take advantage of the `ThemeOptions.props` and `ThemeOptions.overrides` options
+
+
+<!-- _Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
 
 ## 🚀 Quick start
 
@@ -94,6 +102,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default) -->
