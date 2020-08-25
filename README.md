@@ -1,4 +1,3 @@
-
 <p align="center">
   <a href="#">
     <img alt="Material-Ui Theme Creator" src="/src/images/mui_theme_creator_logo.webp?raw=true" width="120" />
@@ -12,16 +11,16 @@
 
 Material-UI Theme Creator provides an interface to help create a [Material-UI](https://material-ui.com/) `ThemeOptions` object, which styles components in the library.
 
-Use the app here LINK
+[Use the app here](https://bareynol.github.io/mui-theme-creator/)
 
 ## Features
+
 The app has a few developer-friendly features:
 
-* Site templates to preview the theme on
-* A code editor with code completion and suggestions based off `ThemeOptions` type data.
-* Dynamic loading of Google Fonts
-* Detailed snippets that take advantage of the `ThemeOptions.props` and `ThemeOptions.overrides` options
-
+- Site templates to preview the theme on
+- A code editor with code completion and suggestions based off `ThemeOptions` type data.
+- Dynamic loading of Google Fonts
+- Detailed snippets that take advantage of the `ThemeOptions.props` and `ThemeOptions.overrides` options
 
 ## Motivations
 
@@ -39,7 +38,8 @@ _Have feature ideas, useful snippets, or bugs? Fantastic! Any help is appreciate
 yarn install
 yarn start # or use gatsby develop
 ```
-<!-- 
+
+<!--
 1.  **Create a Gatsby site.**
 
     Use the Gatsby CLI to create a new site, specifying the default starter.

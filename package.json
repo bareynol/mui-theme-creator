@@ -2,8 +2,8 @@
   "name": "material-ui-theme-creator",
   "private": true,
   "description": "A comprehensive tool to customize themes for Material-UI",
-  "version": "0.1.0",
-  "author": "Brian Rrynolds <brireyn@gmail.com>",
+  "version": "4.11.0",
+  "author": "Brian Reynolds <brireyn@gmail.com>",
   "dependencies": {
     "@loadable/component": "^5.13.1",
     "@material-ui/core": "^4.11.0",
@@ -54,13 +54,10 @@
     "prettier": "^2.0.5",
     "react-test-renderer": "^16.13.1"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "0BSD",
   "scripts": {
     "build": "./extractMuiVersion.sh && gatsby build",
-    "develop": "./extractMuiVersion.sh && gatsby develop",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
@@ -69,9 +66,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/bareynol/mui-theme-creator"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/bareynol/mui-theme-creator/issues"
   }
 }
