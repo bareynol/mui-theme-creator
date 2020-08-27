@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-import siteImage from "src/images/mui_theme_creator_logo.webp"
+import siteImage from "src/images/mui_theme_creator_logo.png"
 
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
@@ -20,6 +20,7 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            url
           }
         }
       }
@@ -27,7 +28,7 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-
+  const siteUrl = site.siteMetadata.url
   return (
     <Helmet
       htmlAttributes={{
@@ -45,7 +46,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:url`,
-          content: `https://bareynol.gitlab.io/mui-theme-creator/`,
+          content: siteUrl,
         },
         {
           property: `og:description`,
@@ -57,7 +58,15 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:image`,
-          content: siteImage,
+          content: `${siteUrl}${siteImage}`,
+        },
+        {
+          property: `og:image:url`,
+          content: `${siteUrl}${siteImage}`,
+        },
+        {
+          property: `og:image:type`,
+          content: `image/png`,
         },
         {
           name: `twitter:card`,
@@ -69,7 +78,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:url`,
-          content: `https://bareynol.gitlab.io/mui-theme-creator/`,
+          content: siteUrl,
         },
         {
           name: `twitter:title`,
@@ -81,7 +90,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:image`,
-          content: siteImage,
+          content: `${siteUrl}${siteImage}`,
         },
       ].concat(meta)}
     />

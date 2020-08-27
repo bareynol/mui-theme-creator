@@ -6,9 +6,11 @@ import {
   Typography,
   makeStyles,
   Link,
+  IconButton,
 } from "@material-ui/core"
 import muiVersion from "src/muiVersion"
 import TutorialButton from "./Tutorial/TutorialButton"
+import GitHubIcon from "@material-ui/icons/GitHub"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -48,6 +50,13 @@ const Header = ({ className }) => {
         </div>
         <div>
           <TutorialButton />
+          <IconButton
+            href="https://github.com/bareynol/mui-theme-creator"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GitHubIcon />
+          </IconButton>
         </div>
       </Toolbar>
     </AppBar>

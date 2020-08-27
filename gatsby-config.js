@@ -4,6 +4,7 @@ module.exports = {
     title: `Material-UI Theme Creator`,
     description: `Kick off your next, great Material-UI project with a customized theme.`,
     author: `@bareynol`,
+    url: "https://bareynol.github.io/mui-theme-creator",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
