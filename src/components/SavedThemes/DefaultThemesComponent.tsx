@@ -8,7 +8,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { useDispatch } from "react-redux"
 import { addNewDefaultTheme } from "../../state/actions"
 import { NewSavedTheme } from "../../state/types"
-import defaultThemes from "./defaultThemes"
+import defaultThemes, { defaultThemesId } from "./DefaultThemes"
 import ThemeThumbnail from "./ThemeThumbnail"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,9 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export const defaultThemesId = "default-themes"
-
-function DefaultThemes() {
+function DefaultThemesComponent() {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
@@ -121,4 +119,4 @@ function DefaultThemes() {
   )
 }
 
-export default DefaultThemes
+export default DefaultThemesComponent

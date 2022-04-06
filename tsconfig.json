@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "src/muiTypeStrings", "public"],
+  "exclude": ["node_modules", "src/muiTypeStrings", "public", "src/**/*.js", "src/**/*.jsx"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 

@@ -7,7 +7,7 @@ module.exports = {
     url: "https://bareynol.github.io/mui-theme-creator",
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-helmet-async`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

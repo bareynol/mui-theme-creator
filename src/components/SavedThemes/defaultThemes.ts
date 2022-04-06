@@ -170,3 +170,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
 ]
 
 export default defaultThemeList
+
+const defaultThemesId = "default-themes";
+
+export { defaultThemesId };
