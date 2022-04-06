@@ -1,13 +1,13 @@
-import React from "react"
-import { Typography, Theme, Grid, Divider } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, Grid, Theme, Typography } from "@mui/material";
 import createStyles from '@mui/styles/createStyles';
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import DefaultThemes from "./DefaultThemes"
-import SavedThemeItem from "./SavedThemeItem/SavedThemeItem"
-import SavedThemeList from "./SavedThemeList"
-import AddThemeButton from "./AddThemeButton"
+import makeStyles from '@mui/styles/makeStyles';
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/state/types";
+import AddThemeButton from "./AddThemeButton";
+import DefaultThemesComponent from "./DefaultThemesComponent";
+import SavedThemeItem from "./SavedThemeItem/SavedThemeItem";
+import SavedThemeList from "./SavedThemeList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +46,7 @@ function SavedThemes() {
           <CurrentTheme />
           <div className={classes.themeActions}>
             <AddThemeButton />
-            <DefaultThemes />
+            <DefaultThemesComponent />
           </div>
         </Grid>
         <Divider orientation="vertical" flexItem className={classes.divider} />

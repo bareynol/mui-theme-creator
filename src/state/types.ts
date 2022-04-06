@@ -1,4 +1,5 @@
-import { Theme, ThemeOptions } from '@mui/material';
+import { Theme } from '@mui/material';
+import { ThemeOptions } from '@mui/material/styles';
 import { EditorState } from "./editor/types"
 
 export interface RootState {

@@ -10,7 +10,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
           main: "#1976d2",
         },
         secondary: {
-          main: "rgb(220, 0, 78)",
+          main: "#9c27b0",
         },
         background: {
           default: "#fff",
@@ -29,11 +29,11 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
           main: "#90caf9",
         },
         secondary: {
-          main: "#f48fb1",
+          main: "#ce93d8",
         },
         background: {
-          default: "#212121",
-          paper: "#424242",
+          default: "#121212",
+          paper: "#121212",
         },
       },
     },
