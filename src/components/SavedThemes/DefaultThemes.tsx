@@ -12,8 +12,8 @@ import {
 } from "@material-ui/core"
 
 import { useDispatch } from "react-redux"
-import { addNewDefaultTheme } from "src/state/actions"
-import { NewSavedTheme } from "src/state/types"
+import { addNewDefaultTheme } from "../../state/actions"
+import { NewSavedTheme } from "../../state/types"
 import defaultThemes from "./defaultThemes"
 import ThemeThumbnail from "./ThemeThumbnail"
 
@@ -68,7 +68,7 @@ function DefaultThemes() {
   }
 
   const handleClickTheme = useCallback(
-    (newTheme: NewSavedTheme) => {
+    (newTheme: NewSavedTheme | Omit<NewSavedTheme, "lastUpdated">) => {
       dispatch(addNewDefaultTheme(newTheme))
     },
     [dispatch]

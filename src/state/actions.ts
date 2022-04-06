@@ -109,7 +109,7 @@ export const addNewSavedTheme = (name: string) => ({
   },
 })
 
-export const addNewDefaultTheme = (newSavedTheme: NewSavedTheme) => ({
+export const addNewDefaultTheme = (newSavedTheme: NewSavedTheme | Omit<NewSavedTheme, "lastUpdated">) => ({
   type: "ADD_NEW_THEME",
   savedTheme: newSavedTheme,
 })

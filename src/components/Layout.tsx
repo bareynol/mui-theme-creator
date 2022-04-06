@@ -13,7 +13,11 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import theme from "src/siteTheme"
 import "./layout.css"
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
