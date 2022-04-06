@@ -1,68 +1,57 @@
-import React from "react"
-
-import makeStyles from '@mui/styles/makeStyles';
-
-import ComponentNavDrawer from "src/components/ComponentNavDrawer"
-import Header from "src/components/Header"
-import Layout from "src/components/Layout"
-import MainWindow from "src/components/MainWindow"
-import SmallScreenWarning from "src/components/SmallScreenWarning"
-import ThemeConfigDrawer from "src/components/ThemeConfigDrawer"
-import Tutorial from "src/components/Tutorial"
-import ErrorBoundary from "src/components/ErrorBoundary"
-
-const useStyles = makeStyles(theme => ({
-  appRoot: {
-    display: "flex",
-    height: "100vh",
-  },
-  headerNavAndMain: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    minWidth: 0,
-  },
-  navAndMain: {
-    flex: 1,
-    display: "flex",
-    minHeight: 0,
-  },
-  main: {
-    minWidth: 0,
-    minHeight: 0,
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-  },
-  header: {
-    backgroundColor: "#000000",
-    [theme.breakpoints.up("md")]: {
-      position: "static",
-    },
-  },
-}))
+import { Box } from "@mui/material";
+import React from "react";
+import ComponentNavDrawer from "src/components/ComponentNavDrawer";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import Header from "src/components/Header";
+import Layout from "src/components/Layout";
+import MainWindow from "src/components/MainWindow";
+import SmallScreenWarning from "src/components/SmallScreenWarning";
+import ThemeConfigDrawer from "src/components/ThemeConfigDrawer";
+import Tutorial from "src/components/Tutorial";
 
 const IndexPage = () => {
-  const classes = useStyles()
   return (
     <Layout>
-      <div className={classes.appRoot}>
+      <Box sx={{
+        display: "flex",
+        height: "100vh",
+      }}>
         <ErrorBoundary>
-          <div className={classes.headerNavAndMain}>
-            <Header className={classes.header} />
+          <Box sx={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minWidth: 0,
+          }}>
+            <Header sx={{
+              backgroundColor: "#000000",
+              position: {
+                md: 'static'
+              }
+            }} />
 
-            <div className={classes.navAndMain}>
+            <Box sx={{
+              flex: 1,
+              display: "flex",
+              minHeight: 0,
+            }}>
               <ComponentNavDrawer />
 
-              <main className={classes.main}>
+              <Box component="main" sx={{
+                minWidth: 0,
+                minHeight: 0,
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+              }}>
                 <MainWindow />
-              </main>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
 
           <ThemeConfigDrawer />
         </ErrorBoundary>
-      </div>
+      </Box>
       <SmallScreenWarning />
       <Tutorial />
     </Layout>

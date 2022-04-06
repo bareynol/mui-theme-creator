@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { AppBar, Toolbar, Typography, Link, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Typography, Link, IconButton, AppBarProps } from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 import muiVersion from "src/muiVersion"
 import TutorialButton from "./Tutorial/TutorialButton"
@@ -22,10 +22,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header = ({ className }) => {
+const Header = (props: AppBarProps) => {
   const classes = useStyles()
   return (
-    <AppBar position="static" color="default" className={className}>
+    <AppBar position="static" color="default" {...props}>
       <Toolbar className={classes.toolbar}>
         <div>
           <Typography variant="h6" className={classes.title}>
@@ -55,14 +55,6 @@ const Header = ({ className }) => {
       </Toolbar>
     </AppBar>
   );
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header
