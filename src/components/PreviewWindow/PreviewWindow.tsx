@@ -34,6 +34,10 @@ function TabPanel(props: TabPanelProps) {
 
 export const previewNavTabsId = "preview-nav-tabs"
 
+const tabStyle = {
+  minWidth: { sm: 160 }
+};
+
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -54,15 +58,17 @@ const PreviewWindow = () => {
             value={tabIndex}
             onChange={handleChange}
             variant="scrollable"
+            textColor="inherit"
+            indicatorColor="secondary"
             scrollButtons
             aria-label="preview-window-tabs"
             allowScrollButtonsMobile>
-            <Tab label="Instructions" />
-            <Tab label="Sign Up" />
-            <Tab label="Dashboard" />
-            <Tab label="Blog" />
-            <Tab label="Pricing" />
-            <Tab label="Checkout" />
+            <Tab label="Instructions" sx={tabStyle} />
+            <Tab label="Sign Up" sx={tabStyle} />
+            <Tab label="Dashboard" sx={tabStyle} />
+            <Tab label="Blog" sx={tabStyle} />
+            <Tab label="Pricing" sx={tabStyle} />
+            <Tab label="Checkout" sx={tabStyle} />
           </Tabs>
         </AppBar>
       </Tooltip>

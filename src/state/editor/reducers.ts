@@ -29,7 +29,7 @@ export const initialState: EditorState = {
 
 export default (
   state = initialState,
-  action,
+  action: any,
   savedThemes: RootState["savedThemes"]
 ) => {
   switch (action.type) {

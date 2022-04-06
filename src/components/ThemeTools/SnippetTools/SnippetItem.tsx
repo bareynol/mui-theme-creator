@@ -36,7 +36,11 @@ const useIsSnippetIncluded = (configs: SnippetModification["configs"]) => {
   return true
 }
 
-const SnippetItem = ({ snippet }) => {
+interface SnippetItemProps {
+  snippet: SnippetModification
+}
+
+const SnippetItem = ({ snippet }: SnippetItemProps) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const handleAddSnippet = useCallback(() => {
@@ -52,14 +56,15 @@ const SnippetItem = ({ snippet }) => {
   const isSnippetIncluded = useIsSnippetIncluded(snippet.configs)
 
   const { info, docs, title } = snippet
-  const toolTipContent = info && (
+  const toolTipContent = info ? (
     <div>
       <div>{info}</div>
       {docs && (
         <Link href={docs} target="_blank" rel="noreferrer" underline="hover">{`Theme ${title} Docs`}</Link>
       )}
     </div>
-  )
+  ) : '';
+
   return (
     <Accordion
       disabled={isSnippetIncluded}
@@ -71,7 +76,7 @@ const SnippetItem = ({ snippet }) => {
           {title}
         </Typography>
         {info && (
-          <Tooltip title={toolTipContent} interactive arrow>
+          <Tooltip title={toolTipContent} arrow>
             <InfoOutlinedIcon />
           </Tooltip>
         )}

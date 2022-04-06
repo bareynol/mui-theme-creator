@@ -80,7 +80,7 @@ export const themeConfig: ThemeOptions = {
     MuiDrawer: {
       styleOverrides: {
         docked: {
-          "& $paper": {
+          "& .MuiPaper-root": {
             position: "static",
           },
         },
