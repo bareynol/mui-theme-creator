@@ -1,15 +1,9 @@
 import React, { useCallback } from "react"
 
-import {
-  Button,
-  ButtonBase,
-  createStyles,
-  Grid,
-  makeStyles,
-  Popover,
-  Theme,
-  Typography,
-} from "@material-ui/core"
+import { Button, ButtonBase, Grid, Popover, Theme, Typography } from "@mui/material";
+
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { useDispatch } from "react-redux"
 import { addNewDefaultTheme } from "../../state/actions"

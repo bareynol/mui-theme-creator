@@ -1,16 +1,18 @@
 import React, { useState } from "react"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core"
-import BottomNavigation from "@material-ui/core/BottomNavigation"
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
+import { Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import BottomNavigation from "@mui/material/BottomNavigation"
+import BottomNavigationAction from "@mui/material/BottomNavigationAction"
 import PaletteTools from "./PaletteTools/PaletteTools"
 
 import TypographyTools from "./TypographyTools/TypographyTools"
 
-import PaletteIcon from "@material-ui/icons/Palette"
-import FontIcon from "@material-ui/icons/FontDownload"
-import TypographyIcon from "@material-ui/icons/TextFields"
-import SnippetsIcon from "@material-ui/icons/PlaylistAdd"
+import PaletteIcon from "@mui/icons-material/Palette"
+import FontIcon from "@mui/icons-material/FontDownload"
+import TypographyIcon from "@mui/icons-material/TextFields"
+import SnippetsIcon from "@mui/icons-material/PlaylistAdd"
 import ToolPanel from "./ToolPanel"
 import FontTools from "./FontTools/FontTools"
 import SnippetTools from "./SnippetTools"

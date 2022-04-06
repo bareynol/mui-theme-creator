@@ -1,7 +1,9 @@
 import React, { useCallback } from "react"
 import { useDispatch } from "react-redux"
 import { setThemeOption, removeThemeOption } from "src/state/actions"
-import { Grid, Button, makeStyles, createStyles } from "@material-ui/core"
+import { Grid, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useThemeValueInfo } from "src/state/selectors"
 import FontWeightInput from "./FontWeightInput"
 import FontSizeInput from "./FontSizeInput"
@@ -43,7 +45,7 @@ export default function TypographyInput({ label, variantPath, property }) {
   ])
 
   return (
-    <Grid container justify="space-between" alignItems="baseline">
+    <Grid container justifyContent="space-between" alignItems="baseline">
       <Grid item className={classes.inputContainer}>
         <TypographyPropertyInput
           property={property}
@@ -65,7 +67,7 @@ export default function TypographyInput({ label, variantPath, property }) {
         </Button>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 function TypographyPropertyInput({ property, ...props }) {

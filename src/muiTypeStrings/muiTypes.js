@@ -344,7 +344,7 @@ export type Direction = "ltr" | "rtl"
 
 ${muiComponentOverrideTypes}
 
-export interface ThemeOptions {
+export interface DeprecatedThemeOptions {
   shape?: ShapeOptions
   breakpoints?: BreakpointsOptions
   direction?: Direction
@@ -376,5 +376,5 @@ export interface Theme {
   unstable_strictMode?: boolean;
 }
 
-export function createMuiTheme(options?: ThemeOptions, ...args: object[]): Theme;
+export function createMuiTheme(options?: DeprecatedThemeOptions, ...args: object[]): Theme;
 `

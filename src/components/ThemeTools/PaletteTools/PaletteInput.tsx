@@ -2,13 +2,9 @@ import React, { useCallback } from "react"
 import ColorInput from "src/components/ColorInput"
 import { useDispatch } from "react-redux"
 import { setThemeOption, removeThemeOption } from "src/state/actions"
-import {
-  Grid,
-  Typography,
-  Button,
-  makeStyles,
-  createStyles,
-} from "@material-ui/core"
+import { Grid, Typography, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useThemeValue, useThemeValueInfo } from "src/state/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,7 +33,7 @@ export default function PaletteInput({ label, path }) {
   ])
 
   return (
-    <Grid container justify="space-between" alignItems="flex-end">
+    <Grid container justifyContent="space-between" alignItems="flex-end">
       <Grid item>
         <ColorInput
           label={label}
@@ -59,5 +55,5 @@ export default function PaletteInput({ label, path }) {
         </Button>
       </Grid>
     </Grid>
-  )
+  );
 }

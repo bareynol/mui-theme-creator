@@ -1,16 +1,10 @@
 import PropTypes from "prop-types"
 import React from "react"
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  makeStyles,
-  Link,
-  IconButton,
-} from "@material-ui/core"
+import { AppBar, Toolbar, Typography, Link, IconButton } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import muiVersion from "src/muiVersion"
 import TutorialButton from "./Tutorial/TutorialButton"
-import GitHubIcon from "@material-ui/icons/GitHub"
+import GitHubIcon from "@mui/icons-material/GitHub"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -44,7 +38,7 @@ const Header = ({ className }) => {
               target="_blank"
               rel="noreferrer"
             >
-              {`@material-ui/core@${muiVersion}`}
+              {`@mui/material@${muiVersion}`}
             </Link>
           </Typography>
         </div>
@@ -54,13 +48,13 @@ const Header = ({ className }) => {
             href="https://github.com/bareynol/mui-theme-creator"
             target="_blank"
             rel="noreferrer"
-          >
+            size="large">
             <GitHubIcon />
           </IconButton>
         </div>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 Header.propTypes = {

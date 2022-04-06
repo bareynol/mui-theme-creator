@@ -1,9 +1,11 @@
 import React from "react"
-import Button from "@material-ui/core/Button"
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import SnackbarContent from "@material-ui/core/SnackbarContent"
-import { IconButton } from "@material-ui/core"
-import CloseIcon from "@material-ui/icons/Close"
+import Button from "@mui/material/Button"
+import { Theme } from "@mui/material/styles";
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import SnackbarContent from "@mui/material/SnackbarContent"
+import { IconButton } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
 
 const action = (
   <Button color="secondary" size="small">

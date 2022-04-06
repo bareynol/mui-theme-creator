@@ -6,7 +6,7 @@ const testCases = {
 			Object.defineProperty(exports, "__esModule", { value: true });
 			exports.themeOptions = {
 				palette: {
-					type: 'light',
+					mode: 'light',
 					primary: {
 						main: '#3f51b5',
 					},
@@ -17,7 +17,7 @@ const testCases = {
 			};`,
     parseEditorOutput: {
       palette: {
-        type: "light",
+        mode: "light",
         primary: {
           main: "#3f51b5",
         },
@@ -32,7 +32,7 @@ const testCases = {
 			Object.defineProperty(exports, "__esModule", { value: true });
 			exports.themeOptions = {
 				palette: {
-					type: 'light',
+					mode: 'light',
 					primary: {
 						main: '#3f51b5',
 					},

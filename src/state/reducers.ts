@@ -1,5 +1,5 @@
 import { RootState, PreviewSize } from "src/state/types"
-import { createMuiTheme, ThemeOptions } from "@material-ui/core"
+import { createTheme, DeprecatedThemeOptions, adaptV4Theme } from "@mui/material";
 import { generateThemeId, isSetEq } from "src/utils"
 import editorReducer, {
   initialState as editorInitialState,
@@ -8,8 +8,7 @@ import { loadFonts } from "./actions"
 import deepmerge from "deepmerge"
 
 import { defaultThemeOptions } from "src/siteTheme"
-import { TypographyOptions } from "@material-ui/core/styles/createTypography"
-import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints"
+import { TypographyOptions, BreakpointValues } from '@mui/material/styles';
 
 const defaultThemeId = generateThemeId({})
 
@@ -17,7 +16,7 @@ const initialState: RootState = {
   editor: editorInitialState,
   themeId: defaultThemeId,
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
-  themeObject: createMuiTheme(defaultThemeOptions),
+  themeObject: createTheme(adaptV4Theme(defaultThemeOptions)),
   savedThemes: {
     [defaultThemeId]: {
       id: defaultThemeId,
@@ -223,7 +222,7 @@ export default (state = initialState, action) => {
  * @returns string[] - the google fonts included in `themeOptions`
  */
 const getFontsFromThemeOptions = (
-  themeOptions: ThemeOptions,
+  themeOptions: DeprecatedThemeOptions,
   previousFonts: string[] | undefined,
   loadedFonts: Set<string>
 ) => {
@@ -281,7 +280,7 @@ function loadFontsIfRequired(fonts: string[], loadedFonts: Set<string>) {
 }
 
 const createPreviewMuiTheme = (
-  themeOptions: ThemeOptions,
+  themeOptions: DeprecatedThemeOptions,
   previewSize: PreviewSize
 ) => {
   const spoofedBreakpoints: Record<string, BreakpointValues> = {
@@ -292,12 +291,12 @@ const createPreviewMuiTheme = (
     xl: { xs: 0, sm: 1, md: 2, lg: 3, xl: 4 },
   }
 
-  if (!previewSize) return createMuiTheme(themeOptions)
+  if (!previewSize) return createTheme(adaptV4Theme(themeOptions));
 
-  return createMuiTheme(
-    deepmerge(
+  return createTheme(
+    adaptV4Theme(deepmerge(
       { breakpoints: { values: spoofedBreakpoints[previewSize] } },
       themeOptions
-    )
-  )
+    ))
+  );
 }

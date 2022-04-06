@@ -1,5 +1,5 @@
 import React from "react"
-import { AppBar, Tabs, Tab, Tooltip } from "@material-ui/core"
+import { AppBar, Tabs, Tab, Tooltip } from "@mui/material"
 import AppBarExample from "src/components/MuiComponentSamples/Samples/AppBar"
 import DefaultExample from "./Samples/DefaultExample"
 import SignUpExample from "./Samples/SignUpExample"
@@ -54,9 +54,9 @@ const PreviewWindow = () => {
             value={tabIndex}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons="on"
+            scrollButtons
             aria-label="preview-window-tabs"
-          >
+            allowScrollButtonsMobile>
             <Tab label="Instructions" />
             <Tab label="Sign Up" />
             <Tab label="Dashboard" />
@@ -89,7 +89,7 @@ const PreviewWindow = () => {
         </TabPanel>
       </div>
     </PreviewWrapper>
-  )
+  );
 }
 
 export default PreviewWindow

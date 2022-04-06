@@ -1,4 +1,4 @@
-import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
+import { DeprecatedThemeOptions } from '@mui/material/styles';
 import { setByPath, removeByPath, getByPath, verbose } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"
@@ -17,7 +17,7 @@ import { canSave } from "./selectors"
  */
 export const removeThemeOption = path => (dispatch, getState) => {
   if (checkIfUserAllowsOverwrite(getState())) {
-    let updatedThemeOptions: ThemeOptions
+    let updatedThemeOptions: DeprecatedThemeOptions
 
     // path with ".<name>" removed
     const parentPath = path.substring(0, path.lastIndexOf("."))

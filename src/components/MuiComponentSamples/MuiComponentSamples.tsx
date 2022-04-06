@@ -1,5 +1,7 @@
 import React from "react"
-import { Typography, makeStyles, Button, Grid } from "@material-ui/core"
+import { Typography, Button, Grid } from "@mui/material";
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import componentSamples from "./Samples"
 
@@ -31,7 +33,7 @@ const MuiComponentSamples = () => {
       </Typography>
       {componentSamples.map(({ id, title, component, docs }) => (
         <div key={id} id={id}>
-          <Grid container justify="space-between" alignItems="center">
+          <Grid container justifyContent="space-between" alignItems="center">
             <Typography variant="h5" gutterBottom>
               {title}
             </Typography>
@@ -50,7 +52,7 @@ const MuiComponentSamples = () => {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default MuiComponentSamples

@@ -1,11 +1,11 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import { Typography } from "@material-ui/core"
-import DeleteIcon from "@material-ui/icons/Delete"
-import CloudUploadIcon from "@material-ui/icons/CloudUpload"
-import KeyboardVoiceIcon from "@material-ui/icons/KeyboardVoice"
-import SaveIcon from "@material-ui/icons/Save"
+import makeStyles from '@mui/styles/makeStyles';
+import Button from "@mui/material/Button"
+import { Typography } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
+import CloudUploadIcon from "@mui/icons-material/CloudUpload"
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice"
+import SaveIcon from "@mui/icons-material/Save"
 
 const useStyles = makeStyles(theme => ({
   group: {
@@ -83,11 +83,7 @@ export default function ButtonsExample() {
         >
           Delete
         </Button>
-        <Button
-          variant="contained"
-          color="default"
-          startIcon={<CloudUploadIcon />}
-        >
+        <Button variant="contained" startIcon={<CloudUploadIcon />}>
           Upload
         </Button>
         <Button
@@ -116,5 +112,5 @@ export default function ButtonsExample() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

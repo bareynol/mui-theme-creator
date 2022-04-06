@@ -1,11 +1,13 @@
 import React from "react"
 import clsx from "clsx"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import CardActions from "@material-ui/core/CardActions"
-import Divider from "@material-ui/core/Divider"
-import Typography from "@material-ui/core/Typography"
-import { Theme, makeStyles, createStyles } from "@material-ui/core"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import CardActions from "@mui/material/CardActions"
+import Divider from "@mui/material/Divider"
+import Typography from "@mui/material/Typography"
+import { Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import TutorialStepButton from "./TutorialStepButton"
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,6 +1,7 @@
 import React, { useCallback } from "react"
-import Typography from "@material-ui/core/Typography"
-import { withStyles, Button } from "@material-ui/core"
+import Typography from "@mui/material/Typography"
+import { Button } from "@mui/material";
+import withStyles from '@mui/styles/withStyles';
 import { useDispatch } from "react-redux"
 import { resetSiteData } from "src/state/actions"
 
@@ -30,7 +31,7 @@ class ErrorBoundary extends React.Component {
           </Typography>
           <Typography variant="h1" gutterBottom>{`:(`}</Typography>
           <Typography variant="h5" gutterBottom>
-            This likely is caused by an error on the ThemeOptions object
+            This likely is caused by an error on the DeprecatedThemeOptions object
           </Typography>
           <Typography variant="h5" gutterBottom>
             This can be cleared up by wiping the saved theme data...

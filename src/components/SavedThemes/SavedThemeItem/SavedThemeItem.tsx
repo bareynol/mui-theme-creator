@@ -2,15 +2,10 @@ import React, { useCallback } from "react"
 import moment from "moment"
 import { useDispatch, useSelector } from "react-redux"
 
-import {
-  Button,
-  Card,
-  createStyles,
-  makeStyles,
-  Theme,
-  Typography,
-} from "@material-ui/core"
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz"
+import { Button, Card, Theme, Typography } from "@mui/material";
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz"
 
 import { loadSavedTheme, removeSavedTheme } from "src/state/actions"
 import { RootState } from "src/state/types"

@@ -1,20 +1,21 @@
 import React from "react"
-import { fade, makeStyles } from "@material-ui/core/styles"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
-import IconButton from "@material-ui/core/IconButton"
-import Typography from "@material-ui/core/Typography"
-import InputBase from "@material-ui/core/InputBase"
-import Badge from "@material-ui/core/Badge"
-import MenuItem from "@material-ui/core/MenuItem"
-import Menu from "@material-ui/core/Menu"
-import MenuIcon from "@material-ui/icons/Menu"
-import SearchIcon from "@material-ui/icons/Search"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-import MailIcon from "@material-ui/icons/Mail"
-import NotificationsIcon from "@material-ui/icons/Notifications"
-import MoreIcon from "@material-ui/icons/MoreVert"
-import { Tooltip } from "@material-ui/core"
+import { alpha } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import InputBase from "@mui/material/InputBase"
+import Badge from "@mui/material/Badge"
+import MenuItem from "@mui/material/MenuItem"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import SearchIcon from "@mui/icons-material/Search"
+import AccountCircle from "@mui/icons-material/AccountCircle"
+import MailIcon from "@mui/icons-material/Mail"
+import NotificationsIcon from "@mui/icons-material/Notifications"
+import MoreIcon from "@mui/icons-material/MoreVert"
+import { Tooltip } from "@mui/material"
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -32,9 +33,9 @@ const useStyles = makeStyles(theme => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -133,7 +134,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" size="large">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -141,7 +142,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton aria-label="show 11 new notifications" color="inherit" size="large">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -154,7 +155,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-        >
+          size="large">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -173,7 +174,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
               color="inherit"
               aria-label="open drawer"
               onClick={onDrawerButtonClick}
-            >
+              size="large">
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6">
@@ -194,15 +195,12 @@ export default function AppBarExample({ onDrawerButtonClick }) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 4 new mails" color="inherit">
+              <IconButton aria-label="show 4 new mails" color="inherit" size="large">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
+              <IconButton aria-label="show 17 new notifications" color="inherit" size="large">
                 <Badge badgeContent={17} color="secondary">
                   <NotificationsIcon />
                 </Badge>
@@ -214,7 +212,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
-              >
+                size="large">
                 <AccountCircle />
               </IconButton>
             </div>
@@ -225,7 +223,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
-              >
+                size="large">
                 <MoreIcon />
               </IconButton>
             </div>
@@ -235,5 +233,5 @@ export default function AppBarExample({ onDrawerButtonClick }) {
       {renderMobileMenu}
       {renderMenu}
     </div>
-  )
+  );
 }

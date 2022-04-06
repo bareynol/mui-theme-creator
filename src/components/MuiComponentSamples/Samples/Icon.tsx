@@ -1,7 +1,9 @@
 import React from "react"
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import { green } from "@material-ui/core/colors"
-import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import { green } from "@mui/material/colors"
+import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

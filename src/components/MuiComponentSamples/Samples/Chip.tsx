@@ -1,10 +1,12 @@
 import React from "react"
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import Avatar from "@material-ui/core/Avatar"
-import Chip from "@material-ui/core/Chip"
-import FaceIcon from "@material-ui/icons/Face"
-import DoneIcon from "@material-ui/icons/Done"
-import { Typography } from "@material-ui/core"
+import { Theme } from "@mui/material/styles";
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Avatar from "@mui/material/Avatar"
+import Chip from "@mui/material/Chip"
+import FaceIcon from "@mui/icons-material/Face"
+import DoneIcon from "@mui/icons-material/Done"
+import { Typography } from "@mui/material"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

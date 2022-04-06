@@ -1,18 +1,21 @@
 import React from "react"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import ListSubheader from "@material-ui/core/ListSubheader"
-import DashboardIcon from "@material-ui/icons/Dashboard"
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
-import PeopleIcon from "@material-ui/icons/People"
-import BarChartIcon from "@material-ui/icons/BarChart"
-import LayersIcon from "@material-ui/icons/Layers"
-import AssignmentIcon from "@material-ui/icons/Assignment"
-import Drawer from "@material-ui/core/Drawer"
-import List from "@material-ui/core/List"
-import Divider from "@material-ui/core/Divider"
-import { makeStyles, Theme, createStyles, Toolbar } from "@material-ui/core"
+import ListItem from "@mui/material/ListItem"
+import ListItemIcon from "@mui/material/ListItemIcon"
+import ListItemText from "@mui/material/ListItemText"
+import ListSubheader from "@mui/material/ListSubheader"
+import DashboardIcon from "@mui/icons-material/Dashboard"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import PeopleIcon from "@mui/icons-material/People"
+import BarChartIcon from "@mui/icons-material/BarChart"
+import LayersIcon from "@mui/icons-material/Layers"
+import AssignmentIcon from "@mui/icons-material/Assignment"
+import Drawer from "@mui/material/Drawer"
+import List from "@mui/material/List"
+import Divider from "@mui/material/Divider"
+import { Theme, Toolbar } from "@mui/material";
+
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme: Theme) =>

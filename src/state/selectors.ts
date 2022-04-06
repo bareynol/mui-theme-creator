@@ -3,7 +3,7 @@ import { getByPath } from "src/utils"
 import { RootState } from "./types"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
-import { ThemeOptions, Theme } from "@material-ui/core"
+import { DeprecatedThemeOptions, Theme } from "@mui/material"
 
 /**
  * Return the value of in the theme at the specified path,
@@ -14,7 +14,7 @@ import { ThemeOptions, Theme } from "@material-ui/core"
  */
 const getThemeValueInfo = (
   path: string,
-  themeOptions: ThemeOptions,
+  themeOptions: DeprecatedThemeOptions,
   themeObject: Theme
 ) => {
   const valFromSaved: any = getByPath(themeOptions, path)

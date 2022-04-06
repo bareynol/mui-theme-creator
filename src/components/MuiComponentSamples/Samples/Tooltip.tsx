@@ -1,10 +1,12 @@
 import React from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import AddIcon from "@material-ui/icons/Add"
-import Fab from "@material-ui/core/Fab"
-import DeleteIcon from "@material-ui/icons/Delete"
-import IconButton from "@material-ui/core/IconButton"
-import Tooltip from "@material-ui/core/Tooltip"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import AddIcon from "@mui/icons-material/Add"
+import Fab from "@mui/material/Fab"
+import DeleteIcon from "@mui/icons-material/Delete"
+import IconButton from "@mui/material/IconButton"
+import Tooltip from "@mui/material/Tooltip"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +22,7 @@ export default function TooltipExample() {
   return (
     <div>
       <Tooltip title="Delete">
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" size="large">
           <DeleteIcon />
         </IconButton>
       </Tooltip>
@@ -35,5 +37,5 @@ export default function TooltipExample() {
         </Fab>
       </Tooltip>
     </div>
-  )
+  );
 }

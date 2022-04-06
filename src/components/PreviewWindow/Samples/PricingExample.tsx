@@ -1,19 +1,19 @@
 import React from "react"
-import AppBar from "@material-ui/core/AppBar"
-import Button from "@material-ui/core/Button"
-import Card from "@material-ui/core/Card"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import CardHeader from "@material-ui/core/CardHeader"
-import Grid from "@material-ui/core/Grid"
-import StarIcon from "@material-ui/icons/StarBorder"
-import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator"
-import Tooltip from "@material-ui/core/Tooltip"
+import AppBar from "@mui/material/AppBar"
+import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardActions from "@mui/material/CardActions"
+import CardContent from "@mui/material/CardContent"
+import CardHeader from "@mui/material/CardHeader"
+import Grid from "@mui/material/Grid"
+import StarIcon from "@mui/icons-material/StarBorder"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import Link from "@mui/material/Link"
+import { darken, lighten } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import Container from "@mui/material/Container"
+import Tooltip from "@mui/material/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   ul: {
@@ -351,7 +351,7 @@ export default function PricingExample() {
       </Container>
       {/* Footer */}
       <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
+        <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map(footer => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Tooltip
@@ -384,5 +384,5 @@ export default function PricingExample() {
       </Container>
       {/* End footer */}
     </React.Fragment>
-  )
+  );
 }

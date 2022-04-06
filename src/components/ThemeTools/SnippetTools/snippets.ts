@@ -1,5 +1,5 @@
 import { SnippetModification } from "./types"
-import { grey } from "@material-ui/core/colors"
+import { grey } from "@mui/material/colors"
 import { defaultTheme } from "src/siteTheme"
 
 const snippets: Array<SnippetModification> = [

@@ -1,12 +1,7 @@
 import React, { useEffect } from "react"
-import {
-  TextField,
-  InputAdornment,
-  Popover,
-  makeStyles,
-  Theme,
-  createStyles,
-} from "@material-ui/core"
+import { TextField, InputAdornment, Popover, Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { ChromePicker } from "react-color"
 import MaterialColorPicker from "./MaterialColorPicker"
 import { colorFromString } from "./utils"

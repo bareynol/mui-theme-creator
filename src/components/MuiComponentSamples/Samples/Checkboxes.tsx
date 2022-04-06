@@ -1,11 +1,13 @@
 import React from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import FormLabel from "@material-ui/core/FormLabel"
-import FormControl from "@material-ui/core/FormControl"
-import FormGroup from "@material-ui/core/FormGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import FormHelperText from "@material-ui/core/FormHelperText"
-import Checkbox from "@material-ui/core/Checkbox"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import FormLabel from "@mui/material/FormLabel"
+import FormControl from "@mui/material/FormControl"
+import FormGroup from "@mui/material/FormGroup"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormHelperText from "@mui/material/FormHelperText"
+import Checkbox from "@mui/material/Checkbox"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

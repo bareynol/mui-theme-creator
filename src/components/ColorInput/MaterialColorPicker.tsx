@@ -1,19 +1,11 @@
 import React, { useEffect } from "react"
-import * as colors from "@material-ui/core/colors"
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  Tooltip,
-  Collapse,
-} from "@material-ui/core"
+import * as colors from "@mui/material/colors"
+import { Theme, Tooltip, Collapse } from "@mui/material";
 
-import {
-  decomposeColor,
-  recomposeColor,
-  rgbToHex,
-  hslToRgb,
-} from "@material-ui/core/styles/colorManipulator"
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+
+import { decomposeColor, recomposeColor, rgbToHex, hslToRgb } from '@mui/material/styles';
 
 const muiHues = [
   "red",

@@ -9,8 +9,8 @@ import {
 import { toolPanelId } from "src/components/ThemeTools/ToolPanel"
 import TutorialTooltip from "../TutorialTooltip"
 
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
+import Typography from "@mui/material/Typography"
+import Link from "@mui/material/Link"
 
 import colorPickerImage from "src/images/tutorial/colorpicker.webp"
 import typographyToolsImage from "src/images/tutorial/typographytools.webp"

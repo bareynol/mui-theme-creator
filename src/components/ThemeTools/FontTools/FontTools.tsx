@@ -1,13 +1,15 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import Typography from "@material-ui/core/Typography"
-import Accordion from "@material-ui/core/Accordion"
-import AccordionSummary from "@material-ui/core/AccordionSummary"
-import AccordionDetails from "@material-ui/core/AccordionDetails"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import Typography from "@mui/material/Typography"
+import Accordion from "@mui/material/Accordion"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 
-import { Chip, makeStyles, Theme, createStyles } from "@material-ui/core"
+import { Chip, Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import AddFontInput from "./AddFontInput"
 import PopularFontList from "./PopularFontList"
 

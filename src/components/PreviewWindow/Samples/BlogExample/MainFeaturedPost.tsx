@@ -1,11 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Paper from "@material-ui/core/Paper"
-import Typography from "@material-ui/core/Typography"
-import Grid from "@material-ui/core/Grid"
-import Link from "@material-ui/core/Link"
-import Tooltip from "@material-ui/core/Tooltip"
+import makeStyles from '@mui/styles/makeStyles';
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid"
+import Link from "@mui/material/Link"
+import Tooltip from "@mui/material/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {

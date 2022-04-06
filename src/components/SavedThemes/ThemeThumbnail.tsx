@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react"
-import {
-  createMuiTheme,
-  makeStyles,
-  Theme,
-  createStyles,
-} from "@material-ui/core"
-import AddIcon from "@material-ui/icons/Add"
+import { createTheme, Theme, adaptV4Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import AddIcon from "@mui/icons-material/Add"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +69,7 @@ function ThemeThumbnail({ themeOptions, large = false }) {
   const classes = useStyles()
   const [themeObject, setThemeObject] = useState({})
 
-  useEffect(() => setThemeObject(createMuiTheme(themeOptions)), [themeOptions])
+  useEffect(() => setThemeObject(createTheme(adaptV4Theme(themeOptions))), [themeOptions])
 
   const { background, primary, secondary, text } = themeObject?.palette || {}
 

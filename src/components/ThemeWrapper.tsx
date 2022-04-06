@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { ThemeProvider, Theme, makeStyles } from "@material-ui/core/styles"
+import { ThemeProvider, StyledEngineProvider, Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import Paper from "@material-ui/core/Paper"
+import Paper from "@mui/material/Paper"
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 interface ThemeWrapperProps {
   children: React.ReactNode | React.ReactNodeArray
@@ -17,10 +25,12 @@ const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
   const themeObject = useSelector((state: RootState) => state.themeObject)
 
   return (
-    <ThemeProvider theme={themeObject}>
-      <ThemeContainer>{children}</ThemeContainer>
-    </ThemeProvider>
-  )
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themeObject}>
+        <ThemeContainer>{children}</ThemeContainer>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 const useStyles = makeStyles(theme => ({

@@ -1,17 +1,17 @@
 import React from "react"
 import clsx from "clsx"
-import { makeStyles } from "@material-ui/core/styles"
-import Drawer from "@material-ui/core/Drawer"
-import List from "@material-ui/core/List"
-import Divider from "@material-ui/core/Divider"
-import Container from "@material-ui/core/Container"
-import Grid from "@material-ui/core/Grid"
-import Paper from "@material-ui/core/Paper"
+import makeStyles from '@mui/styles/makeStyles';
+import Drawer from "@mui/material/Drawer"
+import List from "@mui/material/List"
+import Divider from "@mui/material/Divider"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
 import { mainListItems, secondaryListItems } from "./listItems"
 import Chart from "./Chart"
 import Deposits from "./Deposits"
 import Orders from "./Orders"
-import Hidden from "@material-ui/core/Hidden"
+import Hidden from "@mui/material/Hidden"
 
 const drawerWidth = 240
 
@@ -53,7 +53,7 @@ export default function Dashboard() {
 
   return (
     <div className={classes.root}>
-      <Hidden smDown>
+      <Hidden mdDown>
         <Drawer
           variant="permanent"
           open
@@ -91,5 +91,5 @@ export default function Dashboard() {
         </Container>
       </div>
     </div>
-  )
+  );
 }

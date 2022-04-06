@@ -1,13 +1,8 @@
-import {
-  createMuiTheme,
-  ThemeOptions,
-  Theme,
-  PaletteType,
-} from "@material-ui/core"
+import { createTheme, DeprecatedThemeOptions, Theme, PaletteType, adaptV4Theme } from "@mui/material";
 
-export const defaultThemeOptions: ThemeOptions = {
+export const defaultThemeOptions: DeprecatedThemeOptions = {
   palette: {
-    type: "light" as PaletteType,
+    mode: "light" as PaletteType,
     primary: {
       main: "#3f51b5", // the default primary color
     },
@@ -17,11 +12,11 @@ export const defaultThemeOptions: ThemeOptions = {
   },
 }
 
-export const defaultTheme: Theme = createMuiTheme()
+export const defaultTheme: Theme = createTheme()
 
-export const themeConfig: ThemeOptions = {
+export const themeConfig: DeprecatedThemeOptions = {
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       main: "#90caf9",
     },
@@ -94,4 +89,4 @@ export const themeConfig: ThemeOptions = {
   },
 }
 
-export default createMuiTheme(themeConfig)
+export default createTheme(adaptV4Theme(themeConfig))

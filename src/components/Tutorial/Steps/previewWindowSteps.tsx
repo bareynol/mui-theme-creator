@@ -5,7 +5,7 @@ import { previewSizeControlsId } from "src/components/PreviewWindow/PreviewSizeC
 import { previewNavTabsId } from "src/components/PreviewWindow/PreviewWindow"
 
 import TutorialTooltip from "../TutorialTooltip"
-import Typography from "@material-ui/core/Typography"
+import Typography from "@mui/material/Typography"
 
 import { useSwitchToTab } from "./hooks"
 

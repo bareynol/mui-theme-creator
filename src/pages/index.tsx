@@ -1,6 +1,6 @@
 import React from "react"
 
-import { makeStyles } from "@material-ui/core"
+import makeStyles from '@mui/styles/makeStyles';
 
 import ComponentNavDrawer from "src/components/ComponentNavDrawer"
 import Header from "src/components/Header"

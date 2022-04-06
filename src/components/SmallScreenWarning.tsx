@@ -11,7 +11,7 @@ import {
   Button,
   darken,
 } from "@material-ui/core"
-import { TransitionProps } from "@material-ui/core/transitions/transition"
+import { TransitionProps } from "@mui/material/transitions/transition"
 import hereBeDragonsImage from "src/images/herebedragons.webp"
 import { loadFonts } from "src/state/actions"
 import { useSelector, useDispatch } from "react-redux"

@@ -10,7 +10,9 @@ import "./editor.css"
 import * as monaco from "monaco-editor"
 import EditorControls from "./EditorControls"
 import EditorErrors from "./EditorErrors"
-import { makeStyles, Theme, createStyles } from "@material-ui/core"
+import { Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { verbose } from "src/utils"
 
 const useStyles = makeStyles((theme: Theme) =>

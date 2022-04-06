@@ -1,22 +1,23 @@
 import React from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import IconButton from "@material-ui/core/IconButton"
-import SettingsIcon from "@material-ui/icons/Settings"
-import Popover from "@material-ui/core/Popover"
+import Tooltip from "@mui/material/Tooltip"
+import IconButton from "@mui/material/IconButton"
+import SettingsIcon from "@mui/icons-material/Settings"
+import Popover from "@mui/material/Popover"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import { useUpdateEditorState } from "src/state/editor/actions"
-import Checkbox from "@material-ui/core/Checkbox"
+import Checkbox from "@mui/material/Checkbox"
 import {
-  makeStyles,
   Theme,
-  createStyles,
   List,
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
   ListSubheader,
-} from "@material-ui/core"
+} from "@mui/material";
+
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,33 +46,31 @@ const EditorButton = () => {
   }
   const open = Boolean(anchorEl)
 
-  return (
-    <>
-      <Tooltip title="Editor Settings">
-        <IconButton onClick={handleOpen}>
-          <SettingsIcon />
-        </IconButton>
-      </Tooltip>
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "center",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        PaperProps={{
-          className: classes.popoverPaper,
-        }}
-      >
-        <EditorSettings />
-      </Popover>
-    </>
-  )
+  return <>
+    <Tooltip title="Editor Settings">
+      <IconButton onClick={handleOpen} size="large">
+        <SettingsIcon />
+      </IconButton>
+    </Tooltip>
+    <Popover
+      open={open}
+      anchorEl={anchorEl}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: "center",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      PaperProps={{
+        className: classes.popoverPaper,
+      }}
+    >
+      <EditorSettings />
+    </Popover>
+  </>;
 }
 export default EditorButton
 

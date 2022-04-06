@@ -8,10 +8,17 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import CssBaseline from "@material-ui/core/CssBaseline"
-import { ThemeProvider } from "@material-ui/core/styles"
+import CssBaseline from "@mui/material/CssBaseline"
+import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
 import theme from "src/siteTheme"
 import "./layout.css"
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 interface LayoutProps {
   children: React.ReactNode
@@ -19,11 +26,13 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  )
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 Layout.propTypes = {

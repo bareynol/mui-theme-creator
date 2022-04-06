@@ -1,14 +1,8 @@
 import React from "react"
-import {
-  Accordion,
-  AccordionSummary,
-  Typography,
-  makeStyles,
-  createStyles,
-  AccordionDetails,
-  Theme,
-} from "@material-ui/core"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import { Accordion, AccordionSummary, Typography, AccordionDetails, Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import PaletteInput from "./PaletteInput"
 import { useThemeValue } from "src/state/selectors"
 

@@ -1,12 +1,7 @@
 import React from "react"
-import {
-  Typography,
-  makeStyles,
-  Theme,
-  createStyles,
-  Grid,
-  Divider,
-} from "@material-ui/core"
+import { Typography, Theme, Grid, Divider } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import DefaultThemes from "./DefaultThemes"
@@ -26,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     divider: {
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
-      [theme.breakpoints.down("md")]: {
+      [theme.breakpoints.down('lg')]: {
         display: "none",
       },
     },
@@ -45,7 +40,7 @@ function SavedThemes() {
   const classes = useStyles()
   return (
     <div className={classes.savedThemesRoot}>
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item>
           <Typography variant="h4">Current Theme</Typography>
           <CurrentTheme />
@@ -64,7 +59,7 @@ function SavedThemes() {
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }
 
 export default SavedThemes

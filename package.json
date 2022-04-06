@@ -18,7 +18,7 @@
     "@types/recharts": "^1.8.14",
     "deepmerge": "^4.2.2",
     "dot-prop-immutable": "^2.1.0",
-    "gatsby": "^2.23.12",
+    "gatsby": "^3.14.6",
     "gatsby-image": "^2.4.9",
     "gatsby-plugin-manifest": "^2.4.14",
     "gatsby-plugin-material-ui": "^2.1.9",

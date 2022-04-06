@@ -1,7 +1,8 @@
 import React from "react"
-import Drawer from "@material-ui/core/Drawer"
-import Grid from "@material-ui/core/Grid"
-import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core"
+import Drawer from "@mui/material/Drawer"
+import Grid from "@mui/material/Grid"
+import { useTheme, useMediaQuery } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import ThemeTools from "./ThemeTools/ThemeTools"

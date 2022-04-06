@@ -1,13 +1,14 @@
 import React from "react"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import AppBar from "@material-ui/core/AppBar"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
-import Typography from "@material-ui/core/Typography"
-import Box from "@material-ui/core/Box"
-import PhoneIcon from "@material-ui/icons/Phone"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import PersonPinIcon from "@material-ui/icons/PersonPin"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import AppBar from "@mui/material/AppBar"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import PhoneIcon from "@mui/icons-material/Phone"
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import PersonPinIcon from "@mui/icons-material/PersonPin"
 
 interface TabPanelProps {
   children?: React.ReactNode

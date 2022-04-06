@@ -1,13 +1,15 @@
 import React from "react"
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
-import Badge from "@material-ui/core/Badge"
-import ButtonGroup from "@material-ui/core/ButtonGroup"
-import Button from "@material-ui/core/Button"
-import AddIcon from "@material-ui/icons/Add"
-import RemoveIcon from "@material-ui/icons/Remove"
-import MailIcon from "@material-ui/icons/Mail"
-import Switch from "@material-ui/core/Switch"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
+import { Theme } from "@mui/material/styles";
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Badge from "@mui/material/Badge"
+import ButtonGroup from "@mui/material/ButtonGroup"
+import Button from "@mui/material/Button"
+import AddIcon from "@mui/icons-material/Add"
+import RemoveIcon from "@mui/icons-material/Remove"
+import MailIcon from "@mui/icons-material/Mail"
+import Switch from "@mui/material/Switch"
+import FormControlLabel from "@mui/material/FormControlLabel"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
-import Divider from "@material-ui/core/Divider"
-import { Link, Tooltip } from "@material-ui/core"
+import makeStyles from '@mui/styles/makeStyles';
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import Divider from "@mui/material/Divider"
+import { Link, Tooltip } from "@mui/material"
 
 const useStyles = makeStyles(theme => ({
   markdown: {

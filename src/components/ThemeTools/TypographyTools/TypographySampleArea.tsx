@@ -1,15 +1,16 @@
 import React from "react"
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  ThemeProvider,
-  Typography,
-  Paper,
-  Grid,
-} from "@material-ui/core"
+import { Theme, ThemeProvider, StyledEngineProvider, Typography, Paper, Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,43 +45,45 @@ function TypographySampleArea({
     smallPreview ? classes.smallText : ""
   }`
   return (
-    <ThemeProvider theme={themeObject}>
-      <Paper
-        variant="outlined"
-        className={classes.sampleAreaRoot}
-        style={{
-          backgroundColor: themeObject.palette.background.default,
-        }}
-      >
-        <Grid container wrap="nowrap" alignItems="baseline">
-          <Grid item>
-            <Typography
-              variant={variant}
-              {...typographyProps}
-              className={typographyClassName}
-            >
-              {bgText}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Paper
-              variant="outlined"
-              square
-              className={classes.sampleAreaPaper}
-            >
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themeObject}>
+        <Paper
+          variant="outlined"
+          className={classes.sampleAreaRoot}
+          style={{
+            backgroundColor: themeObject.palette.background.default,
+          }}
+        >
+          <Grid container wrap="nowrap" alignItems="baseline">
+            <Grid item>
               <Typography
                 variant={variant}
                 {...typographyProps}
                 className={typographyClassName}
               >
-                {paperText}
+                {bgText}
               </Typography>
-            </Paper>
+            </Grid>
+            <Grid item>
+              <Paper
+                variant="outlined"
+                square
+                className={classes.sampleAreaPaper}
+              >
+                <Typography
+                  variant={variant}
+                  {...typographyProps}
+                  className={typographyClassName}
+                >
+                  {paperText}
+                </Typography>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
-    </ThemeProvider>
-  )
+        </Paper>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 export default TypographySampleArea

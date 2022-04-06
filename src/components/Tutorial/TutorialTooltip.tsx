@@ -1,9 +1,12 @@
 import React from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import IconButton from "@material-ui/core/IconButton"
-import { withStyles, Theme, makeStyles, createStyles } from "@material-ui/core"
+import Tooltip from "@mui/material/Tooltip"
+import IconButton from "@mui/material/IconButton"
+import { Theme } from "@mui/material";
+import withStyles from '@mui/styles/withStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import TutorialStepButton from "./TutorialStepButton"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
 import { useDispatch } from "react-redux"
 import { toggleTutorial } from "src/state/actions"
 

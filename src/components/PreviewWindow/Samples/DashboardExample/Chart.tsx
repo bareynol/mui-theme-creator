@@ -1,7 +1,7 @@
 import React from "react"
-import { useTheme } from "@material-ui/core/styles"
-import Tooltip from "@material-ui/core/Tooltip"
-import Typography from "@material-ui/core/Typography"
+import { useTheme } from "@mui/material/styles"
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
 import {
   LineChart,
   Line,

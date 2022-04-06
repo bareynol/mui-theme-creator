@@ -1,14 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import Grid from "@material-ui/core/Grid"
-import Card from "@material-ui/core/Card"
-import CardActionArea from "@material-ui/core/CardActionArea"
-import CardContent from "@material-ui/core/CardContent"
-import CardMedia from "@material-ui/core/CardMedia"
-import Hidden from "@material-ui/core/Hidden"
-import Tooltip from "@material-ui/core/Tooltip"
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
+import CardActionArea from "@mui/material/CardActionArea"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Hidden from "@mui/material/Hidden"
+import Tooltip from "@mui/material/Tooltip"
 
 const useStyles = makeStyles({
   card: {
@@ -70,7 +70,7 @@ export default function FeaturedPost(props) {
               </Tooltip>
             </CardContent>
           </div>
-          <Hidden xsDown>
+          <Hidden smDown>
             <CardMedia
               className={classes.cardMedia}
               image={post.image}
@@ -80,7 +80,7 @@ export default function FeaturedPost(props) {
         </Card>
       </CardActionArea>
     </Grid>
-  )
+  );
 }
 
 FeaturedPost.propTypes = {

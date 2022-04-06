@@ -1,11 +1,13 @@
 import React from "react"
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import Avatar from "@material-ui/core/Avatar"
-import { deepOrange, deepPurple, pink, green } from "@material-ui/core/colors"
-import FolderIcon from "@material-ui/icons/Folder"
-import PageviewIcon from "@material-ui/icons/Pageview"
-import AssignmentIcon from "@material-ui/icons/Assignment"
-import AvatarGroup from "@material-ui/lab/AvatarGroup"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import Avatar from "@mui/material/Avatar"
+import { deepOrange, deepPurple, pink, green } from "@mui/material/colors"
+import FolderIcon from "@mui/icons-material/Folder"
+import PageviewIcon from "@mui/icons-material/Pageview"
+import AssignmentIcon from "@mui/icons-material/Assignment"
+import AvatarGroup from '@mui/material/AvatarGroup'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

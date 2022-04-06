@@ -881,7 +881,7 @@ export interface MuiComponentProps {
    *
    * API:
    *
-   * - [GridList API](https://material-ui.com/api/grid-list/)
+   * - [ImageList API](https://material-ui.com/api/grid-list/)
    */
   MuiGridList?: {
     /**
@@ -905,7 +905,7 @@ export interface MuiComponentProps {
    *
    * API:
    *
-   * - [GridListTile API](https://material-ui.com/api/grid-list-tile/)
+   * - [ImageListItem API](https://material-ui.com/api/grid-list-tile/)
    */
   MuiGridListTile?: {
     /**
@@ -925,7 +925,7 @@ export interface MuiComponentProps {
    *
    * API:
    *
-   * - [GridListTileBar API](https://material-ui.com/api/grid-list-tile-bar/)
+   * - [ImageListItemBar API](https://material-ui.com/api/grid-list-tile-bar/)
    */
   MuiGridListTileBar?: {
     /**

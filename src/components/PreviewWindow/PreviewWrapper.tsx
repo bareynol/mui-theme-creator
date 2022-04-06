@@ -1,5 +1,7 @@
 import React from "react"
-import { makeStyles, Paper, Theme, createStyles } from "@material-ui/core"
+import { Paper, Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import ThemeWrapper from "src/components/ThemeWrapper"

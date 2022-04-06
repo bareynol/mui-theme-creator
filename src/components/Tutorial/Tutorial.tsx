@@ -1,10 +1,12 @@
 import React, { useEffect, useCallback } from "react"
-import Backdrop from "@material-ui/core/Backdrop"
-import Button from "@material-ui/core/Button"
-import Portal from "@material-ui/core/Portal"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles, Theme, createStyles } from "@material-ui/core"
-import CloseIcon from "@material-ui/icons/Close"
+import Backdrop from "@mui/material/Backdrop"
+import Button from "@mui/material/Button"
+import Portal from "@mui/material/Portal"
+import Typography from "@mui/material/Typography"
+import { Theme } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import CloseIcon from "@mui/icons-material/Close"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "baseline",
       "& > *": {
-        margin: `0 ${theme.spacing()}px`,
+        margin: `0 ${theme.spacing()}`,
       },
     },
     closeButton: {

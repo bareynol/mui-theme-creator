@@ -1,16 +1,16 @@
 import React from "react"
-import Avatar from "@material-ui/core/Avatar"
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Checkbox from "@material-ui/core/Checkbox"
-import Link from "@material-ui/core/Link"
-import Grid from "@material-ui/core/Grid"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
-import Tooltip from "@material-ui/core/Tooltip"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Checkbox from "@mui/material/Checkbox"
+import Link from "@mui/material/Link"
+import Grid from "@mui/material/Grid"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import Typography from "@mui/material/Typography"
+import makeStyles from '@mui/styles/makeStyles';
+import Container from "@mui/material/Container"
+import Tooltip from "@mui/material/Tooltip"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -115,7 +115,7 @@ export default function SignUpExample() {
               Sign Up
             </Button>
           </Tooltip>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Tooltip title={`<Link color="primary" variant="body2">`} arrow>
                 <Link href="#" variant="body2">
@@ -127,5 +127,5 @@ export default function SignUpExample() {
         </form>
       </div>
     </Container>
-  )
+  );
 }

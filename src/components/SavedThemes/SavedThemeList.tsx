@@ -1,5 +1,8 @@
 import React from "react"
-import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core"
+import { Grid, Theme } from "@mui/material";
+
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
@@ -24,7 +27,7 @@ function SavedThemeList() {
   )
 
   return (
-    <Grid id={savedThemeListId} container wrap="wrap" justify="center">
+    <Grid id={savedThemeListId} container wrap="wrap" justifyContent="center">
       {sortedThemes.map(t => (
         <Grid
           item
@@ -40,7 +43,7 @@ function SavedThemeList() {
         </Grid>
       ))}
     </Grid>
-  )
+  );
 }
 
 export default SavedThemeList

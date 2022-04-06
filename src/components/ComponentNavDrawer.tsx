@@ -3,7 +3,6 @@ import componentSamples from "src/components/MuiComponentSamples/Samples"
 import {
   Drawer,
   List,
-  makeStyles,
   ListSubheader,
   ListItem,
   ListItemText,
@@ -11,7 +10,8 @@ import {
   Link,
   useTheme,
   useMediaQuery,
-} from "@material-ui/core"
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { useDispatch, useSelector } from "react-redux"
 import { setActiveTab } from "src/state/actions"
 import { RootState } from "src/state/types"

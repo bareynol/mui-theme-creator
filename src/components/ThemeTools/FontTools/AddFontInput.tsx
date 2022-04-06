@@ -1,10 +1,10 @@
 import React, { useState, FormEvent, useCallback } from "react"
-import Link from "@material-ui/core/Link"
-import TextField from "@material-ui/core/TextField"
+import Link from "@mui/material/Link"
+import TextField from "@mui/material/TextField"
 import { useDispatch } from "react-redux"
 import { addFonts } from "src/state/actions"
-import { InputAdornment, CircularProgress, Typography } from "@material-ui/core"
-import AddIcon from "@material-ui/icons/Add"
+import { InputAdornment, CircularProgress, Typography } from "@mui/material"
+import AddIcon from "@mui/icons-material/Add"
 
 function AddFontInput() {
   const dispatch = useDispatch()

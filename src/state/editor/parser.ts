@@ -14,7 +14,7 @@ import { verbose } from "src/utils"
  *  Object.defineProperty(exports, "__esModule", { value: true });
  *  exports.themeOptions = {
  *    palette: {
- *      type: 'light',
+ *      mode: 'light',
  *      primary: {
  *        main: '#3f51b5',
  *      },

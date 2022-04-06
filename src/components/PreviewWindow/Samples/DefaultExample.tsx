@@ -1,6 +1,5 @@
 import React from "react"
 import {
-  makeStyles,
   Typography,
   Grid,
   Card,
@@ -14,12 +13,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core"
-import BuildIcon from "@material-ui/icons/Build"
-import StarIcon from "@material-ui/icons/Star"
-import PaletteIcon from "@material-ui/icons/Palette"
-import FontIcon from "@material-ui/icons/FontDownload"
-import TypographyIcon from "@material-ui/icons/TextFields"
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import BuildIcon from "@mui/icons-material/Build"
+import StarIcon from "@mui/icons-material/Star"
+import PaletteIcon from "@mui/icons-material/Palette"
+import FontIcon from "@mui/icons-material/FontDownload"
+import TypographyIcon from "@mui/icons-material/TextFields"
 import wrapTooltip from "../wrapTooltip"
 import { TutorialLink } from "src/components/Tutorial/TutorialButton"
 
@@ -58,7 +58,7 @@ const DefaultExample = () => {
       <Typography paragraph>
         <TutorialLink>Check out the Tutorial!</TutorialLink>
       </Typography>
-      <Grid container spacing={2} justify="center">
+      <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} md={6}>
           <FeatureCard
             icon={<BuildIcon color="primary" />}
@@ -202,7 +202,7 @@ const DefaultExample = () => {
         </Fab>
       </Tooltip> */}
     </Box>
-  )
+  );
 }
 
 export default DefaultExample

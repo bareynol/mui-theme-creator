@@ -3,19 +3,12 @@ import { SnippetModification } from "./types"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 import { getByPath } from "src/utils"
-import {
-  Link,
-  Tooltip,
-  makeStyles,
-  Theme,
-  createStyles,
-  Accordion,
-  AccordionSummary,
-  Typography,
-} from "@material-ui/core"
-import AddIcon from "@material-ui/icons/Add"
-import RemoveIcon from "@material-ui/icons/Remove"
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined"
+import { Link, Tooltip, Theme, Accordion, AccordionSummary, Typography } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import AddIcon from "@mui/icons-material/Add"
+import RemoveIcon from "@mui/icons-material/Remove"
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import { setThemeOptions, removeThemeOptions } from "src/state/actions"
 import { ThemeValueChangeEvent } from "../events"
 

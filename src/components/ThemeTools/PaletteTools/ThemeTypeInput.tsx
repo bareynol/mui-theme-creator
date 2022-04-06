@@ -1,14 +1,7 @@
 import React, { useCallback } from "react"
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Typography,
-  Switch,
-} from "@material-ui/core"
+import { Theme, ListItem, ListItemText, ListItemSecondaryAction, Typography, Switch } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { useDispatch } from "react-redux"
 import { setThemeOption } from "src/state/actions"
 import { useThemeValue } from "src/state/selectors"
@@ -36,11 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ThemeTypeInput() {
   const classes = useStyles()
-  const themeIsDark = useThemeValue("palette.type") === "dark"
+  const themeIsDark = useThemeValue("palette.mode") === "dark"
   const dispatch = useDispatch()
 
   const toggleThemeType = useCallback(() => {
-    dispatch(setThemeOption("palette.type", themeIsDark ? "light" : "dark"))
+    dispatch(setThemeOption("palette.mode", themeIsDark ? "light" : "dark"))
     document.dispatchEvent(ThemeValueChangeEvent())
   }, [dispatch, themeIsDark])
 

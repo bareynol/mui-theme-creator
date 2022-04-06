@@ -1,7 +1,9 @@
 import React from "react"
 import clsx from "clsx"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import CircularProgress from "@material-ui/core/CircularProgress"
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import CircularProgress from "@mui/material/CircularProgress"
 import {
   Typography,
   Fab,
@@ -9,10 +11,10 @@ import {
   LinearProgress,
   LinearProgressProps,
   Box,
-} from "@material-ui/core"
-import { green } from "@material-ui/core/colors"
-import CheckIcon from "@material-ui/icons/Check"
-import SaveIcon from "@material-ui/icons/Save"
+} from "@mui/material"
+import { green } from "@mui/material/colors"
+import CheckIcon from "@mui/icons-material/Check"
+import SaveIcon from "@mui/icons-material/Save"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

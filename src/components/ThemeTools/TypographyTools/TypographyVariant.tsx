@@ -1,14 +1,8 @@
 import React, { useState } from "react"
-import {
-  Accordion,
-  AccordionSummary,
-  makeStyles,
-  createStyles,
-  AccordionDetails,
-  Theme,
-  Divider,
-} from "@material-ui/core"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import { Accordion, AccordionSummary, AccordionDetails, Theme, Divider } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import TypographySampleArea from "./TypographySampleArea"
 import { useThemeValue } from "src/state/selectors"
 import TypographyInput from "./TypographyInput/TypographyInput"

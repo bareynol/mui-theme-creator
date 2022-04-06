@@ -1,6 +1,6 @@
 import React from "react"
 import ThemeTypeInput from "./ThemeTypeInput"
-import { Typography, AccordionSummary, Accordion } from "@material-ui/core"
+import { Typography, AccordionSummary, Accordion } from "@mui/material"
 import PaletteSubType from "./PaletteSubType"
 
 const paletteColorTypes = [

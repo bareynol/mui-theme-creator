@@ -2,18 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
 import clsx from "clsx"
-import {
-  Snackbar,
-  IconButton,
-  makeStyles,
-  Theme,
-  createStyles,
-  Collapse,
-  Divider,
-} from "@material-ui/core"
-import Alert from "@material-ui/lab/Alert"
-import CloseIcon from "@material-ui/icons/Close"
-import ExpandLessIcon from "@material-ui/icons/ExpandLess"
+import { Snackbar, IconButton, Theme, Collapse, Divider } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import Alert from '@mui/material/Alert'
+import CloseIcon from "@mui/icons-material/Close"
+import ExpandLessIcon from "@mui/icons-material/ExpandLess"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
