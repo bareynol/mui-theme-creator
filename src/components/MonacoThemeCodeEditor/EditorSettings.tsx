@@ -1,40 +1,19 @@
-import React from "react"
-import Tooltip from "@mui/material/Tooltip"
-import IconButton from "@mui/material/IconButton"
 import SettingsIcon from "@mui/icons-material/Settings"
-import Popover from "@mui/material/Popover"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import { useUpdateEditorState } from "src/state/editor/actions"
-import Checkbox from "@mui/material/Checkbox"
 import {
-  Theme,
   List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  ListSubheader,
-} from "@mui/material";
+  ListItem, ListItemSecondaryAction, ListItemText, ListSubheader
+} from "@mui/material"
+import Checkbox from "@mui/material/Checkbox"
+import IconButton from "@mui/material/IconButton"
+import Popover from "@mui/material/Popover"
+import Tooltip from "@mui/material/Tooltip"
+import React from "react"
+import { useSelector } from "react-redux"
+import { useUpdateEditorState } from "src/state/editor/actions"
+import { RootState } from "src/state/types"
 
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(3),
-    },
-    popoverPaper: {
-      // backgroundColor: theme.palette.background.default,
-    },
-    settingsList: {
-      minWidth: 320,
-    },
-  })
-)
 
 const EditorButton = () => {
-  const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
 
   const handleOpen = (event: React.MouseEvent) => {
@@ -64,9 +43,6 @@ const EditorButton = () => {
         vertical: "top",
         horizontal: "right",
       }}
-      PaperProps={{
-        className: classes.popoverPaper,
-      }}
     >
       <EditorSettings />
     </Popover>
@@ -75,7 +51,6 @@ const EditorButton = () => {
 export default EditorButton
 
 const EditorSettings = () => {
-  const classes = useStyles()
   const formatOnSave = useSelector(
     (state: RootState) => state.editor.formatOnSave
   )
@@ -88,7 +63,7 @@ const EditorSettings = () => {
     updateEditor({ outputTypescript: !outputTypescript })
 
   return (
-    <List dense className={classes.settingsList}>
+    <List dense sx={{ minWidth: 320 }}>
       <ListSubheader>Editor Settings</ListSubheader>
       <ListItem button onClick={toggleFormatOnSave}>
         <ListItemText

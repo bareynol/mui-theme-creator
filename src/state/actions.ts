@@ -1,4 +1,4 @@
-import { ThemeOptions } from '@mui/material/styles';
+import { ThemeOptions } from '@mui/material';
 import { setByPath, removeByPath, getByPath, verbose } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"

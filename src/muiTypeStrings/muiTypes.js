@@ -164,7 +164,7 @@ export type PaletteTonalOffset =
 
 export interface Palette {
   common: CommonColors
-  type: PaletteType
+  mode: PaletteType
   contrastThreshold: number
   tonalOffset: PaletteTonalOffset
   primary: PaletteColor

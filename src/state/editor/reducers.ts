@@ -5,7 +5,7 @@ import { ThemeOptions } from "@mui/material"
 import { RootState } from "../types"
 
 const stringify = (themeOptions: ThemeOptions) => {
-  return `import { ThemeOptions } from '@mui/material/styles';
+  return `import { ThemeOptions } from '@mui/material';
 
 export const themeOptions: ThemeOptions = ${JSON5.stringify(
     themeOptions,

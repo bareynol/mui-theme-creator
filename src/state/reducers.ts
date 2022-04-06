@@ -1,14 +1,14 @@
-import { RootState, PreviewSize } from "src/state/types"
 import { createTheme, ThemeOptions } from "@mui/material";
-import { generateThemeId, isSetEq } from "src/utils"
+import { TypographyOptions } from "@mui/material/styles/createTypography";
+import deepmerge from "deepmerge";
+import { defaultThemeOptions } from "src/siteTheme";
+import { PreviewSize, RootState } from "src/state/types";
+import { generateThemeId, isSetEq } from "src/utils";
+import { loadFonts } from "./actions";
 import editorReducer, {
-  initialState as editorInitialState,
-} from "./editor/reducers"
-import { loadFonts } from "./actions"
-import deepmerge from "deepmerge"
+  initialState as editorInitialState
+} from "./editor/reducers";
 
-import { defaultThemeOptions } from "src/siteTheme"
-import { TypographyVariantsOptions, Breakpoints } from '@mui/material/styles';
 
 const defaultThemeId = generateThemeId({})
 
@@ -226,7 +226,7 @@ const getFontsFromThemeOptions = (
   previousFonts: string[] | undefined,
   loadedFonts: Set<string>
 ) => {
-  const typography = themeOptions.typography as TypographyVariantsOptions | undefined
+  const typography: TypographyOptions | undefined = themeOptions.typography;
 
   // get all defined fonts from the themeOptions
   const fontList: string[] = [

@@ -1,40 +1,24 @@
-import PropTypes from "prop-types"
-import React from "react"
-import { AppBar, Toolbar, Typography, Link, IconButton, AppBarProps } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import muiVersion from "src/muiVersion"
-import TutorialButton from "./Tutorial/TutorialButton"
-import GitHubIcon from "@mui/icons-material/GitHub"
-
-const useStyles = makeStyles(theme => ({
-  title: {
-    fontSize: theme.typography.h6.fontSize,
-    lineHeight: theme.typography.h6.fontSize,
-  },
-  version: {
-    fontSize: theme.typography.caption.fontSize,
-    lineHeight: theme.typography.caption.fontSize,
-    fontWeight: 700,
-  },
-  toolbar: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-}))
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { AppBar, AppBarProps, IconButton, Link, Toolbar, Typography } from "@mui/material";
+import React from "react";
+import muiVersion from "src/muiVersion";
+import TutorialButton from "./Tutorial/TutorialButton";
 
 const Header = (props: AppBarProps) => {
-  const classes = useStyles()
   return (
     <AppBar position="static" color="default" {...props}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar sx={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}>
         <div>
-          <Typography variant="h6" className={classes.title}>
-            Material-UI Theme Creator
+          <Typography variant="h6" sx={{ typography: 'h6' }}>
+            MUI Theme Creator
           </Typography>
-          <Typography variant="caption" className={classes.version}>
+          <Typography variant="caption" sx={{ typography: 'caption', fontWeight: 700 }}>
             {"└─ "}
             <Link
-              href="https://material-ui.com/"
+              href="https://mui.com/"
               target="_blank"
               rel="noreferrer"
               underline="hover">

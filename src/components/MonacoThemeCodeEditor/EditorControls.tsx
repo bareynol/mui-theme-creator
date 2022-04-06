@@ -1,42 +1,35 @@
-import React, { useState } from "react"
 import FileCopyIcon from "@mui/icons-material/FileCopy"
-import DownloadIcon from "@mui/icons-material/GetApp"
-import SaveIcon from "@mui/icons-material/Save"
 import RedoIcon from "@mui/icons-material/Redo"
+import SaveIcon from "@mui/icons-material/Save"
 import UndoIcon from "@mui/icons-material/Undo"
-import Typography from "@mui/material/Typography"
-import Tooltip from "@mui/material/Tooltip"
-import { IconButton, Theme, Divider, Snackbar } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import { useCanSave } from "src/state/selectors"
+import { Box, Divider, IconButton, Snackbar } from "@mui/material"
 import Alert from '@mui/material/Alert'
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
+import React, { useState } from "react"
+import { useSelector } from "react-redux"
+import { useCanSave } from "src/state/selectors"
+import { RootState } from "src/state/types"
 import EditorButton from "./EditorSettings"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    editorControlRoot: {
-      paddingRight: theme.spacing(),
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    editorControlActions: {
-      display: "flex",
-    },
-  })
-)
+interface EditorControlsProps {
+  onRedo: React.MouseEventHandler<HTMLButtonElement>;
+  onUndo: React.MouseEventHandler<HTMLButtonElement>;
+  onSave: React.MouseEventHandler<HTMLButtonElement>;
+}
 
-function EditorControls({ onRedo, onUndo, onSave }) {
-  const classes = useStyles()
+function EditorControls({ onRedo, onUndo, onSave }: EditorControlsProps) {
   const canUndo = useSelector((state: RootState) => state.editor.canUndo)
   const canRedo = useSelector((state: RootState) => state.editor.canRedo)
   const canSave = useCanSave()
   return (
-    <div className={classes.editorControlRoot}>
-      <div className={classes.editorControlActions}>
+    <Box sx={{
+      paddingRight: 1,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}>
+      <Box sx={{ display: "flex" }}>
         <EditorButton />
         <CopyButton />
         <Divider orientation="vertical" flexItem />
@@ -61,7 +54,7 @@ function EditorControls({ onRedo, onUndo, onSave }) {
             </IconButton>
           </span>
         </Tooltip>
-      </div>
+      </Box>
       <Typography
         variant="body2"
         color={canSave ? "textPrimary" : "textSecondary"}
@@ -69,13 +62,13 @@ function EditorControls({ onRedo, onUndo, onSave }) {
       >
         {canSave ? "* Unsaved Changes" : "All changes saved"}
       </Typography>
-    </div>
+    </Box>
   );
 }
 
 export default EditorControls
 
-const CopyButton = ({}) => {
+const CopyButton = ({ }) => {
   const themeInput = useSelector((state: RootState) => state.editor.themeInput)
   const outputTypescript = useSelector(
     (state: RootState) => state.editor.outputTypescript

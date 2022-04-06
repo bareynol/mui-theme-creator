@@ -1,45 +1,20 @@
-import React from "react"
-import ThemeWrapper from "src/components/ThemeWrapper"
-import { Container, AppBar, Tabs, Tab, Theme, IconButton, Hidden } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import MuiComponentSamples from "src/components/MuiComponentSamples"
-import PreviewWindow from "src/components/PreviewWindow"
-import SavedThemes from "src/components/SavedThemes/SavedThemes"
-import { useDispatch, useSelector } from "react-redux"
-import { setActiveTab } from "src/state/actions"
-import { RootState } from "src/state/types"
-import MaterialUiIcon from "mdi-material-ui/MaterialUi"
-import BrushIcon from "@mui/icons-material/Brush"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    mainWindow: {
-      overflowY: "auto",
-      height: "100%",
-    },
-    navAppBar: {
-      justifyContent: "space-between",
-      flexDirection: "row",
-    },
-    componentsTabRoot: {
-      backgroundColor: "#fff", // ensures transparent colors show properly
-    },
-    tabs: {
-      flexGrow: 1,
-    },
-    tabFlexContainer: {
-      justifyContent: "center",
-    },
-  })
-)
+import BrushIcon from "@mui/icons-material/Brush";
+import { AppBar, Box, Hidden, IconButton, Tab, Tabs } from "@mui/material";
+import MaterialUiIcon from "mdi-material-ui/MaterialUi";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import MuiComponentSamples from "src/components/MuiComponentSamples";
+import PreviewWindow from "src/components/PreviewWindow";
+import SavedThemes from "src/components/SavedThemes/SavedThemes";
+import ThemeWrapper from "src/components/ThemeWrapper";
+import { setActiveTab } from "src/state/actions";
+import { RootState } from "src/state/types";
 
 export const previewTabId = "preview-tab"
 export const componentsTabId = "components-tab"
 export const savedThemesTabId = "saved-themes-tab"
 
 const MainWindow = () => {
-  const classes = useStyles()
   const activeTab = useSelector((state: RootState) => state.activeTab)
   const dispatch = useDispatch()
   const setTab = React.useCallback(value => dispatch(setActiveTab(value)), [
@@ -47,7 +22,10 @@ const MainWindow = () => {
   ])
 
   return <>
-    <AppBar position="sticky" color="default" className={classes.navAppBar}>
+    <AppBar position="sticky" color="default" sx={{
+      justifyContent: "space-between",
+      flexDirection: "row",
+    }}>
       <Hidden lgUp>
         <IconButton onClick={() => dispatch({ type: "TOGGLE_COMPONENT_NAV" })} size="large">
           <MaterialUiIcon />
@@ -59,9 +37,11 @@ const MainWindow = () => {
         textColor="primary"
         variant="scrollable"
         onChange={(event, value) => setTab(value)}
-        classes={{
-          root: classes.tabs,
-          flexContainer: classes.tabFlexContainer,
+        sx={{
+          flexGrow: 1,
+          '& .MuiTabs-flexContainer': {
+            justifyContent: "center",
+          },
         }}
       >
         <Tab label="Preview" value="preview" id={previewTabId} />
@@ -74,19 +54,19 @@ const MainWindow = () => {
         </IconButton>
       </Hidden>
     </AppBar>
-    <div className={classes.mainWindow}>
+    <Box sx={{  overflowY: "auto", height: 1 }}>
       {activeTab === "preview" && <PreviewWindow />}
 
       {activeTab === "components" && (
-        <div className={classes.componentsTabRoot}>
+        <Box sx={{ bgcolor: '#fff' }}>
           <ThemeWrapper>
             <MuiComponentSamples />
           </ThemeWrapper>
-        </div>
+        </Box>
       )}
 
       {activeTab === "saved" && <SavedThemes />}
-    </div>
+    </Box>
   </>;
 }
 

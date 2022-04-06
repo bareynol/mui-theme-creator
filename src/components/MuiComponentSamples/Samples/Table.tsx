@@ -23,11 +23,11 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import FilterListIcon from "@mui/icons-material/FilterList"
 
 interface Data {
-  calories: number
-  carbs: number
-  fat: number
-  name: string
-  protein: number
+  calories: number;
+  carbs: number;
+  fat: number;
+  name: string;
+  protein: number;
 }
 
 function createData(
@@ -54,7 +54,7 @@ const rows = [
   createData("Marshmallow", 318, 0, 81, 2.0),
   createData("Nougat", 360, 19.0, 9, 37.0),
   createData("Oreo", 437, 18.0, 63, 4.0),
-]
+];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -154,7 +154,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "default"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
