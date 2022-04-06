@@ -1,34 +1,26 @@
-import React from "react"
-import makeStyles from '@mui/styles/makeStyles';
-import Button from "@mui/material/Button"
-import Avatar from "@mui/material/Avatar"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import ListItemAvatar from "@mui/material/ListItemAvatar"
-import ListItemText from "@mui/material/ListItemText"
-import DialogTitle from "@mui/material/DialogTitle"
-import Dialog from "@mui/material/Dialog"
-import PersonIcon from "@mui/icons-material/Person"
-import AddIcon from "@mui/icons-material/Add"
-import Typography from "@mui/material/Typography"
-import { blue } from "@mui/material/colors"
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import { blue } from "@mui/material/colors";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 const emails = ["username@gmail.com", "user02@gmail.com"]
-const useStyles = makeStyles({
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600],
-  },
-})
 
 export interface SimpleDialogProps {
-  open: boolean
-  selectedValue: string
-  onClose: (value: string) => void
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
 }
 
 function SimpleDialog(props: SimpleDialogProps) {
-  const classes = useStyles()
   const { onClose, selectedValue, open } = props
 
   const handleClose = () => {
@@ -54,7 +46,10 @@ function SimpleDialog(props: SimpleDialogProps) {
             key={email}
           >
             <ListItemAvatar>
-              <Avatar className={classes.avatar}>
+              <Avatar sx={{
+                backgroundColor: blue[100],
+                color: blue[600],
+              }}>
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>

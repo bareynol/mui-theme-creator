@@ -1,66 +1,25 @@
-import React from "react"
-import { Theme } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from "clsx"
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import Button from "@mui/material/Button"
-import Typography from "@mui/material/Typography"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ShareIcon from "@mui/icons-material/Share";
 import {
-  Grid,
-  CardHeader,
-  Avatar,
-  IconButton,
-  CardMedia,
-  Collapse,
-} from "@mui/material"
-import { red } from "@mui/material/colors"
-import FavoriteIcon from "@mui/icons-material/Favorite"
-import ShareIcon from "@mui/icons-material/Share"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import MoreVertIcon from "@mui/icons-material/MoreVert"
-
-const useStyles = makeStyles((theme: Theme) => ({
-  rootSimple: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  rootComplex: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}))
+  Avatar, Box, CardHeader, CardMedia,
+  Collapse, Grid, IconButton
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import { red } from "@mui/material/colors";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 export default function CardExample() {
-  const classes = useStyles()
-  const bull = <span className={classes.bullet}>•</span>
+  const bull = <Box component="span" sx={{
+    display: "inline-block",
+    m: "0 2px",
+    transform: "scale(0.8)",
+  }}>•</Box>
   const [expanded, setExpanded] = React.useState(false)
 
   const handleExpandClick = () => {
@@ -71,10 +30,10 @@ export default function CardExample() {
     <Grid container spacing={2}>
       <Grid item>
         <Typography variant="h6">Simple</Typography>
-        <Card className={classes.rootSimple}>
+        <Card sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography
-              className={classes.title}
+              sx={{ fontSize: 14 }}
               color="textSecondary"
               gutterBottom
             >
@@ -83,7 +42,7 @@ export default function CardExample() {
             <Typography variant="h5" component="h2">
               be{bull}nev{bull}o{bull}lent
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
+            <Typography sx={{ mb: '12px' }} color="textSecondary">
               adjective
             </Typography>
             <Typography variant="body2" component="p">
@@ -105,10 +64,10 @@ export default function CardExample() {
       </Grid>
       <Grid item>
         <Typography variant="h6">Outlined</Typography>
-        <Card variant="outlined" className={classes.rootSimple}>
+        <Card variant="outlined" sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography
-              className={classes.title}
+              sx={{ fontSize: 14 }}
               color="textSecondary"
               gutterBottom
             >
@@ -117,7 +76,7 @@ export default function CardExample() {
             <Typography variant="h5" component="h2">
               be{bull}nev{bull}o{bull}lent
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
+            <Typography sx={{ mb: '12px' }} color="textSecondary">
               adjective
             </Typography>
             <Typography variant="body2" component="p">
@@ -139,10 +98,10 @@ export default function CardExample() {
       </Grid>
       <Grid item>
         <Typography variant="h6">Complex</Typography>
-        <Card className={classes.rootComplex}>
+        <Card sx={{ minWidth: 345 }}>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
+              <Avatar aria-label="recipe" sx={{ bgcolor: red[500] }}>
                 R
               </Avatar>
             }
@@ -155,7 +114,10 @@ export default function CardExample() {
             subheader="September 14, 2016"
           />
           <CardMedia
-            className={classes.media}
+            sx={{
+              height: 0,
+              pt: "56.25%", // 16:9
+            }}
             image="https://material-ui.com/static/images/cards/paella.jpg"
             title="Paella dish"
           />
@@ -174,9 +136,13 @@ export default function CardExample() {
               <ShareIcon />
             </IconButton>
             <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
+              sx={{
+                transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                marginLeft: "auto",
+                transition: (theme) => theme.transitions.create("transform", {
+                  duration: theme.transitions.duration.shortest,
+                }),
+              }}
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"

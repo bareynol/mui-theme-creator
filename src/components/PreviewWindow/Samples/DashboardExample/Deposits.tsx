@@ -1,21 +1,13 @@
-import React from "react"
-import Link from "@mui/material/Link"
-import makeStyles from '@mui/styles/makeStyles';
-import Typography from "@mui/material/Typography"
-import Tooltip from "@mui/material/Tooltip"
+import Link from "@mui/material/Link";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
-function preventDefault(event) {
+function preventDefault(event: React.MouseEvent) {
   event.preventDefault()
 }
 
-const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-  },
-})
-
 export default function Deposits() {
-  const classes = useStyles()
   return (
     <React.Fragment>
       <Tooltip
@@ -41,7 +33,7 @@ export default function Deposits() {
         placement="left"
         arrow
       >
-        <Typography color="textSecondary" className={classes.depositContext}>
+        <Typography color="textSecondary" sx={{ flex: 1 }}>
           on 15 March, 2019
         </Typography>
       </Tooltip>

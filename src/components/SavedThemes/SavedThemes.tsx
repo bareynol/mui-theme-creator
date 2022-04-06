@@ -1,6 +1,4 @@
-import { Divider, Grid, Theme, Typography } from "@mui/material";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/state/types";
@@ -9,56 +7,41 @@ import DefaultThemesComponent from "./DefaultThemesComponent";
 import SavedThemeItem from "./SavedThemeItem/SavedThemeItem";
 import SavedThemeList from "./SavedThemeList";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    savedThemesRoot: {
-      paddingTop: theme.spacing(2),
-      paddingLeft: theme.spacing(2),
-    },
-    savedThemes: {
-      flex: 1,
-    },
-    divider: {
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.down('lg')]: {
-        display: "none",
-      },
-    },
-    themeActions: {
-      display: "flex",
-      flexDirection: "column",
-      marginBottom: theme.spacing(2),
-      "& > *": {
-        marginTop: theme.spacing(),
-      },
-    },
-  })
-)
-
 function SavedThemes() {
-  const classes = useStyles()
   return (
-    <div className={classes.savedThemesRoot}>
+    <Box sx={{ pt: 2, pl: 2 }}>
       <Grid container justifyContent="center">
         <Grid item>
           <Typography variant="h4">Current Theme</Typography>
           <CurrentTheme />
-          <div className={classes.themeActions}>
+          <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            mb: 2,
+            "& > *": {
+              mt: 1,
+            },
+          }}>
             <AddThemeButton />
             <DefaultThemesComponent />
-          </div>
+          </Box>
         </Grid>
-        <Divider orientation="vertical" flexItem className={classes.divider} />
+        <Divider orientation="vertical" flexItem sx={{
+          mx: 2,
+          display: {
+            xs: 'none',
+            lg: 'block',
+          }
+        }} />
 
-        <Grid item className={classes.savedThemes}>
+        <Grid item sx={{ flex: 1 }}>
           <Typography variant="h4" gutterBottom>
             Saved Themes
           </Typography>
           <SavedThemeList />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 }
 

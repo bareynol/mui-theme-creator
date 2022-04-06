@@ -1,34 +1,15 @@
-import React, { useCallback, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "src/state/types"
-import { setPreviewSize } from "src/state/actions"
-
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
 import SmartphoneIcon from "@mui/icons-material/Smartphone"
 import TabletIcon from "@mui/icons-material/TabletAndroid"
-import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
-import { BottomNavigation, BottomNavigationAction, Theme, useTheme, useMediaQuery } from "@mui/material";
-
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    sizeControlRoot: {
-      height: "auto",
-      backgroundColor: theme.palette.background.default,
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      zIndex: 1,
-      flexDirection: "column",
-    },
-  })
-)
+import { BottomNavigation, BottomNavigationAction, useMediaQuery, useTheme } from "@mui/material"
+import React, { useCallback, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setPreviewSize } from "src/state/actions"
+import { RootState } from "src/state/types"
 
 export const previewSizeControlsId = "preview-size-controls"
 
 const PreviewSizeControls = () => {
-  const classes = useStyles()
   const previewSize = useSelector((state: RootState) => state.previewSize)
   const dispatch = useDispatch()
   const handleOnChange = useCallback(
@@ -55,7 +36,15 @@ const PreviewSizeControls = () => {
       id={previewSizeControlsId}
       value={previewSize}
       onChange={handleOnChange}
-      className={classes.sizeControlRoot}
+      sx={{
+        height: "auto",
+        bgcolor: 'background.default',
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        zIndex: 1,
+        flexDirection: "column",
+      }}
       showLabels
     >
       <BottomNavigationAction

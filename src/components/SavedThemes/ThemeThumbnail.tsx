@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react"
+import AddIcon from "@mui/icons-material/Add";
 import { Box, createTheme, Theme, ThemeOptions } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import AddIcon from "@mui/icons-material/Add"
+import React, { useEffect, useState } from "react";
 
 interface Props {
   themeOptions: ThemeOptions;
@@ -30,7 +28,7 @@ function ThemeThumbnail({ themeOptions, large = false }: Props) {
         sx={{
           height: "15%",
           width: "100%",
-          paddingLeft: 4,
+          pl: '4px',
           fontSize: "75%",
           bgcolor: primary?.main,
         }}

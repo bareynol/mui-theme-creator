@@ -1,26 +1,15 @@
-import React from "react"
-import TextField from "@mui/material/TextField"
-import { Theme } from "@mui/material/styles";
-
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > div > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  })
-)
+import { Box } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import React from "react";
 
 export default function TextFieldExample() {
-  const classes = useStyles()
-
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <Box component="form" sx={{
+      "& > div > *": {
+        m: 1,
+        width: "25ch",
+      },
+    }} noValidate autoComplete="off">
       <div>
         <TextField
           required
@@ -194,6 +183,6 @@ export default function TextFieldExample() {
           variant="outlined"
         />
       </div>
-    </form>
+    </Box>
   )
 }

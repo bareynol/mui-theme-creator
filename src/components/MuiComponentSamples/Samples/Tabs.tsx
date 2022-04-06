@@ -1,14 +1,12 @@
-import React from "react"
-import { Theme } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
-import AppBar from "@mui/material/AppBar"
-import Tabs from "@mui/material/Tabs"
-import Tab from "@mui/material/Tab"
-import Typography from "@mui/material/Typography"
-import Box from "@mui/material/Box"
-import PhoneIcon from "@mui/icons-material/Phone"
-import FavoriteIcon from "@mui/icons-material/Favorite"
-import PersonPinIcon from "@mui/icons-material/PersonPin"
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import PhoneIcon from "@mui/icons-material/Phone";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -43,15 +41,7 @@ function a11yProps(index: any) {
   }
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}))
-
 export default function TabsExample() {
-  const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -59,7 +49,10 @@ export default function TabsExample() {
   }
 
   return (
-    <div className={classes.root}>
+    <Box sx={{
+      flexGrow: 1,
+      bgcolor: 'background.paper',
+    }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -101,6 +94,6 @@ export default function TabsExample() {
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
-    </div>
+    </Box>
   )
 }

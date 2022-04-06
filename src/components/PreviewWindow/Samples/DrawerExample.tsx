@@ -1,43 +1,27 @@
-import React from "react"
+import AssignmentIcon from "@mui/icons-material/Assignment"
+import BarChartIcon from "@mui/icons-material/BarChart"
+import DashboardIcon from "@mui/icons-material/Dashboard"
+import LayersIcon from "@mui/icons-material/Layers"
+import PeopleIcon from "@mui/icons-material/People"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import { Toolbar } from "@mui/material"
+import Divider from "@mui/material/Divider"
+import Drawer from "@mui/material/Drawer"
+import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import ListSubheader from "@mui/material/ListSubheader"
-import DashboardIcon from "@mui/icons-material/Dashboard"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import PeopleIcon from "@mui/icons-material/People"
-import BarChartIcon from "@mui/icons-material/BarChart"
-import LayersIcon from "@mui/icons-material/Layers"
-import AssignmentIcon from "@mui/icons-material/Assignment"
-import Drawer from "@mui/material/Drawer"
-import List from "@mui/material/List"
-import Divider from "@mui/material/Divider"
-import { Theme, Toolbar } from "@mui/material";
-
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import React from "react"
 
 const drawerWidth = 240
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    drawerPaper: {
-      position: "relative",
-      whiteSpace: "nowrap",
-      width: drawerWidth,
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerBackdrop: {
-      position: "absolute",
-    },
-  })
-)
 
-const DrawerExample = ({ open, onClose }) => {
-  const classes = useStyles()
-  const drawerRef = React.useRef<HTMLElement | null>(null)
+interface Props {
+  open: boolean
+  onClose: () => void
+}
+const DrawerExample = ({ open, onClose }: Props) => {
+  const drawerRef = React.useRef<HTMLDivElement | null>(null)
 
   const getParent = () => drawerRef.current?.parentElement
 
@@ -51,12 +35,19 @@ const DrawerExample = ({ open, onClose }) => {
         container: getParent(),
         disablePortal: true,
         BackdropProps: {
-          classes: { root: classes.drawerBackdrop },
+          sx: {
+            position: "absolute",
+          }
         },
       }}
-      style={{ position: "absolute" }}
-      classes={{
-        paper: classes.drawerPaper,
+      sx={{
+        position: "relative",
+        whiteSpace: "nowrap",
+        width: drawerWidth,
+        transition: (theme) => theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
       }}
     >
       <Toolbar />

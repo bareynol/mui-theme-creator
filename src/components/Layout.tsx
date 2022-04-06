@@ -5,14 +5,11 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-
-import CssBaseline from "@mui/material/CssBaseline"
-import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
-import theme from "src/siteTheme"
-import "./layout.css"
-
+import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, Theme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import theme from "src/siteTheme";
+import "./layout.css";
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -33,10 +30,6 @@ const Layout = ({ children }: LayoutProps) => {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

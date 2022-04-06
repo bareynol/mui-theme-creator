@@ -1,27 +1,13 @@
-import React from "react"
-import { Theme } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import FormLabel from "@mui/material/FormLabel"
-import FormControl from "@mui/material/FormControl"
-import FormGroup from "@mui/material/FormGroup"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import FormHelperText from "@mui/material/FormHelperText"
-import Checkbox from "@mui/material/Checkbox"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-    },
-    formControl: {
-      margin: theme.spacing(3),
-    },
-  })
-)
+import { Box } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
+import React from "react";
 
 export default function CheckboxesExample() {
-  const classes = useStyles()
   const [state, setState] = React.useState({
     gilad: true,
     jason: false,
@@ -36,8 +22,8 @@ export default function CheckboxesExample() {
   const error = [gilad, jason, antoine].filter(v => v).length !== 2
 
   return (
-    <div className={classes.root}>
-      <FormControl component="fieldset" className={classes.formControl}>
+    <Box sx={{ display: "flex" }}>
+      <FormControl component="fieldset" sx={{ m: 3 }}>
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <FormGroup>
           <FormControlLabel
@@ -69,7 +55,7 @@ export default function CheckboxesExample() {
         required
         error={error}
         component="fieldset"
-        className={classes.formControl}
+        sx={{ m: 3 }}
       >
         <FormLabel component="legend">Pick two</FormLabel>
         <FormGroup>
@@ -98,6 +84,6 @@ export default function CheckboxesExample() {
         </FormGroup>
         <FormHelperText>You can display an error</FormHelperText>
       </FormControl>
-    </div>
+    </Box>
   )
 }

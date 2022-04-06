@@ -1,58 +1,22 @@
-import React from "react"
+import BuildIcon from "@mui/icons-material/Build";
+import FontIcon from "@mui/icons-material/FontDownload";
+import PaletteIcon from "@mui/icons-material/Palette";
+import StarIcon from "@mui/icons-material/Star";
+import TypographyIcon from "@mui/icons-material/TextFields";
 import {
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Link,
-  Box,
-  Tooltip,
-  Divider,
-  BottomNavigationAction,
-  List,
+  BottomNavigationAction, Box, Card,
+  CardContent, Divider, Grid, Link, List,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  ListItemText, Tooltip, Typography
 } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import BuildIcon from "@mui/icons-material/Build"
-import StarIcon from "@mui/icons-material/Star"
-import PaletteIcon from "@mui/icons-material/Palette"
-import FontIcon from "@mui/icons-material/FontDownload"
-import TypographyIcon from "@mui/icons-material/TextFields"
-import wrapTooltip from "../wrapTooltip"
-import { TutorialLink } from "src/components/Tutorial/TutorialButton"
-
-const useStyles = makeStyles(theme => ({
-  logo: {
-    width: 195,
-    height: 175,
-    margin: theme.spacing(2),
-    marginBottom: 0,
-  },
-  muiTitle: {
-    textTransform: "uppercase",
-    letterSpacing: ".5rem",
-    fontWeight: theme.typography.fontWeightLight,
-  },
-  fab: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  cardActions: {
-    justifyContent: "flex-end",
-    display: "flex",
-    "&> *": {
-      marginLeft: theme.spacing(),
-    },
-  },
-}))
+import React from "react";
+import { TutorialLink } from "src/components/Tutorial/TutorialButton";
+import wrapTooltip from "../wrapTooltip";
 
 const WrappedTypography = wrapTooltip(Typography, "Typography")
 
 const DefaultExample = () => {
-  const classes = useStyles()
   return (
     <Box p={3}>
       <Typography paragraph>
@@ -207,7 +171,12 @@ const DefaultExample = () => {
 
 export default DefaultExample
 
-const FeatureCard = ({ icon, title, children }) => (
+interface FeatureCardProps {
+  icon: React.ReactElement;
+  title: string;
+  children: React.ReactNode;
+}
+const FeatureCard = ({ icon, title, children }: FeatureCardProps) => (
   <Card>
     <CardContent>
       <Grid container spacing={1} alignItems="center">
@@ -228,17 +197,22 @@ const FeatureCard = ({ icon, title, children }) => (
   </Card>
 )
 
-const ThemeToolUsageListItem = ({ label, icon, children }) => (
+interface ThemeToolUsageListItemProps {
+  icon: React.ReactElement;
+  label: string;
+  children: React.ReactNode;
+}
+const ThemeToolUsageListItem = ({ label, icon, children }: ThemeToolUsageListItemProps) => (
   <ListItem>
     <ListItemIcon>
       <BottomNavigationAction
         label={label}
         icon={icon}
         showLabel
-        style={{
+        sx={{
           color: "inherit",
-          padding: 0,
-          paddingRight: 4,
+          p: 0,
+          pr: '4px',
           minWidth: 70,
         }}
       />
@@ -249,14 +223,18 @@ const ThemeToolUsageListItem = ({ label, icon, children }) => (
   </ListItem>
 )
 
-const TabUsageListItem = ({ label, children }) => (
+interface TabUsageListItemProps {
+  label: string;
+  children: React.ReactNode;
+}
+const TabUsageListItem = ({ label, children }: TabUsageListItemProps) => (
   <ListItem>
     <ListItemIcon>
       <Typography
         variant="overline"
         color="primary"
-        style={{
-          paddingRight: 4,
+        sx={{
+          pr: '4px',
           minWidth: 110,
           textAlign: "center",
         }}

@@ -1,53 +1,12 @@
-import React, { useCallback } from "react"
-
-import { Button, ButtonBase, Grid, Popover, Theme, Typography } from "@mui/material";
-
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-
-import { useDispatch } from "react-redux"
-import { addNewDefaultTheme } from "../../state/actions"
-import { NewSavedTheme } from "../../state/types"
-import defaultThemes, { defaultThemesId } from "./DefaultThemes"
-import ThemeThumbnail from "./ThemeThumbnail"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttonRoot: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    thumbnailContainer: {
-      position: "relative",
-      "&:hover $hoverArea": {
-        display: "flex",
-      },
-    },
-    hoverArea: {
-      position: "absolute",
-      top: 0,
-      bottom: 0,
-      right: 0,
-      left: 0,
-      backdropFilter: "blur(2px) saturate(30%) brightness(40%)",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      display: "none",
-    },
-    templatePopover: {
-      padding: theme.spacing(2),
-    },
-    templateContainer: {
-      flex: 1,
-      flexGrow: 1,
-      overflowX: "auto",
-    },
-  })
-)
+import { Box, Button, ButtonBase, Grid, Popover, Typography } from "@mui/material";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { addNewDefaultTheme } from "../../state/actions";
+import { NewSavedTheme } from "../../state/types";
+import defaultThemes, { defaultThemesId } from "./DefaultThemes";
+import ThemeThumbnail from "./ThemeThumbnail";
 
 function DefaultThemesComponent() {
-  const classes = useStyles()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
@@ -91,23 +50,46 @@ function DefaultThemesComponent() {
           vertical: "top",
           horizontal: "left",
         }}
-        classes={{ paper: classes.templatePopover }}
+        sx={{ p: 2 }}
       >
         <Grid
           container
           spacing={2}
           wrap="nowrap"
-          className={classes.templateContainer}
+          sx={{
+            flex: 1,
+            flexGrow: 1,
+            overflowX: "auto",
+          }}
         >
           {defaultThemes.map(t => (
             <Grid item key={t.name} onClick={() => handleClickTheme(t)}>
-              <ButtonBase className={classes.buttonRoot}>
-                <div className={classes.thumbnailContainer}>
+              <ButtonBase sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}>
+                <Box sx={{
+                  position: "relative",
+                  "&:hover > .MuiBox-root:last-child": {
+                    display: "flex",
+                  },
+                }}>
                   <ThemeThumbnail themeOptions={t.themeOptions} />
-                  <div className={classes.hoverArea}>
+                  <Box sx={{
+                    position: "absolute",
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    backdropFilter: "blur(2px) saturate(30%) brightness(40%)",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "none",
+                  }}>
                     <Typography>Click to add</Typography>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
 
                 <Typography variant="subtitle1">{t.name}</Typography>
               </ButtonBase>

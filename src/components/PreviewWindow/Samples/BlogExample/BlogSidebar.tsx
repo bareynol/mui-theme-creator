@@ -1,28 +1,21 @@
-import React from "react"
-import PropTypes from "prop-types"
-import makeStyles from '@mui/styles/makeStyles';
-import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
-import Typography from "@mui/material/Typography"
-import Link from "@mui/material/Link"
-import Tooltip from "@mui/material/Tooltip"
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import { Archive, Social } from "./Blog";
 
-const useStyles = makeStyles(theme => ({
-  sidebarAboutBox: {
-    padding: theme.spacing(2),
-  },
-  sidebarSection: {
-    marginTop: theme.spacing(3),
-  },
-}))
-
-export default function BlogSidebar(props) {
-  const classes = useStyles()
-  const { archives, description, social, title } = props
-
+interface Props {
+  archives: Archive[];
+  description: string;
+  title: string;
+  social: Social[]
+}
+export default function BlogSidebar({ archives, description, social, title }: Props) {
   return (
     <Grid item xs={12} md={4}>
-      <Paper elevation={0} className={classes.sidebarAboutBox}>
+      <Paper elevation={0} sx={{ p: 2 }}>
         <Tooltip title={`<Typography variant="h6">`} placement="left" arrow>
           <Typography variant="h6" gutterBottom>
             {title}
@@ -36,7 +29,7 @@ export default function BlogSidebar(props) {
         <Typography
           variant="h6"
           gutterBottom
-          className={classes.sidebarSection}
+          sx={{ mt: 3 }}
         >
           Archives
         </Typography>
@@ -57,12 +50,12 @@ export default function BlogSidebar(props) {
         <Typography
           variant="h6"
           gutterBottom
-          className={classes.sidebarSection}
+          sx={{ mt: 3 }}
         >
           Social
         </Typography>
       </Tooltip>
-      {social.map(network => (
+      {social.map((network: Social) => (
         <Tooltip
           key={network.name}
           title={`<Link color="primary" variant="body1">`}
@@ -81,11 +74,4 @@ export default function BlogSidebar(props) {
       ))}
     </Grid>
   );
-}
-
-BlogSidebar.propTypes = {
-  archives: PropTypes.array,
-  description: PropTypes.string,
-  social: PropTypes.array,
-  title: PropTypes.string,
 }

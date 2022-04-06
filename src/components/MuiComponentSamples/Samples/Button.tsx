@@ -1,30 +1,26 @@
-import React from "react"
-import makeStyles from '@mui/styles/makeStyles';
-import Button from "@mui/material/Button"
-import { Typography } from "@mui/material"
-import DeleteIcon from "@mui/icons-material/Delete"
-import CloudUploadIcon from "@mui/icons-material/CloudUpload"
-import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice"
-import SaveIcon from "@mui/icons-material/Save"
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DeleteIcon from "@mui/icons-material/Delete";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
+import SaveIcon from "@mui/icons-material/Save";
+import { Box, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import React from "react";
 
-const useStyles = makeStyles(theme => ({
-  group: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-    marginBottom: theme.spacing(2),
-  },
-}))
+const groupStyle = {
+  mb: 2,
+  '& > *': {
+    m: 1
+  }
+};
 
 export default function ButtonsExample() {
-  const classes = useStyles()
 
   return (
     <div>
       <Typography variant="h6" id="contained-buttons">
         Contained Buttons
       </Typography>
-      <div className={classes.group}>
+      <Box sx={groupStyle}>
         <Button variant="contained">Default</Button>
         <Button variant="contained" color="primary">
           Primary
@@ -38,12 +34,12 @@ export default function ButtonsExample() {
         <Button variant="contained" color="primary" href="#contained-buttons">
           Link
         </Button>
-      </div>
+      </Box>
 
       <Typography variant="h6" id="text-buttons">
         Text Buttons
       </Typography>
-      <div className={classes.group}>
+      <Box sx={groupStyle}>
         <Button>Default</Button>
         <Button color="primary">Primary</Button>
         <Button color="secondary">Secondary</Button>
@@ -51,12 +47,12 @@ export default function ButtonsExample() {
         <Button color="primary" href="#text-buttons">
           Link
         </Button>
-      </div>
+      </Box>
 
       <Typography variant="h6" id="outlined-buttons">
         Outlined Buttons
       </Typography>
-      <div className={classes.group}>
+      <Box sx={groupStyle}>
         <Button variant="outlined">Default</Button>
         <Button variant="outlined" color="primary">
           Primary
@@ -70,12 +66,12 @@ export default function ButtonsExample() {
         <Button variant="outlined" color="primary" href="#outlined-buttons">
           Link
         </Button>
-      </div>
+      </Box>
 
       <Typography variant="h6" id="buttons-with-icons">
         Buttons with icons and label
       </Typography>
-      <div className={classes.group}>
+      <Box sx={groupStyle}>
         <Button
           variant="contained"
           color="secondary"
@@ -110,7 +106,7 @@ export default function ButtonsExample() {
         >
           Save
         </Button>
-      </div>
+      </Box>
     </div>
   );
 }

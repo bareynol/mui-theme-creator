@@ -12,14 +12,16 @@ import {
 } from "recharts"
 
 // Generate Sales Data
-function createData(time, amount) {
+function createData(time: string, amount?: number) {
   return {
     time,
     amount,
-    amount2: amount + Math.round(Math.random() * 1000),
-    amount3: amount + Math.round(Math.random() * 2000),
+    amount2: typeof amount === 'undefined' ? NaN : amount + Math.round(Math.random() * 1000),
+    amount3: typeof amount === 'undefined' ? NaN : amount + Math.round(Math.random() * 2000),
   }
 }
+
+console.log(createData("00:00"))
 
 const data = [
   createData("00:00", 0),
@@ -30,7 +32,7 @@ const data = [
   createData("15:00", 2000),
   createData("18:00", 2400),
   createData("21:00", 2400),
-  createData("24:00", undefined),
+  createData("24:00"),
 ]
 
 export default function Chart() {

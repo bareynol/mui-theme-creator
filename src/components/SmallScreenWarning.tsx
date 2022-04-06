@@ -1,26 +1,17 @@
-import React, { useEffect } from "react"
 import {
-  Hidden,
-  Dialog,
-  Typography,
-  DialogContent,
-  Slide,
-  makeStyles,
-  Theme,
-  createStyles,
-  Button,
-  darken,
-  Box,
+  Box, Button,
+  darken, Dialog, DialogContent, Hidden, Slide, SlideProps, Typography
 } from "@mui/material"
 import { TransitionProps } from "@mui/material/transitions/transition"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import hereBeDragonsImage from "src/images/herebedragons.webp"
 import { loadFonts } from "src/state/actions"
-import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactNode },
-  ref: React.Ref<unknown>
+const Transition = React.forwardRef<HTMLElement, SlideProps>(function Transition(
+  props,
+  ref
 ) {
   return <Slide direction="up" ref={ref} {...props} />
 })

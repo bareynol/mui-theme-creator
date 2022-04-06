@@ -1,33 +1,15 @@
-import React from "react"
-import { Theme } from "@mui/material/styles";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import Badge from "@mui/material/Badge"
-import ButtonGroup from "@mui/material/ButtonGroup"
-import Button from "@mui/material/Button"
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
-import MailIcon from "@mui/icons-material/Mail"
-import Switch from "@mui/material/Switch"
-import FormControlLabel from "@mui/material/FormControlLabel"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      flexDirection: "column",
-      "& > *": {
-        marginBottom: theme.spacing(2),
-      },
-      "& > div > span": {
-        marginRight: theme.spacing(4),
-      },
-    },
-  })
-)
+import AddIcon from "@mui/icons-material/Add";
+import MailIcon from "@mui/icons-material/Mail";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box } from "@mui/material";
+import Badge from "@mui/material/Badge";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import React from "react";
 
 export default function BadgeExample() {
-  const classes = useStyles()
   const [count, setCount] = React.useState(1)
   const [invisible, setInvisible] = React.useState(false)
 
@@ -36,7 +18,16 @@ export default function BadgeExample() {
   }
 
   return (
-    <div className={classes.root}>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      "& > *": {
+        mb: 2,
+      },
+      "& > div > span": {
+        mr: 4,
+      },
+    }}>
       <div>
         <Badge color="primary" badgeContent={count}>
           <MailIcon />
@@ -87,6 +78,6 @@ export default function BadgeExample() {
           label="Show Badge"
         />
       </div>
-    </div>
+    </Box>
   )
 }

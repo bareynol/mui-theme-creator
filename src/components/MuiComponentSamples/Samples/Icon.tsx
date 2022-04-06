@@ -1,19 +1,6 @@
-import React from "react"
-import { Theme } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import { green } from "@mui/material/colors"
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > svg": {
-        margin: theme.spacing(2),
-      },
-    },
-  })
-)
+import { green } from "@mui/material/colors";
+import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
+import React from "react";
 
 function HomeIcon(props: SvgIconProps) {
   return (
@@ -24,16 +11,15 @@ function HomeIcon(props: SvgIconProps) {
 }
 
 export default function IconExample() {
-  const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <HomeIcon />
-      <HomeIcon color="primary" />
-      <HomeIcon color="secondary" />
-      <HomeIcon color="action" />
-      <HomeIcon color="disabled" />
-      <HomeIcon style={{ color: green[500] }} />
+    <div>
+      <HomeIcon sx={{ m: 2 }} />
+      <HomeIcon color="primary" sx={{ m: 2 }} />
+      <HomeIcon color="secondary" sx={{ m: 2 }} />
+      <HomeIcon color="action" sx={{ m: 2 }} />
+      <HomeIcon color="disabled" sx={{ m: 2 }} />
+      <HomeIcon sx={{ m: 2, color: green[500] }} />
     </div>
   )
 }

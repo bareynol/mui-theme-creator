@@ -1,49 +1,28 @@
-import React from "react"
-import PropTypes from "prop-types"
-import makeStyles from '@mui/styles/makeStyles';
-import Paper from "@mui/material/Paper"
-import Typography from "@mui/material/Typography"
-import Grid from "@mui/material/Grid"
-import Link from "@mui/material/Link"
-import Tooltip from "@mui/material/Tooltip"
+import { Box } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import { Post } from "./Blog";
 
-const useStyles = makeStyles(theme => ({
-  mainFeaturedPost: {
-    position: "relative",
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing(4),
-    backgroundImage: "url(https://source.unsplash.com/random)",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-  },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,.3)",
-  },
-  mainFeaturedPostContent: {
-    position: "relative",
-    padding: theme.spacing(3),
-    [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(6),
-      paddingRight: 0,
-    },
-  },
-}))
-
-export default function MainFeaturedPost(props) {
-  const classes = useStyles()
-  const { post } = props
-
+interface Props {
+  post: Post
+}
+export default function MainFeaturedPost({ post }: Props) {
   return (
     <Paper
-      className={classes.mainFeaturedPost}
-      style={{ backgroundImage: `url(${post.image})` }}
+      sx={{
+        position: "relative",
+        bgcolor: (theme) => theme.palette.grey[800],
+        color: 'common.white',
+        mb: 4,
+        backgroundImage: `url(${post.image})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
     >
       {/* Increase the priority of the hero background image */}
       {
@@ -53,10 +32,27 @@ export default function MainFeaturedPost(props) {
           alt={post.imageText}
         />
       }
-      <div className={classes.overlay} />
+      <Box sx={{
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        bgcolor: "rgba(0,0,0,.3)",
+      }} />
       <Grid container>
         <Grid item md={6}>
-          <div className={classes.mainFeaturedPostContent}>
+          <Box sx={{
+            position: "relative",
+            p: {
+              xs: 3,
+              md: 6,
+            },
+            pr: {
+              xs: 3,
+              md: 0,
+            }
+          }}>
             <Tooltip
               title={`<Typography color="textPrimary" variant="h3">`}
               placement="left"
@@ -89,13 +85,9 @@ export default function MainFeaturedPost(props) {
                 {post.linkText}
               </Link>
             </Tooltip>
-          </div>
+          </Box>
         </Grid>
       </Grid>
     </Paper>
   );
-}
-
-MainFeaturedPost.propTypes = {
-  post: PropTypes.object,
 }
