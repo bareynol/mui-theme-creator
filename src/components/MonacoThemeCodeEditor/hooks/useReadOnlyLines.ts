@@ -5,7 +5,7 @@ import { verbose } from "src/utils"
 
 // number of lines from the top and bottom of the
 // code in the editor that should be considered read only
-//    first two lines consist of importing the DeprecatedThemeOptions interface
+//    first two lines consist of importing the ThemeOptions interface
 //    and opening the themeOptions objects
 //    last line is a bracket closing the themeOptions object
 const readOnlyLines = {

@@ -47,7 +47,7 @@ export default function Main(props) {
           <Typography>
             April 1, 2020 by{" "}
             <Tooltip title={`<Link color="primary" variant="body1">`} arrow>
-              <Link href="#">[Olivier]</Link>
+              <Link href="#" underline="hover">[Olivier]</Link>
             </Tooltip>
           </Typography>
         </Tooltip>
@@ -152,7 +152,7 @@ export default function Main(props) {
         </ol>
       </div>
     </Grid>
-  )
+  );
 }
 
 Main.propTypes = {

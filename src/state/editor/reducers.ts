@@ -1,13 +1,13 @@
 import { EditorState } from "./types"
 import { defaultThemeOptions } from "src/siteTheme"
 import JSON5 from "json5"
-import { DeprecatedThemeOptions } from "@mui/material"
+import { ThemeOptions } from "@mui/material"
 import { RootState } from "../types"
 
-const stringify = (themeOptions: DeprecatedThemeOptions) => {
-  return `import { DeprecatedThemeOptions } from '@mui/material/styles/createMuiTheme';
+const stringify = (themeOptions: ThemeOptions) => {
+  return `import { ThemeOptions } from '@mui/material/styles';
 
-export const themeOptions: DeprecatedThemeOptions = ${JSON5.stringify(
+export const themeOptions: ThemeOptions = ${JSON5.stringify(
     themeOptions,
     null,
     2

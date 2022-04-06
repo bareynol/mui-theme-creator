@@ -47,11 +47,11 @@ export default function Deposits() {
       </Tooltip>
       <div>
         <Tooltip title={`<Link color="primary">`} placement="left" arrow>
-          <Link color="primary" href="#" onClick={preventDefault}>
+          <Link color="primary" href="#" onClick={preventDefault} underline="hover">
             View balance
           </Link>
         </Tooltip>
       </div>
     </React.Fragment>
-  )
+  );
 }

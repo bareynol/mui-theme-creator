@@ -17,5 +17,5 @@ export const TutorialLink = ({ children }) => {
   const dispatch = useDispatch()
   const handleToggle = useCallback(() => dispatch(toggleTutorial()), [dispatch])
 
-  return <Link onClick={handleToggle}>{children}</Link>
+  return <Link onClick={handleToggle} underline="hover">{children}</Link>;
 }

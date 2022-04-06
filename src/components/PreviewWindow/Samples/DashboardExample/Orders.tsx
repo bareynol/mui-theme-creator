@@ -106,11 +106,11 @@ export default function Orders() {
       </Tooltip>
       <div className={classes.seeMore}>
         <Tooltip title={`<Link color="primary">`} placement="left" arrow>
-          <Link color="primary" href="#" onClick={preventDefault}>
+          <Link color="primary" href="#" onClick={preventDefault} underline="hover">
             See more orders
           </Link>
         </Tooltip>
       </div>
     </React.Fragment>
-  )
+  );
 }

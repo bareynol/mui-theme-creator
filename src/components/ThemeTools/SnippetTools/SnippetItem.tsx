@@ -56,11 +56,7 @@ const SnippetItem = ({ snippet }) => {
     <div>
       <div>{info}</div>
       {docs && (
-        <Link
-          href={docs}
-          target="_blank"
-          rel="noreferrer"
-        >{`Theme ${title} Docs`}</Link>
+        <Link href={docs} target="_blank" rel="noreferrer" underline="hover">{`Theme ${title} Docs`}</Link>
       )}
     </div>
   )

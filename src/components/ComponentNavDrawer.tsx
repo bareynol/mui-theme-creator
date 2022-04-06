@@ -49,7 +49,7 @@ const ComponentNavDrawer = () => {
   }, [dispatch])
 
   const NavLink = React.forwardRef((linkProps, ref) => (
-    <Link ref={ref} {...linkProps} color="textPrimary" />
+    <Link ref={ref} {...linkProps} color="textPrimary" underline="hover" />
   ))
 
   return (

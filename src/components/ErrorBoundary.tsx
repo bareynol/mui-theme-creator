@@ -31,7 +31,7 @@ class ErrorBoundary extends React.Component {
           </Typography>
           <Typography variant="h1" gutterBottom>{`:(`}</Typography>
           <Typography variant="h5" gutterBottom>
-            This likely is caused by an error on the DeprecatedThemeOptions object
+            This likely is caused by an error on the ThemeOptions object
           </Typography>
           <Typography variant="h5" gutterBottom>
             This can be cleared up by wiping the saved theme data...

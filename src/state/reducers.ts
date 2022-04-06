@@ -1,5 +1,5 @@
 import { RootState, PreviewSize } from "src/state/types"
-import { createTheme, DeprecatedThemeOptions, adaptV4Theme } from "@mui/material";
+import { createTheme, ThemeOptions } from "@mui/material";
 import { generateThemeId, isSetEq } from "src/utils"
 import editorReducer, {
   initialState as editorInitialState,
@@ -8,7 +8,7 @@ import { loadFonts } from "./actions"
 import deepmerge from "deepmerge"
 
 import { defaultThemeOptions } from "src/siteTheme"
-import { TypographyOptions, BreakpointValues } from '@mui/material/styles';
+import { TypographyVariantsOptions, Breakpoints } from '@mui/material/styles';
 
 const defaultThemeId = generateThemeId({})
 
@@ -16,7 +16,7 @@ const initialState: RootState = {
   editor: editorInitialState,
   themeId: defaultThemeId,
   themeOptions: defaultThemeOptions, // the object loaded into createMuiTheme
-  themeObject: createTheme(adaptV4Theme(defaultThemeOptions)),
+  themeObject: createTheme(defaultThemeOptions),
   savedThemes: {
     [defaultThemeId]: {
       id: defaultThemeId,
@@ -38,7 +38,7 @@ const initialState: RootState = {
 
 const initialFonts = ["Droid Sans", "Droid Serif", "Open Sans", "Roboto"]
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: any) => {
   // run editor reducers
   state = {
     ...state,
@@ -222,11 +222,11 @@ export default (state = initialState, action) => {
  * @returns string[] - the google fonts included in `themeOptions`
  */
 const getFontsFromThemeOptions = (
-  themeOptions: DeprecatedThemeOptions,
+  themeOptions: ThemeOptions,
   previousFonts: string[] | undefined,
   loadedFonts: Set<string>
 ) => {
-  const typography = themeOptions.typography as TypographyOptions | undefined
+  const typography = themeOptions.typography as TypographyVariantsOptions | undefined
 
   // get all defined fonts from the themeOptions
   const fontList: string[] = [
@@ -280,10 +280,10 @@ function loadFontsIfRequired(fonts: string[], loadedFonts: Set<string>) {
 }
 
 const createPreviewMuiTheme = (
-  themeOptions: DeprecatedThemeOptions,
+  themeOptions: ThemeOptions,
   previewSize: PreviewSize
 ) => {
-  const spoofedBreakpoints: Record<string, BreakpointValues> = {
+  const spoofedBreakpoints: Record<string, { xs: number, sm: number, md: number, lg: number, xl: number}> = {
     xs: { xs: 0, sm: 10000, md: 10001, lg: 10002, xl: 10003 },
     sm: { xs: 0, sm: 1, md: 10001, lg: 10002, xl: 10003 },
     md: { xs: 0, sm: 1, md: 2, lg: 10002, xl: 10003 },
@@ -291,12 +291,12 @@ const createPreviewMuiTheme = (
     xl: { xs: 0, sm: 1, md: 2, lg: 3, xl: 4 },
   }
 
-  if (!previewSize) return createTheme(adaptV4Theme(themeOptions));
+  if (!previewSize) return createTheme(themeOptions);
 
   return createTheme(
-    adaptV4Theme(deepmerge(
+    deepmerge(
       { breakpoints: { values: spoofedBreakpoints[previewSize] } },
       themeOptions
-    ))
+    )
   );
 }

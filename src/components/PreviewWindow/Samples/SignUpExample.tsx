@@ -118,7 +118,7 @@ export default function SignUpExample() {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Tooltip title={`<Link color="primary" variant="body2">`} arrow>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" underline="hover">
                   Already have an account? Sign in
                 </Link>
               </Tooltip>

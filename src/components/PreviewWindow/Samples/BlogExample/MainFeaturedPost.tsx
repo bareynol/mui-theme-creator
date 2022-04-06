@@ -85,7 +85,7 @@ export default function MainFeaturedPost(props) {
               placement="left"
               arrow
             >
-              <Link variant="subtitle1" href="#">
+              <Link variant="subtitle1" href="#" underline="hover">
                 {post.linkText}
               </Link>
             </Tooltip>
@@ -93,7 +93,7 @@ export default function MainFeaturedPost(props) {
         </Grid>
       </Grid>
     </Paper>
-  )
+  );
 }
 
 MainFeaturedPost.propTypes = {

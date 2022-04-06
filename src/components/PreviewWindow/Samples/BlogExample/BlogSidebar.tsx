@@ -48,7 +48,7 @@ export default function BlogSidebar(props) {
           placement="left"
           arrow
         >
-          <Link display="block" variant="body1" href={archive.url}>
+          <Link display="block" variant="body1" href={archive.url} underline="hover">
             {archive.title}
           </Link>
         </Tooltip>
@@ -69,7 +69,7 @@ export default function BlogSidebar(props) {
           placement="left"
           arrow
         >
-          <Link display="block" variant="body1" href="#">
+          <Link display="block" variant="body1" href="#" underline="hover">
             <Grid container direction="row" spacing={1} alignItems="center">
               <Grid item>
                 <network.icon />
@@ -80,7 +80,7 @@ export default function BlogSidebar(props) {
         </Tooltip>
       ))}
     </Grid>
-  )
+  );
 }
 
 BlogSidebar.propTypes = {

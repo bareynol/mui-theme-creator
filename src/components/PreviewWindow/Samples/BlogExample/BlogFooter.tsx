@@ -11,14 +11,14 @@ function Copyright() {
     <Tooltip title={`<Typography variant="body2" color="textSecondary">`} arrow>
       <Typography variant="body2" color="textSecondary" align="center">
         {"Copyright © "}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="https://material-ui.com/" underline="hover">
           Your Website
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}
       </Typography>
     </Tooltip>
-  )
+  );
 }
 
 const useStyles = makeStyles(theme => ({

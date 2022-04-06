@@ -178,7 +178,7 @@ export default function PricingExample() {
                   color="textPrimary"
                   href="#"
                   className={classes.link}
-                >
+                  underline="hover">
                   Features
                 </Link>
               </Tooltip>
@@ -191,7 +191,7 @@ export default function PricingExample() {
                   color="textPrimary"
                   href="#"
                   className={classes.link}
-                >
+                  underline="hover">
                   Enterprise
                 </Link>
               </Tooltip>
@@ -204,7 +204,7 @@ export default function PricingExample() {
                   color="textPrimary"
                   href="#"
                   className={classes.link}
-                >
+                  underline="hover">
                   Support
                 </Link>
               </Tooltip>
@@ -371,7 +371,7 @@ export default function PricingExample() {
                       placement="left"
                       arrow
                     >
-                      <Link href="#" variant="subtitle1" color="textSecondary">
+                      <Link href="#" variant="subtitle1" color="textSecondary" underline="hover">
                         {item}
                       </Link>
                     </Tooltip>

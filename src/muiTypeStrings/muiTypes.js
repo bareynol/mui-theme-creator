@@ -344,14 +344,13 @@ export type Direction = "ltr" | "rtl"
 
 ${muiComponentOverrideTypes}
 
-export interface DeprecatedThemeOptions {
+export interface ThemeOptions {
   shape?: ShapeOptions
   breakpoints?: BreakpointsOptions
   direction?: Direction
   mixins?: MixinsOptions
-  overrides?: Overrides // don't want to deal with these imports
   palette?: PaletteOptions
-  props?: MuiComponentProps
+  components?: Components
   shadows?: Shadows
   spacing?: SpacingOptions
   transitions?: TransitionsOptions
@@ -376,5 +375,5 @@ export interface Theme {
   unstable_strictMode?: boolean;
 }
 
-export function createMuiTheme(options?: DeprecatedThemeOptions, ...args: object[]): Theme;
+export function createMuiTheme(options?: ThemeOptions, ...args: object[]): Theme;
 `

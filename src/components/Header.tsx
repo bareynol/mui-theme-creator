@@ -37,7 +37,7 @@ const Header = (props: AppBarProps) => {
               href="https://material-ui.com/"
               target="_blank"
               rel="noreferrer"
-            >
+              underline="hover">
               {`@mui/material@${muiVersion}`}
             </Link>
           </Typography>

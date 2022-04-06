@@ -1,11 +1,11 @@
-import { Theme, DeprecatedThemeOptions } from '@mui/material/styles';
+import { Theme, ThemeOptions } from '@mui/material/styles';
 import { EditorState } from "./editor/types"
 
 export interface RootState {
   editor: EditorState
   themeId: string
   themeObject: Theme
-  themeOptions: DeprecatedThemeOptions
+  themeOptions: ThemeOptions
   savedThemes: Record<string, SavedTheme>
   loadedFonts: Set<string>
   activeTab: string
@@ -20,7 +20,7 @@ export interface RootState {
 export type SavedTheme = {
   id: string
   name: string
-  themeOptions: DeprecatedThemeOptions
+  themeOptions: ThemeOptions
   fonts: string[]
   lastUpdated: string
 }

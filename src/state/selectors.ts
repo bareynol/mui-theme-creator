@@ -3,7 +3,7 @@ import { getByPath } from "src/utils"
 import { RootState } from "./types"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
-import { DeprecatedThemeOptions, Theme } from "@mui/material"
+import { ThemeOptions, Theme } from "@mui/material"
 
 /**
  * Return the value of in the theme at the specified path,
@@ -14,7 +14,7 @@ import { DeprecatedThemeOptions, Theme } from "@mui/material"
  */
 const getThemeValueInfo = (
   path: string,
-  themeOptions: DeprecatedThemeOptions,
+  themeOptions: ThemeOptions,
   themeObject: Theme
 ) => {
   const valFromSaved: any = getByPath(themeOptions, path)
@@ -26,7 +26,7 @@ const getThemeValueInfo = (
 
 const makeThemeValueInfoSelector = () =>
   createSelector(
-    (_, path: string) => path,
+    (_: any, path: string) => path,
     (state: RootState) => state.themeOptions,
     (state: RootState) => state.themeObject,
     getThemeValueInfo
@@ -49,7 +49,7 @@ export const useThemeValueInfo = (path: string) => {
  */
 export const useThemeValue = (path: string) => useThemeValueInfo(path).value
 
-export const canSave = state =>
+export const canSave = (state: any) =>
   state.editor.savedVersion !== state.editor.currentVersion
 
 /**

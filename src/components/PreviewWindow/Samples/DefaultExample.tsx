@@ -91,7 +91,7 @@ const DefaultExample = () => {
                     href="https://fonts.google.com/"
                     target="_blank"
                     rel="noreferrer"
-                  >
+                    underline="hover">
                     {`Google Fonts`}
                   </Link>
                   {` to use on typography elements on this page`}
@@ -133,7 +133,7 @@ const DefaultExample = () => {
                   href="https://microsoft.github.io/monaco-editor/"
                   target="_blank"
                   rel="noreferrer"
-                >
+                  underline="hover">
                   Monaco Editor
                 </Link>
               </ListItem>
@@ -161,7 +161,7 @@ const DefaultExample = () => {
                   target="_blank"
                   rel="noreferrer"
                   variant="h6"
-                >
+                  underline="hover">
                   Web Font Loader
                 </Link>
               </ListItem>

@@ -79,7 +79,7 @@ export default function BlogHeader(props) {
               variant="body2"
               href={section.url}
               className={classes.toolbarLink}
-            >
+              underline="hover">
               {section.title}
             </Link>
           </Tooltip>
