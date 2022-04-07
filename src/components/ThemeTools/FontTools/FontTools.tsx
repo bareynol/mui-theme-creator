@@ -1,37 +1,26 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { Box, Chip } from "@mui/material"
+import Accordion from "@mui/material/Accordion"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import Typography from "@mui/material/Typography"
 import React from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "src/state/types"
-import Typography from "@mui/material/Typography"
-import Accordion from "@mui/material/Accordion"
-import AccordionSummary from "@mui/material/AccordionSummary"
-import AccordionDetails from "@mui/material/AccordionDetails"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-
-import { Chip, Theme } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
 import AddFontInput from "./AddFontInput"
 import PopularFontList from "./PopularFontList"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    popularFontList: {
-      flexDirection: "column",
-    },
-    loadedFontContent: {
-      display: "flex",
-      flexWrap: "wrap",
-      "& > *": {
-        margin: theme.spacing(0.5),
-      },
-      maxHeight: 200,
-      overflowY: "auto",
-    },
-  })
-)
+const loadedFontContentStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  "& > *": {
+    m: 0.5,
+  },
+  maxHeight: 200,
+  overflowY: "auto",
+};
 
 function FontTools() {
-  const classes = useStyles()
   const loadedFonts = useSelector((state: RootState) => state.loadedFonts)
   const currentFonts = useSelector(
     (state: RootState) => state.savedThemes[state.themeId].fonts
@@ -53,11 +42,11 @@ function FontTools() {
         </AccordionDetails>
       </Accordion>
       <Accordion defaultExpanded={currentFonts.length < 5}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ fontSize: '0.875rem' }}>
           {`Fonts used in current theme (${currentFonts.length})`}
         </AccordionSummary>
         <AccordionDetails>
-          <div className={classes.loadedFontContent}>
+          <Box sx={loadedFontContentStyle}>
             {currentFonts.map(font => (
               <Chip
                 label={font}
@@ -66,15 +55,15 @@ function FontTools() {
                 style={{ fontFamily: font }}
               />
             ))}
-          </div>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ fontSize: '0.875rem' }}>
           {`Loaded and Available Fonts (${loadedFonts.size})`}
         </AccordionSummary>
         <AccordionDetails>
-          <div className={classes.loadedFontContent}>
+          <Box sx={loadedFontContentStyle}>
             {[...loadedFonts].map(font => (
               <Chip
                 label={font}
@@ -83,7 +72,7 @@ function FontTools() {
                 style={{ fontFamily: font }}
               />
             ))}
-          </div>
+          </Box>
         </AccordionDetails>
       </Accordion>
     </>

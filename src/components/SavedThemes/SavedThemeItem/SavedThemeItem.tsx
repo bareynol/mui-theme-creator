@@ -1,17 +1,13 @@
-import React, { useCallback } from "react"
-import moment from "moment"
-import { useDispatch, useSelector } from "react-redux"
-
-import { Box, Button, Card, Theme, ThemeOptions, Typography } from "@mui/material";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz"
-
-import { loadSavedTheme, removeSavedTheme } from "src/state/actions"
-import { RootState } from "src/state/types"
-import ThemeThumbnail from "../ThemeThumbnail"
-import DeleteThemeButton from "./DeleteThemeButton"
-import RenameThemeButton from "./RenameThemeButton"
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import { Box, Button, Card, ThemeOptions, Typography } from "@mui/material";
+import moment from "moment";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadSavedTheme, removeSavedTheme } from "src/state/actions";
+import { RootState } from "src/state/types";
+import ThemeThumbnail from "../ThemeThumbnail";
+import DeleteThemeButton from "./DeleteThemeButton";
+import RenameThemeButton from "./RenameThemeButton";
 
 interface Props {
   name: string

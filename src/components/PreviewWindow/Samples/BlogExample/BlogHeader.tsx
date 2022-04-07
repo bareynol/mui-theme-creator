@@ -15,7 +15,7 @@ interface Props {
 export default function BlogHeader({ sections, title }: Props) {
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1 }}>
+      <Toolbar sx={{ borderBottom: 1, borderBottomColor: 'divider', }}>
         <Tooltip title={`<Button color="default" size="small">`} arrow>
           <Button size="small">Subscribe</Button>
         </Tooltip>

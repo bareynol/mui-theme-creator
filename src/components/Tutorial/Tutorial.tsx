@@ -1,53 +1,19 @@
-import React, { useEffect, useCallback } from "react"
+import CloseIcon from "@mui/icons-material/Close"
+import { Box } from "@mui/material"
 import Backdrop from "@mui/material/Backdrop"
 import Button from "@mui/material/Button"
 import Portal from "@mui/material/Portal"
 import Typography from "@mui/material/Typography"
-import { Theme } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import CloseIcon from "@mui/icons-material/Close"
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "src/state/types"
+import React, { useCallback, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import {
-  setActiveTab,
-  resetTutorialStep,
-  toggleTutorial,
+  resetTutorialStep, setActiveTab, toggleTutorial
 } from "src/state/actions"
-
+import { RootState } from "src/state/types"
 import stepList from "./Steps"
 import TutorialStepButton from "./TutorialStepButton"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      zIndex: 5000,
-      position: "relative",
-    },
-    title: {
-      position: "absolute",
-      top: 0,
-      textAlign: "center",
-      display: "flex",
-      alignItems: "baseline",
-      "& > *": {
-        margin: `0 ${theme.spacing()}`,
-      },
-    },
-    closeButton: {
-      position: "absolute",
-      top: 0,
-      right: 0,
-      fontSize: "1.5rem",
-    },
-    closeIcon: {
-      fontSize: "2rem",
-    },
-  })
-)
-
 export const TutorialContent = () => {
-  const classes = useStyles()
   const previewWindowTab = useSelector((state: RootState) => state.activeTab)
   const step = useSelector((state: RootState) => state.tutorialStep)
   const dispatch = useDispatch()
@@ -64,25 +30,43 @@ export const TutorialContent = () => {
   const CurrentStep = stepList[step]
   return (
     <Portal>
-      <div className={classes.root}>
+      <Box sx={{
+        zIndex: 5000,
+        position: "relative",
+      }}>
         <Backdrop open>
-          <div className={classes.title}>
+          <Box sx={{
+            position: "absolute",
+            top: 0,
+            textAlign: "center",
+            display: "flex",
+            alignItems: "baseline",
+            "& > *": {
+              my: 0,
+              mx: 1
+            },
+          }}>
             <TutorialStepButton variant="prev" />
             <Typography variant="h3">Tutorial</Typography>
             <Typography>{`(${step + 1}/${stepList.length})`}</Typography>
             <TutorialStepButton variant="next" />
-          </div>
+          </Box>
 
           <Button
             onClick={handleClose}
-            endIcon={<CloseIcon className={classes.closeIcon} />}
-            className={classes.closeButton}
+            endIcon={<CloseIcon sx={{ fontSize: "2rem" }} />}
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              fontSize: "1.5rem",
+            }}
           >
             Close
           </Button>
           <CurrentStep />
         </Backdrop>
-      </div>
+      </Box>
     </Portal>
   )
 }

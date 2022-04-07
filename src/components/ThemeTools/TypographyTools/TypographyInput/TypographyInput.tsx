@@ -1,33 +1,20 @@
-import React, { useCallback } from "react"
-import { useDispatch } from "react-redux"
-import { setThemeOption, removeThemeOption } from "src/state/actions"
-import { Grid, Button } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import { useThemeValueInfo } from "src/state/selectors"
-import FontWeightInput from "./FontWeightInput"
-import FontSizeInput from "./FontSizeInput"
-import FontFamilyInput from "./FontFamilyInput"
-import LineHeightInput from "./LineHeightInput"
-import LetterSpacingInput from "./LetterSpacingInput"
-import { ThemeValueChangeEvent } from "../../events"
+import { Button, Grid } from "@mui/material";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { removeThemeOption, setThemeOption } from "src/state/actions";
+import { useThemeValueInfo } from "src/state/selectors";
+import { ThemeValueChangeEvent } from "../../events";
+import FontFamilyInput from "./FontFamilyInput";
+import FontSizeInput from "./FontSizeInput";
+import FontWeightInput from "./FontWeightInput";
+import LetterSpacingInput, { InputProps } from "./LetterSpacingInput";
+import LineHeightInput from "./LineHeightInput";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    resetButton: {
-      textTransform: "capitalize",
-    },
-    disabledButton: {
-      fontStyle: "italic",
-    },
-    inputContainer: {
-      flex: 1,
-    },
-  })
-)
-
-export default function TypographyInput({ label, variantPath, property }) {
-  const classes = useStyles()
+interface TypographyInputProps {
+  variantPath: string;
+  property: string;
+}
+export default function TypographyInput({ variantPath, property }: TypographyInputProps) {
   const path = `${variantPath}.${property}`
   const themeValueInfo = useThemeValueInfo(path)
   const dispatch = useDispatch()
@@ -46,7 +33,7 @@ export default function TypographyInput({ label, variantPath, property }) {
 
   return (
     <Grid container justifyContent="space-between" alignItems="baseline">
-      <Grid item className={classes.inputContainer}>
+      <Grid item sx={{ flex: 1 }}>
         <TypographyPropertyInput
           property={property}
           value={themeValueInfo.value}
@@ -57,9 +44,11 @@ export default function TypographyInput({ label, variantPath, property }) {
         <Button
           size="small"
           disabled={!themeValueInfo.modifiedByUser}
-          classes={{
-            root: classes.resetButton,
-            disabled: classes.disabledButton,
+          sx={{
+            textTransform: "capitalize",
+            '& .Mui-disabled': {
+              fontStyle: "italic"
+            }
           }}
           onClick={handleReset}
         >
@@ -70,7 +59,10 @@ export default function TypographyInput({ label, variantPath, property }) {
   );
 }
 
-function TypographyPropertyInput({ property, ...props }) {
+interface TypographyPropertyInputProps extends InputProps{
+  property: string;
+}
+function TypographyPropertyInput({ property, ...props }: TypographyPropertyInputProps) {
   switch (property) {
     case "fontFamily":
       return <FontFamilyInput {...props} />

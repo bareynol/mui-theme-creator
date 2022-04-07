@@ -21,8 +21,6 @@ function createData(time: string, amount?: number) {
   }
 }
 
-console.log(createData("00:00"))
-
 const data = [
   createData("00:00", 0),
   createData("03:00", 300),

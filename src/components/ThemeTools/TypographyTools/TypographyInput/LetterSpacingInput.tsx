@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react"
-import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
-import Slider from "@mui/material/Slider"
-import { Theme } from "@mui/material";
-
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    disabledText: {
-      fontStyle: "italic",
-    },
-  })
-)
+import { SelectChangeEvent } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 
 const getLetterSpacingValue = (letterSpacing: string) => {
   if (
@@ -26,8 +15,12 @@ const getLetterSpacingValue = (letterSpacing: string) => {
   return parseFloat(letterSpacing.slice(0, -2))
 }
 
-function LetterSpacingInput({ value, onChange, property }) {
-  const classes = useStyles()
+export interface InputProps {
+  value: string;
+  onChange: (event: Event | SyntheticEvent<Element, Event> | SelectChangeEvent<string>, value: string | number) => void;
+  property?: string;
+}
+function LetterSpacingInput({ value, onChange }: InputProps) {
   const [displayValue, setDisplayValue] = useState<number | undefined>(
     undefined
   )
@@ -55,7 +48,10 @@ function LetterSpacingInput({ value, onChange, property }) {
       min={-0.1}
       max={1.5}
       step={0.01}
-      onChange={(event, newDisplayValue) => setDisplayValue(newDisplayValue)}
+      onChange={(event, newDisplayValue) => {
+        const newVal = Array.isArray(newDisplayValue) ? newDisplayValue[0] : newDisplayValue;
+        setDisplayValue(newVal)
+      }}
       onChangeCommitted={(event, newValue) =>
         onChange(event, `${newValue}em`)
       }
@@ -64,7 +60,7 @@ function LetterSpacingInput({ value, onChange, property }) {
       <Typography
         color="textSecondary"
         variant="caption"
-        className={classes.disabledText}
+        sx={{ fontStyle: "italic" }}
       >
         Only em units supported. Use the code editor to configure other types.
       </Typography>

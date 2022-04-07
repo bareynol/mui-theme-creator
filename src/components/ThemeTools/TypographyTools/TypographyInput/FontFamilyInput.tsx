@@ -38,6 +38,7 @@ function FontFamilyInput({ value, onChange }) {
           setInput(event.target.value)
         }
         fullWidth
+        variant="standard"
         InputLabelProps={{ shrink: true }}
         InputProps={{
           endAdornment: (

@@ -104,7 +104,7 @@ export default function PricingExample() {
           position="static"
           color="default"
           elevation={0}
-          sx={{ borderBottom: 1 }}
+          sx={{ borderBottom: 1, borderBottomColor: 'divider', }}
         >
           <Toolbar sx={{ flexWrap: "wrap" }}>
             <Tooltip

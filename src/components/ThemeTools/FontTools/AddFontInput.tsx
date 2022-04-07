@@ -34,8 +34,8 @@ function AddFontInput() {
       <Typography variant="body2">Add Fonts</Typography>
       <TextField
         name="fontname"
-        // label="Add Fonts"
         error={error}
+        variant="standard"
         helperText={
           error ? (
             "Error loading font"

@@ -61,6 +61,7 @@ function AddThemeButton() {
               label="Theme Name"
               fullWidth
               required
+              variant="standard"
             />
           </DialogContent>
           <DialogActions>

@@ -12,7 +12,7 @@ const Header = (props: AppBarProps) => {
         justifyContent: "space-between",
       }}>
         <div>
-          <Typography variant="h6" sx={{ typography: 'h6' }}>
+          <Typography variant="h6" sx={{ typography: 'h6', lineHeight: '1.25rem' }}>
             MUI Theme Creator
           </Typography>
           <Typography variant="caption" sx={{ typography: 'caption', fontWeight: 700 }}>

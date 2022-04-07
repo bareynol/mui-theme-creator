@@ -26,6 +26,7 @@ export default function PaymentForm() {
             label="Name on card"
             fullWidth
             autoComplete="cc-name"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -35,6 +36,7 @@ export default function PaymentForm() {
             label="Card number"
             fullWidth
             autoComplete="cc-number"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -44,6 +46,7 @@ export default function PaymentForm() {
             label="Expiry date"
             fullWidth
             autoComplete="cc-exp"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -54,6 +57,7 @@ export default function PaymentForm() {
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>

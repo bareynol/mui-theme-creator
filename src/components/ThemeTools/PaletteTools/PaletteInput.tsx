@@ -1,25 +1,15 @@
-import React, { useCallback } from "react"
-import ColorInput from "src/components/ColorInput"
-import { useDispatch } from "react-redux"
-import { setThemeOption, removeThemeOption } from "src/state/actions"
-import { Grid, Typography, Button } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import { useThemeValue, useThemeValueInfo } from "src/state/selectors"
+import { Button, Grid } from "@mui/material";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import ColorInput from "src/components/ColorInput";
+import { removeThemeOption, setThemeOption } from "src/state/actions";
+import { useThemeValueInfo } from "src/state/selectors";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    resetButton: {
-      textTransform: "capitalize",
-    },
-    disabledButton: {
-      fontStyle: "italic",
-    },
-  })
-)
-
-export default function PaletteInput({ label, path }) {
-  const classes = useStyles()
+interface Props {
+  label: string;
+  path: string;
+}
+export default function PaletteInput({ label, path }: Props) {
   const themeValueInfo = useThemeValueInfo(path)
   const dispatch = useDispatch()
 
@@ -45,9 +35,11 @@ export default function PaletteInput({ label, path }) {
         <Button
           size="small"
           disabled={!themeValueInfo.modifiedByUser}
-          classes={{
-            root: classes.resetButton,
-            disabled: classes.disabledButton,
+          sx={{
+            textTransform: "capitalize",
+            '&.Mui-disabled': {
+              fontStyle: "italic",
+            }
           }}
           onClick={handleReset}
         >

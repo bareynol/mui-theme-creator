@@ -1,51 +1,16 @@
-import React, { useState } from "react"
-
-import { Theme } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import BottomNavigation from "@mui/material/BottomNavigation"
-import BottomNavigationAction from "@mui/material/BottomNavigationAction"
-import PaletteTools from "./PaletteTools/PaletteTools"
-
-import TypographyTools from "./TypographyTools/TypographyTools"
-
-import PaletteIcon from "@mui/icons-material/Palette"
-import FontIcon from "@mui/icons-material/FontDownload"
-import TypographyIcon from "@mui/icons-material/TextFields"
-import SnippetsIcon from "@mui/icons-material/PlaylistAdd"
-import ToolPanel from "./ToolPanel"
-import FontTools from "./FontTools/FontTools"
-import SnippetTools from "./SnippetTools"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    themeToolsRoot: {
-      display: "flex",
-      flexDirection: "column",
-      height: "100%",
-      overflow: "auto",
-    },
-    themeToolsBottomNavBar: {
-      backgroundColor: theme.palette.background.default,
-      borderTop: "1px solid",
-      borderTopColor: theme.palette.divider,
-      width: "calc(100% - 1px)", // to prevent scroll bar
-    },
-    selected: {
-      // color: "#fff",
-      "&$root": {
-        backgroundColor: "#212121",
-      },
-      "& $wrapper": {
-        color: "#fff",
-      },
-    },
-    wrapper: {
-      color: theme.palette.text.disabled,
-    },
-    root: {},
-  })
-)
+import FontIcon from "@mui/icons-material/FontDownload";
+import PaletteIcon from "@mui/icons-material/Palette";
+import SnippetsIcon from "@mui/icons-material/PlaylistAdd";
+import TypographyIcon from "@mui/icons-material/TextFields";
+import { Box } from "@mui/material";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import React, { useState } from "react";
+import FontTools from "./FontTools/FontTools";
+import PaletteTools from "./PaletteTools/PaletteTools";
+import SnippetTools from "./SnippetTools";
+import ToolPanel from "./ToolPanel";
+import TypographyTools from "./TypographyTools/TypographyTools";
 
 export const paletteToolsId = "palette-tools-nav"
 export const fontToolsId = "font-tools-nav"
@@ -58,46 +23,44 @@ const toolPanels: Array<{
   tools: any
   id: string
 }> = [
-  {
-    label: "Palette",
-    icon: <PaletteIcon />,
-    tools: PaletteTools,
-    id: paletteToolsId,
-  },
-  {
-    label: "Fonts",
-    icon: <FontIcon />,
-    tools: FontTools,
-    id: fontToolsId,
-  },
-  {
-    label: "Typography",
-    icon: <TypographyIcon />,
-    tools: TypographyTools,
-    id: typographyToolsId,
-  },
-  {
-    label: "Snippets",
-    icon: <SnippetsIcon />,
-    tools: SnippetTools,
-    id: snippetToolsId,
-  },
-]
+    {
+      label: "Palette",
+      icon: <PaletteIcon />,
+      tools: PaletteTools,
+      id: paletteToolsId,
+    },
+    {
+      label: "Fonts",
+      icon: <FontIcon />,
+      tools: FontTools,
+      id: fontToolsId,
+    },
+    {
+      label: "Typography",
+      icon: <TypographyIcon />,
+      tools: TypographyTools,
+      id: typographyToolsId,
+    },
+    {
+      label: "Snippets",
+      icon: <SnippetsIcon />,
+      tools: SnippetTools,
+      id: snippetToolsId,
+    },
+  ]
 
 export default function ThemeTools() {
-  const classes = useStyles()
   const [bottomNavIndex, setBottomNavIndex] = useState(0)
-
-  const bottomNavActionClasses = {
-    selected: classes.selected,
-    wrapper: classes.wrapper,
-    root: classes.root,
-  }
 
   const currentTool = toolPanels[bottomNavIndex]
 
   return (
-    <div className={classes.themeToolsRoot}>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      height: 1,
+      overflow: "auto",
+    }}>
       <ToolPanel panelTitle={currentTool.label}>
         <currentTool.tools />
       </ToolPanel>
@@ -105,7 +68,12 @@ export default function ThemeTools() {
       <BottomNavigation
         value={bottomNavIndex}
         showLabels
-        className={classes.themeToolsBottomNavBar}
+        sx={{
+          bgcolor: 'background.default',
+          borderTop: 1,
+          borderTopColor: 'divider',
+          width: "calc(100% - 1px)", // to prevent scroll bar
+        }}
         onChange={(event, newValue) => setBottomNavIndex(newValue)}
       >
         {toolPanels.map((panel, index) => (
@@ -115,10 +83,14 @@ export default function ThemeTools() {
             label={panel.label}
             value={index}
             icon={panel.icon}
-            classes={bottomNavActionClasses}
+            sx={{
+              '&.Mui-selected': {
+                bgcolor: "#212121",
+              }
+            }}
           />
         ))}
       </BottomNavigation>
-    </div>
+    </Box>
   )
 }

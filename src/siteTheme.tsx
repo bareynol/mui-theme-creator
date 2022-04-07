@@ -43,12 +43,12 @@ export const themeConfig: ThemeOptions = {
           "&:before": {
             display: "none",
           },
-          "&$expanded": {
+          "&.Mui-expanded": {
             margin: "auto",
           },
-          "&$disabled": {
-            marginLeft: 32,
-          },
+          "&.Mui-disabled": {
+            marginLeft: 32
+          }
         },
       }
     },
@@ -57,14 +57,14 @@ export const themeConfig: ThemeOptions = {
         root: {
           borderBottom: "1px solid rgba(255, 255, 255, .125)",
           minHeight: 56,
-          "&$expanded": {
-            minHeight: 56,
-          },
+          "&.Mui-expanded": {
+            minHeight: 56
+          }
         },
         content: {
           alignItems: "center",
           justifyContent: "space-between",
-          "&$expanded": {
+          "&.Mui-expanded": {
             margin: "12px 0",
           },
         },

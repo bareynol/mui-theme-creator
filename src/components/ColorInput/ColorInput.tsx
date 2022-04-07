@@ -61,6 +61,7 @@ export default function ColorInput({ label, color, onColorChange }: ColorInputPr
         size="small"
         value={color}
         onPaste={handlePaste}
+        variant="standard"
       />
       <Popover
         open={popoverOpen}

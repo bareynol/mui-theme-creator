@@ -14,6 +14,10 @@ export const previewTabId = "preview-tab"
 export const componentsTabId = "components-tab"
 export const savedThemesTabId = "saved-themes-tab"
 
+const tabStyle = {
+  minWidth: { sm: 160 }
+};
+
 const MainWindow = () => {
   const activeTab = useSelector((state: RootState) => state.activeTab)
   const dispatch = useDispatch()
@@ -44,9 +48,9 @@ const MainWindow = () => {
           },
         }}
       >
-        <Tab label="Preview" value="preview" id={previewTabId} />
-        <Tab label="Components" value="components" id={componentsTabId} />
-        <Tab label="Saved Themes" value="saved" id={savedThemesTabId} />
+        <Tab label="Preview" value="preview" id={previewTabId} sx={tabStyle} />
+        <Tab label="Components" value="components" id={componentsTabId} sx={tabStyle} />
+        <Tab label="Saved Themes" value="saved" id={savedThemesTabId} sx={tabStyle} />
       </Tabs>
       <Hidden smUp>
         <IconButton onClick={() => dispatch({ type: "TOGGLE_THEME_CONFIG" })} size="large">

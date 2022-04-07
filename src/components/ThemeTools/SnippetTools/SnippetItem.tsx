@@ -1,25 +1,14 @@
+import AddIcon from "@mui/icons-material/Add"
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
+import RemoveIcon from "@mui/icons-material/Remove"
+import { Accordion, AccordionSummary, Link, Tooltip, Typography } from "@mui/material"
 import React, { useCallback } from "react"
-import { SnippetModification } from "./types"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { removeThemeOptions, setThemeOptions } from "src/state/actions"
 import { RootState } from "src/state/types"
 import { getByPath } from "src/utils"
-import { Link, Tooltip, Theme, Accordion, AccordionSummary, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
-import { setThemeOptions, removeThemeOptions } from "src/state/actions"
 import { ThemeValueChangeEvent } from "../events"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    snippetTitle: {
-      marginLeft: theme.spacing(),
-      flexGrow: 1,
-    },
-  })
-)
+import { SnippetModification } from "./types"
 
 /**
  * Simple check of if the SnippetModification.configs are
@@ -41,7 +30,6 @@ interface SnippetItemProps {
 }
 
 const SnippetItem = ({ snippet }: SnippetItemProps) => {
-  const classes = useStyles()
   const dispatch = useDispatch()
   const handleAddSnippet = useCallback(() => {
     dispatch(setThemeOptions(snippet.configs))
@@ -72,7 +60,10 @@ const SnippetItem = ({ snippet }: SnippetItemProps) => {
     >
       <AccordionSummary>
         {isSnippetIncluded ? <RemoveIcon /> : <AddIcon />}
-        <Typography variant="body2" className={classes.snippetTitle}>
+        <Typography variant="body2" sx={{
+          ml: 1,
+          flexGrow: 1,
+        }}>
           {title}
         </Typography>
         {info && (

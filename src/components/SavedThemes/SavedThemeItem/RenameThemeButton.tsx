@@ -57,6 +57,7 @@ function RenameThemeButton({ themeId, defaultName }) {
               label="Theme Name"
               fullWidth
               required
+              variant="standard"
             />
           </DialogContent>
           <DialogActions>

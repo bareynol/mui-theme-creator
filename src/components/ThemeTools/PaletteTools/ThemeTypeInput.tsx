@@ -1,34 +1,11 @@
-import React, { useCallback } from "react"
-import { Theme, ListItem, ListItemText, ListItemSecondaryAction, Typography, Switch } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import { useDispatch } from "react-redux"
-import { setThemeOption } from "src/state/actions"
-import { useThemeValue } from "src/state/selectors"
-import { ThemeValueChangeEvent } from "../events"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    inputRoot: {
-      display: "flex",
-      alignItems: "center",
-    },
-    switchBase: {
-      color: "#fff",
-      // "&$checked": {
-      //   color: "#212121",
-      // },
-      // "&$checked + $track": {
-      //   backgroundColor: "#303030",
-      // },
-    },
-    checked: {},
-    track: {},
-  })
-)
+import { Box, Switch, Typography } from "@mui/material";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { setThemeOption } from "src/state/actions";
+import { useThemeValue } from "src/state/selectors";
+import { ThemeValueChangeEvent } from "../events";
 
 export default function ThemeTypeInput() {
-  const classes = useStyles()
   const themeIsDark = useThemeValue("palette.mode") === "dark"
   const dispatch = useDispatch()
 
@@ -38,7 +15,10 @@ export default function ThemeTypeInput() {
   }, [dispatch, themeIsDark])
 
   return (
-    <div className={classes.inputRoot}>
+    <Box sx={{
+      display: "flex",
+      alignItems: "center",
+    }}>
       <Typography
         variant="body2"
         color={themeIsDark ? "textSecondary" : "textPrimary"}
@@ -48,11 +28,7 @@ export default function ThemeTypeInput() {
       <Switch
         checked={themeIsDark}
         onClick={toggleThemeType}
-        classes={{
-          switchBase: classes.switchBase,
-          checked: classes.checked,
-          track: classes.track,
-        }}
+        sx={{ color: "#fff" }}
         color="default"
       />
       <Typography
@@ -61,6 +37,6 @@ export default function ThemeTypeInput() {
       >
         Dark
       </Typography>
-    </div>
+    </Box>
   )
 }
