@@ -65,7 +65,7 @@
   "scripts": {
     "build": "./extractMuiVersion.sh && gatsby build",
     "develop": "gatsby develop",
-    "deploy": "./extractMuiVersion.sh && gatsby build --prefix-paths && gh-pages -d public",
+    "deploy": "bash ./extractMuiVersion.sh && gatsby build --prefix-paths && gh-pages -d public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
