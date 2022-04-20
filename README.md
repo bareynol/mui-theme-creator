@@ -11,7 +11,7 @@
 
 Material-UI Theme Creator provides an interface to help create a [Material-UI](https://material-ui.com/) `ThemeOptions` object, which styles components in the library.
 
-[Use the app here](https://bareynol.github.io/mui-theme-creator/)
+[Use the app here](https://zenoo.github.io/mui-theme-creator/)
 
 ## Features
 
