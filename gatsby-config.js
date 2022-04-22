@@ -4,7 +4,7 @@ module.exports = {
     title: `Material-UI Theme Creator`,
     description: `Kick off your next, great Material-UI project with a customized theme.`,
     author: `@zenoo`,
-    url: "https://zenoo.github.io//mui-theme-creator",
+    url: "https://zenoo.github.io/mui-theme-creator",
   },
   plugins: [
     `gatsby-plugin-react-helmet-async`,
