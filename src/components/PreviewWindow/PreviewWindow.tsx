@@ -46,12 +46,12 @@ const PreviewWindow = () => {
     setTabIndex(newTabIndex)
   }
 
-  const handleOpenDrawer = () => setDrawerOpen(() => !drawerOpen)
+  const toggleDrawer = () => setDrawerOpen(prev => !prev)
   const handleCloseDrawer = () => setDrawerOpen(false)
 
   return (
     <PreviewWrapper>
-      <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
+      <AppBarExample onDrawerButtonClick={toggleDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
           <Tabs
