@@ -35,8 +35,8 @@ function TabPanel(props: TabPanelProps) {
 export const previewNavTabsId = "preview-nav-tabs"
 
 const tabStyle = {
-  minWidth: { sm: 160 }
-};
+  minWidth: { sm: 160 },
+}
 
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
@@ -46,12 +46,12 @@ const PreviewWindow = () => {
     setTabIndex(newTabIndex)
   }
 
-  const handleOpenDrawer = () => setDrawerOpen(true)
+  const toggleDrawer = () => setDrawerOpen(prev => !prev)
   const handleCloseDrawer = () => setDrawerOpen(false)
 
   return (
     <PreviewWrapper>
-      <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
+      <AppBarExample onDrawerButtonClick={toggleDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
           <Tabs
@@ -62,7 +62,8 @@ const PreviewWindow = () => {
             indicatorColor="secondary"
             scrollButtons
             aria-label="preview-window-tabs"
-            allowScrollButtonsMobile>
+            allowScrollButtonsMobile
+          >
             <Tab label="Instructions" sx={tabStyle} />
             <Tab label="Sign Up" sx={tabStyle} />
             <Tab label="Dashboard" sx={tabStyle} />
@@ -95,7 +96,7 @@ const PreviewWindow = () => {
         </TabPanel>
       </div>
     </PreviewWrapper>
-  );
+  )
 }
 
 export default PreviewWindow
