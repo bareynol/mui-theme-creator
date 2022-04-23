@@ -3,8 +3,9 @@
   "private": true,
   "description": "A comprehensive tool to customize themes for Material-UI",
   "version": "5.0.0",
-  "original-by": "Brian Reynolds <brireyn@gmail.com>",
-  "v5-author": "Zenoo <https://github.com/Zenoo>",
+  "keywords": ["MUI", "MUI v5", "Material-UI", "MUI Theme Creator"],
+  "author": "Brian Reynolds <brireyn@gmail.com>",
+  "contributors": ["Zenoo (https://github.com/Zenoo)"],
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
     "@emotion/react": "^11.9.0",
@@ -77,6 +78,7 @@
     "type": "git",
     "url": "https://github.com/zenoo/mui-theme-creator"
   },
+  "homepage": "https://zenoo.github.io/mui-theme-creator/",
   "bugs": {
     "url": "https://github.com/zenoo/mui-theme-creator/issues"
   }
