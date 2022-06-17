@@ -1,7 +1,6 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import PhoneIcon from "@mui/icons-material/Phone";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -53,7 +52,7 @@ export default function TabsExample() {
       flexGrow: 1,
       bgcolor: 'background.paper',
     }}>
-      <AppBar position="static">
+      <Box position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -63,7 +62,7 @@ export default function TabsExample() {
           <Tab label="Favourites" {...a11yProps(1)} />
           <Tab label="Nearby" {...a11yProps(2)} />
         </Tabs>
-      </AppBar>
+      </Box>
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
@@ -74,7 +73,7 @@ export default function TabsExample() {
         Item Three
       </TabPanel>
 
-      <AppBar position="static">
+      <Box position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -84,7 +83,7 @@ export default function TabsExample() {
           <Tab icon={<FavoriteIcon />} label="Favourites" {...a11yProps(1)} />
           <Tab icon={<PersonPinIcon />} label="Nearby" {...a11yProps(2)} />
         </Tabs>
-      </AppBar>
+      </Box>
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
