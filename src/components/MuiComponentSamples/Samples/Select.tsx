@@ -27,6 +27,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl}>
         <InputLabel id="demo-simple-select-label">Age</InputLabel>
         <Select
+          label="Age"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={age}
@@ -40,6 +41,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl}>
         <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
         <Select
+          label="Age"
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           value={age}
@@ -95,6 +97,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl} disabled>
         <InputLabel id="demo-simple-select-disabled-label">Name</InputLabel>
         <Select
+          label="Name"
           labelId="demo-simple-select-disabled-label"
           id="demo-simple-select-disabled"
           value={age}
@@ -112,6 +115,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl} error>
         <InputLabel id="demo-simple-select-error-label">Name</InputLabel>
         <Select
+          label="Name"
           labelId="demo-simple-select-error-label"
           id="demo-simple-select-error"
           value={age}
@@ -130,6 +134,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl}>
         <InputLabel id="demo-simple-select-readonly-label">Name</InputLabel>
         <Select
+          label="Name"
           labelId="demo-simple-select-readonly-label"
           id="demo-simple-select-readonly"
           value={age}
@@ -148,6 +153,7 @@ export default function SelectExample() {
       <FormControl sx={styles.formControl}>
         <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
         <Select
+          label="Age  "
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={age}
@@ -155,7 +161,7 @@ export default function SelectExample() {
           autoWidth
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>None</em> 
           </MenuItem>
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
