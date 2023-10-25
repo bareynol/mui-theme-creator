@@ -1,5 +1,5 @@
 import React from "react"
-import { AppBar, Tabs, Tab, Tooltip } from "@material-ui/core"
+import { AppBar, Tabs, Tab, Tooltip } from "@mui/material"
 import AppBarExample from "src/components/MuiComponentSamples/Samples/AppBar"
 import DefaultExample from "./Samples/DefaultExample"
 import SignUpExample from "./Samples/SignUpExample"
@@ -34,6 +34,10 @@ function TabPanel(props: TabPanelProps) {
 
 export const previewNavTabsId = "preview-nav-tabs"
 
+const tabStyle = {
+  minWidth: { sm: 160 },
+}
+
 const PreviewWindow = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -42,27 +46,30 @@ const PreviewWindow = () => {
     setTabIndex(newTabIndex)
   }
 
-  const handleOpenDrawer = () => setDrawerOpen(true)
+  const toggleDrawer = () => setDrawerOpen(prev => !prev)
   const handleCloseDrawer = () => setDrawerOpen(false)
 
   return (
     <PreviewWrapper>
-      <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
+      <AppBarExample onDrawerButtonClick={toggleDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
           <Tabs
             value={tabIndex}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons="on"
+            textColor="inherit"
+            indicatorColor="secondary"
+            scrollButtons
             aria-label="preview-window-tabs"
+            allowScrollButtonsMobile
           >
-            <Tab label="Instructions" />
-            <Tab label="Sign Up" />
-            <Tab label="Dashboard" />
-            <Tab label="Blog" />
-            <Tab label="Pricing" />
-            <Tab label="Checkout" />
+            <Tab label="Instructions" sx={tabStyle} />
+            <Tab label="Sign Up" sx={tabStyle} />
+            <Tab label="Dashboard" sx={tabStyle} />
+            <Tab label="Blog" sx={tabStyle} />
+            <Tab label="Pricing" sx={tabStyle} />
+            <Tab label="Checkout" sx={tabStyle} />
           </Tabs>
         </AppBar>
       </Tooltip>

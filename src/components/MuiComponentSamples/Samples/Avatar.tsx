@@ -1,58 +1,28 @@
-import React from "react"
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import Avatar from "@material-ui/core/Avatar"
-import { deepOrange, deepPurple, pink, green } from "@material-ui/core/colors"
-import FolderIcon from "@material-ui/icons/Folder"
-import PageviewIcon from "@material-ui/icons/Pageview"
-import AssignmentIcon from "@material-ui/icons/Assignment"
-import AvatarGroup from "@material-ui/lab/AvatarGroup"
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import FolderIcon from "@mui/icons-material/Folder";
+import PageviewIcon from "@mui/icons-material/Pageview";
+import { Box } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from '@mui/material/AvatarGroup';
+import { deepOrange, deepPurple, green, pink } from "@mui/material/colors";
+import React from "react";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
-    avatarSet: {
-      display: "flex",
-      margin: theme.spacing(2),
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-    orange: {
-      color: theme.palette.getContrastText(deepOrange[500]),
-      backgroundColor: deepOrange[500],
-    },
-    purple: {
-      color: theme.palette.getContrastText(deepPurple[500]),
-      backgroundColor: deepPurple[500],
-    },
-    pink: {
-      color: theme.palette.getContrastText(pink[500]),
-      backgroundColor: pink[500],
-    },
-    green: {
-      color: "#fff",
-      backgroundColor: green[500],
-    },
-    small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
-    },
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-  })
-)
+const avatarSetStyle = {
+  display: "flex",
+  m: 2,
+  "& > *": {
+    m: 1,
+  },
+};
 
 export default function AvatarExample() {
-  const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <div className={classes.avatarSet}>
+    <Box sx={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}>
+      <Box sx={avatarSetStyle}>
         <Avatar
           alt="Remy Sharp"
           src="https://material-ui.com/static/images/avatar/1.jpg"
@@ -65,17 +35,26 @@ export default function AvatarExample() {
           alt="Cindy Baker"
           src="https://material-ui.com/static/images/avatar/3.jpg"
         />
-      </div>
-      <div className={classes.avatarSet}>
+      </Box>
+      <Box sx={avatarSetStyle}>
         <Avatar>H</Avatar>
-        <Avatar className={classes.orange}>N</Avatar>
-        <Avatar className={classes.purple}>OP</Avatar>
-      </div>
-      <div className={classes.avatarSet}>
+        <Avatar sx={{
+          color: (theme) => theme.palette.getContrastText(deepOrange[500]),
+          bgcolor: deepOrange[500],
+        }}>N</Avatar>
+        <Avatar sx={{
+          color: (theme) => theme.palette.getContrastText(deepPurple[500]),
+          bgcolor: deepPurple[500],
+        }}>OP</Avatar>
+      </Box>
+      <Box sx={avatarSetStyle}>
         <Avatar
           alt="Remy Sharp"
           src="https://material-ui.com/static/images/avatar/1.jpg"
-          className={classes.small}
+          sx={{
+            width: (theme) => theme.spacing(3),
+            height: (theme) => theme.spacing(3),
+          }}
         />
         <Avatar
           alt="Remy Sharp"
@@ -84,21 +63,30 @@ export default function AvatarExample() {
         <Avatar
           alt="Remy Sharp"
           src="https://material-ui.com/static/images/avatar/1.jpg"
-          className={classes.large}
+          sx={{
+            width: (theme) => theme.spacing(7),
+            height: (theme) => theme.spacing(7),
+          }}
         />
-      </div>
-      <div className={classes.avatarSet}>
+      </Box>
+      <Box sx={avatarSetStyle}>
         <Avatar>
           <FolderIcon />
         </Avatar>
-        <Avatar className={classes.pink}>
+        <Avatar sx={{
+          color: (theme) => theme.palette.getContrastText(pink[500]),
+          bgcolor: pink[500],
+        }}>
           <PageviewIcon />
         </Avatar>
-        <Avatar className={classes.green}>
+        <Avatar sx={{
+          color: "#fff",
+          bgcolor: green[500],
+        }}>
           <AssignmentIcon />
         </Avatar>
-      </div>
-      <div className={classes.avatarSet}>
+      </Box>
+      <Box sx={avatarSetStyle}>
         <AvatarGroup max={4}>
           <Avatar
             alt="Remy Sharp"
@@ -121,7 +109,7 @@ export default function AvatarExample() {
             src="https://material-ui.com/static/images/avatar/5.jpg"
           />
         </AvatarGroup>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

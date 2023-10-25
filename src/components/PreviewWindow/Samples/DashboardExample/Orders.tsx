@@ -1,16 +1,19 @@
-import React from "react"
-import Link from "@material-ui/core/Link"
-import { makeStyles } from "@material-ui/core/styles"
-import Table from "@material-ui/core/Table"
-import TableBody from "@material-ui/core/TableBody"
-import TableCell from "@material-ui/core/TableCell"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import Typography from "@material-ui/core/Typography"
-import Tooltip from "@material-ui/core/Tooltip"
+import { Box } from "@mui/material";
+import Link from "@mui/material/Link";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
+function createData(
+  id: number, date: string,
+  name: string, shipTo: string,
+  paymentMethod: string, amount: number) {
   return { id, date, name, shipTo, paymentMethod, amount }
 }
 
@@ -57,18 +60,11 @@ const rows = [
   ),
 ]
 
-function preventDefault(event) {
+function preventDefault(event: React.MouseEvent) {
   event.preventDefault()
 }
 
-const useStyles = makeStyles(theme => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}))
-
 export default function Orders() {
-  const classes = useStyles()
   return (
     <React.Fragment>
       <Tooltip
@@ -104,13 +100,13 @@ export default function Orders() {
           </TableBody>
         </Table>
       </Tooltip>
-      <div className={classes.seeMore}>
+      <Box sx={{ mt: 3 }}>
         <Tooltip title={`<Link color="primary">`} placement="left" arrow>
-          <Link color="primary" href="#" onClick={preventDefault}>
+          <Link color="primary" href="#" onClick={preventDefault} underline="hover">
             See more orders
           </Link>
         </Tooltip>
-      </div>
+      </Box>
     </React.Fragment>
-  )
+  );
 }

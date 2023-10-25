@@ -1,26 +1,11 @@
-import React from "react"
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import Avatar from "@material-ui/core/Avatar"
-import Chip from "@material-ui/core/Chip"
-import FaceIcon from "@material-ui/icons/Face"
-import DoneIcon from "@material-ui/icons/Done"
-import { Typography } from "@material-ui/core"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
-      "& > *": {
-        margin: theme.spacing(0.5),
-      },
-    },
-  })
-)
+import DoneIcon from "@mui/icons-material/Done";
+import FaceIcon from "@mui/icons-material/Face";
+import { Box, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import React from "react";
 
 export default function ChipExample() {
-  const classes = useStyles()
 
   const handleDelete = () => {
     console.info("You clicked the delete icon.")
@@ -33,7 +18,14 @@ export default function ChipExample() {
   return (
     <>
       <Typography variant="h6">Default</Typography>
-      <div className={classes.root}>
+      <Box sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        "& > *": {
+          m: 0.5,
+        }
+      }}>
         <Chip label="Basic" />
         <Chip label="Disabled" disabled />
         <Chip
@@ -91,10 +83,17 @@ export default function ChipExample() {
           onDelete={handleDelete}
           color="secondary"
         />
-      </div>
+      </Box>
 
       <Typography variant="h6">Outlined</Typography>
-      <div className={classes.root}>
+      <Box sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        "& > *": {
+          m: 0.5,
+        }
+      }}>
         <Chip variant="outlined" label="Basic" />
         <Chip variant="outlined" label="Disabled" disabled />
         <Chip
@@ -166,7 +165,7 @@ export default function ChipExample() {
           onDelete={handleDelete}
           color="secondary"
         />
-      </div>
+      </Box>
     </>
   )
 }

@@ -16,7 +16,7 @@ export const getByPath = (
   path.split(".").reduce((o: any, p) => (o ? o[p] : defaultValue), object) ||
   defaultValue
 
-export const removeByPath = (object, path) => {
+export const removeByPath: any = (object: any, path: string) => {
   const prunedObject = dotProp.delete(object, path)
   const pathArray = path.split(".")
   if (pathArray.length > 1) {
@@ -34,7 +34,7 @@ export const removeByPath = (object, path) => {
   return prunedObject
 }
 
-export const setByPath = (object, path, value) =>
+export const setByPath = (object: any, path: string, value: any) =>
   dotProp.set(object, path, value)
 
 /**

@@ -1,5 +1,5 @@
 PACKAGE_VERSION=$(cat package.json \
-  | grep @material-ui/core \
+  | grep @mui/material \
   | head -1 \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \

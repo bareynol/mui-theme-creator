@@ -11,6 +11,7 @@ import CardExample from "./Card"
 import ProgressExample from "./Progress"
 import SnackbarExample from "./Snackbar"
 import AvatarExample from "./Avatar"
+import AlertExample from "./Alert"
 import BadgeExample from "./Badge"
 import ChipExample from "./Chip"
 import BottomNavigationExample from "./BottomNavigation"
@@ -39,6 +40,12 @@ export default [
     title: "Accordion",
     component: <AccordionExample />,
     docs: "https://material-ui.com/components/accordion/",
+  },
+  {
+    id: "Alert",
+    title: "Alert",
+    component: <AlertExample />,
+    docs: "https://material-ui.com/components/alert/",
   },
   {
     id: "Appbar",

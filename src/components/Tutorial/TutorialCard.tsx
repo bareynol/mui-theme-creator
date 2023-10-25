@@ -1,34 +1,23 @@
+import Card, { CardProps } from "@mui/material/Card"
+import CardActions from "@mui/material/CardActions"
+import CardContent from "@mui/material/CardContent"
+import Divider from "@mui/material/Divider"
+import Typography from "@mui/material/Typography"
 import React from "react"
-import clsx from "clsx"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import CardActions from "@material-ui/core/CardActions"
-import Divider from "@material-ui/core/Divider"
-import Typography from "@material-ui/core/Typography"
-import { Theme, makeStyles, createStyles } from "@material-ui/core"
 import TutorialStepButton from "./TutorialStepButton"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    card: {
-      maxWidth: 750,
-    },
-    cardActions: {
-      justifyContent: "space-between",
-    },
-  })
-)
-
-const TutorialCard = ({ title, ...props }) => {
-  const classes = useStyles()
+interface Props extends CardProps {
+  title: string;
+}
+const TutorialCard = ({ title, ...props }: Props) => {
   return (
-    <Card {...props} className={clsx(props.className, classes.card)}>
+    <Card {...props} sx={{ maxWidth: 750 }}>
       <CardContent>
         <Typography variant="h4">{title}</Typography>
       </CardContent>
       <CardContent>{props.children}</CardContent>
       <Divider />
-      <CardActions className={classes.cardActions}>
+      <CardActions sx={{ justifyContent: "space-between" }}>
         <TutorialStepButton variant="prev" />
         <TutorialStepButton variant="next" />
       </CardActions>

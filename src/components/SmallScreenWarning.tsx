@@ -1,52 +1,22 @@
-import React, { useEffect } from "react"
 import {
-  Hidden,
-  Dialog,
-  Typography,
-  DialogContent,
-  Slide,
-  makeStyles,
-  Theme,
-  createStyles,
-  Button,
-  darken,
-} from "@material-ui/core"
-import { TransitionProps } from "@material-ui/core/transitions/transition"
+  Box, Button,
+  darken, Dialog, DialogContent, Hidden, Slide, SlideProps, Typography
+} from "@mui/material"
+import { TransitionProps } from "@mui/material/transitions/transition"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import hereBeDragonsImage from "src/images/herebedragons.webp"
 import { loadFonts } from "src/state/actions"
-import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "src/state/types"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    dialogPaper: {
-      backgroundColor: darken(theme.palette.error.dark, 0.5),
-    },
-    dialogContent: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    exitButtonArea: {
-      textAlign: "center",
-      marginBottom: 32,
-      "& > *": {
-        fontFamily: '"Press Start 2P"',
-      },
-    },
-  })
-)
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement },
-  ref: React.Ref<unknown>
+const Transition = React.forwardRef<HTMLElement, SlideProps>(function Transition(
+  props,
+  ref
 ) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
 const SmallScreenWarning = () => {
-  const classes = useStyles()
   const warningSeen = useSelector((state: RootState) => state.mobileWarningSeen)
   const dispatch = useDispatch()
 
@@ -65,9 +35,14 @@ const SmallScreenWarning = () => {
         open={!warningSeen}
         onClose={handleClose}
         TransitionComponent={Transition}
-        classes={{ paper: classes.dialogPaper }}
+        sx={{ bgcolor: (theme) => darken(theme.palette.error.dark, 0.5) }}
       >
-        <DialogContent className={classes.dialogContent}>
+        <DialogContent sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
           <Typography variant="h5">Material-UI Theme Creator</Typography>
           <Typography variant="h6">You are using a small screen</Typography>
           <div>
@@ -83,12 +58,18 @@ const SmallScreenWarning = () => {
             alt="Here Be Dragons... (for small screens)"
             width="75%"
           />
-          <div className={classes.exitButtonArea}>
+          <Box sx={{
+            textAlign: "center",
+            marginBottom: 32,
+            "& > *": {
+              fontFamily: '"Press Start 2P"',
+            },
+          }}>
             <Typography align="center">Warning to all who enter</Typography>
             <Button variant="outlined" onClick={handleClose}>
               Here be dragons
             </Button>
-          </div>
+          </Box>
         </DialogContent>
       </Dialog>
     </Hidden>

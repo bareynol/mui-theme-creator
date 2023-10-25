@@ -1,13 +1,11 @@
-import React from "react"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import AppBar from "@material-ui/core/AppBar"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
-import Typography from "@material-ui/core/Typography"
-import Box from "@material-ui/core/Box"
-import PhoneIcon from "@material-ui/icons/Phone"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import PersonPinIcon from "@material-ui/icons/PersonPin"
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import PhoneIcon from "@mui/icons-material/Phone";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -42,15 +40,7 @@ function a11yProps(index: any) {
   }
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}))
-
 export default function TabsExample() {
-  const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -58,8 +48,11 @@ export default function TabsExample() {
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <Box sx={{
+      flexGrow: 1,
+      bgcolor: 'background.paper',
+    }}>
+      <Box position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -69,7 +62,7 @@ export default function TabsExample() {
           <Tab label="Favourites" {...a11yProps(1)} />
           <Tab label="Nearby" {...a11yProps(2)} />
         </Tabs>
-      </AppBar>
+      </Box>
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
@@ -80,7 +73,7 @@ export default function TabsExample() {
         Item Three
       </TabPanel>
 
-      <AppBar position="static">
+      <Box position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -90,7 +83,7 @@ export default function TabsExample() {
           <Tab icon={<FavoriteIcon />} label="Favourites" {...a11yProps(1)} />
           <Tab icon={<PersonPinIcon />} label="Nearby" {...a11yProps(2)} />
         </Tabs>
-      </AppBar>
+      </Box>
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
@@ -100,6 +93,6 @@ export default function TabsExample() {
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
-    </div>
+    </Box>
   )
 }

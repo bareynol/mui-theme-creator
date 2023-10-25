@@ -1,11 +1,11 @@
 import { EditorState } from "./types"
 import { defaultThemeOptions } from "src/siteTheme"
 import JSON5 from "json5"
-import { ThemeOptions } from "@material-ui/core"
+import { ThemeOptions } from "@mui/material"
 import { RootState } from "../types"
 
 const stringify = (themeOptions: ThemeOptions) => {
-  return `import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+  return `import { ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = ${JSON5.stringify(
     themeOptions,
@@ -29,7 +29,7 @@ export const initialState: EditorState = {
 
 export default (
   state = initialState,
-  action,
+  action: any,
   savedThemes: RootState["savedThemes"]
 ) => {
   switch (action.type) {

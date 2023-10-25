@@ -1,59 +1,54 @@
-import PropTypes from "prop-types"
-import React from "react"
+import GitHubIcon from "@mui/icons-material/GitHub"
 import {
   AppBar,
+  AppBarProps,
+  IconButton,
+  Link,
   Toolbar,
   Typography,
-  makeStyles,
-  Link,
-  IconButton,
-} from "@material-ui/core"
+} from "@mui/material"
+import React from "react"
 import muiVersion from "src/muiVersion"
 import TutorialButton from "./Tutorial/TutorialButton"
-import GitHubIcon from "@material-ui/icons/GitHub"
 
-const useStyles = makeStyles(theme => ({
-  title: {
-    fontSize: theme.typography.h6.fontSize,
-    lineHeight: theme.typography.h6.fontSize,
-  },
-  version: {
-    fontSize: theme.typography.caption.fontSize,
-    lineHeight: theme.typography.caption.fontSize,
-    fontWeight: 700,
-  },
-  toolbar: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-}))
-
-const Header = ({ className }) => {
-  const classes = useStyles()
+const Header = (props: AppBarProps) => {
   return (
-    <AppBar position="static" color="default" className={className}>
-      <Toolbar className={classes.toolbar}>
+    <AppBar position="static" color="default" {...props}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <div>
-          <Typography variant="h6" className={classes.title}>
-            Material-UI Theme Creator
+          <Typography
+            variant="h6"
+            sx={{ typography: "h6", lineHeight: "1.25rem" }}
+          >
+            MUI Theme Creator
           </Typography>
-          <Typography variant="caption" className={classes.version}>
+          <Typography
+            variant="caption"
+            sx={{ typography: "caption", fontWeight: 700 }}
+          >
             {"└─ "}
             <Link
-              href="https://material-ui.com/"
+              href="https://mui.com/"
               target="_blank"
               rel="noreferrer"
+              underline="hover"
             >
-              {`@material-ui/core@${muiVersion}`}
+              {`@mui/material@${muiVersion}`}
             </Link>
           </Typography>
         </div>
         <div>
           <TutorialButton />
           <IconButton
-            href="https://github.com/bareynol/mui-theme-creator"
+            href="https://github.com/Zenoo/mui-theme-creator"
             target="_blank"
             rel="noreferrer"
+            size="large"
           >
             <GitHubIcon />
           </IconButton>
@@ -61,14 +56,6 @@ const Header = ({ className }) => {
       </Toolbar>
     </AppBar>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header

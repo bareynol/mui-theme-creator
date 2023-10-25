@@ -6,7 +6,7 @@ import {
   decrementTutorialStep,
   toggleTutorial,
 } from "src/state/actions"
-import Button from "@material-ui/core/Button"
+import Button from "@mui/material/Button"
 import stepList from "./Steps"
 
 const TutorialStepButton = ({ variant }) => {

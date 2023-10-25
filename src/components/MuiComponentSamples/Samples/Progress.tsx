@@ -1,72 +1,17 @@
-import React from "react"
-import clsx from "clsx"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import CircularProgress from "@material-ui/core/CircularProgress"
+import CheckIcon from "@mui/icons-material/Check";
+import SaveIcon from "@mui/icons-material/Save";
 import {
-  Typography,
-  Fab,
-  Button,
-  LinearProgress,
-  LinearProgressProps,
-  Box,
-} from "@material-ui/core"
-import { green } from "@material-ui/core/colors"
-import CheckIcon from "@material-ui/icons/Check"
-import SaveIcon from "@material-ui/icons/Save"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      alignItems: "center",
-      "& > * + *": {
-        marginLeft: theme.spacing(2),
-      },
-    },
-    linearRoot: {
-      width: "100%",
-      "& > * + *": {
-        marginTop: theme.spacing(2),
-      },
-    },
-    wrapper: {
-      margin: theme.spacing(1),
-      position: "relative",
-    },
-    buttonSuccess: {
-      backgroundColor: green[500],
-      "&:hover": {
-        backgroundColor: green[700],
-      },
-    },
-    fabProgress: {
-      color: green[500],
-      position: "absolute",
-      top: -6,
-      left: -6,
-      zIndex: 1,
-    },
-    buttonProgress: {
-      color: green[500],
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      marginTop: -12,
-      marginLeft: -12,
-    },
-  })
-)
+  Box, Button, Fab, LinearProgress,
+  LinearProgressProps, Typography
+} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "@mui/material/colors";
+import React from "react";
 
 export default function ProgressExample() {
-  const classes = useStyles()
-
   const [loading, setLoading] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
   const timer = React.useRef<number>()
-
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  })
 
   React.useEffect(() => {
     return () => {
@@ -78,7 +23,7 @@ export default function ProgressExample() {
     if (!loading) {
       setSuccess(false)
       setLoading(true)
-      timer.current = setTimeout(() => {
+      timer.current = window.setTimeout(() => {
         setSuccess(true)
         setLoading(false)
       }, 2000)
@@ -88,45 +33,85 @@ export default function ProgressExample() {
   return (
     <>
       <Typography variant="h6">Circular</Typography>
-      <div className={classes.root}>
+      <Box sx={{
+        display: "flex",
+        alignItems: "center",
+        "& > * + *": {
+          ml: 2,
+        },
+      }}>
         <CircularProgress />
         <CircularProgress color="secondary" />
-        <div className={classes.wrapper}>
+        <Box sx={{
+          m: 1,
+          position: "relative",
+        }}>
           <Fab
             aria-label="save"
             color="primary"
-            className={buttonClassname}
+            sx={success ? {
+              bgcolor: green[500],
+              "&:hover": {
+                bgcolor: green[700],
+              },
+            } : {}}
             onClick={handleButtonClick}
           >
             {success ? <CheckIcon /> : <SaveIcon />}
           </Fab>
           {loading && (
-            <CircularProgress size={68} className={classes.fabProgress} />
+            <CircularProgress size={68} sx={{
+              color: green[500],
+              position: "absolute",
+              top: -6,
+              left: -6,
+              zIndex: 1,
+            }} />
           )}
-        </div>
-        <div className={classes.wrapper}>
+        </Box>
+        <Box sx={{
+          m: 1,
+          position: "relative",
+        }}>
           <Button
             variant="contained"
             color="primary"
-            className={buttonClassname}
+            sx={success ? {
+              bgcolor: green[500],
+              "&:hover": {
+                bgcolor: green[700],
+              },
+            } : {}}
             disabled={loading}
             onClick={handleButtonClick}
           >
             Accept terms
           </Button>
           {loading && (
-            <CircularProgress size={24} className={classes.buttonProgress} />
+            <CircularProgress size={24} sx={{
+              color: green[500],
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginTop: '-12px',
+              marginLeft: '-12px',
+            }} />
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       <Typography variant="h6">Linear</Typography>
-      <div className={classes.linearRoot}>
+      <Box sx={{
+        width: 1,
+        "& > * + *": {
+          mt: 2,
+        },
+      }}>
         <LinearProgress />
         <LinearProgress color="secondary" />
         <LinearBuffer />
         <LinearWithValueLabel />
-      </div>
+      </Box>
     </>
   )
 }
@@ -135,7 +120,7 @@ function LinearBuffer() {
   const [progress, setProgress] = React.useState(0)
   const [buffer, setBuffer] = React.useState(10)
 
-  const progressRef = React.useRef(() => {})
+  const progressRef = React.useRef(() => { })
   React.useEffect(() => {
     progressRef.current = () => {
       if (progress > 100) {

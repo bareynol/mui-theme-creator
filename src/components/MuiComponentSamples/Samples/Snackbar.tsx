@@ -1,9 +1,8 @@
-import React from "react"
-import Button from "@material-ui/core/Button"
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import SnackbarContent from "@material-ui/core/SnackbarContent"
-import { IconButton } from "@material-ui/core"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, IconButton } from "@mui/material";
+import Button from "@mui/material/Button";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import React from "react";
 
 const action = (
   <Button color="secondary" size="small">
@@ -11,22 +10,14 @@ const action = (
   </Button>
 )
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
+export default function SnackbarExample() {
+  return (
+    <Box sx={{
       maxWidth: 600,
       "& > * + *": {
-        marginTop: theme.spacing(2),
+        mt: 2,
       },
-    },
-  })
-)
-
-export default function SnackbarExample() {
-  const classes = useStyles()
-
-  return (
-    <div className={classes.root}>
+    }}>
       <SnackbarContent message="I love snacks." action={action} />
       <SnackbarContent
         message={
@@ -50,6 +41,6 @@ export default function SnackbarExample() {
         }
         action={action}
       />
-    </div>
+    </Box>
   )
 }

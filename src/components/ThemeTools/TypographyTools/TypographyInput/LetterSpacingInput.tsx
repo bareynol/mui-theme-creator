@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
-import Slider from "@material-ui/core/Slider"
-import { makeStyles, Theme, createStyles } from "@material-ui/core"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    disabledText: {
-      fontStyle: "italic",
-    },
-  })
-)
+import { SelectChangeEvent } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 
 const getLetterSpacingValue = (letterSpacing: string) => {
   if (
@@ -23,8 +15,12 @@ const getLetterSpacingValue = (letterSpacing: string) => {
   return parseFloat(letterSpacing.slice(0, -2))
 }
 
-function LetterSpacingInput({ value, onChange, property }) {
-  const classes = useStyles()
+export interface InputProps {
+  value: string;
+  onChange: (event: Event | SyntheticEvent<Element, Event> | SelectChangeEvent<string>, value: string | number) => void;
+  property?: string;
+}
+function LetterSpacingInput({ value, onChange }: InputProps) {
   const [displayValue, setDisplayValue] = useState<number | undefined>(
     undefined
   )
@@ -33,42 +29,43 @@ function LetterSpacingInput({ value, onChange, property }) {
 
   const disabled = displayValue == undefined
 
-  return (
-    <>
-      <Grid container justify="space-between" alignItems="baseline">
-        <Grid item>
-          <Typography variant="caption" color="textSecondary">
-            Letter Spacing:
-          </Typography>
-        </Grid>
-        <Grid item>
-          {!disabled && (
-            <Typography display="inline">{`${displayValue}em`}</Typography>
-          )}
-        </Grid>
-      </Grid>
-      <Slider
-        value={disabled ? 0 : displayValue}
-        disabled={disabled}
-        min={-0.1}
-        max={1.5}
-        step={0.01}
-        onChange={(event, newDisplayValue) => setDisplayValue(newDisplayValue)}
-        onChangeCommitted={(event, newValue) =>
-          onChange(event, `${newValue}em`)
-        }
-      />
-      {disabled && (
-        <Typography
-          color="textSecondary"
-          variant="caption"
-          className={classes.disabledText}
-        >
-          Only em units supported. Use the code editor to configure other types.
+  return <>
+    <Grid container justifyContent="space-between" alignItems="baseline">
+      <Grid item>
+        <Typography variant="caption" color="textSecondary">
+          Letter Spacing:
         </Typography>
-      )}
-    </>
-  )
+      </Grid>
+      <Grid item>
+        {!disabled && (
+          <Typography display="inline">{`${displayValue}em`}</Typography>
+        )}
+      </Grid>
+    </Grid>
+    <Slider
+      value={disabled ? 0 : displayValue}
+      disabled={disabled}
+      min={-0.1}
+      max={1.5}
+      step={0.01}
+      onChange={(event, newDisplayValue) => {
+        const newVal = Array.isArray(newDisplayValue) ? newDisplayValue[0] : newDisplayValue;
+        setDisplayValue(newVal)
+      }}
+      onChangeCommitted={(event, newValue) =>
+        onChange(event, `${newValue}em`)
+      }
+    />
+    {disabled && (
+      <Typography
+        color="textSecondary"
+        variant="caption"
+        sx={{ fontStyle: "italic" }}
+      >
+        Only em units supported. Use the code editor to configure other types.
+      </Typography>
+    )}
+  </>;
 }
 
 export default LetterSpacingInput

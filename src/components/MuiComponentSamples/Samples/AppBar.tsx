@@ -1,94 +1,33 @@
-import React from "react"
-import { fade, makeStyles } from "@material-ui/core/styles"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
-import IconButton from "@material-ui/core/IconButton"
-import Typography from "@material-ui/core/Typography"
-import InputBase from "@material-ui/core/InputBase"
-import Badge from "@material-ui/core/Badge"
-import MenuItem from "@material-ui/core/MenuItem"
-import Menu from "@material-ui/core/Menu"
-import MenuIcon from "@material-ui/icons/Menu"
-import SearchIcon from "@material-ui/icons/Search"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-import MailIcon from "@material-ui/icons/Mail"
-import NotificationsIcon from "@material-ui/icons/Notifications"
-import MoreIcon from "@material-ui/icons/MoreVert"
-import { Tooltip } from "@material-ui/core"
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SearchIcon from "@mui/icons-material/Search";
+import { Box, Tooltip } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { alpha } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
-const useStyles = makeStyles(theme => ({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-}))
+interface Props {
+  onDrawerButtonClick: React.MouseEventHandler<HTMLButtonElement>
+}
 
-export default function AppBarExample({ onDrawerButtonClick }) {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+export default function AppBarExample({ onDrawerButtonClick }: Props) {
+  const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<Element | null>(null)
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
-  const handleProfileMenuOpen = event => {
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLAnchorElement | HTMLLIElement | HTMLButtonElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -101,7 +40,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
     handleMobileMenuClose()
   }
 
-  const handleMobileMenuOpen = event => {
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
     setMobileMoreAnchorEl(event.currentTarget)
   }
 
@@ -133,7 +72,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" size="large">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -141,7 +80,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton aria-label="show 11 new notifications" color="inherit" size="large">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -154,7 +93,7 @@ export default function AppBarExample({ onDrawerButtonClick }) {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-        >
+          size="large">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -163,46 +102,81 @@ export default function AppBarExample({ onDrawerButtonClick }) {
   )
 
   return (
-    <div className={classes.grow}>
+    <Box sx={{ flexGrow: 1 }}>
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static">
           <Toolbar>
             <IconButton
               edge="start"
-              className={classes.menuButton}
+              sx={{ mr: 2 }}
               color="inherit"
               aria-label="open drawer"
               onClick={onDrawerButtonClick}
-            >
+              size="large">
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.title} variant="h6">
+            <Typography sx={{
+              display: { xs: "none", sm: "block" },
+            }} variant="h6">
               Material-UI
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
+            <Box sx={{
+              position: "relative",
+              borderRadius: 1,
+              backgroundColor: (theme) => alpha(theme.palette.common.white, 0.15),
+              "&:hover": {
+                backgroundColor: (theme) => alpha(theme.palette.common.white, 0.25),
+              },
+              mr: 2,
+              ml: {
+                xs: 0,
+                sm: 3,
+              },
+              width: {
+                xs: 1,
+                sm: "auto",
+              },
+            }}>
+              <Box sx={{
+                py: 0,
+                px: 2,
+                height: 1,
+                position: "absolute",
+                pointerEvents: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
                 <SearchIcon />
-              </div>
+              </Box>
               <InputBase
                 placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
+                sx={{
+                  color: "inherit",
+                  '& .MuiInputBase-input': {
+                    py: 1,
+                    pr: 1,
+                    pl: (theme) => `calc(1em + ${theme.spacing(4)})`,
+                    transition: (theme) => theme.transitions.create("width"),
+                    width: {
+                      xs: 1,
+                      md: '20ch'
+                    },
+                  }
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-            </div>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 4 new mails" color="inherit">
+            </Box>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{
+              display: { xs: "none", md: "flex" },
+            }}>
+              <IconButton aria-label="show 4 new mails" color="inherit" size="large">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
+              <IconButton aria-label="show 17 new notifications" color="inherit" size="large">
                 <Badge badgeContent={17} color="secondary">
                   <NotificationsIcon />
                 </Badge>
@@ -214,26 +188,28 @@ export default function AppBarExample({ onDrawerButtonClick }) {
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
-              >
+                size="large">
                 <AccountCircle />
               </IconButton>
-            </div>
-            <div className={classes.sectionMobile}>
+            </Box>
+            <Box sx={{
+              display: { xs: "flex", md: "none" },
+            }}>
               <IconButton
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
-              >
+                size="large">
                 <MoreIcon />
               </IconButton>
-            </div>
+            </Box>
           </Toolbar>
         </AppBar>
       </Tooltip>
       {renderMobileMenu}
       {renderMenu}
-    </div>
-  )
+    </Box>
+  );
 }

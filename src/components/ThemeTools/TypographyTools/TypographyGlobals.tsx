@@ -1,39 +1,8 @@
-import React from "react"
-import {
-  Accordion,
-  AccordionSummary,
-  makeStyles,
-  createStyles,
-  AccordionDetails,
-  Theme,
-  Divider,
-} from "@material-ui/core"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import TypographySampleArea from "./TypographySampleArea"
-import TypographyInput from "./TypographyInput/TypographyInput"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    accordionSummary: {
-      position: "sticky",
-      top: 0,
-      backgroundColor: theme.palette.background.paper,
-      zIndex: theme.zIndex.drawer + 3,
-      borderBottom: "1px solid",
-      borderBottomColor: theme.palette.divider,
-    },
-    accordionSummaryContent: {
-      maxWidth: "100%",
-      overflow: "auto",
-    },
-    accordionDetails: {
-      flexDirection: "column",
-      "&> *": {
-        marginBottom: theme.spacing(2),
-      },
-    },
-  })
-)
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Accordion, AccordionDetails, AccordionSummary, Divider } from "@mui/material";
+import React from "react";
+import TypographyInput from "./TypographyInput/TypographyInput";
+import TypographySampleArea from "./TypographySampleArea";
 
 const defaultGlobalProperties = [
   "fontFamily",
@@ -46,13 +15,22 @@ const defaultGlobalProperties = [
 ]
 
 function TypographyGlobals() {
-  const classes = useStyles()
   return (
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        className={classes.accordionSummary}
-        classes={{ content: classes.accordionSummaryContent }}
+        sx={{
+          position: "sticky",
+          top: 0,
+          bgcolor: 'background.paper',
+          zIndex: (theme) => theme.zIndex.drawer + 3,
+          borderBottom: 1,
+          borderBottomColor: 'divider',
+          '& .MuiAccordionSummary-content': {
+            maxWidth: "100%",
+            overflow: "auto",
+          }
+        }}
       >
         <TypographySampleArea
           variant="body1"
@@ -60,11 +38,15 @@ function TypographyGlobals() {
           paperText="Styles"
         />
       </AccordionSummary>
-      <AccordionDetails className={classes.accordionDetails}>
+      <AccordionDetails sx={{
+        flexDirection: "column",
+        "&> *": {
+          mb: 2,
+        },
+      }}>
         {defaultGlobalProperties.map(property => (
           <div key={`base-text-${property}`}>
             <TypographyInput
-              label={property}
               variantPath="typography"
               property={property}
             />

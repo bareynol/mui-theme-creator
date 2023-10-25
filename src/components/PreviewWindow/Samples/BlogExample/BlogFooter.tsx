@@ -1,40 +1,36 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
-import Tooltip from "@material-ui/core/Tooltip"
+import { Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 function Copyright() {
   return (
     <Tooltip title={`<Typography variant="body2" color="textSecondary">`} arrow>
       <Typography variant="body2" color="textSecondary" align="center">
         {"Copyright © "}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="https://material-ui.com/" underline="hover">
           Your Website
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}
       </Typography>
     </Tooltip>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    // marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
-  },
-}))
-
-export default function BlogFooter(props) {
-  const classes = useStyles()
-  const { description, title } = props
-
+interface Props {
+  description: string;
+  title: string;
+}
+export default function BlogFooter({ description, title }: Props) {
   return (
-    <footer className={classes.footer}>
+    <Box component="footer" sx={{
+      bgcolor: 'background.paper',
+      py: 6,
+      px: 0,
+    }}>
       <Container maxWidth="lg">
         <Tooltip title={`<Typography variant="h6">`} arrow>
           <Typography variant="h6" align="center" gutterBottom>
@@ -56,11 +52,6 @@ export default function BlogFooter(props) {
         </Tooltip>
         <Copyright />
       </Container>
-    </footer>
+    </Box>
   )
-}
-
-BlogFooter.propTypes = {
-  description: PropTypes.string,
-  title: PropTypes.string,
 }

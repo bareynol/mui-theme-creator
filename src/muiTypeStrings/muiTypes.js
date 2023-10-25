@@ -164,7 +164,7 @@ export type PaletteTonalOffset =
 
 export interface Palette {
   common: CommonColors
-  type: PaletteType
+  mode: PaletteType
   contrastThreshold: number
   tonalOffset: PaletteTonalOffset
   primary: PaletteColor
@@ -349,9 +349,8 @@ export interface ThemeOptions {
   breakpoints?: BreakpointsOptions
   direction?: Direction
   mixins?: MixinsOptions
-  overrides?: Overrides // don't want to deal with these imports
   palette?: PaletteOptions
-  props?: MuiComponentProps
+  components?: Components
   shadows?: Shadows
   spacing?: SpacingOptions
   transitions?: TransitionsOptions

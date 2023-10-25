@@ -1,40 +1,8 @@
-import React from "react"
-import {
-  Accordion,
-  AccordionSummary,
-  Typography,
-  makeStyles,
-  createStyles,
-  AccordionDetails,
-  Theme,
-} from "@material-ui/core"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PaletteInput from "./PaletteInput"
-import { useThemeValue } from "src/state/selectors"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      textTransform: "capitalize",
-    },
-    accordionDetails: {
-      flexDirection: "column",
-      "&> *": {
-        marginBottom: theme.spacing(2),
-      },
-    },
-    thumbnailContainer: {
-      display: "flex",
-      alignSelf: "stretch",
-    },
-    colorThumbnail: {
-      height: "100%",
-      width: 15,
-      marginLeft: 4,
-      border: "1px solid grey",
-    },
-  })
-)
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
+import React from "react";
+import { useThemeValue } from "src/state/selectors";
+import PaletteInput from "./PaletteInput";
 
 interface PaletteSubTypeProps {
   title: string
@@ -47,27 +15,44 @@ export default function PaletteSubType({
   path,
   paletteValues,
 }: PaletteSubTypeProps) {
-  const classes = useStyles()
   const themeValues = useThemeValue(path)
 
   return (
     <>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.title} variant="body2">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{
+          '& .MuiAccordionSummary-expandIconWrapper': {
+            ml: 1.5
+          }
+        }}>
+          <Typography sx={{ textTransform: "capitalize" }} variant="body2">
             {title}
           </Typography>
-          <div className={classes.thumbnailContainer}>
+          <Box sx={{
+            display: "flex",
+            alignSelf: "stretch",
+          }}>
             {paletteValues.map(([name, subPath]) => (
-              <div
+              <Box
                 key={name}
-                className={classes.colorThumbnail}
-                style={{ backgroundColor: themeValues?.[subPath] }}
+                sx={{
+                  height: 1,
+                  width: 15,
+                  ml: '4px',
+                  border: 1,
+                  borderColor: "#808080",
+                  bgcolor: themeValues?.[subPath]
+                }}
               />
             ))}
-          </div>
+          </Box>
         </AccordionSummary>
-        <AccordionDetails className={classes.accordionDetails}>
+        <AccordionDetails sx={{
+          flexDirection: "column",
+          "&> *": {
+            mb: 2,
+          },
+        }}>
           {paletteValues.map(([name, subPath]) => (
             <PaletteInput
               key={`${title}-${name}`}

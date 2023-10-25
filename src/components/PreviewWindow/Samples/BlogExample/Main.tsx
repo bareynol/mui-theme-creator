@@ -1,24 +1,13 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
-import Divider from "@material-ui/core/Divider"
-import { Link, Tooltip } from "@material-ui/core"
+import { Box, Link, Tooltip } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
-const useStyles = makeStyles(theme => ({
-  markdown: {
-    ...theme.typography.body2,
-    padding: theme.spacing(3, 0),
-  },
-}))
-
-const posts = [<></>]
-
-export default function Main(props) {
-  const classes = useStyles()
-  const { posts, title } = props
-
+interface Props {
+  title: string;
+}
+export default function Main({ title }: Props) {
   return (
     <Grid item xs={12} md={8}>
       <Tooltip
@@ -31,7 +20,11 @@ export default function Main(props) {
         </Typography>
       </Tooltip>
       <Divider />
-      <div className={classes.markdown}>
+      <Box sx={{
+        typography: 'body2',
+        py: 3,
+        px: 0
+      }}>
         <Tooltip
           title={`<Typography color="textPrimary" variant="h5">`}
           placement="left"
@@ -47,7 +40,7 @@ export default function Main(props) {
           <Typography>
             April 1, 2020 by{" "}
             <Tooltip title={`<Link color="primary" variant="body1">`} arrow>
-              <Link href="#">[Olivier]</Link>
+              <Link href="#" underline="hover">[Olivier]</Link>
             </Tooltip>
           </Typography>
         </Tooltip>
@@ -150,12 +143,7 @@ export default function Main(props) {
             Maecenas sed diam eget risus varius blandit sit amet non magna.
           </li>
         </ol>
-      </div>
+      </Box>
     </Grid>
-  )
-}
-
-Main.propTypes = {
-  posts: PropTypes.array,
-  title: PropTypes.string,
+  );
 }

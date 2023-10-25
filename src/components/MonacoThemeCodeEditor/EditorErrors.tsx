@@ -1,61 +1,16 @@
-import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import clsx from "clsx"
-import {
-  Snackbar,
-  IconButton,
-  makeStyles,
-  Theme,
-  createStyles,
-  Collapse,
-  Divider,
-} from "@material-ui/core"
-import Alert from "@material-ui/lab/Alert"
-import CloseIcon from "@material-ui/icons/Close"
-import ExpandLessIcon from "@material-ui/icons/ExpandLess"
+import CloseIcon from "@mui/icons-material/Close";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { Box, Collapse, Divider, IconButton, Snackbar } from "@mui/material";
+import Alert from '@mui/material/Alert';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/state/types";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: "absolute",
-      bottom: 0,
-      width: "100%",
-    },
-    errorItem: {
-      position: "relative",
-      bottom: 0,
-    },
-    alertRoot: {
-      alignItems: "flex-end",
-      width: "100%",
-    },
-    alertIcon: {
-      padding: 0,
-    },
-    alertMessage: {
-      padding: "4px 0",
-      flexGrow: 1,
-    },
-    alertDivider: {
-      marginTop: theme.spacing(),
-      marginBottom: theme.spacing(),
-    },
-    errorLine: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    expandIcon: {
-      transition: theme.transitions.create("transform"),
-      "&$expanded": {
-        transform: "rotate(180deg)",
-      },
-    },
-    expanded: {},
-  })
-)
+interface EditorErrorsProps {
+  editorRef: React.RefObject<any>;
+}
 
-const EditorErrors = ({ editorRef }) => {
-  const classes = useStyles()
+const EditorErrors = ({ editorRef }: EditorErrorsProps) => {
   const errors = useSelector((state: RootState) => state.editor.errors)
   const [open, setOpen] = useState(true)
   const [expanded, setExpanded] = useState(errors.length < 3) // default open if 1 or 2 errors
@@ -77,23 +32,23 @@ const EditorErrors = ({ editorRef }) => {
     }
   }, [errors])
 
-  const getErrorString = error => {
+  const getErrorString = (error: any) => {
     if (!error.start) {
       return error.messageText
     }
     const pos = model?.getPositionAt(error.start)
-    return `Line ${pos.lineNumber}:${pos.column}. ${
-      error.messageText.messageText ?? error.messageText
-    }`
+    return `Line ${pos.lineNumber}:${pos.column}. ${error.messageText.messageText ?? error.messageText
+      }`
   }
 
   const alertIcon = (
     <IconButton
       onClick={handleExpand}
       size="small"
-      className={clsx(classes.expandIcon, {
-        [classes.expanded]: expanded,
-      })}
+      sx={{
+        transition: (theme) => theme.transitions.create("transform"),
+        transform: expanded ? 'rotate(180deg)' : null
+      }}
     >
       <ExpandLessIcon />
     </IconButton>
@@ -106,30 +61,45 @@ const EditorErrors = ({ editorRef }) => {
   )
 
   return (
-    <div className={classes.root}>
-      <Snackbar open={open} className={classes.errorItem}>
+    <Box sx={{
+      position: "absolute",
+      bottom: 0,
+      width: 1,
+    }}>
+      <Snackbar open={open} sx={{
+        position: "relative",
+        bottom: 0,
+      }}>
         <Alert
           severity="error"
           icon={alertIcon}
           action={alertAction}
-          classes={{
-            root: classes.alertRoot,
-            icon: classes.alertIcon,
-            message: classes.alertMessage,
+          sx={{
+            alignItems: "flex-end",
+            width: 1,
+            '& .MuiAlert-icon': {
+              p: 0
+            },
+            '& .MuiAlert-message': {
+              padding: "4px 0",
+              flexGrow: 1,
+            }
           }}
         >
           <Collapse in={expanded}>
             {errors.map(e => (
-              <div key={`${e.code}-${e.start}`} className={classes.errorLine}>
+              <Box key={`${e.code}-${e.start}`} sx={{
+                fontWeight: (theme) => theme.typography.fontWeightBold,
+              }}>
                 {getErrorString(e)}
-              </div>
+              </Box>
             ))}
-            <Divider className={classes.alertDivider} />
+            <Divider sx={{ my: 1 }} />
           </Collapse>
           <div>{`${errors.length} errors preventing save.`}</div>
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   )
 }
 

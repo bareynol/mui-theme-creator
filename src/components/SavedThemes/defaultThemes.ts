@@ -5,12 +5,12 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Material-UI Docs - Light",
     themeOptions: {
       palette: {
-        type: "light",
+        mode: "light",
         primary: {
           main: "#1976d2",
         },
         secondary: {
-          main: "rgb(220, 0, 78)",
+          main: "#9c27b0",
         },
         background: {
           default: "#fff",
@@ -24,16 +24,16 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Material-UI Docs - Dark",
     themeOptions: {
       palette: {
-        type: "dark",
+        mode: "dark",
         primary: {
           main: "#90caf9",
         },
         secondary: {
-          main: "#f48fb1",
+          main: "#ce93d8",
         },
         background: {
-          default: "#212121",
-          paper: "#424242",
+          default: "#121212",
+          paper: "#121212",
         },
       },
     },
@@ -43,7 +43,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Hacker Theme",
     themeOptions: {
       palette: {
-        type: "dark",
+        mode: "dark",
         primary: {
           main: "#0f0",
         },
@@ -93,7 +93,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Dark Blue",
     themeOptions: {
       palette: {
-        type: "dark",
+        mode: "dark",
         primary: {
           main: "#5893df",
         },
@@ -112,7 +112,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Red Rover",
     themeOptions: {
       palette: {
-        type: "dark",
+        mode: "dark",
         primary: {
           main: "#ff8f00",
         },
@@ -137,7 +137,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
     name: "Comic Book",
     themeOptions: {
       palette: {
-        type: "dark",
+        mode: "dark",
         primary: {
           main: "#bd0707",
         },
@@ -170,3 +170,7 @@ const defaultThemeList: Omit<NewSavedTheme, "lastUpdated">[] = [
 ]
 
 export default defaultThemeList
+
+const defaultThemesId = "default-themes";
+
+export { defaultThemesId };

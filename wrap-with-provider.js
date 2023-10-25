@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
+// @ts-nocheck
 import React from "react"
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
@@ -5,8 +7,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import createStore from "./src/state/createStore"
 import SEO from "src/components/seo"
 
-// eslint-disable-next-line react/display-name,react/prop-types
-export default ({ element }) => {
+const ProviderWrap = ({ element }) => {
   // Instantiating store in `wrapRootElement` handler ensures:
   //  - there is fresh store for each SSR page
   //  - it will be called only once in browser, when React mounts
@@ -20,3 +21,5 @@ export default ({ element }) => {
     </Provider>
   )
 }
+
+export default ProviderWrap;

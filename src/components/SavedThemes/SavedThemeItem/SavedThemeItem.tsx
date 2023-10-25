@@ -1,60 +1,21 @@
-import React, { useCallback } from "react"
-import moment from "moment"
-import { useDispatch, useSelector } from "react-redux"
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import { Box, Button, Card, ThemeOptions, Typography } from "@mui/material";
+import moment from "moment";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadSavedTheme, removeSavedTheme } from "src/state/actions";
+import { RootState } from "src/state/types";
+import ThemeThumbnail from "../ThemeThumbnail";
+import DeleteThemeButton from "./DeleteThemeButton";
+import RenameThemeButton from "./RenameThemeButton";
 
-import {
-  Button,
-  Card,
-  createStyles,
-  makeStyles,
-  Theme,
-  Typography,
-} from "@material-ui/core"
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz"
-
-import { loadSavedTheme, removeSavedTheme } from "src/state/actions"
-import { RootState } from "src/state/types"
-import ThemeThumbnail from "../ThemeThumbnail"
-import DeleteThemeButton from "./DeleteThemeButton"
-import RenameThemeButton from "./RenameThemeButton"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: "relative",
-      "&:hover $hoverArea": {
-        display: "flex",
-      },
-    },
-    savedItemContent: {
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
-    },
-    loadedCard: {
-      backgroundColor: "#9e9e9e",
-      color: "#000",
-    },
-    hoverArea: {
-      position: "absolute",
-      top: 0,
-      bottom: 0,
-      right: 0,
-      left: 0,
-      backdropFilter: "blur(2px) saturate(30%) brightness(40%)",
-      alignItems: "center",
-      justifyContent: "center",
-      display: "none",
-    },
-    hoverAreaActions: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "baseline",
-    },
-  })
-)
-
-function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
-  const classes = useStyles()
+interface Props {
+  name: string
+  themeId: string
+  lastUpdated: string
+  themeOptions: ThemeOptions
+}
+function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }: Props) {
 
   const dispatch = useDispatch()
 
@@ -77,11 +38,17 @@ function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
   const loadedThemeId = useSelector((state: RootState) => state.themeId)
 
   return (
-    <div className={classes.root} onClick={handleLoadTheme}>
-      <Card
-        className={`${themeId === loadedThemeId ? classes.loadedCard : ""}`}
-      >
-        <div className={classes.savedItemContent}>
+    <Box sx={{
+      position: "relative",
+      "&:hover > .MuiBox-root:last-child": {
+        display: "flex",
+      },
+    }} onClick={handleLoadTheme}>
+      <Card sx={themeId === loadedThemeId ? {
+        backgroundColor: "#9e9e9e",
+        color: "#000",
+      } : null}>
+        <Box sx={{ mx: 2 }}>
           <Typography variant="subtitle1" align="center">
             {name}
           </Typography>
@@ -91,10 +58,24 @@ function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
             component="p"
             align="center"
           >{`Last Updated: ${moment(lastUpdated).fromNow()}`}</Typography>
-        </div>
+        </Box>
       </Card>
-      <div className={classes.hoverArea}>
-        <div className={classes.hoverAreaActions}>
+      <Box sx={{
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        backdropFilter: "blur(2px) saturate(30%) brightness(40%)",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "none",
+      }}>
+        <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "baseline",
+        }}>
           <Button
             size="large"
             disabled={themeId === loadedThemeId}
@@ -109,9 +90,9 @@ function SavedThemeItem({ name, themeId, lastUpdated, ...thumbnailProps }) {
             themeName={name}
             disabled={themeId === loadedThemeId}
           />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 

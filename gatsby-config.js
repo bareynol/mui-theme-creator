@@ -3,11 +3,11 @@ module.exports = {
   siteMetadata: {
     title: `Material-UI Theme Creator`,
     description: `Kick off your next, great Material-UI project with a customized theme.`,
-    author: `@bareynol`,
-    url: "https://bareynol.github.io/mui-theme-creator",
+    author: `@zenoo`,
+    url: "https://zenoo.github.io/mui-theme-creator",
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-helmet-async`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -15,6 +15,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

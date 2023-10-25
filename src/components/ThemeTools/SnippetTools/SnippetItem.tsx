@@ -1,32 +1,14 @@
+import AddIcon from "@mui/icons-material/Add"
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
+import RemoveIcon from "@mui/icons-material/Remove"
+import { Accordion, AccordionSummary, Link, Tooltip, Typography } from "@mui/material"
 import React, { useCallback } from "react"
-import { SnippetModification } from "./types"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { removeThemeOptions, setThemeOptions } from "src/state/actions"
 import { RootState } from "src/state/types"
 import { getByPath } from "src/utils"
-import {
-  Link,
-  Tooltip,
-  makeStyles,
-  Theme,
-  createStyles,
-  Accordion,
-  AccordionSummary,
-  Typography,
-} from "@material-ui/core"
-import AddIcon from "@material-ui/icons/Add"
-import RemoveIcon from "@material-ui/icons/Remove"
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined"
-import { setThemeOptions, removeThemeOptions } from "src/state/actions"
 import { ThemeValueChangeEvent } from "../events"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    snippetTitle: {
-      marginLeft: theme.spacing(),
-      flexGrow: 1,
-    },
-  })
-)
+import { SnippetModification } from "./types"
 
 /**
  * Simple check of if the SnippetModification.configs are
@@ -43,8 +25,11 @@ const useIsSnippetIncluded = (configs: SnippetModification["configs"]) => {
   return true
 }
 
-const SnippetItem = ({ snippet }) => {
-  const classes = useStyles()
+interface SnippetItemProps {
+  snippet: SnippetModification
+}
+
+const SnippetItem = ({ snippet }: SnippetItemProps) => {
   const dispatch = useDispatch()
   const handleAddSnippet = useCallback(() => {
     dispatch(setThemeOptions(snippet.configs))
@@ -59,18 +44,15 @@ const SnippetItem = ({ snippet }) => {
   const isSnippetIncluded = useIsSnippetIncluded(snippet.configs)
 
   const { info, docs, title } = snippet
-  const toolTipContent = info && (
+  const toolTipContent = info ? (
     <div>
       <div>{info}</div>
       {docs && (
-        <Link
-          href={docs}
-          target="_blank"
-          rel="noreferrer"
-        >{`Theme ${title} Docs`}</Link>
+        <Link href={docs} target="_blank" rel="noreferrer" underline="hover">{`Theme ${title} Docs`}</Link>
       )}
     </div>
-  )
+  ) : '';
+
   return (
     <Accordion
       disabled={isSnippetIncluded}
@@ -78,11 +60,14 @@ const SnippetItem = ({ snippet }) => {
     >
       <AccordionSummary>
         {isSnippetIncluded ? <RemoveIcon /> : <AddIcon />}
-        <Typography variant="body2" className={classes.snippetTitle}>
+        <Typography variant="body2" sx={{
+          ml: 1,
+          flexGrow: 1,
+        }}>
           {title}
         </Typography>
         {info && (
-          <Tooltip title={toolTipContent} interactive arrow>
+          <Tooltip title={toolTipContent} arrow>
             <InfoOutlinedIcon />
           </Tooltip>
         )}

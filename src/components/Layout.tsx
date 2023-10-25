@@ -5,25 +5,31 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
+import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, Theme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import theme from "src/siteTheme";
+import "./layout.css";
 
-import CssBaseline from "@material-ui/core/CssBaseline"
-import { ThemeProvider } from "@material-ui/core/styles"
-import theme from "src/siteTheme"
-import "./layout.css"
-
-const Layout = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  )
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+
+interface LayoutProps {
+  children: React.ReactNode
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 export default Layout

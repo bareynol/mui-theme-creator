@@ -1,75 +1,30 @@
+import StarIcon from "@mui/icons-material/StarBorder"
+import { Box } from "@mui/material"
+import AppBar from "@mui/material/AppBar"
+import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardActions from "@mui/material/CardActions"
+import CardContent from "@mui/material/CardContent"
+import CardHeader from "@mui/material/CardHeader"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Link from "@mui/material/Link"
+import Toolbar from "@mui/material/Toolbar"
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
 import React from "react"
-import AppBar from "@material-ui/core/AppBar"
-import Button from "@material-ui/core/Button"
-import Card from "@material-ui/core/Card"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import CardHeader from "@material-ui/core/CardHeader"
-import Grid from "@material-ui/core/Grid"
-import StarIcon from "@material-ui/icons/StarBorder"
-import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator"
-import Tooltip from "@material-ui/core/Tooltip"
 
-const useStyles = makeStyles(theme => ({
-  ul: {
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-  },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: "wrap",
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
-  heroContent: {
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardHeader: {
-    color: theme.palette.secondary.contrastText,
-    "&$main": {
-      backgroundColor: theme.palette.secondary.main,
-    },
-    "&$light": {
-      backgroundColor: theme.palette.secondary.light,
-    },
-    "&$dark": {
-      backgroundColor: theme.palette.secondary.dark,
-    },
-  },
-  main: {},
-  dark: {},
-  light: {},
-  cardPricing: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
-  },
-}))
+type TierType = {
+  title: string
+  subheader?: string
+  price: string
+  description: string[]
+  buttonText: string
+  buttonVariant: "text" | "outlined" | "contained"
+  color: "main" | "light" | "dark"
+}
 
-const tiers = [
+const tiers: TierType[] = [
   {
     title: "Free",
     price: "0",
@@ -142,8 +97,6 @@ const footers = [
 ]
 
 export default function PricingExample() {
-  const classes = useStyles()
-
   return (
     <React.Fragment>
       <Tooltip title={`<AppBar color="default">`} placement="bottom" arrow>
@@ -151,9 +104,9 @@ export default function PricingExample() {
           position="static"
           color="default"
           elevation={0}
-          className={classes.appBar}
+          sx={{ borderBottom: 1, borderBottomColor: 'divider', }}
         >
-          <Toolbar className={classes.toolbar}>
+          <Toolbar sx={{ flexWrap: "wrap" }}>
             <Tooltip
               title={`<Typography color="textPrimary" variant="h6">`}
               placement="left"
@@ -163,7 +116,7 @@ export default function PricingExample() {
                 variant="h6"
                 color="inherit"
                 noWrap
-                className={classes.toolbarTitle}
+                sx={{ flexGrow: 1 }}
               >
                 Company name
               </Typography>
@@ -177,8 +130,8 @@ export default function PricingExample() {
                   variant="button"
                   color="textPrimary"
                   href="#"
-                  className={classes.link}
-                >
+                  sx={{ my: 1, mx: 1.5 }}
+                  underline="hover">
                   Features
                 </Link>
               </Tooltip>
@@ -190,8 +143,8 @@ export default function PricingExample() {
                   variant="button"
                   color="textPrimary"
                   href="#"
-                  className={classes.link}
-                >
+                  sx={{ my: 1, mx: 1.5 }}
+                  underline="hover">
                   Enterprise
                 </Link>
               </Tooltip>
@@ -203,8 +156,8 @@ export default function PricingExample() {
                   variant="button"
                   color="textPrimary"
                   href="#"
-                  className={classes.link}
-                >
+                  sx={{ my: 1, mx: 1.5 }}
+                  underline="hover">
                   Support
                 </Link>
               </Tooltip>
@@ -217,7 +170,7 @@ export default function PricingExample() {
                 href="#"
                 color="primary"
                 variant="outlined"
-                className={classes.link}
+                sx={{ my: 1, mx: 1.5 }}
               >
                 Login
               </Button>
@@ -226,7 +179,7 @@ export default function PricingExample() {
         </AppBar>
       </Tooltip>
       {/* Hero unit */}
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
+      <Container maxWidth="sm" component="main" sx={{ mt: 8, my: 0, mb: 6 }}>
         <Tooltip
           title={`<Typography color="textPrimary" variant="h2">`}
           placement="top"
@@ -279,15 +232,26 @@ export default function PricingExample() {
                       titleTypographyProps={{ align: "center" }}
                       subheaderTypographyProps={{
                         align: "center",
-                        classes: { root: classes.cardHeader },
+                        sx: {
+                          color: 'secondary.contrastText',
+                          bgcolor: tier.color === 'main' ? 'secondary.main' : tier.color === 'light' ? 'secondary.light' : 'secondary.dark',
+                        }
                       }}
                       action={tier.title === "Pro" ? <StarIcon /> : null}
-                      className={`${classes.cardHeader} ${classes[tier.color]}`}
+                      sx={{
+                        color: 'secondary.contrastText',
+                        bgcolor: tier.color === 'main' ? 'secondary.main' : tier.color === 'light' ? 'secondary.light' : 'secondary.dark',
+                      }}
                     />
                   </div>
                 </Tooltip>
                 <CardContent>
-                  <div className={classes.cardPricing}>
+                  <Box sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "baseline",
+                    mb: 2,
+                  }}>
                     <Tooltip
                       title={`<Typography color="textPrimary" variant="h3">`}
                       placement="left"
@@ -310,7 +274,7 @@ export default function PricingExample() {
                         /mo
                       </Typography>
                     </Tooltip>
-                  </div>
+                  </Box>
                   <ul>
                     {tier.description.map(line => (
                       <Tooltip
@@ -350,8 +314,15 @@ export default function PricingExample() {
         </Grid>
       </Container>
       {/* Footer */}
-      <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
+      <Container maxWidth="md" component="footer" sx={{
+        borderTop: 1,
+        mt: 8,
+        py: {
+          xs: 3,
+          sm: 6,
+        },
+      }}>
+        <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map(footer => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Tooltip
@@ -363,7 +334,11 @@ export default function PricingExample() {
                   {footer.title}
                 </Typography>
               </Tooltip>
-              <ul className={classes.ul}>
+              <Box component="ul" sx={{
+                margin: 0,
+                padding: 0,
+                listStyle: "none",
+              }}>
                 {footer.description.map(item => (
                   <li key={item}>
                     <Tooltip
@@ -371,18 +346,18 @@ export default function PricingExample() {
                       placement="left"
                       arrow
                     >
-                      <Link href="#" variant="subtitle1" color="textSecondary">
+                      <Link href="#" variant="subtitle1" color="textSecondary" underline="hover">
                         {item}
                       </Link>
                     </Tooltip>
                   </li>
                 ))}
-              </ul>
+              </Box>
             </Grid>
           ))}
         </Grid>
       </Container>
       {/* End footer */}
     </React.Fragment>
-  )
+  );
 }

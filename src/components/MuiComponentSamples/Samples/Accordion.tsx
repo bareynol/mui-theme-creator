@@ -1,22 +1,15 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Accordion from "@material-ui/core/Accordion"
-import AccordionSummary from "@material-ui/core/AccordionSummary"
-import AccordionDetails from "@material-ui/core/AccordionDetails"
-import Typography from "@material-ui/core/Typography"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-  },
-}))
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Box } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 export default function AccordionExample() {
-  const classes = useStyles()
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: 1 }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -56,6 +49,6 @@ export default function AccordionExample() {
           <Typography>Disabled Accordion</Typography>
         </AccordionSummary>
       </Accordion>
-    </div>
+    </Box>
   )
 }

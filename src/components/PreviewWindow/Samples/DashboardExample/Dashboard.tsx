@@ -1,64 +1,43 @@
-import React from "react"
-import clsx from "clsx"
-import { makeStyles } from "@material-ui/core/styles"
-import Drawer from "@material-ui/core/Drawer"
-import List from "@material-ui/core/List"
-import Divider from "@material-ui/core/Divider"
-import Container from "@material-ui/core/Container"
-import Grid from "@material-ui/core/Grid"
-import Paper from "@material-ui/core/Paper"
-import { mainListItems, secondaryListItems } from "./listItems"
-import Chart from "./Chart"
-import Deposits from "./Deposits"
-import Orders from "./Orders"
-import Hidden from "@material-ui/core/Hidden"
+import { Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
+import List from "@mui/material/List";
+import Paper from "@mui/material/Paper";
+import React from "react";
+import Chart from "./Chart";
+import Deposits from "./Deposits";
+import { mainListItems, secondaryListItems } from "./listItems";
+import Orders from "./Orders";
 
 const drawerWidth = 240
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-  },
-  drawerPaper: {
-    position: "static",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  content: {
-    flexGrow: 1,
-    overflow: "auto",
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
-  },
-}))
+const paperStyle = {
+  p: 2,
+  display: "flex",
+  overflow: "auto",
+  flexDirection: "column",
+};
 
 export default function Dashboard() {
-  const classes = useStyles()
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
-
   return (
-    <div className={classes.root}>
-      <Hidden smDown>
+    <Box sx={{ display: 'flex' }}>
+      <Hidden mdDown>
         <Drawer
           variant="permanent"
           open
-          classes={{
-            paper: classes.drawerPaper,
+          sx={{
+            '& .MuiDrawer-paper': {
+              position: "static",
+              whiteSpace: "nowrap",
+              width: drawerWidth,
+              transition: (theme) => theme.transitions.create("width", {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            }
           }}
         >
           <List>{mainListItems}</List>
@@ -66,30 +45,39 @@ export default function Dashboard() {
           <List>{secondaryListItems}</List>
         </Drawer>
       </Hidden>
-      <div className={classes.content}>
-        <Container maxWidth="lg" className={classes.container}>
+      <Box sx={{
+        flexGrow: 1,
+        overflow: "auto",
+      }}>
+        <Container maxWidth="lg" sx={{ py: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={8}>
-              <Paper className={fixedHeightPaper}>
+              <Paper sx={{
+                ...paperStyle,
+                height: 240,
+              }}>
                 <Chart />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
             <Grid item xs={12} md={4}>
-              <Paper className={fixedHeightPaper}>
+              <Paper sx={{
+                ...paperStyle,
+                height: 240,
+              }}>
                 <Deposits />
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              <Paper sx={paperStyle}>
                 <Orders />
               </Paper>
             </Grid>
           </Grid>
         </Container>
-      </div>
-    </div>
-  )
+      </Box>
+    </Box>
+  );
 }

@@ -1,72 +1,60 @@
+import FileCopyIcon from "@mui/icons-material/FileCopy"
+import RedoIcon from "@mui/icons-material/Redo"
+import SaveIcon from "@mui/icons-material/Save"
+import UndoIcon from "@mui/icons-material/Undo"
+import { Box, Divider, IconButton, Snackbar } from "@mui/material"
+import Alert from '@mui/material/Alert'
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
 import React, { useState } from "react"
-import FileCopyIcon from "@material-ui/icons/FileCopy"
-import DownloadIcon from "@material-ui/icons/GetApp"
-import SaveIcon from "@material-ui/icons/Save"
-import RedoIcon from "@material-ui/icons/Redo"
-import UndoIcon from "@material-ui/icons/Undo"
-import Typography from "@material-ui/core/Typography"
-import Tooltip from "@material-ui/core/Tooltip"
-import {
-  IconButton,
-  makeStyles,
-  createStyles,
-  Theme,
-  Divider,
-  Snackbar,
-} from "@material-ui/core"
 import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
 import { useCanSave } from "src/state/selectors"
-import Alert from "@material-ui/lab/Alert"
+import { RootState } from "src/state/types"
 import EditorButton from "./EditorSettings"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    editorControlRoot: {
-      paddingRight: theme.spacing(),
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    editorControlActions: {
-      display: "flex",
-    },
-  })
-)
+interface EditorControlsProps {
+  onRedo: React.MouseEventHandler<HTMLButtonElement>;
+  onUndo: React.MouseEventHandler<HTMLButtonElement>;
+  onSave: React.MouseEventHandler<HTMLButtonElement>;
+}
 
-function EditorControls({ onRedo, onUndo, onSave }) {
-  const classes = useStyles()
+function EditorControls({ onRedo, onUndo, onSave }: EditorControlsProps) {
   const canUndo = useSelector((state: RootState) => state.editor.canUndo)
   const canRedo = useSelector((state: RootState) => state.editor.canRedo)
   const canSave = useCanSave()
   return (
-    <div className={classes.editorControlRoot}>
-      <div className={classes.editorControlActions}>
+    <Box sx={{
+      paddingRight: 1,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}>
+      <Box sx={{ display: "flex" }}>
         <EditorButton />
         <CopyButton />
         <Divider orientation="vertical" flexItem />
         <Tooltip title="Undo (Ctrl + Z)">
           <span>
-            <IconButton disabled={!canUndo} onClick={onUndo}>
+            <IconButton disabled={!canUndo} onClick={onUndo} size="large">
               <UndoIcon />
             </IconButton>
           </span>
         </Tooltip>
         <Tooltip title="Redo (Ctrl + Y)">
           <span>
-            <IconButton disabled={!canRedo} onClick={onRedo}>
+            <IconButton disabled={!canRedo} onClick={onRedo} size="large">
               <RedoIcon />
             </IconButton>
           </span>
         </Tooltip>
         <Tooltip title="Save Changes (Ctrl + S)">
           <span>
-            <IconButton disabled={!canSave} onClick={onSave}>
+            <IconButton disabled={!canSave} onClick={onSave} size="large">
               <SaveIcon />
             </IconButton>
           </span>
         </Tooltip>
-      </div>
+      </Box>
       <Typography
         variant="body2"
         color={canSave ? "textPrimary" : "textSecondary"}
@@ -74,13 +62,13 @@ function EditorControls({ onRedo, onUndo, onSave }) {
       >
         {canSave ? "* Unsaved Changes" : "All changes saved"}
       </Typography>
-    </div>
-  )
+    </Box>
+  );
 }
 
 export default EditorControls
 
-const CopyButton = ({}) => {
+const CopyButton = ({ }) => {
   const themeInput = useSelector((state: RootState) => state.editor.themeInput)
   const outputTypescript = useSelector(
     (state: RootState) => state.editor.outputTypescript
@@ -98,23 +86,21 @@ const CopyButton = ({}) => {
     navigator.clipboard.writeText(codeToCopy).then(() => setOpen(true))
   }
 
-  return (
-    <>
-      <Tooltip title="Copy theme code">
-        <IconButton color="primary" onClick={copyToClipboard}>
-          <FileCopyIcon />
-        </IconButton>
-      </Tooltip>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        onClose={() => setOpen(false)}
-      >
-        <Alert variant="filled" severity="success">
-          Copied theme code to clipboard!
-        </Alert>
-      </Snackbar>
-    </>
-  )
+  return <>
+    <Tooltip title="Copy theme code">
+      <IconButton color="primary" onClick={copyToClipboard} size="large">
+        <FileCopyIcon />
+      </IconButton>
+    </Tooltip>
+    <Snackbar
+      open={open}
+      autoHideDuration={2000}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      onClose={() => setOpen(false)}
+    >
+      <Alert variant="filled" severity="success">
+        Copied theme code to clipboard!
+      </Alert>
+    </Snackbar>
+  </>;
 }

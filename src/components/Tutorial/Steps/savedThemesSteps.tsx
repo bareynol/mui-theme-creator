@@ -6,7 +6,7 @@ import { defaultThemesId } from "src/components/SavedThemes/DefaultThemes"
 import { savedThemeListId } from "src/components/SavedThemes/SavedThemeList"
 
 import TutorialTooltip from "../TutorialTooltip"
-import Typography from "@material-ui/core/Typography"
+import Typography from "@mui/material/Typography"
 
 import { useSwitchToTab } from "./hooks"
 
@@ -20,6 +20,7 @@ const SavedThemesTabTutorialStep = () => {
 }
 
 const AddNewThemesTutorialStep = () => {
+  console.log(defaultThemesId);
   // useSwitchToTab("saved")
   return (
     <>

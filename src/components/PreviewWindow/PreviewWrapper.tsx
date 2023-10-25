@@ -1,79 +1,48 @@
-import React from "react"
-import { makeStyles, Paper, Theme, createStyles } from "@material-ui/core"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import ThemeWrapper from "src/components/ThemeWrapper"
-import PreviewSizeControls from "./PreviewSizeControls"
+import { Box, Paper } from "@mui/material";
+import React from "react";
+import { useSelector } from "react-redux";
+import ThemeWrapper from "src/components/ThemeWrapper";
+import { RootState } from "src/state/types";
+import PreviewSizeControls from "./PreviewSizeControls";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    previewWrapper: {
-      height: "100%",
-      position: "relative",
-    },
-    letterBox: {
-      backgroundColor: "#212121",
-      padding: theme.spacing(2),
-      height: "100%",
-    },
-  })
-)
+interface PreviewWrapperProps {
+  children: React.ReactNode
+}
 
 /**
  * Wraps children in ThemeWrapper and creates a letterbox around the component
  */
-const PreviewWrapper = ({ children }) => {
-  const classes = useStyles()
-
+const PreviewWrapper = ({ children }: PreviewWrapperProps) => {
   return (
-    <>
-      <div className={classes.previewWrapper}>
-        <PreviewSizeControls />
-        <ThemeWrapper>
-          <div className={classes.letterBox}>
-            <PreviewBackground>{children}</PreviewBackground>
-          </div>
-        </ThemeWrapper>
-      </div>
-    </>
+    <Box sx={{
+      height: 1,
+      position: "relative",
+    }}>
+      <PreviewSizeControls />
+      <ThemeWrapper>
+        <Box sx={{
+          bgcolor: "#212121",
+          p: 2,
+          height: 1,
+        }}>
+          <PreviewBackground>{children}</PreviewBackground>
+        </Box>
+      </ThemeWrapper>
+    </Box>
   )
 }
 
 export default PreviewWrapper
 
-const useBackgroundStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    previewArea: {
-      backgroundColor: theme.palette.background.default,
-      maxWidth: 1000,
-      height: "100%",
-      overflowY: "scroll",
-      margin: "auto",
-      position: "relative", // for FAB positioning
-      "&.xs": {
-        maxWidth: 375,
-      },
-      "&.sm": {
-        maxWidth: 650,
-      },
-      "&.md": {
-        maxWidth: 1000,
-      },
-    },
-    xs: {},
-    sm: {},
-    md: {},
-    lg: {},
-    xl: {},
-  })
-)
+interface PreviewBackgroundProps {
+  children: React.ReactNode
+}
 
 /**
  * Creates a Paper component with a backgroundColor of `palette.background.default`
  * adds 'rtl' as a className if required by the theme to enable RTL styles.
  */
-const PreviewBackground = ({ children }) => {
-  const classes = useBackgroundStyles()
+const PreviewBackground = ({ children }: PreviewBackgroundProps) => {
 
   // if the theme has `direction` set to 'rtl', then add 'rtl' as a classname
   // to the Paper component, so that RTL styles will be enabled
@@ -85,7 +54,14 @@ const PreviewBackground = ({ children }) => {
     <Paper
       elevation={8}
       square
-      className={`${classes.previewArea} ${previewSize || ""}`}
+      sx={{
+        bgcolor: 'background.default',
+        maxWidth: previewSize === "xs" ? 375 : previewSize === "sm" ? 650 : 1000,
+        height: 1,
+        overflowY: "scroll",
+        margin: "auto",
+        position: "relative", // for FAB positioning
+      }}
       dir={directionIsRTL ? "rtl" : ""}
     >
       {children}

@@ -4,7 +4,7 @@ import { componentsTabId } from "src/components/MainWindow"
 import { componentNavDrawerId } from "src/components/ComponentNavDrawer"
 
 import TutorialTooltip from "../TutorialTooltip"
-import Typography from "@material-ui/core/Typography"
+import Typography from "@mui/material/Typography"
 
 import { useSwitchToTab } from "./hooks"
 

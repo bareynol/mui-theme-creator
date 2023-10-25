@@ -1,76 +1,74 @@
-import React from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import IconButton from "@material-ui/core/IconButton"
-import { withStyles, Theme, makeStyles, createStyles } from "@material-ui/core"
-import TutorialStepButton from "./TutorialStepButton"
-import CloseIcon from "@material-ui/icons/Close"
-import { useDispatch } from "react-redux"
-import { toggleTutorial } from "src/state/actions"
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Theme, TooltipProps } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import withStyles from '@mui/styles/withStyles';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleTutorial } from "src/state/actions";
+import TutorialStepButton from "./TutorialStepButton";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    tutorialTooltipContentRoot: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    tutorialTooltipCloseButton: {
-      alignSelf: "flex-end",
-      "& svg": {
-        fontSize: "1.2em",
-      },
-    },
-    tutorialTooltipActions: {
-      marginTop: 8,
-      display: "flex",
-      justifyContent: "space-between",
-    },
-    tutorialTooltipContent: {
-      paddingLeft: 16,
-      paddingRight: 16,
-    },
-  })
-)
-
-const TutorialTooltip = ({ anchorId, children, ...props }) =>
+interface TutorialTooltipProps extends TooltipProps {
+  anchorId: string
+}
+const TutorialTooltip = ({ anchorId, children, ...props }: TutorialTooltipProps) =>
   document.getElementById(anchorId) && (
     <Tooltip
       {...props}
       open
-      interactive
       arrow
       title={<TooltipContents>{children}</TooltipContents>}
       PopperProps={{
         anchorEl: document.getElementById(anchorId),
         disablePortal: true,
-        modifiers: {
-          preventOverflow: {
-            boundariesElement: "viewport",
-          },
-        },
+        modifiers: [{
+          name: 'preventOverflow',
+          enabled: true,
+          options: {
+            altBoundary: true,
+            tether: false,
+            rootBoundary: 'viewport',
+            padding: 8,
+          }
+        }],
       }}
     >
       <div />
     </Tooltip>
   )
 
-const TooltipContents = ({ children }) => {
-  const classes = useStyles()
+interface TooltipContentsProps {
+  children: React.ReactNode
+}
+const TooltipContents = ({ children }: TooltipContentsProps) => {
   const dispatch = useDispatch()
   return (
-    <div className={classes.tutorialTooltipContentRoot}>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <IconButton
         size="small"
         onClick={() => dispatch(toggleTutorial())}
-        className={classes.tutorialTooltipCloseButton}
+        sx={{
+          alignSelf: "flex-end",
+          "& svg": {
+            fontSize: "1.2em",
+          },
+        }}
       >
         <CloseIcon />
       </IconButton>
-      <div className={classes.tutorialTooltipContent}>{children}</div>
-      <div className={classes.tutorialTooltipActions}>
+      <Box sx={{ px: 2 }}>{children}</Box>
+      <Box sx={{
+        mt: 1,
+        display: "flex",
+        justifyContent: "space-between",
+      }}>
         <TutorialStepButton variant="prev" />
         <TutorialStepButton variant="next" />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

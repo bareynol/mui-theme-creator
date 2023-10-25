@@ -1,36 +1,24 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import Grid from "@material-ui/core/Grid"
-import Card from "@material-ui/core/Card"
-import CardActionArea from "@material-ui/core/CardActionArea"
-import CardContent from "@material-ui/core/CardContent"
-import CardMedia from "@material-ui/core/CardMedia"
-import Hidden from "@material-ui/core/Hidden"
-import Tooltip from "@material-ui/core/Tooltip"
+import { Box } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import { Post } from "./Blog";
 
-const useStyles = makeStyles({
-  card: {
-    display: "flex",
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
-})
-
-export default function FeaturedPost(props) {
-  const classes = useStyles()
-  const { post } = props
-
+interface Props {
+  post: Post;
+}
+export default function FeaturedPost({ post }: Props) {
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component="a" href="#">
-        <Card className={classes.card}>
-          <div className={classes.cardDetails}>
+        <Card sx={{ display: "flex" }}>
+          <Box sx={{ flex: 1 }}>
             <CardContent>
               <Tooltip
                 title={`<Typography variant="h5">`}
@@ -69,20 +57,16 @@ export default function FeaturedPost(props) {
                 </Typography>
               </Tooltip>
             </CardContent>
-          </div>
-          <Hidden xsDown>
+          </Box>
+          <Hidden smDown>
             <CardMedia
-              className={classes.cardMedia}
+              sx={{ width: 160 }}
               image={post.image}
-              title={post.imageTitle}
+              title={post.imageText}
             />
           </Hidden>
         </Card>
       </CardActionArea>
     </Grid>
-  )
-}
-
-FeaturedPost.propTypes = {
-  post: PropTypes.object,
+  );
 }

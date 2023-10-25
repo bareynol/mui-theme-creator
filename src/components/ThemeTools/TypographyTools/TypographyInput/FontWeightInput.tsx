@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
-import Slider from "@material-ui/core/Slider"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import Slider from "@mui/material/Slider"
 
 const titles = {
   fontWeight: "Font Weight",
@@ -16,29 +16,27 @@ function FontWeightInput({ value, onChange, property }) {
 
   useEffect(() => setDisplayValue(value), [value])
 
-  return (
-    <>
-      <Grid container justify="space-between" alignItems="baseline">
-        <Grid item>
-          <Typography
-            variant="caption"
-            color="textSecondary"
-          >{`${titles[property]}:`}</Typography>
-        </Grid>
-        <Grid item>
-          <Typography display="inline">{displayValue}</Typography>
-        </Grid>
+  return <>
+    <Grid container justifyContent="space-between" alignItems="baseline">
+      <Grid item>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+        >{`${titles[property]}:`}</Typography>
       </Grid>
-      <Slider
-        value={displayValue}
-        min={100}
-        max={1000}
-        step={100}
-        onChange={(event, newDisplayValue) => setDisplayValue(newDisplayValue)}
-        onChangeCommitted={onChange}
-      />
-    </>
-  )
+      <Grid item>
+        <Typography display="inline">{displayValue}</Typography>
+      </Grid>
+    </Grid>
+    <Slider
+      value={displayValue}
+      min={100}
+      max={1000}
+      step={100}
+      onChange={(event, newDisplayValue) => setDisplayValue(newDisplayValue)}
+      onChangeCommitted={onChange}
+    />
+  </>;
 }
 
 export default FontWeightInput

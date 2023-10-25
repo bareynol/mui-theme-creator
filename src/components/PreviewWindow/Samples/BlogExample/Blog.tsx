@@ -1,24 +1,23 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Grid from "@material-ui/core/Grid"
-import Container from "@material-ui/core/Container"
-import GitHubIcon from "@material-ui/icons/GitHub"
-import FacebookIcon from "@material-ui/icons/Facebook"
-import TwitterIcon from "@material-ui/icons/Twitter"
-import BlogHeader from "./BlogHeader"
-import MainFeaturedPost from "./MainFeaturedPost"
-import FeaturedPost from "./FeaturedPost"
-import Main from "./Main"
-import BlogSidebar from "./BlogSidebar"
-import BlogFooter from "./BlogFooter"
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { SvgIconTypeMap } from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
+import React from "react";
+import BlogFooter from "./BlogFooter";
+import BlogHeader from "./BlogHeader";
+import BlogSidebar from "./BlogSidebar";
+import FeaturedPost from "./FeaturedPost";
+import Main from "./Main";
+import MainFeaturedPost from "./MainFeaturedPost";
 
-const useStyles = makeStyles(theme => ({
-  mainGrid: {
-    marginTop: theme.spacing(3),
-  },
-}))
-
-const sections = [
+export type Section = {
+  title: string;
+  url: string;
+}
+const sections: Section[] = [
   { title: "Technology", url: "#" },
   { title: "Design", url: "#" },
   { title: "Culture", url: "#" },
@@ -31,16 +30,25 @@ const sections = [
   { title: "Travel", url: "#" },
 ]
 
-const mainFeaturedPost = {
+export type Post = {
+  title: string;
+  date: string;
+  description: string;
+  image: string;
+  imageText: string;
+  linkText?: string;
+}
+
+const mainFeaturedPost: Post = {
   title: "Title of a longer featured blog post",
   description:
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
   image: "https://source.unsplash.com/random",
-  imgText: "main image description",
+  imageText: "main image description",
   linkText: "Continue reading…",
 }
 
-const featuredPosts = [
+const featuredPosts: Post[] = [
   {
     title: "Featured post",
     date: "Nov 12",
@@ -59,7 +67,23 @@ const featuredPosts = [
   },
 ]
 
-const sidebar = {
+export type Archive = {
+  title: string;
+  url: string;
+}
+
+export type Social = {
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; };
+  name: string;
+}
+
+interface SideBar {
+  title: string;
+  description: string;
+  archives: Archive[];
+  social: Social[];
+}
+const sidebar: SideBar = {
   title: "About",
   description:
     "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
@@ -84,8 +108,6 @@ const sidebar = {
 }
 
 export default function Blog() {
-  const classes = useStyles()
-
   return (
     <React.Fragment>
       <Container maxWidth="lg">
@@ -97,7 +119,7 @@ export default function Blog() {
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
-          <Grid container spacing={5} className={classes.mainGrid}>
+          <Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" />
             <BlogSidebar
               title={sidebar.title}

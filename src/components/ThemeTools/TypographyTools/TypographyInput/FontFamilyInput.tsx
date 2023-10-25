@@ -9,8 +9,8 @@ import {
   MenuItem,
   Tooltip,
   Typography,
-} from "@material-ui/core"
-import AddIcon from "@material-ui/icons/Add"
+} from "@mui/material"
+import AddIcon from "@mui/icons-material/Add"
 
 function FontFamilyInput({ value, onChange }) {
   const loadedFonts = useSelector((state: RootState) => state.loadedFonts)
@@ -38,6 +38,7 @@ function FontFamilyInput({ value, onChange }) {
           setInput(event.target.value)
         }
         fullWidth
+        variant="standard"
         InputLabelProps={{ shrink: true }}
         InputProps={{
           endAdornment: (
@@ -80,7 +81,7 @@ function FontSelector({ onSelectFont }) {
             setAnchorEl(event.currentTarget)
           }
           aria-haspopup="true"
-        >
+          size="large">
           <AddIcon />
         </IconButton>
         <Menu
@@ -100,5 +101,5 @@ function FontSelector({ onSelectFont }) {
         </Menu>
       </div>
     </Tooltip>
-  )
+  );
 }

@@ -1,39 +1,28 @@
-import React from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import AddIcon from "@material-ui/icons/Add"
-import Fab from "@material-ui/core/Fab"
-import DeleteIcon from "@material-ui/icons/Delete"
-import IconButton from "@material-ui/core/IconButton"
-import Tooltip from "@material-ui/core/Tooltip"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    fab: {
-      margin: theme.spacing(2),
-    },
-  })
-)
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Fab from "@mui/material/Fab";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import React from "react";
 
 export default function TooltipExample() {
-  const classes = useStyles()
-
   return (
     <div>
       <Tooltip title="Delete">
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" size="large">
           <DeleteIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Add" aria-label="add">
-        <Fab color="primary" className={classes.fab}>
+        <Fab color="primary" sx={{ m: 2 }}>
           <AddIcon />
         </Fab>
       </Tooltip>
       <Tooltip title="Add" aria-label="add">
-        <Fab color="secondary" className={classes.fab}>
+        <Fab color="secondary" sx={{ m: 2 }}>
           <AddIcon />
         </Fab>
       </Tooltip>
     </div>
-  )
+  );
 }

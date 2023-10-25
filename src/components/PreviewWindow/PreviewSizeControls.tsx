@@ -1,39 +1,15 @@
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
+import SmartphoneIcon from "@mui/icons-material/Smartphone"
+import TabletIcon from "@mui/icons-material/TabletAndroid"
+import { BottomNavigation, BottomNavigationAction, useMediaQuery, useTheme } from "@mui/material"
 import React, { useCallback, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "src/state/types"
+import { useDispatch, useSelector } from "react-redux"
 import { setPreviewSize } from "src/state/actions"
-
-import SmartphoneIcon from "@material-ui/icons/Smartphone"
-import TabletIcon from "@material-ui/icons/TabletAndroid"
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows"
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  makeStyles,
-  Theme,
-  createStyles,
-  useTheme,
-  useMediaQuery,
-} from "@material-ui/core"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    sizeControlRoot: {
-      height: "auto",
-      backgroundColor: theme.palette.background.default,
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      zIndex: 1,
-      flexDirection: "column",
-    },
-  })
-)
+import { RootState } from "src/state/types"
 
 export const previewSizeControlsId = "preview-size-controls"
 
 const PreviewSizeControls = () => {
-  const classes = useStyles()
   const previewSize = useSelector((state: RootState) => state.previewSize)
   const dispatch = useDispatch()
   const handleOnChange = useCallback(
@@ -42,7 +18,7 @@ const PreviewSizeControls = () => {
   )
 
   const theme = useTheme()
-  const screenIsMdDown = useMediaQuery(theme.breakpoints.down("md"))
+  const screenIsMdDown = useMediaQuery(theme.breakpoints.down('lg'))
 
   // spoof a 'xs' screen size on the preview theme
   // when the user's screen is md breakpoint and below
@@ -60,7 +36,15 @@ const PreviewSizeControls = () => {
       id={previewSizeControlsId}
       value={previewSize}
       onChange={handleOnChange}
-      className={classes.sizeControlRoot}
+      sx={{
+        height: "auto",
+        bgcolor: 'background.default',
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        zIndex: 1,
+        flexDirection: "column",
+      }}
       showLabels
     >
       <BottomNavigationAction

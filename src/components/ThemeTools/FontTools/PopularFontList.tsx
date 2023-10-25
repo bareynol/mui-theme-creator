@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react"
-import Typography from "@material-ui/core/Typography"
+import Typography from "@mui/material/Typography"
 import { useDispatch, useSelector } from "react-redux"
 import { addFonts } from "src/state/actions"
-import { Chip, Grid } from "@material-ui/core"
+import { Chip, Grid } from "@mui/material"
 import { RootState } from "src/state/types"
-import AddIcon from "@material-ui/icons/Add"
+import AddIcon from "@mui/icons-material/Add"
 
 const defaultFonts = [
   "Lato",

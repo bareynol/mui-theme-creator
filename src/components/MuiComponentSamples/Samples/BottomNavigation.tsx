@@ -1,19 +1,11 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import BottomNavigation from "@material-ui/core/BottomNavigation"
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
-import RestoreIcon from "@material-ui/icons/Restore"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import LocationOnIcon from "@material-ui/icons/LocationOn"
-
-const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
-})
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import RestoreIcon from "@mui/icons-material/Restore";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import React from "react";
 
 export default function BottomNavigationExample() {
-  const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
   return (
@@ -23,7 +15,7 @@ export default function BottomNavigationExample() {
         setValue(newValue)
       }}
       showLabels
-      className={classes.root}
+      sx={{ width: 500 }}
     >
       <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />

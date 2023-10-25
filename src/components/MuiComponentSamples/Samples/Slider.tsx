@@ -1,21 +1,10 @@
-import React from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
-import Slider from "@material-ui/core/Slider"
-import VolumeDown from "@material-ui/icons/VolumeDown"
-import VolumeUp from "@material-ui/icons/VolumeUp"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: 300,
-    },
-    margin: {
-      height: theme.spacing(3),
-    },
-  })
-)
+import VolumeDown from "@mui/icons-material/VolumeDown";
+import VolumeUp from "@mui/icons-material/VolumeUp";
+import { Box } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 const marks = [
   {
@@ -41,16 +30,15 @@ function valuetext(value: number) {
 }
 
 export default function SliderExample() {
-  const classes = useStyles()
 
-  const [value, setValue] = React.useState<number>(30)
+  const [value, setValue] = React.useState<number | number[]>(30)
 
-  const handleChange = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number)
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue)
   }
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: 300 }}>
       <Typography id="continuous-slider" gutterBottom>
         Volume
       </Typography>
@@ -86,6 +74,6 @@ export default function SliderExample() {
         marks={marks}
         valueLabelDisplay="on"
       />
-    </div>
+    </Box>
   )
 }

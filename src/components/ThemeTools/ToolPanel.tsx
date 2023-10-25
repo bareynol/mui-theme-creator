@@ -1,41 +1,37 @@
-import React from "react"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles, Theme, createStyles } from "@material-ui/core"
+import { Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    toolPanel: {
-      backgroundColor: "#212121",
+export const toolPanelId = "theme-tool-panel"
+
+interface Props {
+  panelTitle: string;
+  children: React.ReactNode;
+}
+function ToolPanel({ panelTitle, children }: Props) {
+  return (
+    <Box id={toolPanelId} sx={{
+      bgcolor: "#212121",
       flexGrow: 1,
       overflowX: "hidden",
       display: "flex",
       flexDirection: "column",
-    },
-    toolPanelTitle: {
-      paddingLeft: 16,
-      paddingRight: 16,
-      borderBottom: `1px solid ${theme.palette.divider}`,
-      borderTop: "1px solid grey",
-    },
-    toolPanelContent: {
-      flex: 1,
-      overflowY: "auto",
-      overflowX: "hidden",
-    },
-  })
-)
-
-export const toolPanelId = "theme-tool-panel"
-
-function ToolPanel({ panelTitle, children }) {
-  const classes = useStyles()
-  return (
-    <div id={toolPanelId} className={classes.toolPanel}>
-      <div className={classes.toolPanelTitle}>
+    }}>
+      <Box sx={{
+        px: 2,
+        borderBottom: 1,
+        borderBottomColor: 'divider',
+        borderTop: 1,
+        borderTopColor: '#808080'
+      }}>
         <Typography variant="overline">{panelTitle}</Typography>
-      </div>
-      <div className={classes.toolPanelContent}>{children}</div>
-    </div>
+      </Box>
+      <Box sx={{
+        flex: 1,
+        overflowY: "auto",
+        overflowX: "hidden",
+      }}>{children}</Box>
+    </Box>
   )
 }
 

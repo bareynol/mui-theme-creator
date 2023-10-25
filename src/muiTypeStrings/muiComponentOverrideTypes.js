@@ -288,9 +288,9 @@ export type GridClassKey =
   | 'grid-xs-10'
   | 'grid-xs-11'
   | 'grid-xs-12';
-export type GridListClassKey = 'root';
-export type GridListTileClassKey = 'root' | 'tile' | 'imgFullHeight' | 'imgFullWidth';
-export type GridListTileBarClassKey =
+export type ImageListClassKey = 'root';
+export type ImageListItemClassKey = 'root' | 'tile' | 'imgFullHeight' | 'imgFullWidth';
+export type ImageListItemBarClassKey =
   | 'root'
   | 'titlePositionBottom'
   | 'titlePositionTop'
@@ -739,9 +739,9 @@ export interface ComponentNameToClassKey {
   MuiFormHelperText: FormHelperTextClassKey;
   MuiFormLabel: FormLabelClassKey;
   MuiGrid: GridClassKey;
-  MuiGridList: GridListClassKey;
-  MuiGridListTile: GridListTileClassKey;
-  MuiGridListTileBar: GridListTileBarClassKey;
+  MuiGridList: ImageListClassKey;
+  MuiGridListTile: ImageListItemClassKey;
+  MuiGridListTileBar: ImageListItemBarClassKey;
   MuiIcon: IconClassKey;
   MuiIconButton: IconButtonClassKey;
   MuiInput: InputClassKey;

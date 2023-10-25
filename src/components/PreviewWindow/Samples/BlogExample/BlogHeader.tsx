@@ -1,38 +1,21 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import Toolbar from "@material-ui/core/Toolbar"
-import Button from "@material-ui/core/Button"
-import IconButton from "@material-ui/core/IconButton"
-import SearchIcon from "@material-ui/icons/Search"
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
-import Tooltip from "@material-ui/core/Tooltip"
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import { Section } from "./Blog";
 
-const useStyles = makeStyles(theme => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: "space-between",
-    overflowX: "auto",
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
-}))
-
-export default function BlogHeader(props) {
-  const classes = useStyles()
-  const { sections, title } = props
-
+interface Props {
+  sections: Section[],
+  title: string,
+}
+export default function BlogHeader({ sections, title }: Props) {
   return (
     <React.Fragment>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar sx={{ borderBottom: 1, borderBottomColor: 'divider', }}>
         <Tooltip title={`<Button color="default" size="small">`} arrow>
           <Button size="small">Subscribe</Button>
         </Tooltip>
@@ -43,13 +26,13 @@ export default function BlogHeader(props) {
             color="inherit"
             align="center"
             noWrap
-            className={classes.toolbarTitle}
+            sx={{ flex: 1 }}
           >
             {title}
           </Typography>
         </Tooltip>
         <Tooltip title={`<IconButton color="default">`} arrow>
-          <IconButton>
+          <IconButton size="large">
             <SearchIcon />
           </IconButton>
         </Tooltip>
@@ -65,7 +48,10 @@ export default function BlogHeader(props) {
       <Toolbar
         component="nav"
         variant="dense"
-        className={classes.toolbarSecondary}
+        sx={{
+          justifyContent: "space-between",
+          overflowX: "auto",
+        }}
       >
         {sections.map(section => (
           <Tooltip
@@ -78,18 +64,16 @@ export default function BlogHeader(props) {
               noWrap
               variant="body2"
               href={section.url}
-              className={classes.toolbarLink}
-            >
+              sx={{
+                p: 1,
+                flexShrink: 0,
+              }}
+              underline="hover">
               {section.title}
             </Link>
           </Tooltip>
         ))}
       </Toolbar>
     </React.Fragment>
-  )
-}
-
-BlogHeader.propTypes = {
-  sections: PropTypes.array,
-  title: PropTypes.string,
+  );
 }

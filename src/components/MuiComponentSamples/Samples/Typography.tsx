@@ -1,19 +1,10 @@
-import React from "react"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    maxWidth: 800,
-  },
-})
+import { Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 export default function TypographyExample() {
-  const classes = useStyles()
-
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: 1, maxWidth: 800 }}>
       <Typography variant="h1" component="h2" gutterBottom>
         h1. Heading
       </Typography>
@@ -61,6 +52,6 @@ export default function TypographyExample() {
       <Typography variant="overline" display="block" gutterBottom>
         overline text
       </Typography>
-    </div>
+    </Box>
   )
 }

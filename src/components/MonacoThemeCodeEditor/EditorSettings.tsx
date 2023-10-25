@@ -1,39 +1,19 @@
-import React from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import IconButton from "@material-ui/core/IconButton"
-import SettingsIcon from "@material-ui/icons/Settings"
-import Popover from "@material-ui/core/Popover"
-import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import { useUpdateEditorState } from "src/state/editor/actions"
-import Checkbox from "@material-ui/core/Checkbox"
+import SettingsIcon from "@mui/icons-material/Settings"
 import {
-  makeStyles,
-  Theme,
-  createStyles,
   List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  ListSubheader,
-} from "@material-ui/core"
+  ListItem, ListItemSecondaryAction, ListItemText, ListSubheader
+} from "@mui/material"
+import Checkbox from "@mui/material/Checkbox"
+import IconButton from "@mui/material/IconButton"
+import Popover from "@mui/material/Popover"
+import Tooltip from "@mui/material/Tooltip"
+import React from "react"
+import { useSelector } from "react-redux"
+import { useUpdateEditorState } from "src/state/editor/actions"
+import { RootState } from "src/state/types"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(3),
-    },
-    popoverPaper: {
-      // backgroundColor: theme.palette.background.default,
-    },
-    settingsList: {
-      minWidth: 320,
-    },
-  })
-)
 
 const EditorButton = () => {
-  const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
 
   const handleOpen = (event: React.MouseEvent) => {
@@ -45,38 +25,32 @@ const EditorButton = () => {
   }
   const open = Boolean(anchorEl)
 
-  return (
-    <>
-      <Tooltip title="Editor Settings">
-        <IconButton onClick={handleOpen}>
-          <SettingsIcon />
-        </IconButton>
-      </Tooltip>
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "center",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        PaperProps={{
-          className: classes.popoverPaper,
-        }}
-      >
-        <EditorSettings />
-      </Popover>
-    </>
-  )
+  return <>
+    <Tooltip title="Editor Settings">
+      <IconButton onClick={handleOpen} size="large">
+        <SettingsIcon />
+      </IconButton>
+    </Tooltip>
+    <Popover
+      open={open}
+      anchorEl={anchorEl}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: "center",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+    >
+      <EditorSettings />
+    </Popover>
+  </>;
 }
 export default EditorButton
 
 const EditorSettings = () => {
-  const classes = useStyles()
   const formatOnSave = useSelector(
     (state: RootState) => state.editor.formatOnSave
   )
@@ -89,7 +63,7 @@ const EditorSettings = () => {
     updateEditor({ outputTypescript: !outputTypescript })
 
   return (
-    <List dense className={classes.settingsList}>
+    <List dense sx={{ minWidth: 320 }}>
       <ListSubheader>Editor Settings</ListSubheader>
       <ListItem button onClick={toggleFormatOnSave}>
         <ListItemText

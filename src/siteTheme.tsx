@@ -1,13 +1,8 @@
-import {
-  createMuiTheme,
-  ThemeOptions,
-  Theme,
-  PaletteType,
-} from "@material-ui/core"
+import { createTheme, ThemeOptions, Theme } from "@mui/material";
 
 export const defaultThemeOptions: ThemeOptions = {
   palette: {
-    type: "light" as PaletteType,
+    mode: "light",
     primary: {
       main: "#3f51b5", // the default primary color
     },
@@ -17,11 +12,11 @@ export const defaultThemeOptions: ThemeOptions = {
   },
 }
 
-export const defaultTheme: Theme = createMuiTheme()
+export const defaultTheme: Theme = createTheme()
 
 export const themeConfig: ThemeOptions = {
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       main: "#90caf9",
     },
@@ -29,69 +24,77 @@ export const themeConfig: ThemeOptions = {
       main: "#f48fb1",
     },
   },
-  props: {
+  components: {
     MuiAccordion: {
-      square: true,
-      TransitionProps: {
-        unmountOnExit: true,
-      },
-    },
-  },
-  overrides: {
-    MuiAccordion: {
-      root: {
-        border: "1px solid rgba(255, 255, 255, .125)",
-        boxShadow: "none",
-        transition: defaultTheme.transitions.create("margin-left"),
-        "&:not(:last-child)": {
-          borderBottom: 0,
-        },
-        "&:before": {
-          display: "none",
-        },
-        "&$expanded": {
-          margin: "auto",
-        },
-        "&$disabled": {
-          marginLeft: 32,
+      defaultProps: {
+        square: true,
+        TransitionProps: {
+          unmountOnExit: true,
         },
       },
+      styleOverrides: {
+        root: {
+          border: "1px solid rgba(255, 255, 255, .125)",
+          boxShadow: "none",
+          transition: defaultTheme.transitions.create("margin-left"),
+          "&:not(:last-child)": {
+            borderBottom: 0,
+          },
+          "&:before": {
+            display: "none",
+          },
+          "&.Mui-expanded": {
+            margin: "auto",
+          },
+          "&.Mui-disabled": {
+            marginLeft: 32
+          }
+        },
+      }
     },
     MuiAccordionSummary: {
-      root: {
-        borderBottom: "1px solid rgba(255, 255, 255, .125)",
-        minHeight: 56,
-        "&$expanded": {
+      styleOverrides: {
+        root: {
+          borderBottom: "1px solid rgba(255, 255, 255, .125)",
           minHeight: 56,
+          "&.Mui-expanded": {
+            minHeight: 56
+          }
         },
-      },
-      content: {
-        alignItems: "center",
-        justifyContent: "space-between",
-        "&$expanded": {
-          margin: "12px 0",
+        content: {
+          alignItems: "center",
+          justifyContent: "space-between",
+          "&.Mui-expanded": {
+            margin: "12px 0",
+          },
         },
-      },
+      }
     },
     MuiAccordionDetails: {
-      root: {
-        backgroundColor: "#212121",
-      },
+      styleOverrides: {
+        root: {
+          backgroundColor: "#212121",
+        }
+      }
     },
     MuiDrawer: {
-      docked: {
-        "& $paper": {
-          position: "static",
+      styleOverrides: {
+        docked: {
+          "& .MuiPaper-root": {
+            position: "static",
+          },
         },
-      },
-      paper: {},
+        paper: {},
+      }
     },
     MuiPopover: {
-      paper: {
-        backgroundColor: "#121212",
-      },
-    },
-  },
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#121212",
+        },
+      }
+    }
+  }
 }
 
-export default createMuiTheme(themeConfig)
+export default createTheme(themeConfig)

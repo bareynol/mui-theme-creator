@@ -1,46 +1,42 @@
-import React from "react"
-import TextField from "@material-ui/core/TextField"
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > div > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  })
-)
+import { Box } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import React from "react";
 
 export default function TextFieldExample() {
-  const classes = useStyles()
-
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <Box component="form" sx={{
+      "& > div > *": {
+        m: 1,
+        width: "25ch",
+      },
+    }} noValidate autoComplete="off">
       <div>
         <TextField
           required
           id="standard-required"
           label="Required"
           defaultValue="Hello World"
+          variant="standard"
         />
         <TextField
           disabled
           id="standard-disabled"
           label="Disabled"
           defaultValue="Hello World"
+          variant="standard"
         />
         <TextField
           id="standard-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
+          variant="standard"
         />
         <TextField
           id="standard-read-only-input"
           label="Read Only"
           defaultValue="Hello World"
+          variant="standard"
           InputProps={{
             readOnly: true,
           }}
@@ -49,22 +45,25 @@ export default function TextFieldExample() {
           id="standard-number"
           label="Number"
           type="number"
+          variant="standard"
           InputLabelProps={{
             shrink: true,
           }}
         />
-        <TextField id="standard-search" label="Search field" type="search" />
+        <TextField id="standard-search" label="Search field" type="search" variant="standard" />
         <TextField
           id="standard-helperText"
           label="Helper text"
           defaultValue="Default Value"
           helperText="Some important text"
+          variant="standard"
         />
         <TextField
           id="standard-helperText-error"
           label="Helper text error"
           defaultValue="Default Value"
           helperText="Some important text"
+          variant="standard"
         />
       </div>
       <div>
@@ -135,21 +134,18 @@ export default function TextFieldExample() {
           id="outlined-required"
           label="Required"
           defaultValue="Hello World"
-          variant="outlined"
         />
         <TextField
           disabled
           id="outlined-disabled"
           label="Disabled"
           defaultValue="Hello World"
-          variant="outlined"
         />
         <TextField
           id="outlined-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
-          variant="outlined"
         />
         <TextField
           id="outlined-read-only-input"
@@ -158,7 +154,6 @@ export default function TextFieldExample() {
           InputProps={{
             readOnly: true,
           }}
-          variant="outlined"
         />
         <TextField
           id="outlined-number"
@@ -167,20 +162,17 @@ export default function TextFieldExample() {
           InputLabelProps={{
             shrink: true,
           }}
-          variant="outlined"
         />
         <TextField
           id="outlined-search"
           label="Search field"
           type="search"
-          variant="outlined"
         />
         <TextField
           id="outlined-helperText"
           label="Helper text"
           defaultValue="Default Value"
           helperText="Some important text"
-          variant="outlined"
         />
         <TextField
           id="outlined-helperText-error"
@@ -188,9 +180,8 @@ export default function TextFieldExample() {
           error
           defaultValue="Default Value"
           helperText="Some important text"
-          variant="outlined"
         />
       </div>
-    </form>
+    </Box>
   )
 }

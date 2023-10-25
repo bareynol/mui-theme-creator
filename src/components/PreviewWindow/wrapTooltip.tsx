@@ -1,5 +1,5 @@
 import React from "react"
-import { Tooltip } from "@material-ui/core"
+import { Tooltip } from "@mui/material"
 
 /**
  * HOC to wrap a component in a tooltip that shows the components

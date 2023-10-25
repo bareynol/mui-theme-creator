@@ -1,4 +1,4 @@
-import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
+import { ThemeOptions } from '@mui/material';
 import { setByPath, removeByPath, getByPath, verbose } from "src/utils"
 import { defaultTheme, defaultThemeOptions } from "src/siteTheme"
 import { NewSavedTheme, PreviewSize } from "./types"
@@ -15,7 +15,7 @@ import { canSave } from "./selectors"
  * and should be removed to tidy the theme code
  * @param path - the path to remove from the themeOptions
  */
-export const removeThemeOption = path => (dispatch, getState) => {
+export const removeThemeOption = (path: string) => (dispatch: Function, getState: Function) => {
   if (checkIfUserAllowsOverwrite(getState())) {
     let updatedThemeOptions: ThemeOptions
 
@@ -44,8 +44,8 @@ export const removeThemeOption = path => (dispatch, getState) => {
 }
 
 export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
-  dispatch,
-  getState
+  dispatch: Function,
+  getState: Function
 ) => {
   if (checkIfUserAllowsOverwrite(getState())) {
     let updatedThemeOptions = getState().themeOptions
@@ -60,7 +60,7 @@ export const removeThemeOptions = (configs: { path: string; value: any }[]) => (
   }
 }
 
-export const setThemeOption = (path, value) => (dispatch, getState) => {
+export const setThemeOption = (path: string, value: any) => (dispatch: Function, getState: Function) => {
   if (checkIfUserAllowsOverwrite(getState())) {
     const updatedThemeOptions = setByPath(getState().themeOptions, path, value)
     return dispatch({
@@ -71,8 +71,8 @@ export const setThemeOption = (path, value) => (dispatch, getState) => {
 }
 
 export const setThemeOptions = (configs: { path: string; value: any }[]) => (
-  dispatch,
-  getState
+  dispatch: Function,
+  getState: Function
 ) => {
   if (checkIfUserAllowsOverwrite(getState())) {
     let updatedThemeOptions = getState().themeOptions
@@ -91,7 +91,7 @@ export const setThemeOptions = (configs: { path: string; value: any }[]) => (
  * Check if the code editor has unsaved work, and if so, prompt the user
  * as to whether they'd like to overwrite with changes being made
  */
-const checkIfUserAllowsOverwrite = state =>
+const checkIfUserAllowsOverwrite = (state: any) =>
   !canSave(state) ||
   confirm(
     "There are unsaved changes in the code editor. Wipe changes and proceed?"
@@ -109,7 +109,7 @@ export const addNewSavedTheme = (name: string) => ({
   },
 })
 
-export const addNewDefaultTheme = (newSavedTheme: NewSavedTheme) => ({
+export const addNewDefaultTheme = (newSavedTheme: NewSavedTheme | Omit<NewSavedTheme, "lastUpdated">) => ({
   type: "ADD_NEW_THEME",
   savedTheme: newSavedTheme,
 })
@@ -122,7 +122,7 @@ export const loadSavedTheme = (themeId: string) => ({
   themeId,
 })
 
-export const removeSavedTheme = (themeId: string) => (dispatch, getState) => {
+export const removeSavedTheme = (themeId: string) => (dispatch: Function, getState: Function) => {
   // don't remove the theme unless it is not the current theme
   if (getState().themeId === themeId) {
     return false
@@ -168,7 +168,7 @@ export async function loadFonts(fonts: string[]) {
 /**
  * Load fonts using webfontloader, then add those fonts to the redux store
  */
-export const addFonts = (fonts: string[]) => async (dispatch, getState) => {
+export const addFonts = (fonts: string[]) => async (dispatch: Function, getState?: Function) => {
   const fontsLoaded: boolean = await loadFonts(fonts)
   if (fontsLoaded) {
     return dispatch({

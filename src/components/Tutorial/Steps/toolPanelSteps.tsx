@@ -9,8 +9,8 @@ import {
 import { toolPanelId } from "src/components/ThemeTools/ToolPanel"
 import TutorialTooltip from "../TutorialTooltip"
 
-import Typography from "@material-ui/core/Typography"
-import Link from "@material-ui/core/Link"
+import Typography from "@mui/material/Typography"
+import Link from "@mui/material/Link"
 
 import colorPickerImage from "src/images/tutorial/colorpicker.webp"
 import typographyToolsImage from "src/images/tutorial/typographytools.webp"
@@ -29,80 +29,76 @@ const ToolPanelTutorialStep = () => {
 }
 
 const PaletteTutorialStep = () => {
-  return (
-    <>
-      <TutorialTooltip anchorId={paletteToolsId} placement="top">
-        <Typography>
-          Use color pickers to set theme <code>palette</code> options
-        </Typography>
-      </TutorialTooltip>
-      <TutorialCard title="Palette Tools">
-        <Typography variant="h6">Color Picker</Typography>
-        <Typography>
-          Select{" "}
-          <Link
-            href="https://material-ui.com/customization/color/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Material-UI Colors
-          </Link>{" "}
-          from the top bar of the popup, or use the{" "}
-          <Link
-            href="https://casesandberg.github.io/react-color/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Color Picker
-          </Link>{" "}
-          to select colors.
-        </Typography>
-        <img
-          src={colorPickerImage}
-          style={{ border: "1px solid white", marginTop: 8, marginBottom: 8 }}
-        />
-        <Typography>
-          <code>light</code>, <code>dark</code>, and <code>contrastText</code>{" "}
-          values are automatically set by the <code>main</code> values unless
-          specifically provided
-        </Typography>
-      </TutorialCard>
-    </>
-  )
+  return <>
+    <TutorialTooltip anchorId={paletteToolsId} placement="top">
+      <Typography>
+        Use color pickers to set theme <code>palette</code> options
+      </Typography>
+    </TutorialTooltip>
+    <TutorialCard title="Palette Tools">
+      <Typography variant="h6">Color Picker</Typography>
+      <Typography>
+        Select{" "}
+        <Link
+          href="https://material-ui.com/customization/color/"
+          target="_blank"
+          rel="noreferrer"
+          underline="hover">
+          Material-UI Colors
+        </Link>{" "}
+        from the top bar of the popup, or use the{" "}
+        <Link
+          href="https://casesandberg.github.io/react-color/"
+          target="_blank"
+          rel="noreferrer"
+          underline="hover">
+          Color Picker
+        </Link>{" "}
+        to select colors.
+      </Typography>
+      <img
+        src={colorPickerImage}
+        style={{ border: "1px solid white", marginTop: 8, marginBottom: 8 }}
+      />
+      <Typography>
+        <code>light</code>, <code>dark</code>, and <code>contrastText</code>{" "}
+        values are automatically set by the <code>main</code> values unless
+        specifically provided
+      </Typography>
+    </TutorialCard>
+  </>;
 }
 
 const FontTutorialStep = () => {
-  return (
-    <>
-      <TutorialTooltip anchorId={fontToolsId} placement="top">
-        Load fonts for Typography elements
-      </TutorialTooltip>
-      <TutorialCard title="Font Loading Tools">
-        <Typography paragraph>
-          Load{" "}
-          <Link
-            href="https://fonts.google.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Google Fonts
-          </Link>{" "}
-          by entering the name of the font in the input.
-        </Typography>
-        <Typography paragraph>
-          Fonts used by <code>typography</code> options are saved and
-          automatically loaded when the page is reloaded
-        </Typography>
-        <Typography>
-          <span style={{ fontFamily: "Droid Sans" }}>Droid Sans, </span>
-          <span style={{ fontFamily: "Droid Serif" }}>Droid Serif, </span>
-          <span style={{ fontFamily: "Open Sans" }}>Open Sans, </span>
-          <span style={{ fontFamily: "Roboto" }}>Roboto, </span>
-          are loaded by default
-        </Typography>
-      </TutorialCard>
-    </>
-  )
+  return <>
+    <TutorialTooltip anchorId={fontToolsId} placement="top">
+      Load fonts for Typography elements
+    </TutorialTooltip>
+    <TutorialCard title="Font Loading Tools">
+      <Typography paragraph>
+        Load{" "}
+        <Link
+          href="https://fonts.google.com/"
+          target="_blank"
+          rel="noreferrer"
+          underline="hover">
+          Google Fonts
+        </Link>{" "}
+        by entering the name of the font in the input.
+      </Typography>
+      <Typography paragraph>
+        Fonts used by <code>typography</code> options are saved and
+        automatically loaded when the page is reloaded
+      </Typography>
+      <Typography>
+        <span style={{ fontFamily: "Droid Sans" }}>Droid Sans, </span>
+        <span style={{ fontFamily: "Droid Serif" }}>Droid Serif, </span>
+        <span style={{ fontFamily: "Open Sans" }}>Open Sans, </span>
+        <span style={{ fontFamily: "Roboto" }}>Roboto, </span>
+        are loaded by default
+      </Typography>
+    </TutorialCard>
+  </>;
 }
 
 const TypographyTutorialStep = () => {

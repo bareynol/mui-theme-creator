@@ -1,11 +1,10 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import Grid from "@material-ui/core/Grid"
-import Tooltip from "@material-ui/core/Tooltip"
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 const products = [
   { name: "Product 1", desc: "A nice thing", price: "$9.99" },
@@ -28,21 +27,7 @@ const payments = [
   { name: "Expiry date", detail: "04/2024" },
 ]
 
-const useStyles = makeStyles(theme => ({
-  listItem: {
-    padding: theme.spacing(1, 0),
-  },
-  total: {
-    fontWeight: 700,
-  },
-  title: {
-    marginTop: theme.spacing(2),
-  },
-}))
-
 export default function Review() {
-  const classes = useStyles()
-
   return (
     <React.Fragment>
       <Tooltip
@@ -56,7 +41,7 @@ export default function Review() {
       </Tooltip>
       <List disablePadding>
         {products.map(product => (
-          <ListItem className={classes.listItem} key={product.name}>
+          <ListItem sx={{ py: 1, px: 0 }} key={product.name}>
             <Tooltip title={`<ListItemText>`} placement="left" arrow>
               <ListItemText primary={product.name} secondary={product.desc} />
             </Tooltip>
@@ -69,7 +54,7 @@ export default function Review() {
             </Tooltip>
           </ListItem>
         ))}
-        <ListItem className={classes.listItem}>
+        <ListItem sx={{ py: 1, px: 0 }}>
           <Tooltip title={`<ListItemText>`} placement="left" arrow>
             <ListItemText primary="Total" />
           </Tooltip>
@@ -78,7 +63,7 @@ export default function Review() {
             placement="left"
             arrow
           >
-            <Typography variant="subtitle1" className={classes.total}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
               $34.06
             </Typography>
           </Tooltip>
@@ -91,7 +76,7 @@ export default function Review() {
             placement="left"
             arrow
           >
-            <Typography variant="h6" gutterBottom className={classes.title}>
+            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
               Shipping
             </Typography>
           </Tooltip>
@@ -116,7 +101,7 @@ export default function Review() {
             placement="left"
             arrow
           >
-            <Typography variant="h6" gutterBottom className={classes.title}>
+            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
               Payment details
             </Typography>
           </Tooltip>
